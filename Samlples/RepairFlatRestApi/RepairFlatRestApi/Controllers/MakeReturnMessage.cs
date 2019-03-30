@@ -30,7 +30,7 @@ namespace RepairFlatRestApi.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.ToString());
+                throw new Exception(ex.ToString().Replace(Environment.NewLine, ""));
             }
         }
     }

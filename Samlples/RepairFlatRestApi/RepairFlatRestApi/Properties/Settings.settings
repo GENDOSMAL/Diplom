@@ -12,7 +12,7 @@
       <Value Profile="(Default)">200</Value>
     </Setting>
     <Setting Name="DefaultLogPath" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">..\..\Log</Value>
+      <Value Profile="(Default)">Log</Value>
     </Setting>
     <Setting Name="KeepLogsDays" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">5</Value>

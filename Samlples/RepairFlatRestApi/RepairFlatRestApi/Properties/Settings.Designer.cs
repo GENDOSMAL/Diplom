@@ -54,7 +54,7 @@ namespace RepairFlatRestApi.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("..\\..\\Log")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Log")]
         public string DefaultLogPath {
             get {
                 return ((string)(this["DefaultLogPath"]));

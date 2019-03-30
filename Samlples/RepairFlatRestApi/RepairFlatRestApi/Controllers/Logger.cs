@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Web.Hosting;
 
 namespace RepairFlatRestApi.Controllers
 {
@@ -11,7 +12,7 @@ namespace RepairFlatRestApi.Controllers
 
         public static void WriteToLog(TypeOfRecord WhatType, string Class, string Method, string MessageToLog)
         {
-            string LogPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string LogPath = Path.GetDirectoryName(HostingEnvironment.ApplicationPhysicalPath);
             if (WorkWithFail(ref LogPath))
             {
                 string content = $"{DateTime.Now.TimeOfDay.ToString()}\t\t{(char)WhatType}\t\t{Class}::{Method}\t\t{MessageToLog}{Environment.NewLine}";
@@ -26,7 +27,7 @@ namespace RepairFlatRestApi.Controllers
             LogPath = Path.Combine(LogPath, Properties.Settings.Default.DefaultLogPath);
             if (Properties.Settings.Default.DefaultLogPath == "")
             {
-                LogPath = Path.Combine(Assembly.GetExecutingAssembly().Location, @"..\Log");
+                LogPath = Path.Combine(Assembly.GetExecutingAssembly().Location, @"Log");
             }
             if (!Directory.Exists(LogPath))
             {
@@ -40,7 +41,7 @@ namespace RepairFlatRestApi.Controllers
 
         public static void DeleteAfter()
         {
-            string LogPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), Properties.Settings.Default.DefaultLogPath);
+            string LogPath = Path.Combine(Path.GetDirectoryName(HostingEnvironment.ApplicationPhysicalPath), Properties.Settings.Default.DefaultLogPath);
             if (Directory.Exists(LogPath))
             {
                 int KeepLogsDays = Properties.Settings.Default.KeepLogsDays;

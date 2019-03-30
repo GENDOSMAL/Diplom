@@ -24,5 +24,12 @@ namespace RepairFlatRestApi.Models
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string description;
         }
+        public class RegisterLoginPerson
+        {
+            public string login;
+            public string password;
+            public string idPolz;
+            public string typeofpolz;
+        }
     }
 }
