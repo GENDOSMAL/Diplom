@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RepairFlatRestApi.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">workstation id=RepairFlat.mssql.somee.com;packet size=4096;user id=malkerov_SQLLogin_1;pwd=1mazufjw7w;data source=RepairFlat.mssql.somee.com;persist security info=False;initial catalog=RepairFlat</Value>
+    </Setting>
+    <Setting Name="BaseAdress" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://repairflat.somee.com</Value>
+    </Setting>
+    <Setting Name="BaseMuteTime" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="DefaultLogPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">..\..\Log</Value>
+    </Setting>
+    <Setting Name="KeepLogsDays" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
