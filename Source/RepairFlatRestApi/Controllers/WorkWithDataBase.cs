@@ -1,8 +1,10 @@
-﻿using System;
+﻿using RepairFlatRestApi.Controllers.OtherController;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
-namespace RepairFlatRestApi.Controllers
+
+namespace RepairFlatRestApi.Controllers.MainConroller
 {
     public class WorkWithDataBase
     {

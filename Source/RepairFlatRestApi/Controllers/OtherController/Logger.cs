@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Web.Hosting;
 
-namespace RepairFlatRestApi.Controllers
+namespace RepairFlatRestApi.Controllers.OtherController
 {
     public class Logger
     {
