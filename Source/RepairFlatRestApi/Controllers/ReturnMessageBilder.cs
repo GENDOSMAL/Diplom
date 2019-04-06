@@ -9,7 +9,7 @@ using System.Web;
 
 namespace RepairFlatRestApi.Controllers
 {
-    public class MakeReturnMessage
+    public class ReturnMessageBilder
     {
         public static HttpResponseMessage MakeAnswerOfAuth(bool sucess, string description, int? id, int? typeOfpolz, HttpStatusCode httpStatusCode)
         {

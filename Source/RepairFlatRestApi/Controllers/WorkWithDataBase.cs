@@ -6,7 +6,6 @@ namespace RepairFlatRestApi.Controllers
 {
     public class WorkWithDataBase
     {
-
         public static List<Tuple<string, string>> SelectSmallVolumeOfData(string query, SqlParameter[] sqlParameters, string[] nameOfSelectColumns)
         {
             Logger.WriteToLog(Logger.TypeOfRecord.Information, nameof(WorkWithDataBase), nameof(SelectSmallVolumeOfData), $"Строка для подключения <{Properties.Settings.Default.ConnectionString}> ");

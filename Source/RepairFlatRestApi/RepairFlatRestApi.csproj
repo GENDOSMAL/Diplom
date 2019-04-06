@@ -160,9 +160,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Logger.cs" />
-    <Compile Include="Controllers\MakeReturnMessage.cs" />
+    <Compile Include="Controllers\OtherController\Logger.cs" />
+    <Compile Include="Controllers\MainConroller\LoginController.cs" />
+    <Compile Include="Controllers\ReturnMessageBilder.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WorkWithDataBase.cs" />
     <Compile Include="Global.asax.cs">
