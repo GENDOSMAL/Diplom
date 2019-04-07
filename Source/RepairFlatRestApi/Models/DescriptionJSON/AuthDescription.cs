@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RepairFlatRestApi.Models
+namespace RepairFlatRestApi.Models.DescriptionJSON
 {
     public class AuthDescription
     {
@@ -18,9 +18,9 @@ namespace RepairFlatRestApi.Models
         {
             public bool sucess;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public int? idPolz;
+            public int? idUser;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public int? typeofpolz;
+            public string typeofpolz;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string description;
         }

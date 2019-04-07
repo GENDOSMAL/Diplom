@@ -9,64 +9,48 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using RepairFlatRestApi.Areas.HelpPage.Controllers;
+using System.Text;
+using RepairFlatRestApi.Models.DescriptionJSON;
 
 namespace RepairFlatRestApi.Controllers
 {
     public class LoginController : ApiController
     {
         [HttpPost, Route("api/main/auth")]
-        public HttpResponseMessage MakeAuth([FromBody]object InformationAboutAuth)
+        public HttpResponseMessage MakeAuth([FromBody]Models.DescriptionJSON.AuthDescription.AskedInformation InformationAboutAuth)
         {
             HttpResponseMessage resultMessage = new HttpResponseMessage(HttpStatusCode.OK);
             if (InformationAboutAuth != null)
             {
                 try
                 {
-                    var infromationToAuth = JsonConvert.DeserializeObject<Models.AuthDescription.AskedInformation>(InformationAboutAuth.ToString());
+                    //Models.DescriptionJSON.AuthDescription.AskedInformation infromationToAuth = JsonConvert.DeserializeObject<Models.DescriptionJSON.AuthDescription.AskedInformation>(InformationAboutAuth.ToString());
                     Logger.WriteToLog(Logger.TypeOfRecord.Information, nameof(LoginController), nameof(MakeAuth), $"Сервер получил и обработал переданную информацию <{InformationAboutAuth.ToString().Replace(Environment.NewLine, "")}>");
-                    string[] whatSelect = new string[] { "typeOfPolz", "idPersonInOtherTable" };
-                    string query = "Select typeOfPolz,idPersonInOtherTable from RepairFlat.dbo.login where login = @login and password = @password; ";
-                    SqlParameter[] sqlParameters = new SqlParameter[2];
-                    sqlParameters[0] = new SqlParameter("@login", infromationToAuth.login);
-                    string password = System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(infromationToAuth.password))));
-                    sqlParameters[1] = new SqlParameter("@password", password);
-                    var resultOfSelect = WorkWithDataBase.SelectSmallVolumeOfData(query, sqlParameters, whatSelect);
-                    if (resultOfSelect != null)
+                    AuthDescription.ResultOfInformation result =DBController.Logining(InformationAboutAuth);
+                    if (!result.sucess)
                     {
-                        int? typeOfPolz = 0;
-                        int? idPersonInOtherTable = 0;
-                        for (int i = 0; i < resultOfSelect.Count; i++)
-                        {
-                            if (resultOfSelect[i].Item1 == "typeOfPolz")
-                            {
-                                typeOfPolz = Convert.ToInt32(resultOfSelect[i].Item2);
-                            }
-                            else if (resultOfSelect[i].Item1 == "idPersonInOtherTable")
-                            {
-                                idPersonInOtherTable = Convert.ToInt32(resultOfSelect[i].Item2);
-                            }
-                        }
-                        Logger.WriteToLog(Logger.TypeOfRecord.Information, nameof(LoginController), nameof(MakeAuth), $"Найдена информация о логине и пароле!");
-
-                        return ReturnMessageBilder.MakeAnswerOfAuth(true, null, typeOfPolz, idPersonInOtherTable, HttpStatusCode.OK);
+                        Logger.WriteToLog(Logger.TypeOfRecord.Information, nameof(LoginController), nameof(MakeAuth), $"Не корректный логин или пароль!");
+                        return ReturnMessageBilder.MakeResponseMessage(result, HttpStatusCode.NotAcceptable);
                     }
                     else
                     {
-                        Logger.WriteToLog(Logger.TypeOfRecord.Warning, nameof(LoginController), nameof(MakeAuth), $"Не найдена информация о данном логине и пароле!");
-                        return ReturnMessageBilder.MakeAnswerOfAuth(false, "Не корректный логин или пароль!", null, null, HttpStatusCode.BadRequest);
+                        Logger.WriteToLog(Logger.TypeOfRecord.Information, nameof(LoginController), nameof(MakeAuth), $"Найдена информация о логине и пароле!");
+                        return ReturnMessageBilder.MakeResponseMessage(result, HttpStatusCode.OK);
                     }
+
                 }
                 catch (Exception ex)
                 {
                     Logger.WriteToLog(Logger.TypeOfRecord.Exception, nameof(LoginController), nameof(MakeAuth), ex.ToString().Replace(Environment.NewLine, ""));
-                    return ReturnMessageBilder.MakeAnswerOfAuth(false, ex.ToString(), null, null, HttpStatusCode.InternalServerError);
+                    return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation {sucess=false, description=ex.ToString()}, HttpStatusCode.InternalServerError);
                 }
             }
             else
             {
                 string description = $"Передано пустое сообщение < >";
                 Logger.WriteToLog(Logger.TypeOfRecord.Exception, nameof(LoginController), nameof(MakeAuth), description);
-                return ReturnMessageBilder.MakeAnswerOfAuth(false, description, null, null, HttpStatusCode.BadRequest);
+                return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = false, description = description }, HttpStatusCode.BadRequest);
             }
         }
 
@@ -77,7 +61,7 @@ namespace RepairFlatRestApi.Controllers
             {
                 try
                 {
-                    var infromationToMakeNewLogin = JsonConvert.DeserializeObject<Models.AuthDescription.RegisterLoginPerson>(InformationAboutNewAuth.ToString());
+                    var infromationToMakeNewLogin = JsonConvert.DeserializeObject<Models.DescriptionJSON.AuthDescription.RegisterLoginPerson>(InformationAboutNewAuth.ToString());
                     string query = "if not EXISTS (Select login from RepairFlat.dbo.login where login=@login) begin Insert into RepairFlat.dbo.login (login,password,idPersonInOtherTable,typeofPolz) values (@login,@password,@idPersonInOtherTable,@typeofPolz) end;";
                     SqlParameter[] sqlParameters = new SqlParameter[4];
                     sqlParameters[0] = new SqlParameter("@login", infromationToMakeNewLogin.login);
@@ -87,24 +71,24 @@ namespace RepairFlatRestApi.Controllers
                     var result = WorkWithDataBase.MakeUpdateAndInsert(query, sqlParameters);
                     if (result)
                     {
-                        return ReturnMessageBilder.MakeAnswerOfAuth(true, null, null, null, HttpStatusCode.OK);
+                        return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = true }, HttpStatusCode.OK);
                     }
                     else
                     {
-                        return ReturnMessageBilder.MakeAnswerOfAuth(false, "Логин уже используется", null, null, HttpStatusCode.InternalServerError);
+                        return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = false, description = "Логин уже используется" }, HttpStatusCode.InternalServerError);
                     }
                 }
                 catch (Exception ex)
                 {
                     Logger.WriteToLog(Logger.TypeOfRecord.Exception, nameof(LoginController), nameof(MakeNewPerson), ex.ToString().Replace(Environment.NewLine, ""));
-                    return ReturnMessageBilder.MakeAnswerOfAuth(false, ex.ToString(), null, null, HttpStatusCode.InternalServerError);
+                    return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = true ,description =ex.ToString()}, HttpStatusCode.InternalServerError);
                 }
             }
             else
             {
                 string description = $"Передано пустое сообщение < >";
                 Logger.WriteToLog(Logger.TypeOfRecord.Exception, nameof(LoginController), nameof(MakeNewPerson), description);
-                return ReturnMessageBilder.MakeAnswerOfAuth(false, description, null, null, HttpStatusCode.BadRequest);
+                return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = true,description=description }, HttpStatusCode.BadRequest);
             }
             throw new NotImplementedException();
         }

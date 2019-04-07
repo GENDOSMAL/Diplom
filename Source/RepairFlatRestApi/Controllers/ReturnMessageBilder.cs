@@ -11,20 +11,12 @@ namespace RepairFlatRestApi.Controllers
 {
     public class ReturnMessageBilder
     {
-        public static HttpResponseMessage MakeAnswerOfAuth(bool sucess, string description, int? id, int? typeOfpolz, HttpStatusCode httpStatusCode)
+        public static HttpResponseMessage MakeResponseMessage(object Message, HttpStatusCode httpStatusCode)
         {
             try
             {
                 HttpResponseMessage resultMessage = new HttpResponseMessage(httpStatusCode);
-                var infromationToClient = new Models.AuthDescription.ResultOfInformation()
-                {
-                    sucess = sucess,
-                    description = description,
-                    idPolz = id,
-                    typeofpolz = typeOfpolz
-                };
-
-                var JsonResult = JsonConvert.SerializeObject(infromationToClient, Formatting.Indented);
+                var JsonResult = JsonConvert.SerializeObject(Message, Formatting.Indented);
                 resultMessage.Content = new StringContent(JsonResult.ToString(), Encoding.UTF8, "application/json");
                 return resultMessage;
             }
