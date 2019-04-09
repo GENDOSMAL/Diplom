@@ -30,13 +30,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string login;
             public string password;
             public string idPolz;
-            public string typeofpolz;
         }
 
-        public class BaseResult
-        {
-            public bool success;
-            public string description;
-        }
+
     }
 }

@@ -5,7 +5,6 @@ using System;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
-using static RepairFlatRestApi.Models.DescriptionJSON.AuthDescription;
 
 namespace RepairFlatRestApi.Controllers.MainConroller
 {

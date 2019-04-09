@@ -1,9 +1,8 @@
 ﻿using RepairFlatRestApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using RepairFlatRestApi.Models.DescriptionJSON;
+using System;
+using System.Linq;
+using static RepairFlatRestApi.Models.DescriptionJSON.AuthDescription;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
@@ -35,9 +34,71 @@ namespace RepairFlatRestApi.Controllers.OtherController
             }, nameof(Logining));
         }
 
+        internal static BaseResult CreateLoginPerson(AuthDescription.RegisterLoginPerson informationAboutNewPerson)
+        {
+            return Run((db) =>
+            {
+                int idUser = Convert.ToInt32(informationAboutNewPerson.idPolz);
+                if (db.LoginingInformation.Where(e => e.idUser == idUser).FirstOrDefault() != null)
+                {
+                    return new BaseResult
+                    {
+                        success = false,
+                        description="Для данного пользователя уже есть информация о логине и пароле!"
+                    };
+                }
+                var InforMationAboutLoginInTable = db.LoginingInformation.Select(e => e.Login == informationAboutNewPerson.login);
+                if(db.LoginingInformation.Where(e => e.Login == informationAboutNewPerson.login).FirstOrDefault() != null)
+                {
+                    return new BaseResult
+                    {
+                        success = false,
+                        description = "Логин уже исползуется"
+                    };
+                }
+                var newLog = new LoginingInformation
+                {
+                    idUser = idUser,
+                    Login = informationAboutNewPerson.login,
+                    Password = HelperUS.PasswordDesript(informationAboutNewPerson.password)
+                };
+                db.LoginingInformation.Add(newLog);
+                db.SaveChanges();
+                return new BaseResult
+                {
+                    success = true,
+                    description = "Данные о логине и пароле добавлены"
+                };
+            }, nameof(CreateLoginPerson));
+        }
 
+        internal static PersonDesctiption.ResultDescription CreateUser(PersonDesctiption.DescriptionOfNewPerson descriptionPerson)
+        {
+            return Run((db) =>
+            {
+                var user = new User
+                {
+                    Birstday = descriptionPerson.Birstday,
+                    LastName = descriptionPerson.Lastname,
+                    Name = descriptionPerson.Name,
+                    Otchestv = descriptionPerson.Otchestv,
+                    TypeOfUser = descriptionPerson.Type
+                };
+                db.User.Add(user);
+                db.SaveChanges();
+                var id = db.User.OrderBy(e => e.idUser)
+                    .Where(e => e.Name == descriptionPerson.Name &&
+                    e.Otchestv == descriptionPerson.Otchestv && e.LastName == descriptionPerson.Lastname).FirstOrDefault().idUser;
+                return new PersonDesctiption.ResultDescription()
+                {
+                    description = "Пользолватель создан",
+                    idPerson = id,
+                    success = true,
+                };
+            }, nameof(CreateUser));
+        }
 
-        static void Run(Action<RepairFlatEntities> dbAction,string nameOfMethod)
+        static void Run(Action<RepairFlatEntities> dbAction, string nameOfMethod)
         {
             using (var db = new RepairFlatEntities())
             {

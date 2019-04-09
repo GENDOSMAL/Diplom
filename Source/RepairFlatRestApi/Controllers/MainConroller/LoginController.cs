@@ -27,45 +27,15 @@ namespace RepairFlatRestApi.Controllers
             }, nameof(LoginController), nameof(MakeAuth));
         }
 
-        //[HttpPost, Route("api/main/createperson")]
-        //public HttpResponseMessage MakeNewPerson([FromBody]object InformationAboutNewAuth)
-        //{
-        //    if (InformationAboutNewAuth != null)
-        //    {
-        //        try
-        //        {
-        //            var infromationToMakeNewLogin = JsonConvert.DeserializeObject<Models.DescriptionJSON.AuthDescription.RegisterLoginPerson>(InformationAboutNewAuth.ToString());
-        //            string query = "if not EXISTS (Select login from RepairFlat.dbo.login where login=@login) begin Insert into RepairFlat.dbo.login (login,password,idPersonInOtherTable,typeofPolz) values (@login,@password,@idPersonInOtherTable,@typeofPolz) end;";
-        //            SqlParameter[] sqlParameters = new SqlParameter[4];
-        //            sqlParameters[0] = new SqlParameter("@login", infromationToMakeNewLogin.login);
-        //            sqlParameters[1] = new SqlParameter("@password", System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(System.Text.Encoding.UTF8.GetString(Convert.FromBase64String(infromationToMakeNewLogin.password)))));
-        //            sqlParameters[2] = new SqlParameter("@idPersonInOtherTable", infromationToMakeNewLogin.idPolz);
-        //            sqlParameters[3] = new SqlParameter("@typeofPolz", infromationToMakeNewLogin.typeofpolz);
-        //            var result = WorkWithDataBase.MakeUpdateAndInsert(query, sqlParameters);
-        //            if (result)
-        //            {
-        //                return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = true }, HttpStatusCode.OK);
-        //            }
-        //            else
-        //            {
-        //                return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = false, description = "Логин уже используется" }, HttpStatusCode.InternalServerError);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Logger.WriteToLog(Logger.TypeOfRecord.Exception, nameof(LoginController), nameof(MakeNewPerson), ex.ToString().Replace(Environment.NewLine, ""));
-        //            return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = true ,description =ex.ToString()}, HttpStatusCode.InternalServerError);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        string description = $"Передано пустое сообщение < >";
-        //        Logger.WriteToLog(Logger.TypeOfRecord.Exception, nameof(LoginController), nameof(MakeNewPerson), description);
-        //        return ReturnMessageBilder.MakeResponseMessage(new AuthDescription.ResultOfInformation { sucess = true,description=description }, HttpStatusCode.BadRequest);
-        //    }
-        //    throw new NotImplementedException();
-        //}
+        [HttpPost, Route("api/main/createLogin")]
+        public HttpResponseMessage MakeNewLoginPerson([FromBody]Models.DescriptionJSON.AuthDescription.RegisterLoginPerson InformationAboutNewPerson)
+        {
+            return CatchError2(() =>
+            {
+                return DBController.CreateLoginPerson(InformationAboutNewPerson);
+            }, nameof(LoginController), nameof(MakeNewLoginPerson));
+        }
 
-        //[HttpPost, Route("api/main/createperson")]
+
     }
 }
