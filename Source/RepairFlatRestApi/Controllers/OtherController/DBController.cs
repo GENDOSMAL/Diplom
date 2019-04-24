@@ -2,7 +2,6 @@
 using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Linq;
-using static RepairFlatRestApi.Models.DescriptionJSON.AuthDescription;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
@@ -127,6 +126,5 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 }
             }
         }
-
     }
 }
