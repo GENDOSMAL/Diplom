@@ -2,7 +2,6 @@
 using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Linq;
-using static RepairFlatRestApi.Models.DescriptionJSON.AuthDescription;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
@@ -31,7 +30,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         typeofpolz = e1.User.TypeOfUser
                     }).FirstOrDefault();
                 }
-            }, nameof(Logining));
+            }, nameof(DBController),nameof(Logining));
         }
 
         internal static BaseResult CreateLoginPerson(AuthDescription.RegisterLoginPerson informationAboutNewPerson)
@@ -69,7 +68,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     success = true,
                     description = "Данные о логине и пароле добавлены"
                 };
-            }, nameof(CreateLoginPerson));
+            }, nameof(DBController), nameof(CreateLoginPerson));
         }
 
         internal static PersonDesctiption.ResultDescription CreateUser(PersonDesctiption.DescriptionOfNewPerson descriptionPerson)
@@ -95,7 +94,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     idPerson = id,
                     success = true,
                 };
-            }, nameof(CreateUser));
+            }, nameof(DBController), nameof(CreateUser));
         }
 
         static void Run(Action<RepairFlatEntities> dbAction, string nameOfMethod)
@@ -113,7 +112,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
             }
         }
 
-        static TResult Run<TResult>(Func<RepairFlatEntities, TResult> dbFunction, string nameOfMethod)
+        static TResult Run<TResult>(Func<RepairFlatEntities, TResult> dbFunction, string NameOfClass,string nameOfMethod)
         {
             using (var db = new RepairFlatEntities())
             {
@@ -123,10 +122,9 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception($"В методе {nameof(DBController)}::{nameOfMethod} произошла ошибка: <{ex.ToString()}>");
+                    throw new Exception($"В методе {NameOfClass}::{nameOfMethod} произошла ошибка: <{ex.ToString()}>");
                 }
             }
         }
-
     }
 }
