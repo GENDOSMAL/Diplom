@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RepairFlatDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RepairFlatDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -640,6 +640,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderInformation_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OrderInformation_WorkerOrderInformation">
           <End Role="WorkerOrderInformation" Type="Self.WorkerOrderInformation" Multiplicity="0..1" />
           <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
@@ -1087,6 +1099,10 @@
             <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_WorkerDetails" Association="Self.FK_OrderInformation_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderInformation_WorkerOrderInformation" Association="Self.FK_OrderInformation_WorkerOrderInformation">
             <End Role="WorkerOrderInformation" EntitySet="WorkerOrderInformation" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
@@ -1196,8 +1212,7 @@
             <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RepairFlatDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1401,6 +1416,7 @@
           <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_OrderInformation" FromRole="OrderInformation" ToRole="OrderPayment" />
           <NavigationProperty Name="OrderServises" Relationship="Self.FK_OrderServises_OrderInformation" FromRole="OrderInformation" ToRole="OrderServises" />
           <NavigationProperty Name="OrderTasks" Relationship="Self.FK_OrderTasks_OrderInformation1" FromRole="OrderInformation" ToRole="OrderTasks" />
+          <NavigationProperty Name="WorkerDetails" Relationship="RepairFlatDBModel.FK_OrderInformation_WorkerDetails" FromRole="OrderInformation" ToRole="WorkerDetails" />
         </EntityType>
         <EntityType Name="OrderMaterial">
           <Key>
@@ -1636,6 +1652,7 @@
           <NavigationProperty Name="WorkersOperats" Relationship="Self.FK_WorkersOperats_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkersOperats" />
           <NavigationProperty Name="WorkersPayGive" Relationship="Self.FK_WorkersPayGive_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkersPayGive" />
           <NavigationProperty Name="WorkersPayGive1" Relationship="Self.FK_WorkersPayGive_WorkerDetails1" FromRole="WorkerDetails" ToRole="WorkersPayGive" />
+          <NavigationProperty Name="OrderInformation" Relationship="RepairFlatDBModel.FK_OrderInformation_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderInformation" />
         </EntityType>
         <EntityType Name="WorkerOrderInformation">
           <Key>
@@ -2487,7 +2504,23 @@
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_WorkerDetails" Association="RepairFlatDBModel.FK_OrderInformation_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_OrderInformation_WorkerDetails">
+          <End Type="RepairFlatDBModel.WorkerDetails" Role="WorkerDetails" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.OrderInformation" Role="OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
