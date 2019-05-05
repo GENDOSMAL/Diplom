@@ -17,17 +17,40 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.LoginingInformation1 = new HashSet<LoginingInformation>();
+            this.DeleteMessage = new HashSet<DeleteMessage>();
+            this.DialogMessage = new HashSet<DialogMessage>();
+            this.DialogUser = new HashSet<DialogUser>();
+            this.MaterialsUpdate = new HashSet<MaterialsUpdate>();
+            this.PremisesUpdate = new HashSet<PremisesUpdate>();
+            this.ServicesUpdate = new HashSet<ServicesUpdate>();
+            this.UserContact = new HashSet<UserContact>();
         }
     
-        public int idUser { get; set; }
+        public System.Guid idUser { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string Otchestv { get; set; }
-        public Nullable<System.DateTime> Birstday { get; set; }
+        public string Patronymic { get; set; }
+        public string Pasport { get; set; }
+        public Nullable<int> Female { get; set; }
+        public Nullable<System.DateTime> BirstDay { get; set; }
         public string TypeOfUser { get; set; }
     
+        public virtual ClientDetails ClientDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LoginingInformation> LoginingInformation1 { get; set; }
+        public virtual ICollection<DeleteMessage> DeleteMessage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DialogMessage> DialogMessage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DialogUser> DialogUser { get; set; }
+        public virtual LoginInformation LoginInformation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MaterialsUpdate> MaterialsUpdate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PremisesUpdate> PremisesUpdate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServicesUpdate> ServicesUpdate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserContact> UserContact { get; set; }
+        public virtual WorkerDetails WorkerDetails { get; set; }
     }
 }

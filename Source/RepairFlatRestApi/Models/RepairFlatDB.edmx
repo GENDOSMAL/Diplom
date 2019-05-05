@@ -1,0 +1,2941 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RepairFlatDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdressDescription">
+          <Key>
+            <PropertyRef Name="idAdress" />
+          </Key>
+          <Property Name="idAdress" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RegionName" Type="nchar" MaxLength="50" />
+          <Property Name="AreaName" Type="nchar" MaxLength="50" />
+          <Property Name="CiryName" Type="nchar" MaxLength="50" />
+          <Property Name="MicroAreaName" Type="nchar" MaxLength="50" />
+          <Property Name="Street" Type="nchar" MaxLength="50" />
+          <Property Name="House" Type="nchar" MaxLength="10" />
+          <Property Name="Entrance" Type="nchar" MaxLength="10" />
+          <Property Name="NumberOfDelen" Type="nchar" MaxLength="10" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="BrigateContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idWorker" Type="uniqueidentifier" />
+          <Property Name="WorkerRole" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="BrigateSeparation">
+          <Key>
+            <PropertyRef Name="IdBrigate" />
+          </Key>
+          <Property Name="IdBrigate" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+          <Property Name="DateStart" Type="date" />
+        </EntityType>
+        <EntityType Name="ClientDetails">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ColoborationOfBrigade">
+          <Key>
+            <PropertyRef Name="IdColoboration" />
+          </Key>
+          <Property Name="IdColoboration" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ColoborationOfBrigateSoComp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdBrigate" Type="uniqueidentifier" />
+          <Property Name="IdColoboration" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ContactUpdate">
+          <Key>
+            <PropertyRef Name="idContactUpdate" />
+          </Key>
+          <Property Name="idContactUpdate" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idContact" Type="uniqueidentifier" />
+          <Property Name="DataOfUpdate" Type="datetime2" Precision="7" />
+          <Property Name="idUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DeleteMessage">
+          <Key>
+            <PropertyRef Name="idDelete" />
+          </Key>
+          <Property Name="idDelete" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idMessage" Type="uniqueidentifier" />
+          <Property Name="idUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DialogMessage">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idDialog" Type="uniqueidentifier" />
+          <Property Name="idUser" Type="uniqueidentifier" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Foto" Type="varbinary(max)" />
+          <Property Name="CreatedTime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Dialogs">
+          <Key>
+            <PropertyRef Name="idDialog" />
+          </Key>
+          <Property Name="idDialog" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NameOfDialog" Type="nchar" MaxLength="100" />
+          <Property Name="FotoOfdialog" Type="varbinary(max)" />
+          <Property Name="CreatedTime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="DialogUser">
+          <Key>
+            <PropertyRef Name="idUserInDialog" />
+          </Key>
+          <Property Name="idUserInDialog" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idDialog" Type="uniqueidentifier" />
+          <Property Name="idUser" Type="uniqueidentifier" />
+          <Property Name="JoinedTime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="EstabilismentPost">
+          <Key>
+            <PropertyRef Name="idEstabilisment" />
+          </Key>
+          <Property Name="idEstabilisment" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idWorker" Type="uniqueidentifier" />
+          <Property Name="idPost" Type="uniqueidentifier" />
+          <Property Name="Salary" Type="money" />
+          <Property Name="DateOfOperate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="LoginInformation">
+          <Key>
+            <PropertyRef Name="IdLog" />
+          </Key>
+          <Property Name="IdLog" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Login" Type="nchar" MaxLength="30" />
+          <Property Name="Password" Type="nchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="MaterialsUpdate">
+          <Key>
+            <PropertyRef Name="idMaterialUpdate" />
+          </Key>
+          <Property Name="idMaterialUpdate" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idMaterials" Type="uniqueidentifier" />
+          <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
+          <Property Name="IdUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="OrderElementOfMeasurments">
+          <Key>
+            <PropertyRef Name="idElement" />
+          </Key>
+          <Property Name="idElement" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idMeasurements" Type="uniqueidentifier" />
+          <Property Name="TypeOfElement" Type="nchar" MaxLength="20" />
+          <Property Name="Lenght" Type="float" />
+          <Property Name="Width" Type="float" />
+          <Property Name="POfElement" Type="float" />
+          <Property Name="WidthOfSlope" Type="float" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderInformation">
+          <Key>
+            <PropertyRef Name="IdOrder" />
+          </Key>
+          <Property Name="IdOrder" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdAdress" Type="uniqueidentifier" />
+          <Property Name="IdWorkerMake" Type="uniqueidentifier" />
+          <Property Name="idClient" Type="uniqueidentifier" />
+          <Property Name="DateStart" Type="datetime2" Precision="7" />
+          <Property Name="Status" Type="int" />
+          <Property Name="AllSumma" Type="money" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+          <Property Name="IdColoboration" Type="uniqueidentifier" />
+          <Property Name="Number" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderMaterial">
+          <Key>
+            <PropertyRef Name="idMaterialINOrder" />
+          </Key>
+          <Property Name="idMaterialINOrder" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdOrder" Type="uniqueidentifier" />
+          <Property Name="idMaterial" Type="uniqueidentifier" />
+          <Property Name="Count" Type="float" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderMeasurements">
+          <Key>
+            <PropertyRef Name="idMeasurements" />
+          </Key>
+          <Property Name="idMeasurements" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdOrder" Type="uniqueidentifier" />
+          <Property Name="idPremisesType" Type="uniqueidentifier" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+          <Property Name="Lenght" Type="float" />
+          <Property Name="Width" Type="float" />
+          <Property Name="Height" Type="float" />
+          <Property Name="Pwalls" Type="float" />
+          <Property Name="PCelling" Type="float" />
+          <Property Name="Swalls" Type="float" />
+          <Property Name="Sfloor" Type="float" />
+        </EntityType>
+        <EntityType Name="OrderPayment">
+          <Key>
+            <PropertyRef Name="IdPayment" />
+          </Key>
+          <Property Name="IdPayment" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdOrder" Type="uniqueidentifier" />
+          <Property Name="IdWorkerMake" Type="uniqueidentifier" />
+          <Property Name="DatePaymnent" Type="datetime2" Precision="7" />
+          <Property Name="idDocAccepted" Type="uniqueidentifier" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+          <Property Name="Summa" Type="money" />
+        </EntityType>
+        <EntityType Name="OrderServises">
+          <Key>
+            <PropertyRef Name="IdServises" />
+          </Key>
+          <Property Name="IdServises" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdOrder" Type="uniqueidentifier" />
+          <Property Name="idServis" Type="uniqueidentifier" />
+          <Property Name="Count" Type="float" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="Description" Type="nchar" MaxLength="10" />
+          <Property Name="DatePlaneStart" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="OrderTasks">
+          <Key>
+            <PropertyRef Name="IdTask" />
+          </Key>
+          <Property Name="IdTask" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdOrder" Type="uniqueidentifier" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+          <Property Name="DateStart" Type="datetime2" Precision="7" />
+          <Property Name="DeadLine" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="OrderTasksState">
+          <Key>
+            <PropertyRef Name="IdState" />
+          </Key>
+          <Property Name="IdState" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdTask" Type="uniqueidentifier" />
+          <Property Name="DateOf" Type="datetime2" Precision="7" />
+          <Property Name="State" Type="nchar" MaxLength="20" />
+          <Property Name="IdWorker" Type="uniqueidentifier" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OurMaterials">
+          <Key>
+            <PropertyRef Name="idMaterials" />
+          </Key>
+          <Property Name="idMaterials" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NameOfMaterial" Type="nchar" MaxLength="30" />
+          <Property Name="UnitOfMeasue" Type="nchar" MaxLength="10" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+          <Property Name="TypeOfMaterial" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OurServices">
+          <Key>
+            <PropertyRef Name="idServis" />
+          </Key>
+          <Property Name="idServis" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Nomination" Type="nchar" MaxLength="50" />
+          <Property Name="TypeOfServices" Type="nchar" MaxLength="10" />
+          <Property Name="UnitOfMeasue" Type="nchar" MaxLength="20" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PremisesType">
+          <Key>
+            <PropertyRef Name="idPremises" />
+          </Key>
+          <Property Name="idPremises" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NameOfPremises" Type="nchar" MaxLength="100" />
+          <Property Name="Descriprtion" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PremisesUpdate">
+          <Key>
+            <PropertyRef Name="idPremisesUpdate" />
+          </Key>
+          <Property Name="idPremisesUpdate" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idPremises" Type="uniqueidentifier" />
+          <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
+          <Property Name="IdUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="ServicesUpdate">
+          <Key>
+            <PropertyRef Name="idServUpdate" />
+          </Key>
+          <Property Name="idServUpdate" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdServices" Type="uniqueidentifier" />
+          <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
+          <Property Name="IdUser" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TypeOfContact">
+          <Key>
+            <PropertyRef Name="idContact" />
+          </Key>
+          <Property Name="idContact" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="nchar" MaxLength="100" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="LastName" Type="nchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nchar" MaxLength="50" />
+          <Property Name="Pasport" Type="nchar" MaxLength="10" />
+          <Property Name="Female" Type="int" />
+          <Property Name="BirstDay" Type="date" />
+          <Property Name="TypeOfUser" Type="nchar" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="UserContact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idType" Type="uniqueidentifier" />
+          <Property Name="Value" Type="nchar" MaxLength="30" />
+          <Property Name="Description" Type="nchar" MaxLength="50" />
+          <Property Name="DateAdd" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="WorkerCanditate">
+          <Key>
+            <PropertyRef Name="idCandidate" />
+          </Key>
+          <Property Name="idCandidate" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="LastName" Type="nchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nchar" MaxLength="50" />
+          <Property Name="BirstDay" Type="date" />
+          <Property Name="Female" Type="int" />
+          <Property Name="Pasport" Type="nchar" MaxLength="12" />
+          <Property Name="Telephone" Type="nchar" MaxLength="20" />
+          <Property Name="Mail" Type="nchar" MaxLength="30" />
+          <Property Name="IdPost" Type="uniqueidentifier" />
+          <Property Name="PlanSalary" Type="money" />
+          <Property Name="IdAdress" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="WorkerDetails">
+          <Key>
+            <PropertyRef Name="IdWorker" />
+          </Key>
+          <Property Name="IdWorker" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idAdress" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="WorkerOrderInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idWorker" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="WorkerPosts">
+          <Key>
+            <PropertyRef Name="idPost" />
+          </Key>
+          <Property Name="idPost" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="NameOfPost" Type="nchar" MaxLength="100" />
+          <Property Name="BaseWage" Type="money" />
+        </EntityType>
+        <EntityType Name="WorkersOperats">
+          <Key>
+            <PropertyRef Name="idOperate" />
+          </Key>
+          <Property Name="idOperate" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idWorker" Type="uniqueidentifier" />
+          <Property Name="idEstabilisment" Type="uniqueidentifier" />
+          <Property Name="TypeOfOperate" Type="int" />
+        </EntityType>
+        <EntityType Name="WorkersPayGive">
+          <Key>
+            <PropertyRef Name="idGive" />
+          </Key>
+          <Property Name="idGive" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idWorkerMake" Type="uniqueidentifier" />
+          <Property Name="idWorkerAdresat" Type="uniqueidentifier" />
+          <Property Name="Size" Type="money" />
+          <Property Name="Data" Type="datetime2" Precision="7" />
+          <Property Name="Descriptiom" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_BrigateContent_BrigateSeparation">
+          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="1" />
+          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BrigateSeparation">
+              <PropertyRef Name="IdBrigate" />
+            </Principal>
+            <Dependent Role="BrigateContent">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrigateContent_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="BrigateContent">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientDetails_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ClientDetails">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation">
+          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="0..1" />
+          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrigateSeparation">
+              <PropertyRef Name="IdBrigate" />
+            </Principal>
+            <Dependent Role="ColoborationOfBrigateSoComp">
+              <PropertyRef Name="IdBrigate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
+          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
+          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColoborationOfBrigade">
+              <PropertyRef Name="IdColoboration" />
+            </Principal>
+            <Dependent Role="ColoborationOfBrigateSoComp">
+              <PropertyRef Name="IdColoboration" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactUpdate_TypeOfContact">
+          <End Role="TypeOfContact" Type="Self.TypeOfContact" Multiplicity="0..1" />
+          <End Role="ContactUpdate" Type="Self.ContactUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfContact">
+              <PropertyRef Name="idContact" />
+            </Principal>
+            <Dependent Role="ContactUpdate">
+              <PropertyRef Name="idContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeleteMessage_DialogMessage">
+          <End Role="DialogMessage" Type="Self.DialogMessage" Multiplicity="0..1" />
+          <End Role="DeleteMessage" Type="Self.DeleteMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DialogMessage">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="DeleteMessage">
+              <PropertyRef Name="idMessage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeleteMessage_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DeleteMessage" Type="Self.DeleteMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DeleteMessage">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogMessage_Dialogs">
+          <End Role="Dialogs" Type="Self.Dialogs" Multiplicity="0..1" />
+          <End Role="DialogMessage" Type="Self.DialogMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dialogs">
+              <PropertyRef Name="idDialog" />
+            </Principal>
+            <Dependent Role="DialogMessage">
+              <PropertyRef Name="idDialog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogMessage_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DialogMessage" Type="Self.DialogMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DialogMessage">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogUser_Dialogs">
+          <End Role="Dialogs" Type="Self.Dialogs" Multiplicity="0..1" />
+          <End Role="DialogUser" Type="Self.DialogUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dialogs">
+              <PropertyRef Name="idDialog" />
+            </Principal>
+            <Dependent Role="DialogUser">
+              <PropertyRef Name="idDialog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DialogUser" Type="Self.DialogUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DialogUser">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstabilismentPost_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="EstabilismentPost">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstabilismentPost_WorkerPosts">
+          <End Role="WorkerPosts" Type="Self.WorkerPosts" Multiplicity="0..1" />
+          <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerPosts">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="EstabilismentPost">
+              <PropertyRef Name="idPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInformation_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LoginInformation" Type="Self.LoginInformation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="LoginInformation">
+              <PropertyRef Name="IdLog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsUpdate_OurMaterials">
+          <End Role="OurMaterials" Type="Self.OurMaterials" Multiplicity="0..1" />
+          <End Role="MaterialsUpdate" Type="Self.MaterialsUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurMaterials">
+              <PropertyRef Name="idMaterials" />
+            </Principal>
+            <Dependent Role="MaterialsUpdate">
+              <PropertyRef Name="idMaterials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsUpdate_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="MaterialsUpdate" Type="Self.MaterialsUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="MaterialsUpdate">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderElementOfMeasurments_OrderMeasurements">
+          <End Role="OrderMeasurements" Type="Self.OrderMeasurements" Multiplicity="0..1" />
+          <End Role="OrderElementOfMeasurments" Type="Self.OrderElementOfMeasurments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderMeasurements">
+              <PropertyRef Name="idMeasurements" />
+            </Principal>
+            <Dependent Role="OrderElementOfMeasurments">
+              <PropertyRef Name="idMeasurements" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_AdressDescription">
+          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDescription">
+              <PropertyRef Name="idAdress" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_ClientDetails">
+          <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientDetails">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_ColoborationOfBrigade">
+          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColoborationOfBrigade">
+              <PropertyRef Name="IdColoboration" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdColoboration" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_WorkerOrderInformation">
+          <End Role="WorkerOrderInformation" Type="Self.WorkerOrderInformation" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerOrderInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaterial_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderMaterial" Type="Self.OrderMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderMaterial">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaterial_OurMaterials">
+          <End Role="OurMaterials" Type="Self.OurMaterials" Multiplicity="0..1" />
+          <End Role="OrderMaterial" Type="Self.OrderMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurMaterials">
+              <PropertyRef Name="idMaterials" />
+            </Principal>
+            <Dependent Role="OrderMaterial">
+              <PropertyRef Name="idMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMeasurements_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderMeasurements" Type="Self.OrderMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderMeasurements">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMeasurements_PremisesType">
+          <End Role="PremisesType" Type="Self.PremisesType" Multiplicity="0..1" />
+          <End Role="OrderMeasurements" Type="Self.OrderMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PremisesType">
+              <PropertyRef Name="idPremises" />
+            </Principal>
+            <Dependent Role="OrderMeasurements">
+              <PropertyRef Name="idPremisesType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPayment_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderPayment">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPayment_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="OrderPayment">
+              <PropertyRef Name="IdWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServises_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderServises" Type="Self.OrderServises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderServises">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServises_OurServices">
+          <End Role="OurServices" Type="Self.OurServices" Multiplicity="0..1" />
+          <End Role="OrderServises" Type="Self.OrderServises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurServices">
+              <PropertyRef Name="idServis" />
+            </Principal>
+            <Dependent Role="OrderServises">
+              <PropertyRef Name="idServis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTasks_OrderInformation1">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderTasks">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTasksState_OrderTasks">
+          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
+          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTasks">
+              <PropertyRef Name="IdTask" />
+            </Principal>
+            <Dependent Role="OrderTasksState">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTasksState_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="OrderTasksState">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremisesUpdate_PremisesType">
+          <End Role="PremisesType" Type="Self.PremisesType" Multiplicity="0..1" />
+          <End Role="PremisesUpdate" Type="Self.PremisesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PremisesType">
+              <PropertyRef Name="idPremises" />
+            </Principal>
+            <Dependent Role="PremisesUpdate">
+              <PropertyRef Name="idPremises" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremisesUpdate_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PremisesUpdate" Type="Self.PremisesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="PremisesUpdate">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesUpdate_OurServices">
+          <End Role="OurServices" Type="Self.OurServices" Multiplicity="0..1" />
+          <End Role="ServicesUpdate" Type="Self.ServicesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurServices">
+              <PropertyRef Name="idServis" />
+            </Principal>
+            <Dependent Role="ServicesUpdate">
+              <PropertyRef Name="IdServices" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesUpdate_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ServicesUpdate" Type="Self.ServicesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ServicesUpdate">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContact_TypeOfContact">
+          <End Role="TypeOfContact" Type="Self.TypeOfContact" Multiplicity="0..1" />
+          <End Role="UserContact" Type="Self.UserContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfContact">
+              <PropertyRef Name="idContact" />
+            </Principal>
+            <Dependent Role="UserContact">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContact_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserContact" Type="Self.UserContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="UserContact">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerCanditate_AdressDescription">
+          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
+          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDescription">
+              <PropertyRef Name="idAdress" />
+            </Principal>
+            <Dependent Role="WorkerCanditate">
+              <PropertyRef Name="IdAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerCanditate_WorkerPosts">
+          <End Role="WorkerPosts" Type="Self.WorkerPosts" Multiplicity="0..1" />
+          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerPosts">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="WorkerCanditate">
+              <PropertyRef Name="IdPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerDetails_AdressDescription">
+          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDescription">
+              <PropertyRef Name="idAdress" />
+            </Principal>
+            <Dependent Role="WorkerDetails">
+              <PropertyRef Name="idAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerDetails_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerOrderInformation_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkerOrderInformation" Type="Self.WorkerOrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkerOrderInformation">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersOperats_EstabilismentPost">
+          <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="0..1" />
+          <End Role="WorkersOperats" Type="Self.WorkersOperats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstabilismentPost">
+              <PropertyRef Name="idEstabilisment" />
+            </Principal>
+            <Dependent Role="WorkersOperats">
+              <PropertyRef Name="idEstabilisment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersOperats_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkersOperats" Type="Self.WorkersOperats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkersOperats">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersPayGive_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkersPayGive" Type="Self.WorkersPayGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkersPayGive">
+              <PropertyRef Name="idWorkerAdresat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersPayGive_WorkerDetails1">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkersPayGive" Type="Self.WorkersPayGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkersPayGive">
+              <PropertyRef Name="idWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RepairFlatDBModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdressDescription" EntityType="Self.AdressDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BrigateContent" EntityType="Self.BrigateContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BrigateSeparation" EntityType="Self.BrigateSeparation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientDetails" EntityType="Self.ClientDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColoborationOfBrigade" EntityType="Self.ColoborationOfBrigade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ColoborationOfBrigateSoComp" EntityType="Self.ColoborationOfBrigateSoComp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactUpdate" EntityType="Self.ContactUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeleteMessage" EntityType="Self.DeleteMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DialogMessage" EntityType="Self.DialogMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dialogs" EntityType="Self.Dialogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DialogUser" EntityType="Self.DialogUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstabilismentPost" EntityType="Self.EstabilismentPost" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginInformation" EntityType="Self.LoginInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaterialsUpdate" EntityType="Self.MaterialsUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderElementOfMeasurments" EntityType="Self.OrderElementOfMeasurments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderInformation" EntityType="Self.OrderInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMaterial" EntityType="Self.OrderMaterial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderMeasurements" EntityType="Self.OrderMeasurements" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderPayment" EntityType="Self.OrderPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderServises" EntityType="Self.OrderServises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTasks" EntityType="Self.OrderTasks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTasksState" EntityType="Self.OrderTasksState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OurMaterials" EntityType="Self.OurMaterials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OurServices" EntityType="Self.OurServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PremisesType" EntityType="Self.PremisesType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PremisesUpdate" EntityType="Self.PremisesUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServicesUpdate" EntityType="Self.ServicesUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfContact" EntityType="Self.TypeOfContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserContact" EntityType="Self.UserContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerCanditate" EntityType="Self.WorkerCanditate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerDetails" EntityType="Self.WorkerDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerOrderInformation" EntityType="Self.WorkerOrderInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerPosts" EntityType="Self.WorkerPosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkersOperats" EntityType="Self.WorkersOperats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkersPayGive" EntityType="Self.WorkersPayGive" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BrigateContent_BrigateSeparation" Association="Self.FK_BrigateContent_BrigateSeparation">
+            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
+            <End Role="BrigateContent" EntitySet="BrigateContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrigateContent_WorkerDetails" Association="Self.FK_BrigateContent_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="BrigateContent" EntitySet="BrigateContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientDetails_User" Association="Self.FK_ClientDetails_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ClientDetails" EntitySet="ClientDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation" Association="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation">
+            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
+            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" Association="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
+            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
+            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactUpdate_TypeOfContact" Association="Self.FK_ContactUpdate_TypeOfContact">
+            <End Role="TypeOfContact" EntitySet="TypeOfContact" />
+            <End Role="ContactUpdate" EntitySet="ContactUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeleteMessage_DialogMessage" Association="Self.FK_DeleteMessage_DialogMessage">
+            <End Role="DialogMessage" EntitySet="DialogMessage" />
+            <End Role="DeleteMessage" EntitySet="DeleteMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeleteMessage_User" Association="Self.FK_DeleteMessage_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeleteMessage" EntitySet="DeleteMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogMessage_Dialogs" Association="Self.FK_DialogMessage_Dialogs">
+            <End Role="Dialogs" EntitySet="Dialogs" />
+            <End Role="DialogMessage" EntitySet="DialogMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogMessage_User" Association="Self.FK_DialogMessage_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DialogMessage" EntitySet="DialogMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogUser_Dialogs" Association="Self.FK_DialogUser_Dialogs">
+            <End Role="Dialogs" EntitySet="Dialogs" />
+            <End Role="DialogUser" EntitySet="DialogUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogUser_User" Association="Self.FK_DialogUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DialogUser" EntitySet="DialogUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstabilismentPost_WorkerDetails" Association="Self.FK_EstabilismentPost_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstabilismentPost_WorkerPosts" Association="Self.FK_EstabilismentPost_WorkerPosts">
+            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
+            <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInformation_User" Association="Self.FK_LoginInformation_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LoginInformation" EntitySet="LoginInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsUpdate_OurMaterials" Association="Self.FK_MaterialsUpdate_OurMaterials">
+            <End Role="OurMaterials" EntitySet="OurMaterials" />
+            <End Role="MaterialsUpdate" EntitySet="MaterialsUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsUpdate_User" Association="Self.FK_MaterialsUpdate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="MaterialsUpdate" EntitySet="MaterialsUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderElementOfMeasurments_OrderMeasurements" Association="Self.FK_OrderElementOfMeasurments_OrderMeasurements">
+            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
+            <End Role="OrderElementOfMeasurments" EntitySet="OrderElementOfMeasurments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_AdressDescription" Association="Self.FK_OrderInformation_AdressDescription">
+            <End Role="AdressDescription" EntitySet="AdressDescription" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_ClientDetails" Association="Self.FK_OrderInformation_ClientDetails">
+            <End Role="ClientDetails" EntitySet="ClientDetails" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_ColoborationOfBrigade" Association="Self.FK_OrderInformation_ColoborationOfBrigade">
+            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_WorkerOrderInformation" Association="Self.FK_OrderInformation_WorkerOrderInformation">
+            <End Role="WorkerOrderInformation" EntitySet="WorkerOrderInformation" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaterial_OrderInformation" Association="Self.FK_OrderMaterial_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderMaterial" EntitySet="OrderMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaterial_OurMaterials" Association="Self.FK_OrderMaterial_OurMaterials">
+            <End Role="OurMaterials" EntitySet="OurMaterials" />
+            <End Role="OrderMaterial" EntitySet="OrderMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMeasurements_OrderInformation" Association="Self.FK_OrderMeasurements_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMeasurements_PremisesType" Association="Self.FK_OrderMeasurements_PremisesType">
+            <End Role="PremisesType" EntitySet="PremisesType" />
+            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPayment_OrderInformation" Association="Self.FK_OrderPayment_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderPayment" EntitySet="OrderPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPayment_WorkerDetails" Association="Self.FK_OrderPayment_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="OrderPayment" EntitySet="OrderPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServises_OrderInformation" Association="Self.FK_OrderServises_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderServises" EntitySet="OrderServises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServises_OurServices" Association="Self.FK_OrderServises_OurServices">
+            <End Role="OurServices" EntitySet="OurServices" />
+            <End Role="OrderServises" EntitySet="OrderServises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTasks_OrderInformation1" Association="Self.FK_OrderTasks_OrderInformation1">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderTasks" EntitySet="OrderTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTasksState_OrderTasks" Association="Self.FK_OrderTasksState_OrderTasks">
+            <End Role="OrderTasks" EntitySet="OrderTasks" />
+            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTasksState_WorkerDetails" Association="Self.FK_OrderTasksState_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremisesUpdate_PremisesType" Association="Self.FK_PremisesUpdate_PremisesType">
+            <End Role="PremisesType" EntitySet="PremisesType" />
+            <End Role="PremisesUpdate" EntitySet="PremisesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremisesUpdate_User" Association="Self.FK_PremisesUpdate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="PremisesUpdate" EntitySet="PremisesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesUpdate_OurServices" Association="Self.FK_ServicesUpdate_OurServices">
+            <End Role="OurServices" EntitySet="OurServices" />
+            <End Role="ServicesUpdate" EntitySet="ServicesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesUpdate_User" Association="Self.FK_ServicesUpdate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ServicesUpdate" EntitySet="ServicesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContact_TypeOfContact" Association="Self.FK_UserContact_TypeOfContact">
+            <End Role="TypeOfContact" EntitySet="TypeOfContact" />
+            <End Role="UserContact" EntitySet="UserContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContact_User" Association="Self.FK_UserContact_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContact" EntitySet="UserContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerCanditate_AdressDescription" Association="Self.FK_WorkerCanditate_AdressDescription">
+            <End Role="AdressDescription" EntitySet="AdressDescription" />
+            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerCanditate_WorkerPosts" Association="Self.FK_WorkerCanditate_WorkerPosts">
+            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
+            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerDetails_AdressDescription" Association="Self.FK_WorkerDetails_AdressDescription">
+            <End Role="AdressDescription" EntitySet="AdressDescription" />
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerDetails_User" Association="Self.FK_WorkerDetails_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerOrderInformation_WorkerDetails" Association="Self.FK_WorkerOrderInformation_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkerOrderInformation" EntitySet="WorkerOrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersOperats_EstabilismentPost" Association="Self.FK_WorkersOperats_EstabilismentPost">
+            <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
+            <End Role="WorkersOperats" EntitySet="WorkersOperats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersOperats_WorkerDetails" Association="Self.FK_WorkersOperats_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkersOperats" EntitySet="WorkersOperats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersPayGive_WorkerDetails" Association="Self.FK_WorkersPayGive_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersPayGive_WorkerDetails1" Association="Self.FK_WorkersPayGive_WorkerDetails1">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RepairFlatDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdressDescription">
+          <Key>
+            <PropertyRef Name="idAdress" />
+          </Key>
+          <Property Name="idAdress" Type="Guid" Nullable="false" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="AreaName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CiryName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="MicroAreaName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="House" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Entrance" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NumberOfDelen" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_AdressDescription" FromRole="AdressDescription" ToRole="OrderInformation" />
+          <NavigationProperty Name="WorkerCanditate" Relationship="Self.FK_WorkerCanditate_AdressDescription" FromRole="AdressDescription" ToRole="WorkerCanditate" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkerDetails_AdressDescription" FromRole="AdressDescription" ToRole="WorkerDetails" />
+        </EntityType>
+        <EntityType Name="BrigateContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="idWorker" Type="Guid" />
+          <Property Name="WorkerRole" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="BrigateSeparation" Relationship="Self.FK_BrigateContent_BrigateSeparation" FromRole="BrigateContent" ToRole="BrigateSeparation" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_BrigateContent_WorkerDetails" FromRole="BrigateContent" ToRole="WorkerDetails" />
+        </EntityType>
+        <EntityType Name="BrigateSeparation">
+          <Key>
+            <PropertyRef Name="IdBrigate" />
+          </Key>
+          <Property Name="IdBrigate" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="DateStart" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BrigateContent" Relationship="Self.FK_BrigateContent_BrigateSeparation" FromRole="BrigateSeparation" ToRole="BrigateContent" />
+          <NavigationProperty Name="ColoborationOfBrigateSoComp" Relationship="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation" FromRole="BrigateSeparation" ToRole="ColoborationOfBrigateSoComp" />
+        </EntityType>
+        <EntityType Name="ClientDetails">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Guid" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ClientDetails_User" FromRole="ClientDetails" ToRole="User" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_ClientDetails" FromRole="ClientDetails" ToRole="OrderInformation" />
+        </EntityType>
+        <EntityType Name="ColoborationOfBrigade">
+          <Key>
+            <PropertyRef Name="IdColoboration" />
+          </Key>
+          <Property Name="IdColoboration" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ColoborationOfBrigateSoComp" Relationship="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" FromRole="ColoborationOfBrigade" ToRole="ColoborationOfBrigateSoComp" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_ColoborationOfBrigade" FromRole="ColoborationOfBrigade" ToRole="OrderInformation" />
+        </EntityType>
+        <EntityType Name="ColoborationOfBrigateSoComp">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="IdBrigate" Type="Guid" />
+          <Property Name="IdColoboration" Type="Guid" />
+          <NavigationProperty Name="BrigateSeparation" Relationship="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation" FromRole="ColoborationOfBrigateSoComp" ToRole="BrigateSeparation" />
+          <NavigationProperty Name="ColoborationOfBrigade" Relationship="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" FromRole="ColoborationOfBrigateSoComp" ToRole="ColoborationOfBrigade" />
+        </EntityType>
+        <EntityType Name="ContactUpdate">
+          <Key>
+            <PropertyRef Name="idContactUpdate" />
+          </Key>
+          <Property Name="idContactUpdate" Type="Guid" Nullable="false" />
+          <Property Name="idContact" Type="Guid" />
+          <Property Name="DataOfUpdate" Type="DateTime" Precision="7" />
+          <Property Name="idUser" Type="Guid" />
+          <NavigationProperty Name="TypeOfContact" Relationship="Self.FK_ContactUpdate_TypeOfContact" FromRole="ContactUpdate" ToRole="TypeOfContact" />
+        </EntityType>
+        <EntityType Name="DeleteMessage">
+          <Key>
+            <PropertyRef Name="idDelete" />
+          </Key>
+          <Property Name="idDelete" Type="Guid" Nullable="false" />
+          <Property Name="idMessage" Type="Guid" />
+          <Property Name="idUser" Type="Guid" />
+          <NavigationProperty Name="DialogMessage" Relationship="Self.FK_DeleteMessage_DialogMessage" FromRole="DeleteMessage" ToRole="DialogMessage" />
+          <NavigationProperty Name="User" Relationship="Self.FK_DeleteMessage_User" FromRole="DeleteMessage" ToRole="User" />
+        </EntityType>
+        <EntityType Name="DialogMessage">
+          <Key>
+            <PropertyRef Name="idMessage" />
+          </Key>
+          <Property Name="idMessage" Type="Guid" Nullable="false" />
+          <Property Name="idDialog" Type="Guid" />
+          <Property Name="idUser" Type="Guid" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Foto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="DeleteMessage" Relationship="Self.FK_DeleteMessage_DialogMessage" FromRole="DialogMessage" ToRole="DeleteMessage" />
+          <NavigationProperty Name="Dialogs" Relationship="Self.FK_DialogMessage_Dialogs" FromRole="DialogMessage" ToRole="Dialogs" />
+          <NavigationProperty Name="User" Relationship="Self.FK_DialogMessage_User" FromRole="DialogMessage" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Dialogs">
+          <Key>
+            <PropertyRef Name="idDialog" />
+          </Key>
+          <Property Name="idDialog" Type="Guid" Nullable="false" />
+          <Property Name="NameOfDialog" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="FotoOfdialog" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CreatedTime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="DialogMessage" Relationship="Self.FK_DialogMessage_Dialogs" FromRole="Dialogs" ToRole="DialogMessage" />
+          <NavigationProperty Name="DialogUser" Relationship="Self.FK_DialogUser_Dialogs" FromRole="Dialogs" ToRole="DialogUser" />
+        </EntityType>
+        <EntityType Name="DialogUser">
+          <Key>
+            <PropertyRef Name="idUserInDialog" />
+          </Key>
+          <Property Name="idUserInDialog" Type="Guid" Nullable="false" />
+          <Property Name="idDialog" Type="Guid" />
+          <Property Name="idUser" Type="Guid" />
+          <Property Name="JoinedTime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Dialogs" Relationship="Self.FK_DialogUser_Dialogs" FromRole="DialogUser" ToRole="Dialogs" />
+          <NavigationProperty Name="User" Relationship="Self.FK_DialogUser_User" FromRole="DialogUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="EstabilismentPost">
+          <Key>
+            <PropertyRef Name="idEstabilisment" />
+          </Key>
+          <Property Name="idEstabilisment" Type="Guid" Nullable="false" />
+          <Property Name="idWorker" Type="Guid" />
+          <Property Name="idPost" Type="Guid" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DateOfOperate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_EstabilismentPost_WorkerDetails" FromRole="EstabilismentPost" ToRole="WorkerDetails" />
+          <NavigationProperty Name="WorkerPosts" Relationship="Self.FK_EstabilismentPost_WorkerPosts" FromRole="EstabilismentPost" ToRole="WorkerPosts" />
+          <NavigationProperty Name="WorkersOperats" Relationship="Self.FK_WorkersOperats_EstabilismentPost" FromRole="EstabilismentPost" ToRole="WorkersOperats" />
+        </EntityType>
+        <EntityType Name="LoginInformation">
+          <Key>
+            <PropertyRef Name="IdLog" />
+          </Key>
+          <Property Name="IdLog" Type="Guid" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LoginInformation_User" FromRole="LoginInformation" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MaterialsUpdate">
+          <Key>
+            <PropertyRef Name="idMaterialUpdate" />
+          </Key>
+          <Property Name="idMaterialUpdate" Type="Guid" Nullable="false" />
+          <Property Name="idMaterials" Type="Guid" />
+          <Property Name="DateOfUpdate" Type="DateTime" Precision="7" />
+          <Property Name="IdUser" Type="Guid" />
+          <NavigationProperty Name="OurMaterials" Relationship="Self.FK_MaterialsUpdate_OurMaterials" FromRole="MaterialsUpdate" ToRole="OurMaterials" />
+          <NavigationProperty Name="User" Relationship="Self.FK_MaterialsUpdate_User" FromRole="MaterialsUpdate" ToRole="User" />
+        </EntityType>
+        <EntityType Name="OrderElementOfMeasurments">
+          <Key>
+            <PropertyRef Name="idElement" />
+          </Key>
+          <Property Name="idElement" Type="Guid" Nullable="false" />
+          <Property Name="idMeasurements" Type="Guid" />
+          <Property Name="TypeOfElement" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Lenght" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="POfElement" Type="Double" />
+          <Property Name="WidthOfSlope" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="OrderMeasurements" Relationship="Self.FK_OrderElementOfMeasurments_OrderMeasurements" FromRole="OrderElementOfMeasurments" ToRole="OrderMeasurements" />
+        </EntityType>
+        <EntityType Name="OrderInformation">
+          <Key>
+            <PropertyRef Name="IdOrder" />
+          </Key>
+          <Property Name="IdOrder" Type="Guid" Nullable="false" />
+          <Property Name="IdAdress" Type="Guid" />
+          <Property Name="IdWorkerMake" Type="Guid" />
+          <Property Name="idClient" Type="Guid" />
+          <Property Name="DateStart" Type="DateTime" Precision="7" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="AllSumma" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="IdColoboration" Type="Guid" />
+          <Property Name="Number" Type="Int32" />
+          <NavigationProperty Name="AdressDescription" Relationship="Self.FK_OrderInformation_AdressDescription" FromRole="OrderInformation" ToRole="AdressDescription" />
+          <NavigationProperty Name="ClientDetails" Relationship="Self.FK_OrderInformation_ClientDetails" FromRole="OrderInformation" ToRole="ClientDetails" />
+          <NavigationProperty Name="ColoborationOfBrigade" Relationship="Self.FK_OrderInformation_ColoborationOfBrigade" FromRole="OrderInformation" ToRole="ColoborationOfBrigade" />
+          <NavigationProperty Name="WorkerOrderInformation" Relationship="Self.FK_OrderInformation_WorkerOrderInformation" FromRole="OrderInformation" ToRole="WorkerOrderInformation" />
+          <NavigationProperty Name="OrderMaterial" Relationship="Self.FK_OrderMaterial_OrderInformation" FromRole="OrderInformation" ToRole="OrderMaterial" />
+          <NavigationProperty Name="OrderMeasurements" Relationship="Self.FK_OrderMeasurements_OrderInformation" FromRole="OrderInformation" ToRole="OrderMeasurements" />
+          <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_OrderInformation" FromRole="OrderInformation" ToRole="OrderPayment" />
+          <NavigationProperty Name="OrderServises" Relationship="Self.FK_OrderServises_OrderInformation" FromRole="OrderInformation" ToRole="OrderServises" />
+          <NavigationProperty Name="OrderTasks" Relationship="Self.FK_OrderTasks_OrderInformation1" FromRole="OrderInformation" ToRole="OrderTasks" />
+        </EntityType>
+        <EntityType Name="OrderMaterial">
+          <Key>
+            <PropertyRef Name="idMaterialINOrder" />
+          </Key>
+          <Property Name="idMaterialINOrder" Type="Guid" Nullable="false" />
+          <Property Name="IdOrder" Type="Guid" />
+          <Property Name="idMaterial" Type="Guid" />
+          <Property Name="Count" Type="Double" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderMaterial_OrderInformation" FromRole="OrderMaterial" ToRole="OrderInformation" />
+          <NavigationProperty Name="OurMaterials" Relationship="Self.FK_OrderMaterial_OurMaterials" FromRole="OrderMaterial" ToRole="OurMaterials" />
+        </EntityType>
+        <EntityType Name="OrderMeasurements">
+          <Key>
+            <PropertyRef Name="idMeasurements" />
+          </Key>
+          <Property Name="idMeasurements" Type="Guid" Nullable="false" />
+          <Property Name="IdOrder" Type="Guid" />
+          <Property Name="idPremisesType" Type="Guid" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Lenght" Type="Double" />
+          <Property Name="Width" Type="Double" />
+          <Property Name="Height" Type="Double" />
+          <Property Name="Pwalls" Type="Double" />
+          <Property Name="PCelling" Type="Double" />
+          <Property Name="Swalls" Type="Double" />
+          <Property Name="Sfloor" Type="Double" />
+          <NavigationProperty Name="OrderElementOfMeasurments" Relationship="Self.FK_OrderElementOfMeasurments_OrderMeasurements" FromRole="OrderMeasurements" ToRole="OrderElementOfMeasurments" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderMeasurements_OrderInformation" FromRole="OrderMeasurements" ToRole="OrderInformation" />
+          <NavigationProperty Name="PremisesType" Relationship="Self.FK_OrderMeasurements_PremisesType" FromRole="OrderMeasurements" ToRole="PremisesType" />
+        </EntityType>
+        <EntityType Name="OrderPayment">
+          <Key>
+            <PropertyRef Name="IdPayment" />
+          </Key>
+          <Property Name="IdPayment" Type="Guid" Nullable="false" />
+          <Property Name="IdOrder" Type="Guid" />
+          <Property Name="IdWorkerMake" Type="Guid" />
+          <Property Name="DatePaymnent" Type="DateTime" Precision="7" />
+          <Property Name="idDocAccepted" Type="Guid" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Summa" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderPayment_OrderInformation" FromRole="OrderPayment" ToRole="OrderInformation" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_OrderPayment_WorkerDetails" FromRole="OrderPayment" ToRole="WorkerDetails" />
+        </EntityType>
+        <EntityType Name="OrderServises">
+          <Key>
+            <PropertyRef Name="IdServises" />
+          </Key>
+          <Property Name="IdServises" Type="Guid" Nullable="false" />
+          <Property Name="IdOrder" Type="Guid" />
+          <Property Name="idServis" Type="Guid" />
+          <Property Name="Count" Type="Double" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DatePlaneStart" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderServises_OrderInformation" FromRole="OrderServises" ToRole="OrderInformation" />
+          <NavigationProperty Name="OurServices" Relationship="Self.FK_OrderServises_OurServices" FromRole="OrderServises" ToRole="OurServices" />
+        </EntityType>
+        <EntityType Name="OrderTasks">
+          <Key>
+            <PropertyRef Name="IdTask" />
+          </Key>
+          <Property Name="IdTask" Type="Guid" Nullable="false" />
+          <Property Name="IdOrder" Type="Guid" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="DateStart" Type="DateTime" Precision="7" />
+          <Property Name="DeadLine" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderTasks_OrderInformation1" FromRole="OrderTasks" ToRole="OrderInformation" />
+          <NavigationProperty Name="OrderTasksState" Relationship="Self.FK_OrderTasksState_OrderTasks" FromRole="OrderTasks" ToRole="OrderTasksState" />
+        </EntityType>
+        <EntityType Name="OrderTasksState">
+          <Key>
+            <PropertyRef Name="IdState" />
+          </Key>
+          <Property Name="IdState" Type="Guid" Nullable="false" />
+          <Property Name="IdTask" Type="Guid" />
+          <Property Name="DateOf" Type="DateTime" Precision="7" />
+          <Property Name="State" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="IdWorker" Type="Guid" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="OrderTasks" Relationship="Self.FK_OrderTasksState_OrderTasks" FromRole="OrderTasksState" ToRole="OrderTasks" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_OrderTasksState_WorkerDetails" FromRole="OrderTasksState" ToRole="WorkerDetails" />
+        </EntityType>
+        <EntityType Name="OurMaterials">
+          <Key>
+            <PropertyRef Name="idMaterials" />
+          </Key>
+          <Property Name="idMaterials" Type="Guid" Nullable="false" />
+          <Property Name="NameOfMaterial" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="UnitOfMeasue" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="TypeOfMaterial" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="MaterialsUpdate" Relationship="Self.FK_MaterialsUpdate_OurMaterials" FromRole="OurMaterials" ToRole="MaterialsUpdate" />
+          <NavigationProperty Name="OrderMaterial" Relationship="Self.FK_OrderMaterial_OurMaterials" FromRole="OurMaterials" ToRole="OrderMaterial" />
+        </EntityType>
+        <EntityType Name="OurServices">
+          <Key>
+            <PropertyRef Name="idServis" />
+          </Key>
+          <Property Name="idServis" Type="Guid" Nullable="false" />
+          <Property Name="Nomination" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="TypeOfServices" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UnitOfMeasue" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="OrderServises" Relationship="Self.FK_OrderServises_OurServices" FromRole="OurServices" ToRole="OrderServises" />
+          <NavigationProperty Name="ServicesUpdate" Relationship="Self.FK_ServicesUpdate_OurServices" FromRole="OurServices" ToRole="ServicesUpdate" />
+        </EntityType>
+        <EntityType Name="PremisesType">
+          <Key>
+            <PropertyRef Name="idPremises" />
+          </Key>
+          <Property Name="idPremises" Type="Guid" Nullable="false" />
+          <Property Name="NameOfPremises" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Descriprtion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="OrderMeasurements" Relationship="Self.FK_OrderMeasurements_PremisesType" FromRole="PremisesType" ToRole="OrderMeasurements" />
+          <NavigationProperty Name="PremisesUpdate" Relationship="Self.FK_PremisesUpdate_PremisesType" FromRole="PremisesType" ToRole="PremisesUpdate" />
+        </EntityType>
+        <EntityType Name="PremisesUpdate">
+          <Key>
+            <PropertyRef Name="idPremisesUpdate" />
+          </Key>
+          <Property Name="idPremisesUpdate" Type="Guid" Nullable="false" />
+          <Property Name="idPremises" Type="Guid" />
+          <Property Name="DateOfUpdate" Type="DateTime" Precision="7" />
+          <Property Name="IdUser" Type="Guid" />
+          <NavigationProperty Name="PremisesType" Relationship="Self.FK_PremisesUpdate_PremisesType" FromRole="PremisesUpdate" ToRole="PremisesType" />
+          <NavigationProperty Name="User" Relationship="Self.FK_PremisesUpdate_User" FromRole="PremisesUpdate" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ServicesUpdate">
+          <Key>
+            <PropertyRef Name="idServUpdate" />
+          </Key>
+          <Property Name="idServUpdate" Type="Guid" Nullable="false" />
+          <Property Name="IdServices" Type="Guid" />
+          <Property Name="DateOfUpdate" Type="DateTime" Precision="7" />
+          <Property Name="IdUser" Type="Guid" />
+          <NavigationProperty Name="OurServices" Relationship="Self.FK_ServicesUpdate_OurServices" FromRole="ServicesUpdate" ToRole="OurServices" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ServicesUpdate_User" FromRole="ServicesUpdate" ToRole="User" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TypeOfContact">
+          <Key>
+            <PropertyRef Name="idContact" />
+          </Key>
+          <Property Name="idContact" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ContactUpdate" Relationship="Self.FK_ContactUpdate_TypeOfContact" FromRole="TypeOfContact" ToRole="ContactUpdate" />
+          <NavigationProperty Name="UserContact" Relationship="Self.FK_UserContact_TypeOfContact" FromRole="TypeOfContact" ToRole="UserContact" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Pasport" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Female" Type="Int32" />
+          <Property Name="BirstDay" Type="DateTime" Precision="0" />
+          <Property Name="TypeOfUser" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ClientDetails" Relationship="Self.FK_ClientDetails_User" FromRole="User" ToRole="ClientDetails" />
+          <NavigationProperty Name="DeleteMessage" Relationship="Self.FK_DeleteMessage_User" FromRole="User" ToRole="DeleteMessage" />
+          <NavigationProperty Name="DialogMessage" Relationship="Self.FK_DialogMessage_User" FromRole="User" ToRole="DialogMessage" />
+          <NavigationProperty Name="DialogUser" Relationship="Self.FK_DialogUser_User" FromRole="User" ToRole="DialogUser" />
+          <NavigationProperty Name="LoginInformation" Relationship="Self.FK_LoginInformation_User" FromRole="User" ToRole="LoginInformation" />
+          <NavigationProperty Name="MaterialsUpdate" Relationship="Self.FK_MaterialsUpdate_User" FromRole="User" ToRole="MaterialsUpdate" />
+          <NavigationProperty Name="PremisesUpdate" Relationship="Self.FK_PremisesUpdate_User" FromRole="User" ToRole="PremisesUpdate" />
+          <NavigationProperty Name="ServicesUpdate" Relationship="Self.FK_ServicesUpdate_User" FromRole="User" ToRole="ServicesUpdate" />
+          <NavigationProperty Name="UserContact" Relationship="Self.FK_UserContact_User" FromRole="User" ToRole="UserContact" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkerDetails_User" FromRole="User" ToRole="WorkerDetails" />
+        </EntityType>
+        <EntityType Name="UserContact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="idUser" Type="Guid" Nullable="false" />
+          <Property Name="idType" Type="Guid" />
+          <Property Name="Value" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="DateAdd" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="TypeOfContact" Relationship="Self.FK_UserContact_TypeOfContact" FromRole="UserContact" ToRole="TypeOfContact" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserContact_User" FromRole="UserContact" ToRole="User" />
+        </EntityType>
+        <EntityType Name="WorkerCanditate">
+          <Key>
+            <PropertyRef Name="idCandidate" />
+          </Key>
+          <Property Name="idCandidate" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="BirstDay" Type="DateTime" Precision="0" />
+          <Property Name="Female" Type="Int32" />
+          <Property Name="Pasport" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Mail" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="IdPost" Type="Guid" />
+          <Property Name="PlanSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IdAdress" Type="Guid" />
+          <NavigationProperty Name="AdressDescription" Relationship="Self.FK_WorkerCanditate_AdressDescription" FromRole="WorkerCanditate" ToRole="AdressDescription" />
+          <NavigationProperty Name="WorkerPosts" Relationship="Self.FK_WorkerCanditate_WorkerPosts" FromRole="WorkerCanditate" ToRole="WorkerPosts" />
+        </EntityType>
+        <EntityType Name="WorkerDetails">
+          <Key>
+            <PropertyRef Name="IdWorker" />
+          </Key>
+          <Property Name="IdWorker" Type="Guid" Nullable="false" />
+          <Property Name="idAdress" Type="Guid" />
+          <NavigationProperty Name="AdressDescription" Relationship="Self.FK_WorkerDetails_AdressDescription" FromRole="WorkerDetails" ToRole="AdressDescription" />
+          <NavigationProperty Name="BrigateContent" Relationship="Self.FK_BrigateContent_WorkerDetails" FromRole="WorkerDetails" ToRole="BrigateContent" />
+          <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_EstabilismentPost_WorkerDetails" FromRole="WorkerDetails" ToRole="EstabilismentPost" />
+          <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderPayment" />
+          <NavigationProperty Name="OrderTasksState" Relationship="Self.FK_OrderTasksState_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderTasksState" />
+          <NavigationProperty Name="User" Relationship="Self.FK_WorkerDetails_User" FromRole="WorkerDetails" ToRole="User" />
+          <NavigationProperty Name="WorkerOrderInformation" Relationship="Self.FK_WorkerOrderInformation_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkerOrderInformation" />
+          <NavigationProperty Name="WorkersOperats" Relationship="Self.FK_WorkersOperats_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkersOperats" />
+          <NavigationProperty Name="WorkersPayGive" Relationship="Self.FK_WorkersPayGive_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkersPayGive" />
+          <NavigationProperty Name="WorkersPayGive1" Relationship="Self.FK_WorkersPayGive_WorkerDetails1" FromRole="WorkerDetails" ToRole="WorkersPayGive" />
+        </EntityType>
+        <EntityType Name="WorkerOrderInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="idWorker" Type="Guid" />
+          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_WorkerOrderInformation" FromRole="WorkerOrderInformation" ToRole="OrderInformation" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkerOrderInformation_WorkerDetails" FromRole="WorkerOrderInformation" ToRole="WorkerDetails" />
+        </EntityType>
+        <EntityType Name="WorkerPosts">
+          <Key>
+            <PropertyRef Name="idPost" />
+          </Key>
+          <Property Name="idPost" Type="Guid" Nullable="false" />
+          <Property Name="NameOfPost" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="BaseWage" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_EstabilismentPost_WorkerPosts" FromRole="WorkerPosts" ToRole="EstabilismentPost" />
+          <NavigationProperty Name="WorkerCanditate" Relationship="Self.FK_WorkerCanditate_WorkerPosts" FromRole="WorkerPosts" ToRole="WorkerCanditate" />
+        </EntityType>
+        <EntityType Name="WorkersOperats">
+          <Key>
+            <PropertyRef Name="idOperate" />
+          </Key>
+          <Property Name="idOperate" Type="Guid" Nullable="false" />
+          <Property Name="idWorker" Type="Guid" />
+          <Property Name="idEstabilisment" Type="Guid" />
+          <Property Name="TypeOfOperate" Type="Int32" />
+          <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_WorkersOperats_EstabilismentPost" FromRole="WorkersOperats" ToRole="EstabilismentPost" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkersOperats_WorkerDetails" FromRole="WorkersOperats" ToRole="WorkerDetails" />
+        </EntityType>
+        <EntityType Name="WorkersPayGive">
+          <Key>
+            <PropertyRef Name="idGive" />
+          </Key>
+          <Property Name="idGive" Type="Guid" Nullable="false" />
+          <Property Name="idWorkerMake" Type="Guid" />
+          <Property Name="idWorkerAdresat" Type="Guid" />
+          <Property Name="Size" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Data" Type="DateTime" Precision="7" />
+          <Property Name="Descriptiom" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkersPayGive_WorkerDetails" FromRole="WorkersPayGive" ToRole="WorkerDetails" />
+          <NavigationProperty Name="WorkerDetails1" Relationship="Self.FK_WorkersPayGive_WorkerDetails1" FromRole="WorkersPayGive" ToRole="WorkerDetails" />
+        </EntityType>
+        <Association Name="FK_OrderInformation_AdressDescription">
+          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDescription">
+              <PropertyRef Name="idAdress" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerCanditate_AdressDescription">
+          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
+          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDescription">
+              <PropertyRef Name="idAdress" />
+            </Principal>
+            <Dependent Role="WorkerCanditate">
+              <PropertyRef Name="IdAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerDetails_AdressDescription">
+          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdressDescription">
+              <PropertyRef Name="idAdress" />
+            </Principal>
+            <Dependent Role="WorkerDetails">
+              <PropertyRef Name="idAdress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrigateContent_BrigateSeparation">
+          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="1" />
+          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="BrigateSeparation">
+              <PropertyRef Name="IdBrigate" />
+            </Principal>
+            <Dependent Role="BrigateContent">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BrigateContent_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="BrigateContent">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation">
+          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="0..1" />
+          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BrigateSeparation">
+              <PropertyRef Name="IdBrigate" />
+            </Principal>
+            <Dependent Role="ColoborationOfBrigateSoComp">
+              <PropertyRef Name="IdBrigate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientDetails_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ClientDetails">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_ClientDetails">
+          <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientDetails">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
+          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
+          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColoborationOfBrigade">
+              <PropertyRef Name="IdColoboration" />
+            </Principal>
+            <Dependent Role="ColoborationOfBrigateSoComp">
+              <PropertyRef Name="IdColoboration" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_ColoborationOfBrigade">
+          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ColoborationOfBrigade">
+              <PropertyRef Name="IdColoboration" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdColoboration" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactUpdate_TypeOfContact">
+          <End Role="TypeOfContact" Type="Self.TypeOfContact" Multiplicity="0..1" />
+          <End Role="ContactUpdate" Type="Self.ContactUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfContact">
+              <PropertyRef Name="idContact" />
+            </Principal>
+            <Dependent Role="ContactUpdate">
+              <PropertyRef Name="idContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeleteMessage_DialogMessage">
+          <End Role="DialogMessage" Type="Self.DialogMessage" Multiplicity="0..1" />
+          <End Role="DeleteMessage" Type="Self.DeleteMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DialogMessage">
+              <PropertyRef Name="idMessage" />
+            </Principal>
+            <Dependent Role="DeleteMessage">
+              <PropertyRef Name="idMessage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeleteMessage_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DeleteMessage" Type="Self.DeleteMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DeleteMessage">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogMessage_Dialogs">
+          <End Role="Dialogs" Type="Self.Dialogs" Multiplicity="0..1" />
+          <End Role="DialogMessage" Type="Self.DialogMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dialogs">
+              <PropertyRef Name="idDialog" />
+            </Principal>
+            <Dependent Role="DialogMessage">
+              <PropertyRef Name="idDialog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogMessage_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DialogMessage" Type="Self.DialogMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DialogMessage">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogUser_Dialogs">
+          <End Role="Dialogs" Type="Self.Dialogs" Multiplicity="0..1" />
+          <End Role="DialogUser" Type="Self.DialogUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dialogs">
+              <PropertyRef Name="idDialog" />
+            </Principal>
+            <Dependent Role="DialogUser">
+              <PropertyRef Name="idDialog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DialogUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DialogUser" Type="Self.DialogUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DialogUser">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstabilismentPost_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="EstabilismentPost">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EstabilismentPost_WorkerPosts">
+          <End Role="WorkerPosts" Type="Self.WorkerPosts" Multiplicity="0..1" />
+          <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerPosts">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="EstabilismentPost">
+              <PropertyRef Name="idPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersOperats_EstabilismentPost">
+          <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="0..1" />
+          <End Role="WorkersOperats" Type="Self.WorkersOperats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstabilismentPost">
+              <PropertyRef Name="idEstabilisment" />
+            </Principal>
+            <Dependent Role="WorkersOperats">
+              <PropertyRef Name="idEstabilisment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInformation_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="LoginInformation" Type="Self.LoginInformation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="LoginInformation">
+              <PropertyRef Name="IdLog" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsUpdate_OurMaterials">
+          <End Role="OurMaterials" Type="Self.OurMaterials" Multiplicity="0..1" />
+          <End Role="MaterialsUpdate" Type="Self.MaterialsUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurMaterials">
+              <PropertyRef Name="idMaterials" />
+            </Principal>
+            <Dependent Role="MaterialsUpdate">
+              <PropertyRef Name="idMaterials" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MaterialsUpdate_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="MaterialsUpdate" Type="Self.MaterialsUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="MaterialsUpdate">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderElementOfMeasurments_OrderMeasurements">
+          <End Role="OrderMeasurements" Type="Self.OrderMeasurements" Multiplicity="0..1" />
+          <End Role="OrderElementOfMeasurments" Type="Self.OrderElementOfMeasurments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderMeasurements">
+              <PropertyRef Name="idMeasurements" />
+            </Principal>
+            <Dependent Role="OrderElementOfMeasurments">
+              <PropertyRef Name="idMeasurements" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_WorkerOrderInformation">
+          <End Role="WorkerOrderInformation" Type="Self.WorkerOrderInformation" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerOrderInformation">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="IdWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaterial_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderMaterial" Type="Self.OrderMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderMaterial">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMeasurements_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderMeasurements" Type="Self.OrderMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderMeasurements">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPayment_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderPayment">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServises_OrderInformation">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderServises" Type="Self.OrderServises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderServises">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTasks_OrderInformation1">
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
+          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInformation">
+              <PropertyRef Name="IdOrder" />
+            </Principal>
+            <Dependent Role="OrderTasks">
+              <PropertyRef Name="IdOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMaterial_OurMaterials">
+          <End Role="OurMaterials" Type="Self.OurMaterials" Multiplicity="0..1" />
+          <End Role="OrderMaterial" Type="Self.OrderMaterial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurMaterials">
+              <PropertyRef Name="idMaterials" />
+            </Principal>
+            <Dependent Role="OrderMaterial">
+              <PropertyRef Name="idMaterial" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderMeasurements_PremisesType">
+          <End Role="PremisesType" Type="Self.PremisesType" Multiplicity="0..1" />
+          <End Role="OrderMeasurements" Type="Self.OrderMeasurements" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PremisesType">
+              <PropertyRef Name="idPremises" />
+            </Principal>
+            <Dependent Role="OrderMeasurements">
+              <PropertyRef Name="idPremisesType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPayment_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="OrderPayment">
+              <PropertyRef Name="IdWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderServises_OurServices">
+          <End Role="OurServices" Type="Self.OurServices" Multiplicity="0..1" />
+          <End Role="OrderServises" Type="Self.OrderServises" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurServices">
+              <PropertyRef Name="idServis" />
+            </Principal>
+            <Dependent Role="OrderServises">
+              <PropertyRef Name="idServis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTasksState_OrderTasks">
+          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
+          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTasks">
+              <PropertyRef Name="IdTask" />
+            </Principal>
+            <Dependent Role="OrderTasksState">
+              <PropertyRef Name="IdTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTasksState_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="OrderTasksState">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesUpdate_OurServices">
+          <End Role="OurServices" Type="Self.OurServices" Multiplicity="0..1" />
+          <End Role="ServicesUpdate" Type="Self.ServicesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurServices">
+              <PropertyRef Name="idServis" />
+            </Principal>
+            <Dependent Role="ServicesUpdate">
+              <PropertyRef Name="IdServices" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremisesUpdate_PremisesType">
+          <End Role="PremisesType" Type="Self.PremisesType" Multiplicity="0..1" />
+          <End Role="PremisesUpdate" Type="Self.PremisesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PremisesType">
+              <PropertyRef Name="idPremises" />
+            </Principal>
+            <Dependent Role="PremisesUpdate">
+              <PropertyRef Name="idPremises" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PremisesUpdate_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="PremisesUpdate" Type="Self.PremisesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="PremisesUpdate">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServicesUpdate_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ServicesUpdate" Type="Self.ServicesUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ServicesUpdate">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContact_TypeOfContact">
+          <End Role="TypeOfContact" Type="Self.TypeOfContact" Multiplicity="0..1" />
+          <End Role="UserContact" Type="Self.UserContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfContact">
+              <PropertyRef Name="idContact" />
+            </Principal>
+            <Dependent Role="UserContact">
+              <PropertyRef Name="idType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContact_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserContact" Type="Self.UserContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="UserContact">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerDetails_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerCanditate_WorkerPosts">
+          <End Role="WorkerPosts" Type="Self.WorkerPosts" Multiplicity="0..1" />
+          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerPosts">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="WorkerCanditate">
+              <PropertyRef Name="IdPost" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerOrderInformation_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkerOrderInformation" Type="Self.WorkerOrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkerOrderInformation">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersOperats_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkersOperats" Type="Self.WorkersOperats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkersOperats">
+              <PropertyRef Name="idWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersPayGive_WorkerDetails">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkersPayGive" Type="Self.WorkersPayGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkersPayGive">
+              <PropertyRef Name="idWorkerAdresat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkersPayGive_WorkerDetails1">
+          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
+          <End Role="WorkersPayGive" Type="Self.WorkersPayGive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerDetails">
+              <PropertyRef Name="IdWorker" />
+            </Principal>
+            <Dependent Role="WorkersPayGive">
+              <PropertyRef Name="idWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RepairFlatDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="AdressDescription" EntityType="Self.AdressDescription" />
+          <EntitySet Name="BrigateContent" EntityType="Self.BrigateContent" />
+          <EntitySet Name="BrigateSeparation" EntityType="Self.BrigateSeparation" />
+          <EntitySet Name="ClientDetails" EntityType="Self.ClientDetails" />
+          <EntitySet Name="ColoborationOfBrigade" EntityType="Self.ColoborationOfBrigade" />
+          <EntitySet Name="ColoborationOfBrigateSoComp" EntityType="Self.ColoborationOfBrigateSoComp" />
+          <EntitySet Name="ContactUpdate" EntityType="Self.ContactUpdate" />
+          <EntitySet Name="DeleteMessage" EntityType="Self.DeleteMessage" />
+          <EntitySet Name="DialogMessage" EntityType="Self.DialogMessage" />
+          <EntitySet Name="Dialogs" EntityType="Self.Dialogs" />
+          <EntitySet Name="DialogUser" EntityType="Self.DialogUser" />
+          <EntitySet Name="EstabilismentPost" EntityType="Self.EstabilismentPost" />
+          <EntitySet Name="LoginInformation" EntityType="Self.LoginInformation" />
+          <EntitySet Name="MaterialsUpdate" EntityType="Self.MaterialsUpdate" />
+          <EntitySet Name="OrderElementOfMeasurments" EntityType="Self.OrderElementOfMeasurments" />
+          <EntitySet Name="OrderInformation" EntityType="Self.OrderInformation" />
+          <EntitySet Name="OrderMaterial" EntityType="Self.OrderMaterial" />
+          <EntitySet Name="OrderMeasurements" EntityType="Self.OrderMeasurements" />
+          <EntitySet Name="OrderPayment" EntityType="Self.OrderPayment" />
+          <EntitySet Name="OrderServises" EntityType="Self.OrderServises" />
+          <EntitySet Name="OrderTasks" EntityType="Self.OrderTasks" />
+          <EntitySet Name="OrderTasksState" EntityType="Self.OrderTasksState" />
+          <EntitySet Name="OurMaterials" EntityType="Self.OurMaterials" />
+          <EntitySet Name="OurServices" EntityType="Self.OurServices" />
+          <EntitySet Name="PremisesType" EntityType="Self.PremisesType" />
+          <EntitySet Name="PremisesUpdate" EntityType="Self.PremisesUpdate" />
+          <EntitySet Name="ServicesUpdate" EntityType="Self.ServicesUpdate" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TypeOfContact" EntityType="Self.TypeOfContact" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <EntitySet Name="UserContact" EntityType="Self.UserContact" />
+          <EntitySet Name="WorkerCanditate" EntityType="Self.WorkerCanditate" />
+          <EntitySet Name="WorkerDetails" EntityType="Self.WorkerDetails" />
+          <EntitySet Name="WorkerOrderInformation" EntityType="Self.WorkerOrderInformation" />
+          <EntitySet Name="WorkerPosts" EntityType="Self.WorkerPosts" />
+          <EntitySet Name="WorkersOperats" EntityType="Self.WorkersOperats" />
+          <EntitySet Name="WorkersPayGive" EntityType="Self.WorkersPayGive" />
+          <AssociationSet Name="FK_OrderInformation_AdressDescription" Association="Self.FK_OrderInformation_AdressDescription">
+            <End Role="AdressDescription" EntitySet="AdressDescription" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerCanditate_AdressDescription" Association="Self.FK_WorkerCanditate_AdressDescription">
+            <End Role="AdressDescription" EntitySet="AdressDescription" />
+            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerDetails_AdressDescription" Association="Self.FK_WorkerDetails_AdressDescription">
+            <End Role="AdressDescription" EntitySet="AdressDescription" />
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrigateContent_BrigateSeparation" Association="Self.FK_BrigateContent_BrigateSeparation">
+            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
+            <End Role="BrigateContent" EntitySet="BrigateContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BrigateContent_WorkerDetails" Association="Self.FK_BrigateContent_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="BrigateContent" EntitySet="BrigateContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation" Association="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation">
+            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
+            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientDetails_User" Association="Self.FK_ClientDetails_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ClientDetails" EntitySet="ClientDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_ClientDetails" Association="Self.FK_OrderInformation_ClientDetails">
+            <End Role="ClientDetails" EntitySet="ClientDetails" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" Association="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
+            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
+            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_ColoborationOfBrigade" Association="Self.FK_OrderInformation_ColoborationOfBrigade">
+            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactUpdate_TypeOfContact" Association="Self.FK_ContactUpdate_TypeOfContact">
+            <End Role="TypeOfContact" EntitySet="TypeOfContact" />
+            <End Role="ContactUpdate" EntitySet="ContactUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeleteMessage_DialogMessage" Association="Self.FK_DeleteMessage_DialogMessage">
+            <End Role="DialogMessage" EntitySet="DialogMessage" />
+            <End Role="DeleteMessage" EntitySet="DeleteMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeleteMessage_User" Association="Self.FK_DeleteMessage_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeleteMessage" EntitySet="DeleteMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogMessage_Dialogs" Association="Self.FK_DialogMessage_Dialogs">
+            <End Role="Dialogs" EntitySet="Dialogs" />
+            <End Role="DialogMessage" EntitySet="DialogMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogMessage_User" Association="Self.FK_DialogMessage_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DialogMessage" EntitySet="DialogMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogUser_Dialogs" Association="Self.FK_DialogUser_Dialogs">
+            <End Role="Dialogs" EntitySet="Dialogs" />
+            <End Role="DialogUser" EntitySet="DialogUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DialogUser_User" Association="Self.FK_DialogUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DialogUser" EntitySet="DialogUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstabilismentPost_WorkerDetails" Association="Self.FK_EstabilismentPost_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EstabilismentPost_WorkerPosts" Association="Self.FK_EstabilismentPost_WorkerPosts">
+            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
+            <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersOperats_EstabilismentPost" Association="Self.FK_WorkersOperats_EstabilismentPost">
+            <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
+            <End Role="WorkersOperats" EntitySet="WorkersOperats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInformation_User" Association="Self.FK_LoginInformation_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LoginInformation" EntitySet="LoginInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsUpdate_OurMaterials" Association="Self.FK_MaterialsUpdate_OurMaterials">
+            <End Role="OurMaterials" EntitySet="OurMaterials" />
+            <End Role="MaterialsUpdate" EntitySet="MaterialsUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MaterialsUpdate_User" Association="Self.FK_MaterialsUpdate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="MaterialsUpdate" EntitySet="MaterialsUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderElementOfMeasurments_OrderMeasurements" Association="Self.FK_OrderElementOfMeasurments_OrderMeasurements">
+            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
+            <End Role="OrderElementOfMeasurments" EntitySet="OrderElementOfMeasurments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_WorkerOrderInformation" Association="Self.FK_OrderInformation_WorkerOrderInformation">
+            <End Role="WorkerOrderInformation" EntitySet="WorkerOrderInformation" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaterial_OrderInformation" Association="Self.FK_OrderMaterial_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderMaterial" EntitySet="OrderMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMeasurements_OrderInformation" Association="Self.FK_OrderMeasurements_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPayment_OrderInformation" Association="Self.FK_OrderPayment_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderPayment" EntitySet="OrderPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServises_OrderInformation" Association="Self.FK_OrderServises_OrderInformation">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderServises" EntitySet="OrderServises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTasks_OrderInformation1" Association="Self.FK_OrderTasks_OrderInformation1">
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+            <End Role="OrderTasks" EntitySet="OrderTasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMaterial_OurMaterials" Association="Self.FK_OrderMaterial_OurMaterials">
+            <End Role="OurMaterials" EntitySet="OurMaterials" />
+            <End Role="OrderMaterial" EntitySet="OrderMaterial" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderMeasurements_PremisesType" Association="Self.FK_OrderMeasurements_PremisesType">
+            <End Role="PremisesType" EntitySet="PremisesType" />
+            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPayment_WorkerDetails" Association="Self.FK_OrderPayment_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="OrderPayment" EntitySet="OrderPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderServises_OurServices" Association="Self.FK_OrderServises_OurServices">
+            <End Role="OurServices" EntitySet="OurServices" />
+            <End Role="OrderServises" EntitySet="OrderServises" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTasksState_OrderTasks" Association="Self.FK_OrderTasksState_OrderTasks">
+            <End Role="OrderTasks" EntitySet="OrderTasks" />
+            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTasksState_WorkerDetails" Association="Self.FK_OrderTasksState_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesUpdate_OurServices" Association="Self.FK_ServicesUpdate_OurServices">
+            <End Role="OurServices" EntitySet="OurServices" />
+            <End Role="ServicesUpdate" EntitySet="ServicesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremisesUpdate_PremisesType" Association="Self.FK_PremisesUpdate_PremisesType">
+            <End Role="PremisesType" EntitySet="PremisesType" />
+            <End Role="PremisesUpdate" EntitySet="PremisesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PremisesUpdate_User" Association="Self.FK_PremisesUpdate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="PremisesUpdate" EntitySet="PremisesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServicesUpdate_User" Association="Self.FK_ServicesUpdate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ServicesUpdate" EntitySet="ServicesUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContact_TypeOfContact" Association="Self.FK_UserContact_TypeOfContact">
+            <End Role="TypeOfContact" EntitySet="TypeOfContact" />
+            <End Role="UserContact" EntitySet="UserContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContact_User" Association="Self.FK_UserContact_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContact" EntitySet="UserContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerDetails_User" Association="Self.FK_WorkerDetails_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerCanditate_WorkerPosts" Association="Self.FK_WorkerCanditate_WorkerPosts">
+            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
+            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerOrderInformation_WorkerDetails" Association="Self.FK_WorkerOrderInformation_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkerOrderInformation" EntitySet="WorkerOrderInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersOperats_WorkerDetails" Association="Self.FK_WorkersOperats_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkersOperats" EntitySet="WorkersOperats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersPayGive_WorkerDetails" Association="Self.FK_WorkersPayGive_WorkerDetails">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkersPayGive_WorkerDetails1" Association="Self.FK_WorkersPayGive_WorkerDetails1">
+            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
+            <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RepairFlatDBModelStoreContainer" CdmEntityContainer="RepairFlatDBEntities">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdressDescription">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.AdressDescription">
+              <MappingFragment StoreEntitySet="AdressDescription">
+                <ScalarProperty Name="idAdress" ColumnName="idAdress" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="AreaName" ColumnName="AreaName" />
+                <ScalarProperty Name="CiryName" ColumnName="CiryName" />
+                <ScalarProperty Name="MicroAreaName" ColumnName="MicroAreaName" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Entrance" ColumnName="Entrance" />
+                <ScalarProperty Name="NumberOfDelen" ColumnName="NumberOfDelen" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrigateContent">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.BrigateContent">
+              <MappingFragment StoreEntitySet="BrigateContent">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="idWorker" ColumnName="idWorker" />
+                <ScalarProperty Name="WorkerRole" ColumnName="WorkerRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BrigateSeparation">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.BrigateSeparation">
+              <MappingFragment StoreEntitySet="BrigateSeparation">
+                <ScalarProperty Name="IdBrigate" ColumnName="IdBrigate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientDetails">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.ClientDetails">
+              <MappingFragment StoreEntitySet="ClientDetails">
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColoborationOfBrigade">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.ColoborationOfBrigade">
+              <MappingFragment StoreEntitySet="ColoborationOfBrigade">
+                <ScalarProperty Name="IdColoboration" ColumnName="IdColoboration" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ColoborationOfBrigateSoComp">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.ColoborationOfBrigateSoComp">
+              <MappingFragment StoreEntitySet="ColoborationOfBrigateSoComp">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdBrigate" ColumnName="IdBrigate" />
+                <ScalarProperty Name="IdColoboration" ColumnName="IdColoboration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactUpdate">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.ContactUpdate">
+              <MappingFragment StoreEntitySet="ContactUpdate">
+                <ScalarProperty Name="idContactUpdate" ColumnName="idContactUpdate" />
+                <ScalarProperty Name="idContact" ColumnName="idContact" />
+                <ScalarProperty Name="DataOfUpdate" ColumnName="DataOfUpdate" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeleteMessage">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.DeleteMessage">
+              <MappingFragment StoreEntitySet="DeleteMessage">
+                <ScalarProperty Name="idDelete" ColumnName="idDelete" />
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DialogMessage">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.DialogMessage">
+              <MappingFragment StoreEntitySet="DialogMessage">
+                <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+                <ScalarProperty Name="idDialog" ColumnName="idDialog" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dialogs">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.Dialogs">
+              <MappingFragment StoreEntitySet="Dialogs">
+                <ScalarProperty Name="idDialog" ColumnName="idDialog" />
+                <ScalarProperty Name="NameOfDialog" ColumnName="NameOfDialog" />
+                <ScalarProperty Name="FotoOfdialog" ColumnName="FotoOfdialog" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DialogUser">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.DialogUser">
+              <MappingFragment StoreEntitySet="DialogUser">
+                <ScalarProperty Name="idUserInDialog" ColumnName="idUserInDialog" />
+                <ScalarProperty Name="idDialog" ColumnName="idDialog" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="JoinedTime" ColumnName="JoinedTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EstabilismentPost">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.EstabilismentPost">
+              <MappingFragment StoreEntitySet="EstabilismentPost">
+                <ScalarProperty Name="idEstabilisment" ColumnName="idEstabilisment" />
+                <ScalarProperty Name="idWorker" ColumnName="idWorker" />
+                <ScalarProperty Name="idPost" ColumnName="idPost" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="DateOfOperate" ColumnName="DateOfOperate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginInformation">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.LoginInformation">
+              <MappingFragment StoreEntitySet="LoginInformation">
+                <ScalarProperty Name="IdLog" ColumnName="IdLog" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialsUpdate">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.MaterialsUpdate">
+              <MappingFragment StoreEntitySet="MaterialsUpdate">
+                <ScalarProperty Name="idMaterialUpdate" ColumnName="idMaterialUpdate" />
+                <ScalarProperty Name="idMaterials" ColumnName="idMaterials" />
+                <ScalarProperty Name="DateOfUpdate" ColumnName="DateOfUpdate" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderElementOfMeasurments">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderElementOfMeasurments">
+              <MappingFragment StoreEntitySet="OrderElementOfMeasurments">
+                <ScalarProperty Name="idElement" ColumnName="idElement" />
+                <ScalarProperty Name="idMeasurements" ColumnName="idMeasurements" />
+                <ScalarProperty Name="TypeOfElement" ColumnName="TypeOfElement" />
+                <ScalarProperty Name="Lenght" ColumnName="Lenght" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="POfElement" ColumnName="POfElement" />
+                <ScalarProperty Name="WidthOfSlope" ColumnName="WidthOfSlope" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderInformation">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderInformation">
+              <MappingFragment StoreEntitySet="OrderInformation">
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="IdAdress" ColumnName="IdAdress" />
+                <ScalarProperty Name="IdWorkerMake" ColumnName="IdWorkerMake" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AllSumma" ColumnName="AllSumma" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IdColoboration" ColumnName="IdColoboration" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderMaterial">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderMaterial">
+              <MappingFragment StoreEntitySet="OrderMaterial">
+                <ScalarProperty Name="idMaterialINOrder" ColumnName="idMaterialINOrder" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="idMaterial" ColumnName="idMaterial" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderMeasurements">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderMeasurements">
+              <MappingFragment StoreEntitySet="OrderMeasurements">
+                <ScalarProperty Name="idMeasurements" ColumnName="idMeasurements" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="idPremisesType" ColumnName="idPremisesType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Lenght" ColumnName="Lenght" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Pwalls" ColumnName="Pwalls" />
+                <ScalarProperty Name="PCelling" ColumnName="PCelling" />
+                <ScalarProperty Name="Swalls" ColumnName="Swalls" />
+                <ScalarProperty Name="Sfloor" ColumnName="Sfloor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderPayment">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderPayment">
+              <MappingFragment StoreEntitySet="OrderPayment">
+                <ScalarProperty Name="IdPayment" ColumnName="IdPayment" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="IdWorkerMake" ColumnName="IdWorkerMake" />
+                <ScalarProperty Name="DatePaymnent" ColumnName="DatePaymnent" />
+                <ScalarProperty Name="idDocAccepted" ColumnName="idDocAccepted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Summa" ColumnName="Summa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderServises">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderServises">
+              <MappingFragment StoreEntitySet="OrderServises">
+                <ScalarProperty Name="IdServises" ColumnName="IdServises" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="idServis" ColumnName="idServis" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DatePlaneStart" ColumnName="DatePlaneStart" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTasks">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderTasks">
+              <MappingFragment StoreEntitySet="OrderTasks">
+                <ScalarProperty Name="IdTask" ColumnName="IdTask" />
+                <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="DeadLine" ColumnName="DeadLine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTasksState">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderTasksState">
+              <MappingFragment StoreEntitySet="OrderTasksState">
+                <ScalarProperty Name="IdState" ColumnName="IdState" />
+                <ScalarProperty Name="IdTask" ColumnName="IdTask" />
+                <ScalarProperty Name="DateOf" ColumnName="DateOf" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IdWorker" ColumnName="IdWorker" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OurMaterials">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OurMaterials">
+              <MappingFragment StoreEntitySet="OurMaterials">
+                <ScalarProperty Name="idMaterials" ColumnName="idMaterials" />
+                <ScalarProperty Name="NameOfMaterial" ColumnName="NameOfMaterial" />
+                <ScalarProperty Name="UnitOfMeasue" ColumnName="UnitOfMeasue" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TypeOfMaterial" ColumnName="TypeOfMaterial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OurServices">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OurServices">
+              <MappingFragment StoreEntitySet="OurServices">
+                <ScalarProperty Name="idServis" ColumnName="idServis" />
+                <ScalarProperty Name="Nomination" ColumnName="Nomination" />
+                <ScalarProperty Name="TypeOfServices" ColumnName="TypeOfServices" />
+                <ScalarProperty Name="UnitOfMeasue" ColumnName="UnitOfMeasue" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremisesType">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.PremisesType">
+              <MappingFragment StoreEntitySet="PremisesType">
+                <ScalarProperty Name="idPremises" ColumnName="idPremises" />
+                <ScalarProperty Name="NameOfPremises" ColumnName="NameOfPremises" />
+                <ScalarProperty Name="Descriprtion" ColumnName="Descriprtion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PremisesUpdate">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.PremisesUpdate">
+              <MappingFragment StoreEntitySet="PremisesUpdate">
+                <ScalarProperty Name="idPremisesUpdate" ColumnName="idPremisesUpdate" />
+                <ScalarProperty Name="idPremises" ColumnName="idPremises" />
+                <ScalarProperty Name="DateOfUpdate" ColumnName="DateOfUpdate" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServicesUpdate">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.ServicesUpdate">
+              <MappingFragment StoreEntitySet="ServicesUpdate">
+                <ScalarProperty Name="idServUpdate" ColumnName="idServUpdate" />
+                <ScalarProperty Name="IdServices" ColumnName="IdServices" />
+                <ScalarProperty Name="DateOfUpdate" ColumnName="DateOfUpdate" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfContact">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.TypeOfContact">
+              <MappingFragment StoreEntitySet="TypeOfContact">
+                <ScalarProperty Name="idContact" ColumnName="idContact" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Pasport" ColumnName="Pasport" />
+                <ScalarProperty Name="Female" ColumnName="Female" />
+                <ScalarProperty Name="BirstDay" ColumnName="BirstDay" />
+                <ScalarProperty Name="TypeOfUser" ColumnName="TypeOfUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContact">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.UserContact">
+              <MappingFragment StoreEntitySet="UserContact">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idType" ColumnName="idType" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkerCanditate">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.WorkerCanditate">
+              <MappingFragment StoreEntitySet="WorkerCanditate">
+                <ScalarProperty Name="idCandidate" ColumnName="idCandidate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="BirstDay" ColumnName="BirstDay" />
+                <ScalarProperty Name="Female" ColumnName="Female" />
+                <ScalarProperty Name="Pasport" ColumnName="Pasport" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="IdPost" ColumnName="IdPost" />
+                <ScalarProperty Name="PlanSalary" ColumnName="PlanSalary" />
+                <ScalarProperty Name="IdAdress" ColumnName="IdAdress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkerDetails">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.WorkerDetails">
+              <MappingFragment StoreEntitySet="WorkerDetails">
+                <ScalarProperty Name="IdWorker" ColumnName="IdWorker" />
+                <ScalarProperty Name="idAdress" ColumnName="idAdress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkerOrderInformation">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.WorkerOrderInformation">
+              <MappingFragment StoreEntitySet="WorkerOrderInformation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="idWorker" ColumnName="idWorker" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkerPosts">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.WorkerPosts">
+              <MappingFragment StoreEntitySet="WorkerPosts">
+                <ScalarProperty Name="idPost" ColumnName="idPost" />
+                <ScalarProperty Name="NameOfPost" ColumnName="NameOfPost" />
+                <ScalarProperty Name="BaseWage" ColumnName="BaseWage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkersOperats">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.WorkersOperats">
+              <MappingFragment StoreEntitySet="WorkersOperats">
+                <ScalarProperty Name="idOperate" ColumnName="idOperate" />
+                <ScalarProperty Name="idWorker" ColumnName="idWorker" />
+                <ScalarProperty Name="idEstabilisment" ColumnName="idEstabilisment" />
+                <ScalarProperty Name="TypeOfOperate" ColumnName="TypeOfOperate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkersPayGive">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.WorkersPayGive">
+              <MappingFragment StoreEntitySet="WorkersPayGive">
+                <ScalarProperty Name="idGive" ColumnName="idGive" />
+                <ScalarProperty Name="idWorkerMake" ColumnName="idWorkerMake" />
+                <ScalarProperty Name="idWorkerAdresat" ColumnName="idWorkerAdresat" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Descriptiom" ColumnName="Descriptiom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
