@@ -11,8 +11,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
         {
             return Run((db) =>
             {
-                string pass = HelperUS.PasswordDesript(asked.password);
-                var InfrormationAboutLogin = db.LoginingInformation.Where(e => e.Login == asked.login && e.Password == pass);
+                var InfrormationAboutLogin = db.LoginInformation.Where(e => e.Login == asked.login && e.Password == asked.password);
                 if (InfrormationAboutLogin.FirstOrDefault() == null)
                 {
                     return new AuthDescription.ResultOfInformation
@@ -26,7 +25,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     return InfrormationAboutLogin.Select(e1 => new AuthDescription.ResultOfInformation
                     {
                         sucess = true,
-                        idUser = e1.idUser,
+                        idUser = e1.IdLog,
                         typeofpolz = e1.User.TypeOfUser
                     }).FirstOrDefault();
                 }
@@ -37,8 +36,8 @@ namespace RepairFlatRestApi.Controllers.OtherController
         {
             return Run((db) =>
             {
-                int idUser = Convert.ToInt32(informationAboutNewPerson.idPolz);
-                if (db.LoginingInformation.Where(e => e.idUser == idUser).FirstOrDefault() != null)
+                Guid idUser = informationAboutNewPerson.idUser;
+                if (db.LoginInformation.Where(e => e.IdLog == idUser).FirstOrDefault() != null)
                 {
                     return new BaseResult
                     {
@@ -46,8 +45,8 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         description="Для данного пользователя уже есть информация о логине и пароле!"
                     };
                 }
-                var InforMationAboutLoginInTable = db.LoginingInformation.Select(e => e.Login == informationAboutNewPerson.login);
-                if(db.LoginingInformation.Where(e => e.Login == informationAboutNewPerson.login).FirstOrDefault() != null)
+                var InforMationAboutLoginInTable = db.LoginInformation.Select(e => e.Login == informationAboutNewPerson.login);
+                if(db.LoginInformation.Where(e => e.Login == informationAboutNewPerson.login).FirstOrDefault() != null)
                 {
                     return new BaseResult
                     {
@@ -55,13 +54,13 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         description = "Логин уже исползуется"
                     };
                 }
-                var newLog = new LoginingInformation
+                var newLogInformation = new LoginInformation
                 {
-                    idUser = idUser,
+                    IdLog = idUser,
                     Login = informationAboutNewPerson.login,
                     Password = HelperUS.PasswordDesript(informationAboutNewPerson.password)
                 };
-                db.LoginingInformation.Add(newLog);
+                db.LoginInformation.Add(newLogInformation);
                 db.SaveChanges();
                 return new BaseResult
                 {
@@ -71,35 +70,36 @@ namespace RepairFlatRestApi.Controllers.OtherController
             }, nameof(DBController), nameof(CreateLoginPerson));
         }
 
-        internal static PersonDesctiption.ResultDescription CreateUser(PersonDesctiption.DescriptionOfNewPerson descriptionPerson)
+        internal static PersonDesctiption.ResultDescription CreateUser(PersonDesctiption.DescriptionOfNewUser descriptionUser)
         {
             return Run((db) =>
             {
+                Guid IdNewUser = Guid.NewGuid();
                 var user = new User
                 {
-                    Birstday = descriptionPerson.Birstday,
-                    LastName = descriptionPerson.Lastname,
-                    Name = descriptionPerson.Name,
-                    Otchestv = descriptionPerson.Otchestv,
-                    TypeOfUser = descriptionPerson.Type
+                    idUser = IdNewUser,
+                    Name = descriptionUser.Name,
+                    LastName = descriptionUser.Lastname,
+                    Patronymic = descriptionUser.Patronymic,
+                    Pasport=descriptionUser.Pasport,
+                    Female = descriptionUser.Female,
+                    BirstDay = descriptionUser.Birstday,                                   
+                    TypeOfUser = descriptionUser.TypeOfUser
                 };
                 db.User.Add(user);
                 db.SaveChanges();
-                var id = db.User.OrderBy(e => e.idUser)
-                    .Where(e => e.Name == descriptionPerson.Name &&
-                    e.Otchestv == descriptionPerson.Otchestv && e.LastName == descriptionPerson.Lastname).FirstOrDefault().idUser;
                 return new PersonDesctiption.ResultDescription()
                 {
-                    description = "Пользолватель создан",
-                    idPerson = id,
+                    description = "Пользователь создан",
+                    idUser = IdNewUser,
                     success = true,
                 };
             }, nameof(DBController), nameof(CreateUser));
         }
 
-        static void Run(Action<RepairFlatEntities> dbAction, string nameOfMethod)
+        static void Run(Action<RepairFlatDB> dbAction, string nameOfMethod)
         {
-            using (var db = new RepairFlatEntities())
+            using (var db = new RepairFlatDB())
             {
                 try
                 {
@@ -112,9 +112,9 @@ namespace RepairFlatRestApi.Controllers.OtherController
             }
         }
 
-        static TResult Run<TResult>(Func<RepairFlatEntities, TResult> dbFunction, string NameOfClass,string nameOfMethod)
+        static TResult Run<TResult>(Func<RepairFlatDB, TResult> dbFunction, string NameOfClass,string nameOfMethod)
         {
-            using (var db = new RepairFlatEntities())
+            using (var db = new RepairFlatDB())
             {
                 try
                 {

@@ -8,10 +8,10 @@ using System.Web.Http;
 
 namespace RepairFlatRestApi.Controllers.MainConroller
 {
-    public class WorkWithUserController:BaseController
+    public class UserController:BaseController
     {
         [HttpPost, Route("api/main/createperson")]
-        public HttpResponseMessage CreateNewPerson([FromBody] PersonDesctiption.DescriptionOfNewPerson DescriptionPerson)
+        public HttpResponseMessage CreateNewPerson([FromBody] PersonDesctiption.DescriptionOfNewUser DescriptionPerson)
         {
             return CatchError2(() =>
             {

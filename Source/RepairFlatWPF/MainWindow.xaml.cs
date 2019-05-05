@@ -23,7 +23,6 @@ namespace RepairFlatWPF
         public MainWindow()
         {
             InitializeComponent();
-            TopOfTheWindow.Background = SystemParameters.WindowGlassBrush;
         }
         private void TopOfTheWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

@@ -38,6 +38,7 @@ namespace RepairFlatRestApi.Models
         public virtual AdressDescription AdressDescription { get; set; }
         public virtual ClientDetails ClientDetails { get; set; }
         public virtual ColoborationOfBrigade ColoborationOfBrigade { get; set; }
+        public virtual WorkerDetails WorkerDetails { get; set; }
         public virtual WorkerOrderInformation WorkerOrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderMaterial> OrderMaterial { get; set; }

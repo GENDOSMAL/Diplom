@@ -13,10 +13,10 @@ namespace RepairFlatRestApi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RepairFlatDBEntities : DbContext
+    public partial class RepairFlatDB : DbContext
     {
-        public RepairFlatDBEntities()
-            : base("name=RepairFlatDBEntities")
+        public RepairFlatDB()
+            : base("name=RepairFlatDB")
         {
         }
     

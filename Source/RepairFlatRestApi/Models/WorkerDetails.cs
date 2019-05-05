@@ -19,6 +19,7 @@ namespace RepairFlatRestApi.Models
         {
             this.BrigateContent = new HashSet<BrigateContent>();
             this.EstabilismentPost = new HashSet<EstabilismentPost>();
+            this.OrderInformation = new HashSet<OrderInformation>();
             this.OrderPayment = new HashSet<OrderPayment>();
             this.OrderTasksState = new HashSet<OrderTasksState>();
             this.WorkerOrderInformation = new HashSet<WorkerOrderInformation>();
@@ -35,6 +36,8 @@ namespace RepairFlatRestApi.Models
         public virtual ICollection<BrigateContent> BrigateContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EstabilismentPost> EstabilismentPost { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderInformation> OrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderPayment> OrderPayment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,18 +9,36 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 {
     public class PersonDesctiption
     {
-        public class DescriptionOfNewPerson
+        /// <summary>
+        /// Описание того, что будет принято о новом пользователе при его регистрации
+        /// </summary>
+        public class DescriptionOfNewUser
         {
             public string Name;
             public string Lastname;
-            public string Otchestv;
+            public string Patronymic;
+            [JsonConverter(typeof(CustomDateTimeConverter))]
             public DateTime Birstday;
-            public string Type;
+            public string TypeOfUser;
+            public string Pasport;
+            public int? Female;
         }
-
+        /// <summary>
+        /// Описание того, что будет вернуто на запрос о создании нового пользователя
+        /// </summary>
         public class ResultDescription:BaseResult
         {
-            public int idPerson;
+            public Guid idUser;
+        }
+        /// <summary>
+        /// Описание того, как будет выглядеть дата
+        /// </summary>
+        class CustomDateTimeConverter : IsoDateTimeConverter
+        {
+            public CustomDateTimeConverter()
+            {
+                base.DateTimeFormat = "dd.MM.yyyy";
+            }
         }
     }
 }
