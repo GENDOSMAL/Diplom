@@ -12,13 +12,14 @@ namespace RepairFlatRestApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class LoginingInformation
+    public partial class PremisesUpdate
     {
-        public int idLog { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public int idUser { get; set; }
+        public System.Guid idPremisesUpdate { get; set; }
+        public Nullable<System.Guid> idPremises { get; set; }
+        public Nullable<System.DateTime> DateOfUpdate { get; set; }
+        public Nullable<System.Guid> IdUser { get; set; }
     
+        public virtual PremisesType PremisesType { get; set; }
         public virtual User User { get; set; }
     }
 }

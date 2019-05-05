@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[PremisesUpdate]
+(
+	[idPremisesUpdate] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [idPremises] UNIQUEIDENTIFIER NULL, 
+    [DateOfUpdate] DATETIME2 NULL, 
+    [IdUser] UNIQUEIDENTIFIER NULL
+)

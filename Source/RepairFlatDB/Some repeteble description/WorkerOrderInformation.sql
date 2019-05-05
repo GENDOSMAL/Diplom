@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[WorkerOrderInformation]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [idWorker] UNIQUEIDENTIFIER NULL
+)

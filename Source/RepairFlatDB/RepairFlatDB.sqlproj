@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>RepairFlatDB</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{f0087ae6-ea1d-450f-87b5-b2adaa186fb1}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>RepairFlatDB</RootNamespace>
+    <AssemblyName>RepairFlatDB</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Some repeteble description" />
+    <Folder Include="Worker" />
+    <Folder Include="OrderInformation" />
+    <Folder Include="BrigadeDescription" />
+    <Folder Include="ClientInformation" />
+    <Folder Include="Dialog" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Some repeteble description\User.sql" />
+    <Build Include="Some repeteble description\UserContact.sql" />
+    <Build Include="Some repeteble description\LoginInformation.sql" />
+    <Build Include="Some repeteble description\OurServices.sql" />
+    <Build Include="Some repeteble description\ServicesUpdate.sql" />
+    <Build Include="Some repeteble description\PremisesType.sql" />
+    <Build Include="Some repeteble description\PremisesUpdate.sql" />
+    <Build Include="Some repeteble description\OurMaterials.sql" />
+    <Build Include="Some repeteble description\MaterialsUpdate.sql" />
+    <Build Include="Some repeteble description\AdressDescription.sql" />
+    <Build Include="ClientInformation\ClientDetails.sql" />
+    <Build Include="OrderInformation\OrderInformation.sql" />
+    <Build Include="OrderInformation\OrderMaterial.sql" />
+    <Build Include="OrderInformation\OrderMeasurements.sql" />
+    <Build Include="OrderInformation\OrderPayment.sql" />
+    <Build Include="OrderInformation\OrderServises.sql" />
+    <Build Include="OrderInformation\OrderTasks.sql" />
+    <Build Include="OrderInformation\OrderTasksState.sql" />
+    <Build Include="OrderInformation\OrderElementOfMeasurments.sql" />
+    <Build Include="BrigadeDescription\BrigateContent.sql" />
+    <Build Include="BrigadeDescription\BrigateSeparation.sql" />
+    <Build Include="BrigadeDescription\ColoborationOfBrigade.sql" />
+    <Build Include="BrigadeDescription\ColoborationOfBrigateSoComp.sql" />
+    <Build Include="Worker\WorkerPosts.sql" />
+    <Build Include="Worker\WorkerCanditate.sql" />
+    <Build Include="Worker\WorkersOperats.sql" />
+    <Build Include="Some repeteble description\TypeOfContact.sql" />
+    <Build Include="Worker\EstabilismentPost.sql" />
+    <Build Include="Some repeteble description\ContactUpdate.sql" />
+    <Build Include="Worker\WorkersPayGive.sql" />
+    <Build Include="Dialog\DeleteMessage.sql" />
+    <Build Include="Dialog\DialogMessage.sql" />
+    <Build Include="Dialog\Dialogs.sql" />
+    <Build Include="Dialog\DialogUser.sql" />
+    <Build Include="Worker\WorkerDetails.sql" />
+    <Build Include="Some repeteble description\WorkerOrderInformation.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="RepairFlatDB.refactorlog" />
+  </ItemGroup>
+</Project>

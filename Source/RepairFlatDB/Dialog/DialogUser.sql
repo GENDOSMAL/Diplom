@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[DialogUser]
+(
+	[idUserInDialog] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [idDialog] UNIQUEIDENTIFIER NULL, 
+    [idUser] UNIQUEIDENTIFIER NULL, 
+    [JoinedTime] DATETIME2 NULL
+)
