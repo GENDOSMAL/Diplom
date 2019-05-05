@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[ServicesUpdate]
+(
+	[idServUpdate] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [IdServices] UNIQUEIDENTIFIER NULL, 
+    [DateOfUpdate] DATETIME2 NULL, 
+    [IdUser] UNIQUEIDENTIFIER NULL
+)

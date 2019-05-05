@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[OrderTasks]
+(
+	[IdTask] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [IdOrder] UNIQUEIDENTIFIER NULL, 
+    [Description] NCHAR(100) NULL, 
+    [DateStart] DATETIME2 NULL, 
+    [DeadLine] DATETIME2 NULL
+)

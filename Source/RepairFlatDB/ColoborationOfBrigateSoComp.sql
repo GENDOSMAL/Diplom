@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ColoborationOfBrigateSoComp]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [IdBrigate] UNIQUEIDENTIFIER NULL, 
+    [IdColoboration] UNIQUEIDENTIFIER NULL
+)

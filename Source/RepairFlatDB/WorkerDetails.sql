@@ -1,4 +1,5 @@
 ﻿CREATE TABLE [dbo].[WorkerDetails]
 (
-	[IdWorker] INT NOT NULL PRIMARY KEY
+	[IdWorker] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [idAdress] UNIQUEIDENTIFIER NULL
 )

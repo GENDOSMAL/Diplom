@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[DeleteMessage]
+(
+	[idDelete] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [idMessage] UNIQUEIDENTIFIER NULL, 
+    [idUser] UNIQUEIDENTIFIER NULL
+)

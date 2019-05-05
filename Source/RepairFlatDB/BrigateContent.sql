@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[BrigateContent]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [idWorker] UNIQUEIDENTIFIER NULL, 
+    [WorkerRole] NCHAR(100) NULL
+)

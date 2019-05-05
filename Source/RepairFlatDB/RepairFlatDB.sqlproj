@@ -57,4 +57,44 @@
   <ItemGroup>
     <Folder Include="Properties" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="User.sql" />
+    <Build Include="UserContact.sql" />
+    <Build Include="WorkerDetails.sql" />
+    <Build Include="LoginInformation.sql" />
+    <Build Include="ClientDetails.sql" />
+    <Build Include="OrderInformation.sql" />
+    <Build Include="WorkerOrderInformation.sql" />
+    <Build Include="OrderServises.sql" />
+    <Build Include="OrderMaterial.sql" />
+    <Build Include="OrderMeasurements.sql" />
+    <Build Include="OrderElementOfMeasurments.sql" />
+    <Build Include="OrderPayment.sql" />
+    <Build Include="OrderTasks.sql" />
+    <Build Include="OrderTasksState.sql" />
+    <Build Include="DialogMessage.sql" />
+    <Build Include="Dialogs.sql" />
+    <Build Include="DialogUser.sql" />
+    <Build Include="DeleteMessage.sql" />
+    <Build Include="WorkerPosts.sql" />
+    <Build Include="EstabilismentPost.sql" />
+    <Build Include="WorkerCanditate.sql" />
+    <Build Include="WorkersOperats.sql" />
+    <Build Include="AdressDescription.sql" />
+    <Build Include="BrigateSeparation.sql" />
+    <Build Include="BrigateContent.sql" />
+    <Build Include="ColoborationOfBrigateSoComp.sql" />
+    <Build Include="ColoborationOfBrigade.sql" />
+    <Build Include="TypeOfContact.sql" />
+    <Build Include="ContactUpdate.sql" />
+    <Build Include="OurMaterials.sql" />
+    <Build Include="MaterialsUpdate.sql" />
+    <Build Include="OurServices.sql" />
+    <Build Include="ServicesUpdate.sql" />
+    <Build Include="PremisesType.sql" />
+    <Build Include="PremisesUpdate.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="RepairFlatDB.refactorlog" />
+  </ItemGroup>
 </Project>
