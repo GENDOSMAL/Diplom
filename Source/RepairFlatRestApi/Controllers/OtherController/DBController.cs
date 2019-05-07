@@ -16,7 +16,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 {
                     return new AuthDescription.ResultOfInformation
                     {
-                        sucess = false,
+                        sucess = false,                        
                         description = "Не корректный логин и пароль"
                     };
                 }

@@ -18,7 +18,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         {
             public bool sucess;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public Guid idUser;
+            public Guid? idUser;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string typeofpolz;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
