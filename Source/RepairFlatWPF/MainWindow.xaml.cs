@@ -23,10 +23,7 @@ namespace RepairFlatWPF
         public MainWindow()
         {
             InitializeComponent();
-        }
-        private void TopOfTheWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
+            this.DataContext = new ViewModel.MainWindowViewModel(this);
         }
     }
 }
