@@ -28,7 +28,7 @@ namespace RepairFlatWPF.ViewModel
 
         #region PublicMember
 
-        public int ResizeBorder { get; set; } = 5;
+        public int ResizeBorder { get; set; } = 10;
 
         public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder+OuterMarginSize); } }
 
@@ -43,7 +43,9 @@ namespace RepairFlatWPF.ViewModel
                 mOuterMarginSize = value;
             }
         }
+
         public Thickness OuterMarginSizeThickness { get { return new Thickness(OuterMarginSize); } }
+
         public int WindowRadius
         {
             get
@@ -55,7 +57,12 @@ namespace RepairFlatWPF.ViewModel
                 mWindowRadius = value;
             }
         }
+
         public CornerRadius WindowCornerRadius { get { return new CornerRadius(WindowRadius); } }
+
+        public int TitleHeight { get; set; } = 35;
+
+        public GridLength TitleHeightGridLength { get { return new GridLength(TitleHeight+ResizeBorder); } }
 
         #endregion
     }
