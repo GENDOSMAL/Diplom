@@ -15,7 +15,7 @@
         MinWidth="{Binding WindowMinimalWidth}"
         MinHeight="{Binding WindowMinimalHeight}"
         Title="АИС Компании по ремонту квартир" 
-        Height="800" Width="800"  >
+        Height="600" Width="800"  >
 
 
     <!--Возможность окна быть изменненным относительно размеров-->
@@ -66,7 +66,7 @@
                                             <Image Source="/image/engineer.ico"/>
                                         </Button>
                                         <!--Название-->
-                                        <Viewbox Grid.Column="1" Margin="0" >
+                                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Margin="0" >
                                             <TextBlock Margin="0 5" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue='АИС Компании по ремонту квартир'}"/>
                                         </Viewbox>
                                         <!--Кнопочки-->
@@ -92,8 +92,7 @@
             </Setter>
         </Style>
     </Window.Resources>
-
-    <Grid Background="Red">
-        
+    <Grid>
+        <Frame x:Name="MainFrame" Content="{Binding CurrentPage, Converter={local:ApplicationPageValueConverter}}"/>
     </Grid>
 </Window>

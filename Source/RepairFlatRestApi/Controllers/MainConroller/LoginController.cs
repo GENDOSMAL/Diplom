@@ -8,6 +8,11 @@ namespace RepairFlatRestApi.Controllers
 {
     public class LoginController : BaseController
     {
+        /// <summary>
+        /// Метод для авторизации 
+        /// </summary>
+        /// <param name="InformationAboutAuth"></param>
+        /// <returns></returns>
         [HttpPost, Route("api/main/auth")]
         public HttpResponseMessage MakeAuth([FromBody]AuthDescription.AskedInformation InformationAboutAuth)
         {
@@ -17,7 +22,11 @@ namespace RepairFlatRestApi.Controllers
                 return resLog;
             }, nameof(LoginController), nameof(MakeAuth));
         }
-
+        /// <summary>
+        /// Метод создания информации о логине
+        /// </summary>
+        /// <param name="InformationAboutNewPerson"></param>
+        /// <returns></returns>
         [HttpPost, Route("api/main/createLogin")]
         public HttpResponseMessage MakeNewLoginPerson([FromBody]AuthDescription.RegisterLoginPerson InformationAboutNewPerson)
         {

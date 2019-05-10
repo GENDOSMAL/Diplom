@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace RepairFlatWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoadingPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoadingPage : Page
     {
-        public MainWindow()
+        public LoadingPage()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
         }
     }
 }

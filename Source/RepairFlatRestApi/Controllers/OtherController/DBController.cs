@@ -5,8 +5,16 @@ using System.Linq;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class DBController
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="asked"></param>
+        /// <returns></returns>
         public static AuthDescription.ResultOfInformation Logining(AuthDescription.AskedInformation asked)
         {
             return Run((db) =>
@@ -31,7 +39,11 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 }
             }, nameof(DBController),nameof(Logining));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="informationAboutNewPerson"></param>
+        /// <returns></returns>
         internal static BaseResult CreateLoginPerson(AuthDescription.RegisterLoginPerson informationAboutNewPerson)
         {
             return Run((db) =>
@@ -69,7 +81,11 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 };
             }, nameof(DBController), nameof(CreateLoginPerson));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="descriptionUser"></param>
+        /// <returns></returns>
         internal static PersonDesctiption.ResultDescription CreateUser(PersonDesctiption.DescriptionOfNewUser descriptionUser)
         {
             return Run((db) =>
@@ -96,7 +112,11 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 };
             }, nameof(DBController), nameof(CreateUser));
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dbAction"></param>
+        /// <param name="nameOfMethod"></param>
         static void Run(Action<RepairFlatDB> dbAction, string nameOfMethod)
         {
             using (var db = new RepairFlatDB())
@@ -111,7 +131,14 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 }
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="dbFunction"></param>
+        /// <param name="NameOfClass"></param>
+        /// <param name="nameOfMethod"></param>
+        /// <returns></returns>
         static TResult Run<TResult>(Func<RepairFlatDB, TResult> dbFunction, string NameOfClass,string nameOfMethod)
         {
             using (var db = new RepairFlatDB())

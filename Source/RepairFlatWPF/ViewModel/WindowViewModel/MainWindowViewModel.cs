@@ -6,23 +6,22 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace RepairFlatWPF.ViewModel
+namespace RepairFlatWPF
 {
     class MainWindowViewModel: BaseViewModel
     {
+        #region Private Member
         private Window mWindow;
 
         private int mOuterMarginSize = 10;
         private int mWindowRadius = 10;
+        #endregion
 
-        public MainWindowViewModel()
-        {
-
-        }
+        #region Constructor
         public MainWindowViewModel(Window window)
         {
             mWindow = window;
-            mWindow.StateChanged += (sender, e) => 
+            mWindow.StateChanged += (sender, e) =>
             {
                 OnPropertyChanged(nameof(ResizeBorderThickness));
                 OnPropertyChanged(nameof(OuterMarginSize));
@@ -35,7 +34,9 @@ namespace RepairFlatWPF.ViewModel
             CloseCommand = new RelayCommand(() => mWindow.Close());
             MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetPosition()));
         }
+        #endregion
 
+        #region Дополнительные методы
         /// <summary>
         /// Получение позиции курсора при нажатии на фото
         /// </summary>
@@ -45,10 +46,12 @@ namespace RepairFlatWPF.ViewModel
             var position = Mouse.GetPosition(mWindow);
             return new Point(position.X + mWindow.Left, position.Y + mWindow.Top);
         }
+        #endregion
 
-        
+        #region Public Member
 
-        #region PublicMember
+
+        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.LoginPage;
 
         public double WindowMinimalWidth { get; set; } = 800;
 
@@ -58,7 +61,7 @@ namespace RepairFlatWPF.ViewModel
 
         public Thickness ResizeBorderThickness { get { return new Thickness(ResizeBorder+OuterMarginSize); } }
 
-        public Thickness InnerConntentPadding { get { return new Thickness(ResizeBorder); } }
+        public Thickness InnerConntentPadding { get; set; } = new Thickness(0);
 
         public int OuterMarginSize
         {

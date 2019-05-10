@@ -13,7 +13,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
         public static void WriteToLog(TypeOfRecord WhatType, string Class, string Method, string MessageToLog)
         {
             string LogPath = Path.GetDirectoryName(HostingEnvironment.ApplicationPhysicalPath);
-            if (WorkWithFail(ref LogPath))
+            if (WorkWithFile(ref LogPath))
             {
                 string content = $"{DateTime.Now.TimeOfDay.ToString()}\t\t{(char)WhatType}\t\t{Class}::{Method}\t\t{MessageToLog}{Environment.NewLine}";
                 File.AppendAllText(LogPath, content);
@@ -22,7 +22,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
         }
 
 
-        public static bool WorkWithFail(ref string LogPath)
+        public static bool WorkWithFile(ref string LogPath)
         {
             LogPath = Path.Combine(LogPath, Properties.Settings.Default.DefaultLogPath);
             if (Properties.Settings.Default.DefaultLogPath == "")

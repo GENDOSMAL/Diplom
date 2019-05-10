@@ -1,7 +1,7 @@
 ﻿using PropertyChanged;
 using System.ComponentModel;
 
-namespace RepairFlatWPF.ViewModel
+namespace RepairFlatWPF
 {
     public class BaseViewModel : INotifyPropertyChanged
     {

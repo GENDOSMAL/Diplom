@@ -76,9 +76,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttachesProperty\BaseAttachedProperty.cs" />
+    <Compile Include="AttachesProperty\PasswordBoxAttachProperty.cs" />
+    <Compile Include="DataModel\ApplicationPage.cs" />
+    <Compile Include="Model\BaseJsonModel.cs" />
+    <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Pages\LoadingPage.xaml.cs">
+      <DependentUpon>LoadingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ValueConverter\ApplicationPageValueConverter.cs" />
+    <Compile Include="ValueConverter\BaseValueConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\WindowViewModel\MainWindowViewModel.cs" />
+    <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
+    <Compile Include="WorkWithServer\LoginWork.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,7 +106,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\LoadingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LoginPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ViewModel\Resourses\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ViewModel\Resourses\HintAssist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

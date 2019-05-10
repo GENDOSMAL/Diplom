@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +16,21 @@ using System.Windows.Shapes;
 namespace RepairFlatWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for LoginPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginPage : Page
     {
-        public MainWindow()
+        public LoginPage()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
+        }
+
+        private void CheckLogin_Click(object sender, RoutedEventArgs e)
+        {
+            var dd = new LoginWork();
+            string base64Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(PasswordText.Password));
+            MessageBox.Show(dd.MakeAuth(Login.Text, base64Password).ToString());
+
         }
     }
 }
