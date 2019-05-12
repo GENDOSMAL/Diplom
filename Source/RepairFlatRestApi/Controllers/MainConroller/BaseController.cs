@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 
-namespace RepairFlatRestApi.Controllers.MainConroller
+namespace RepairFlatRestApi.Controllers
 {
     public class BaseController : ApiController
     {

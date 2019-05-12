@@ -29,7 +29,7 @@ namespace RepairFlatWPF
         {
             var dd = new LoginWork();
             string base64Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(PasswordText.Password));
-            MessageBox.Show(dd.MakeAuth(Login.Text, base64Password).ToString());
+            string ss=dd.MakeAuth(Login.Text, base64Password).ToString();
 
         }
     }

@@ -168,6 +168,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\MainConroller\BaseController.cs" />
+    <Compile Include="Controllers\MainConroller\MakeLoadingController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
     <Compile Include="Controllers\OtherController\DBController.cs" />
     <Compile Include="Controllers\OtherController\HelperUS.cs" />

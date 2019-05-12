@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 
-namespace RepairFlatRestApi.Controllers.MainConroller
+namespace RepairFlatRestApi.Controllers
 {
     public class UserController:BaseController
     {
