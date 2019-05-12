@@ -1,8 +1,8 @@
 ﻿using RepairFlatRestApi.Controllers.MainConroller;
-using RepairFlatRestApi.Controllers.OtherController;
 using System.Net.Http;
 using System.Web.Http;
 using RepairFlatRestApi.Models.DescriptionJSON;
+using static RepairFlatRestApi.Controllers.Logger;
 
 namespace RepairFlatRestApi.Controllers
 {
@@ -33,6 +33,20 @@ namespace RepairFlatRestApi.Controllers
             return CatchError2(() =>
             {
                 return DBController.CreateLoginPerson(InformationAboutNewPerson);
+            }, nameof(LoginController), nameof(MakeNewLoginPerson));
+        }
+
+        [HttpGet, Route("api/main")]
+        public HttpResponseMessage GEt()
+        {
+            WriteToLog(
+                TypeOfRecord.Information,
+                nameof(Logger),
+                nameof(DeleteAfter),
+                $"Удаление файла логов по адресу <>;");
+            return CatchError2(() =>
+            {
+                return DBController.CreateLog();
             }, nameof(LoginController), nameof(MakeNewLoginPerson));
         }
     }

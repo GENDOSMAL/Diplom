@@ -3,7 +3,7 @@ using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Linq;
 
-namespace RepairFlatRestApi.Controllers.OtherController
+namespace RepairFlatRestApi.Controllers
 {
     /// <summary>
     /// 
@@ -81,6 +81,19 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 };
             }, nameof(DBController), nameof(CreateLoginPerson));
         }
+
+        internal static BaseResult CreateLog()
+        {
+            return Run((db) =>
+            {
+                return new BaseResult
+                {
+                    success = false,
+                    description = "Для данного пользователя уже есть информация о логине и пароле!"
+                };
+            }, nameof(DBController), nameof(CreateLog));
+        }
+
         /// <summary>
         /// 
         /// </summary>

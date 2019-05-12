@@ -15,7 +15,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError2(() =>
             {
-                return OtherController.DBController.CreateUser(DescriptionPerson);
+                return DBController.CreateUser(DescriptionPerson);
             }, nameof(LoginController), nameof(CreateNewPerson));
         }
     }
