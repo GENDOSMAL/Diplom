@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace RepairFlatWPF
 {
-    public class LoginWork : BaseWorkWithServer
+    public class LoginWork
     {
 
         public  object MakeAuth(string Login, string Password)
@@ -18,7 +18,7 @@ namespace RepairFlatWPF
             string UrlSend = "http://repairflat.somee.com/api/main/auth";
             string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login, password = Password });
            
-            var d = CatchErrorWithPost(UrlSend, "POST", Json, nameof(LoginWork), nameof(MakeAuth)).Result;
+            var d = BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(LoginWork), nameof(MakeAuth));
             MessageBox.Show(d.ToString());
             //object deserializedProduct = JsonConvert.DeserializeObject<LoginModel>(d);
             return d;

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace RepairFlatWPF
 {
-    public  class BaseWorkWithServer
+    public static class BaseWorkWithServer
     {
         //ПОДУМАТЬ НАД ЭТИМ
-        protected async Task<object> CatchErrorWithPost(string url, string typeOfMessage, string WhatSend, string NameOfClass, string nameOfMethod)
+        public static object CatchErrorWithPost(string url, string typeOfMessage, string WhatSend, string NameOfClass, string nameOfMethod)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace RepairFlatWPF
                 //return result;
 
 
-                Task<object> t = Task<object>.Run(() =>
+                Task<object> t = Task<object>.Run(async () =>
                 {
 
                     var request = (HttpWebRequest)WebRequest.Create(url);
@@ -48,13 +48,13 @@ namespace RepairFlatWPF
                     object result = new object();
                     using (var streamReader = new StreamReader(response.GetResponseStream()))
                     {
-                        result = streamReader.ReadToEnd();
+                        result = await streamReader.ReadToEndAsync();
                     }
                     return result;
                 });
 
                 t.Wait();
-                return t.Result;              
+                return t.Result;
             }
             catch (Exception ex)
             {
