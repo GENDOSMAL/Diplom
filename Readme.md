@@ -1,4 +1,3 @@
-[![CodeFactor](https://github.com/GENDOSMAL/Diplom)](https://www.codefactor.io/repository/github/gendosmal/diplom)
 
   **Написание диплом для колледжа, ну а там как пойдет.**  
 
