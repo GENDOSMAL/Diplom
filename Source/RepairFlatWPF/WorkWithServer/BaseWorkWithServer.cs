@@ -11,25 +11,50 @@ namespace RepairFlatWPF
     public  class BaseWorkWithServer
     {
         //ПОДУМАТЬ НАД ЭТИМ
-        protected Object CatchErrorWithPost(string url, string typeOfMessage, string WhatSend, string NameOfClass, string nameOfMethod)
+        protected async Task<object> CatchErrorWithPost(string url, string typeOfMessage, string WhatSend, string NameOfClass, string nameOfMethod)
         {
             try
             {
-                var request = (HttpWebRequest)WebRequest.Create(url);
-                request.ContentType = "application/json";
-                request.Method = typeOfMessage;
+                //var request = (HttpWebRequest)WebRequest.Create(url);
+                //request.ContentType = "application/json";
+                //request.Method = typeOfMessage;
 
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                //using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                //{
+                //    streamWriter.Write(WhatSend);
+                //}
+                //var response =await Task.Run(()=> (HttpWebResponse)request.GetResponse());
+                //Task<object> result = null;
+                //using (var streamReader = new StreamReader(response.GetResponseStream()))
+                //{
+                //    result =  streamReader.ReadToEnd();
+                //}
+                //return result;
+
+
+                Task<object> t = Task<object>.Run(() =>
                 {
-                    streamWriter.Write(WhatSend);
-                }
-                var response = (HttpWebResponse)request.GetResponse();
-                object result = new object();
-                using (var streamReader = new StreamReader(response.GetResponseStream()))
-                {
-                    result = streamReader.ReadToEnd();
-                }
-                return result;
+
+                    var request = (HttpWebRequest)WebRequest.Create(url);
+                    request.ContentType = "application/json";
+                    request.Method = typeOfMessage;
+
+                    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        streamWriter.Write(WhatSend);
+                    }
+                    var response = (HttpWebResponse)request.GetResponse();
+
+                    object result = new object();
+                    using (var streamReader = new StreamReader(response.GetResponseStream()))
+                    {
+                        result = streamReader.ReadToEnd();
+                    }
+                    return result;
+                });
+
+                t.Wait();
+                return t.Result;              
             }
             catch (Exception ex)
             {

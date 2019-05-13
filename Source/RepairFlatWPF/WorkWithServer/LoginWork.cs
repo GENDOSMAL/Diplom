@@ -5,18 +5,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RepairFlatWPF
 {
     public class LoginWork : BaseWorkWithServer
     {
-        
-        public object MakeAuth(string Login,string Password)
+
+        public  object MakeAuth(string Login, string Password)
         {
+
             string UrlSend = "http://repairflat.somee.com/api/main/auth";
             string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login, password = Password });
-            return CatchErrorWithPost(
-                UrlSend, "POST",Json, nameof(LoginWork), nameof(MakeAuth));
+           
+            var d = CatchErrorWithPost(UrlSend, "POST", Json, nameof(LoginWork), nameof(MakeAuth)).Result;
+            MessageBox.Show(d.ToString());
+            //object deserializedProduct = JsonConvert.DeserializeObject<LoginModel>(d);
+            return d;
+
         }
 
     }

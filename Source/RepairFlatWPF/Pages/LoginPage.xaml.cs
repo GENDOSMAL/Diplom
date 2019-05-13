@@ -25,11 +25,21 @@ namespace RepairFlatWPF
             InitializeComponent();
         }
 
-        private void CheckLogin_Click(object sender, RoutedEventArgs e)
+        public void CheckLogin_Click(object sender, RoutedEventArgs e)
         {
-            var dd = new LoginWork();
-            string base64Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(PasswordText.Password));
-            string ss=dd.MakeAuth(Login.Text, base64Password).ToString();
+            //Ip();
+            //var dd = new LoginWork();
+            //string base64Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(PasswordText.Password));
+
+            ////Task<string> t = Task<string>.Run(() =>
+            ////{
+            //    string ss = "";
+            //    ss = dd.MakeAuth(Login.Text, base64Password).ToString();
+            //   // return ss;
+            ////});
+            ////t.Wait();
+            //MessageBox.Show(ss);
+
 
         }
     }
