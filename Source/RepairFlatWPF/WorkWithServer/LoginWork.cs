@@ -14,8 +14,7 @@ namespace RepairFlatWPF
 
         public  object MakeAuth(string Login, string Password)
         {
-
-            string UrlSend = "http://repairflat.somee.com/api/main/auth";
+            string UrlSend = "http://repairflat.somee.com/api/main/auths";
             string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login, password = Password });
            
             var d = BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(LoginWork), nameof(MakeAuth));
@@ -24,6 +23,8 @@ namespace RepairFlatWPF
             return d;
 
         }
+
+
 
     }
 }

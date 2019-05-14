@@ -24,6 +24,8 @@ namespace RepairFlatWPF
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel(this);
+            Grid.Children.Clear();
+            Grid.Children.Add(new LoginUserControl());
         }
     }
 }

@@ -18,36 +18,26 @@ using static RepairFlatWPF.LoginModel;
 namespace RepairFlatWPF
 {
     /// <summary>
-    /// Interaction logic for LoginPage.xaml
+    /// Interaction logic for LoginUserControl.xaml
     /// </summary>
-    public partial class LoginPage : Page
+    public partial class LoginUserControl : UserControl
     {
-        public LoginPage()
+        public LoginUserControl()
         {
             InitializeComponent();
         }
-
-        public void CheckLogin_Click(object sender, RoutedEventArgs e)
+        public async void CheckLogin_Click(object sender, RoutedEventArgs e)
         {
-            //Ip();
+
             var dd = new LoginWork();
             string base64Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(PasswordText.Password));
-
             string UrlSend = "http://repairflat.somee.com/api/main/auth";
             string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login.Text, password = base64Password });
+            var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(LoginWork), nameof(MakeAuth)));
+            var deserializedProduct = JsonConvert.DeserializeObject<LoginModel>(task.ToString());
 
-            var d = BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(LoginWork), nameof(MakeAuth));
-            MessageBox.Show(d.ToString());
-            //Task<string> t = Task<string>.Run(() =>
-            //{
-            //string ss = "";
-            //ss = dd.MakeAuth(Login.Text, base64Password).ToString();
-            // return ss;
-            //});
-            //t.Wait();
-            //MessageBox.Show(ss);
-
-
+            //IoC.Get<MainWindowViewModel>.v
+            MessageBox.Show(task.ToString());
         }
     }
 }

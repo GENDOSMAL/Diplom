@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RepairFlatWPF
 {
     /// <summary>
-    /// Окна приложения
+    /// Окна приложения привязать к 
     /// </summary>
     public enum ApplicationPage
     {

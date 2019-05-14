@@ -8,6 +8,7 @@ using System.Windows.Input;
 
 namespace RepairFlatWPF
 {
+    //TODO Почистить все, что не связано с отображением окна
     class MainWindowViewModel: BaseViewModel
     {
         #region Private Member
@@ -34,6 +35,10 @@ namespace RepairFlatWPF
             CloseCommand = new RelayCommand(() => mWindow.Close());
             MenuCommand = new RelayCommand(() => SystemCommands.ShowSystemMenu(mWindow, GetPosition()));
         }
+
+        public MainWindowViewModel()
+        {
+        }
         #endregion
 
         #region Дополнительные методы
@@ -49,10 +54,6 @@ namespace RepairFlatWPF
         #endregion
 
         #region Public Member
-
-
-        public ApplicationPage CurrentPage { get; set; } = ApplicationPage.LoginPage;
-
         public double WindowMinimalWidth { get; set; } = 800;
 
         public double WindowMinimalHeight { get; set; } = 600;
