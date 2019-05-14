@@ -15,7 +15,7 @@
         MinWidth="{Binding WindowMinimalWidth}"
         MinHeight="{Binding WindowMinimalHeight}"
         Title="АИС Компании по ремонту квартир" 
-        Height="600" Width="800"  >
+        Height="700" Width="800"  >
 
 
     <!--Возможность окна быть изменненным относительно размеров-->
@@ -82,7 +82,7 @@
                                     <!--Основное окно-->
                                     
                                     <Border Grid.Row="2" Padding="{Binding InnerConntentPadding}">
-                                        <ContentPresenter  Name="ForAll" Content="{TemplateBinding Content}">
+                                        <ContentPresenter Content="{TemplateBinding Content}">
                                         </ContentPresenter>
                                     </Border>
                                 </Grid>
@@ -94,7 +94,81 @@
         </Style>
     </Window.Resources>
     
-    <Grid Name="Grid">
-        
+    <Grid Name="MainGrid">
+        <Grid Name="HelpGrid">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid  Grid.Column="0" Grid.ColumnSpan="2" Width="325" HorizontalAlignment="Left" >
+                <StackPanel>
+                    
+                    <Grid Width="325" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Background="#FFB6B6B6">
+                        <Button x:Name="ButtonOpenMenu" VerticalAlignment="Top" Width="35" Height="35" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"  Margin="18,8,0,0" HorizontalContentAlignment="Center" >
+                            <materialDesign:PackIcon Foreground="#FF807EB6" Kind="FormatListBulleted" Width="30" Height="30"  />
+                        </Button>
+                        <Button x:Name="ButtonCloseMenu"  VerticalAlignment="Top" Width="35" Height="35" Background="{x:Null}" BorderBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Margin="18,8,0,0" Visibility="Collapsed" HorizontalContentAlignment="Center" HorizontalAlignment="Left" >
+                            <materialDesign:PackIcon Foreground="#FF807EB6" Kind="Menu" Width="30" Height="30" />
+                        </Button>
+                        <TextBlock x:Name="NameOfPolz" Margin="75,10,10,10"  Foreground="#FF807EB6" FontFamily="Times New Roman" FontSize="22"/>
+                    </Grid>
+                    <ListView x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  >
+                        <ListViewItem Height="80" >
+                            
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                
+                                <materialDesign:PackIcon Kind="Human" Width="35" Height="35" Margin="8"/>
+                                <TextBlock Text="Работа с заказами" Background="{x:Null}"  Margin="8"  Width="223" FontFamily="Times New Roman" FontSize="22" Foreground="#FF111118" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Height="80" >
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Database" Width="35" Height="35" Margin="8"/>
+                                <TextBlock Text="Контроль заказов" Background="{x:Null}"  Margin="8"  Width="223" FontFamily="Times New Roman" FontSize="22" Foreground="#FF111118" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Height="80" >
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="Details" Width="35" Height="35" Margin="8"/>
+                                <TextBlock Text="Справочная информация" Background="{x:Null}"  Margin="8"  Width="236" FontFamily="Times New Roman" FontSize="22" Foreground="#FF111118" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Height="80" >
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="NaturePeople" Width="35" Height="35" Margin="8"/>
+                                <TextBlock Text="Работа с персоналом" Background="{x:Null}"  Margin="8"  Width="223" FontFamily="Times New Roman" FontSize="22" Foreground="#FF111118" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem Height="80" >
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <materialDesign:PackIcon Kind="CodeArray" Width="35" Height="35" Margin="8"/>
+                                <TextBlock Text="Бухгалтерская работа" Background="{x:Null}"  Margin="8"  Width="223" FontFamily="Times New Roman" FontSize="22" Foreground="#FF111118" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+
+                </StackPanel>
+                <ListView VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="BottomListView"  >
+                    <ListViewItem Height="50">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="AccountConvert" Width="35" Height="35" Margin="10,0,0,0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" />
+                            <TextBlock Text="Сменить пользователя" Background="{x:Null}"  Margin="8"  Width="223" FontFamily="Times New Roman" FontSize="22" Foreground="#FF111118" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="50">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <materialDesign:PackIcon Kind="ExitToApp" Width="35" Height="35" Margin="10,0,0,0" HorizontalContentAlignment="Center" HorizontalAlignment="Left" />
+                            <TextBlock Text="Выход" Background="{x:Null}"  Margin="8"  Width="223" FontFamily="Times New Roman" FontSize="22" Foreground="#FF111118" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+
+            
+            </Grid>
+            <Grid Background="Transparent" Name="Grid" Grid.Column="1">
+
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -23,9 +23,16 @@ namespace RepairFlatWPF
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
-            Grid.Children.Clear();
-            Grid.Children.Add(new LoginUserControl());
+            //TODO Поменять имена полей, сделать переходы
+             this.DataContext = new MainWindowViewModel(this);
+            //MainGrid.Children.Clear();
+            //MainGrid.Children.Add(new LoginUserControl());
+
+        }
+
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

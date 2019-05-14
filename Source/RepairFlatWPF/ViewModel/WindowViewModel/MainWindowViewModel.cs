@@ -56,7 +56,7 @@ namespace RepairFlatWPF
         #region Public Member
         public double WindowMinimalWidth { get; set; } = 800;
 
-        public double WindowMinimalHeight { get; set; } = 600;
+        public double WindowMinimalHeight { get; set; } = 700;
 
         public int ResizeBorder { get; set; } = 5;
 
