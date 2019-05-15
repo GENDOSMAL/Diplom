@@ -12,7 +12,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="ViewModel/Resourses/Button.xaml"/>
                 <ResourceDictionary Source="ViewModel/Resourses/HintAssist.xaml"/>
-
+                <ResourceDictionary Source="ViewModel/Resourses/Label.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                 <Setter Property="FontSize" Value="18"/>

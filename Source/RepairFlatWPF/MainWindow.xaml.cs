@@ -20,11 +20,14 @@ namespace RepairFlatWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool open = true;
+
         public MainWindow()
         {
             InitializeComponent();
+            //GridMenu.Width = 0;
             //TODO Поменять имена полей, сделать переходы
-             this.DataContext = new MainWindowViewModel(this);
+            this.DataContext = new MainWindowViewModel(this);
             //MainGrid.Children.Clear();
             //MainGrid.Children.Add(new LoginUserControl());
 
@@ -34,5 +37,20 @@ namespace RepairFlatWPF
         {
 
         }
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            open = false;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+            //bright.Visibility = Visibility.Collapsed;
+        }
+        private void ButtonCloseMenu1_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            open = true;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+            //bright.Visibility = Visibility.Visible;
+        }
+
     }
 }
