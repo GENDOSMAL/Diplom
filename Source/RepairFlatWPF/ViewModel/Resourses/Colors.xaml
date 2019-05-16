@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:RepairFlatWPF.ViewModel">
+
+    <!--Цвет шапки окна-->
+    <Color x:Key="MainCorolForHead">#b4c0d1</Color>
+    <SolidColorBrush x:Key="ColorHead" Color="{StaticResource MainCorolForHead}" />
+
+    <!--Цвет фона меню-->
+    <Color x:Key="CorolForBackMenu">#7d9092</Color>
+    <SolidColorBrush x:Key="MenuColor" Color="{StaticResource CorolForBackMenu}" />    
+    
+    <!--Цвет фона заголовка меню-->
+    <Color x:Key="CorolTopForMenu">#b5b9ba</Color>
+    <SolidColorBrush x:Key="MenuTopColor" Color="{StaticResource CorolTopForMenu}" />
+
+    <!--Цвет задника при логировании и загрузке-->
+    <Color x:Key="CorolForBackLogAndLoading">#a5cfd5</Color>
+    <SolidColorBrush x:Key="BackLogAndLoadColor" Color="{StaticResource CorolForBackLogAndLoading}" />
+    
+    
+    
+    <!--Цвет задника текста меню-->
+    <Color x:Key="CorolForTextMenu">#E0E8EB</Color>
+    <SolidColorBrush x:Key="MenuTextColor" Color="{StaticResource CorolForTextMenu}" />    
+    
+    <!--Цвет текста на фоне в заголовек окна-->
+    <Color x:Key="CorolForTop">#461F51</Color>
+    <SolidColorBrush x:Key="MenuTopTextColor" Color="{StaticResource CorolForTop}" />   
+</ResourceDictionary>

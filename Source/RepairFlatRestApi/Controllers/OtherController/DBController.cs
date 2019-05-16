@@ -30,6 +30,7 @@ namespace RepairFlatRestApi.Controllers
                 }
                 else
                 {
+                    //TODO Вернуть ФИО
                     return InfrormationAboutLogin.Select(e1 => new AuthDescription.ResultOfInformation
                     {
                         sucess = true,
