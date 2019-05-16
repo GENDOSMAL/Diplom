@@ -46,7 +46,7 @@ namespace RepairFlatWPF
             ButtonOpenMenu.Visibility = Visibility.Visible;
             open = false;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
-            //bright.Visibility = Visibility.Collapsed;
+            Bluring.Visibility = Visibility.Visible;
         }
         /// <summary>
         /// Событие закрытие бокового меню
@@ -58,7 +58,7 @@ namespace RepairFlatWPF
             ButtonCloseMenu.Visibility = Visibility.Visible;
             open = true;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
-            //bright.Visibility = Visibility.Visible;
+            Bluring.Visibility = Visibility.Collapsed;
         }
 
 

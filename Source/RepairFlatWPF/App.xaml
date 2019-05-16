@@ -10,10 +10,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                <ResourceDictionary Source="ViewModel/Resourses/Button.xaml"/>
-                <ResourceDictionary Source="ViewModel/Resourses/HintAssist.xaml"/>
-                <ResourceDictionary Source="ViewModel/Resourses/Colors.xaml"/>
-                <ResourceDictionary Source="ViewModel/Resourses/TextResourses.xaml"/>
+                <ResourceDictionary Source="MakeVievHelp/Resourses/Button.xaml"/>
+                <ResourceDictionary Source="MakeVievHelp/Resourses/HintAssist.xaml"/>
+                <ResourceDictionary Source="MakeVievHelp/Resourses/Colors.xaml"/>
+                <ResourceDictionary Source="MakeVievHelp/Resourses/TextResourses.xaml"/>
                 
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
