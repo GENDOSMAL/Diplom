@@ -15,7 +15,7 @@
         MinWidth="{Binding WindowMinimalWidth}"
         MinHeight="{Binding WindowMinimalHeight}"
         Title="АИС Компании по ремонту квартир" 
-        Height="700" Width="800"  >
+        Height="800" Width="1500"  >
 
 
     <!--Возможность окна быть изменненным относительно размеров-->
@@ -32,12 +32,12 @@
             <Storyboard x:Key="OpenMenu">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
                     <EasingDoubleKeyFrame KeyTime="0" Value="70"/>
-                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="325"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="300"/>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
             <Storyboard x:Key="CloseMenu">
                 <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
-                    <EasingDoubleKeyFrame KeyTime="0" Value="325"/>
+                    <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
                     <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
@@ -57,7 +57,7 @@
 
                                 <Border x:Name="Container"
                                         CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" Background="White"
-                                        />
+                                />
 
                                 <Grid>
                                     <Grid.OpacityMask>
@@ -116,17 +116,17 @@
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
         </EventTrigger>
     </Window.Triggers>
-    <Grid Name="MainGrid">
-        <Grid Name="HelpGrid">
+    <Grid Name="MainGrid" Background="{StaticResource BackLogAndLoadColor}">
+        <Grid Name="HelpGrid" Background="White">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="70"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Name="GridMenu" Background="{StaticResource MenuColor}"   Grid.Column="0" Grid.ColumnSpan="2" Width="325" HorizontalAlignment="Left" >
+            <Grid Name="GridMenu" Background="{StaticResource MenuColor}"   Grid.Column="0" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Left" >
                 <StackPanel>
-                    
-                    <Grid  Width="325" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{StaticResource MenuTopColor}">
-                        <Button x:Name="ButtonOpenMenu"  Style="{StaticResource MenuOpperateButton}" Click="ButtonCloseMenu1_Click" >
+                    <!--Кнопки и надпись ФИО текущего работника-->
+                    <Grid  Width="335" Height="50" VerticalAlignment="Top" HorizontalAlignment="Left" Background="{StaticResource MenuTopColor}">
+                        <Button x:Name="ButtonOpenMenu"  Style="{StaticResource MenuOpperateButton}" Click="ButtonMenuClose_Click" >
                             <materialDesign:PackIcon Foreground="{StaticResource MenuTopTextColor}" Kind="FormatListBulleted" Width="30" Height="30"  />
                         </Button>
                         <Button x:Name="ButtonCloseMenu"  VerticalAlignment="Top" Style="{StaticResource MenuOpperateButton}" Visibility="Collapsed" Click="ButtonOpenMenu_Click" >
@@ -134,7 +134,8 @@
                         </Button>
                         <TextBlock x:Name="NameOfPolz" Margin="75,10,10,10"  Foreground="{StaticResource MenuTopTextColor}" FontFamily="Times New Roman" FontSize="22"/>
                     </Grid>
-                    <ListView  x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  >
+                    <!--Верхнее меню-->
+                    <ListView  x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" PreviewMouseLeftButtonUp="ListViewMenu_PreviewMouseLeftButtonUp"  >
                         <ListViewItem Height="80" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0" >
                                 <materialDesign:PackIcon Kind="Human" Style="{StaticResource IconFofMenu}"/>
@@ -154,7 +155,7 @@
                         <ListViewItem Height="80" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Details" Style="{StaticResource IconFofMenu}"/>
-                                <TextBlock Text="Работа со справочниками" Style="{StaticResource LeftMenu}"   />
+                                <TextBlock Text="Справочные данные" Style="{StaticResource LeftMenu}"   />
 
                             </StackPanel>
                         </ListViewItem>
@@ -170,15 +171,14 @@
                                 <TextBlock Text="Работа с финансами" Style="{StaticResource LeftMenu}"  />
                             </StackPanel>
                         </ListViewItem>
-
                     </ListView>
-
                 </StackPanel>
-                <ListView VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="BottomListView"  >
+                <!--Нижнее меню-->
+                <ListView VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="BottomListView" PreviewMouseLeftButtonUp="BottomListView_PreviewMouseLeftButtonUp"  >
                     <ListViewItem Height="50">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Name="settings">
                             <materialDesign:PackIcon Kind="Settings"  Width="35" Height="35" Margin="8,0,0,0" HorizontalContentAlignment="Center" HorizontalAlignment="Left"  />
-                            <TextBlock Text="Настроки" Margin="14 0 0 0"  Style="{StaticResource LeftMenu}"   />
+                            <TextBlock Text="Настройки" Margin="14 0 0 0"  Style="{StaticResource LeftMenu}"   />
                         </StackPanel>
                     </ListViewItem>                    
                     <ListViewItem Height="50">
@@ -193,9 +193,7 @@
                             <TextBlock Text="Выход" Margin="14 0 0 0" Style="{StaticResource LeftMenu}"  />
                         </StackPanel>
                     </ListViewItem>
-                </ListView>
-
-            
+                </ListView>            
             </Grid>
             <Grid Background="Transparent" Name="Grid" Grid.Column="1">
 

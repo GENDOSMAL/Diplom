@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -22,21 +23,24 @@ namespace RepairFlatWPF
     {
         bool open = true;
 
+        /// <summary>
+        /// Конструктор главного окна, которы при открытии приложения процесс логирования
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             //GridMenu.Width = 0;
-            //TODO Поменять имена полей, сделать переходы
             this.DataContext = new MainWindowViewModel(this);
-            //MainGrid.Children.Clear();
-            //MainGrid.Children.Add(new LoginUserControl());
+            //setChildren(new LoginUserControl());
 
         }
 
-        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
-        {
 
-        }
+        /// <summary>
+        /// Событие открытие бокового меню
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
@@ -44,7 +48,12 @@ namespace RepairFlatWPF
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             //bright.Visibility = Visibility.Collapsed;
         }
-        private void ButtonCloseMenu1_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Событие закрытие бокового меню
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonMenuClose_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
             open = true;
@@ -52,5 +61,87 @@ namespace RepairFlatWPF
             //bright.Visibility = Visibility.Visible;
         }
 
+
+        /// <summary>
+        /// Отлавливание события перехода по определенным пунктам верхнего меню 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListViewMenu_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (open)
+            {
+                var animation = (Storyboard)FindResource("CloseMenu");
+                int index = ListViewMenu.SelectedIndex;
+                switch (index)
+                {
+                    case 0:
+                        //Работа с заказами
+                        break;
+                    case 1:
+                        //Работа с клиентами
+                    case 2:
+                        //Справочные данные
+                        break;
+                    case 3:
+                        //Работа с кадрами
+                        break;
+                    case 4:
+                        //Работа с финансами
+                        break;
+
+                }
+            }
+        }
+        /// <summary>
+        /// Отлавливание событий выбора нижней части меню 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BottomListView_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            //Проверка на то, что окно открыто или нет, сделано, для того, что бы не работа при закрытом
+            if (open)
+            {
+                var animation = (Storyboard)FindResource("CloseMenu");
+                int index = BottomListView.SelectedIndex;
+                switch (index)
+                {
+                    case 0:
+                        //Переход на отображение настроек
+                        break;
+                    case 1:
+                        //Смена профиля
+                        //bright.Visibility = Visibility.Collapsed;
+                        if (MessageBox.Show("Вы действительно хотите сменить пользователя?", "АИС Фирмы по ремонту квартир", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                        {
+                            animation.Begin();
+                            GridMenu.Width = 0;
+                            //ChildGrid.Children.Clear();
+                            //LoginChild.Children.Clear();
+                            //LoginChild.Children.Add(new Views.LoginUsersControl());
+                            //Classes.ClassWitSettings.Prava = 0;
+                            //Classes.ClassWitSettings.idPolzovat = 0;
+                            open = false;
+                        }
+                        break;
+                        
+                    case 2:
+                        //Выход из приложения
+                        //bright.Visibility = Visibility.Collapsed;
+                        if (MessageBox.Show("Вы действительно хотите выйти из программы?", "АИС Ремонт квартир", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                        {
+                            Application.Current.Shutdown();
+                        }
+                        break;
+                }
+            }
+        }
+
+        public void setChildren(UserControl ss1)
+        {
+            MainGrid.Children.Clear();
+            MainGrid.Children.Add(ss1);
+        }
     }
 }

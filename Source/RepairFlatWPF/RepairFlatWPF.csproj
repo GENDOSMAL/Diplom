@@ -96,15 +96,14 @@
     </ApplicationDefinition>
     <Compile Include="AttachesProperty\BaseAttachedProperty.cs" />
     <Compile Include="AttachesProperty\PasswordBoxAttachProperty.cs" />
-    <Compile Include="DataModel\ApplicationPage.cs" />
     <Compile Include="Model\BaseJsonModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="UserControl\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\BaseViewModel.cs" />
-    <Compile Include="ViewModel\RelayCommand.cs" />
-    <Compile Include="ViewModel\WindowViewModel\MainWindowViewModel.cs" />
+    <Compile Include="MakeVievHelp\BaseViewModel.cs" />
+    <Compile Include="MakeVievHelp\RelayCommand.cs" />
+    <Compile Include="MakeVievHelp\WindowViewModel\MainWindowViewModel.cs" />
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
     <Compile Include="WorkWithServer\LoginWork.cs" />
     <Page Include="MainWindow.xaml">
@@ -123,19 +122,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewModel\Resourses\Button.xaml">
+    <Page Include="MakeVievHelp\Resourses\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewModel\Resourses\Colors.xaml">
+    <Page Include="MakeVievHelp\Resourses\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewModel\Resourses\HintAssist.xaml">
+    <Page Include="MakeVievHelp\Resourses\HintAssist.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ViewModel\Resourses\TextResourses.xaml">
+    <Page Include="MakeVievHelp\Resourses\TextResourses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -175,6 +174,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="IoC.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataModel\" />
+    <Folder Include="UserControl\ClientWork\" />
+    <Folder Include="UserControl\NewFolder1\" />
+    <Folder Include="UserControl\OrderWork\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.5.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.5.0.0\build\Fody.targets')" />
