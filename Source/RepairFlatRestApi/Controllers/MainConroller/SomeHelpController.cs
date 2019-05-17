@@ -10,14 +10,14 @@ namespace RepairFlatRestApi.Controllers.MainConroller
 {
     public class SomeHelpController:BaseController
     {
-        [HttpGet, Route("api/main/test")]
-        public HttpResponseMessage MakeAuth([FromBody]AuthDescription.AskedInformation InformationAboutAuth)
-        {
-            return CatchError(() =>
-            {
-                AuthDescription.ResultOfWorkDB resLog = DBController.TestDB();
-                return resLog;
-            }, nameof(LoginController), nameof(MakeAuth));
-        }
+        //[HttpGet, Route("api/main/test")]
+        //public HttpResponseMessage MakeAuth([FromBody]AuthDescription.AskedInformation InformationAboutAuth)
+        //{
+        //    return CatchError(() =>
+        //    {
+        //        AuthDescription.ResultOfWorkDB resLog = DBController.TestDB();
+        //        return resLog;
+        //    }, nameof(LoginController), nameof(MakeAuth));
+        //}
     }
 }

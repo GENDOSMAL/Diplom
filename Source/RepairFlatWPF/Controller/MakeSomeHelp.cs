@@ -34,16 +34,15 @@ namespace RepairFlatWPF
                 Ping ping = new Ping();
                 PingReply pingReply = null;
                 pingReply = ping.Send("ya.ru");
-                if(pingReply.Status == IPStatus.TimedOut)
+                if(pingReply.Status != IPStatus.TimedOut)
                 {
-                    return false;
+                    return true;
                 }
                 else
                 {
-                    var InfFromServer = BaseWorkWithServer.CatchErrorWithGet("api/main/test", "Get", nameof(MakeSomeHelp), nameof(MakePingToServer));
-                    var deserializedProduct = JsonConvert.DeserializeObject<BaseJSONModel.PingTest>(InfFromServer.ToString());
-                    return deserializedProduct.BDWork;
+                    return false;
                 }
+
             }
             catch(Exception ex)
             {
