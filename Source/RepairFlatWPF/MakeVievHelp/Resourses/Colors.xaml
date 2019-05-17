@@ -29,5 +29,12 @@
     
     <!--Цвет текста на фоне в заголовек окна-->
     <Color x:Key="CorolForTop">#461F51</Color>
-    <SolidColorBrush x:Key="MenuTopTextColor" Color="{StaticResource CorolForTop}" />   
+    <SolidColorBrush x:Key="MenuTopTextColor" Color="{StaticResource CorolForTop}" />  
+    
+    <!--Градиент для окна загрузки-->
+    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0" x:Key="GradientForLoading">
+        <GradientStop Color="{StaticResource MainCorolForHead}" Offset="0"/>
+        <GradientStop Color="{StaticResource CorolTopForMenu}" Offset="1" />
+        <GradientStop Color="White" Offset="0.52" />
+    </LinearGradientBrush>
 </ResourceDictionary>

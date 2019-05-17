@@ -5,8 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RepairFlatWPF.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             Height="auto" Width="auto">
+    <UserControl.Resources>
+        <Storyboard x:Key="WaitStoryboard">
+            <DoubleAnimation
+        Storyboard.TargetName="Wait"
+        Storyboard.TargetProperty="(TextBlock.RenderTransform).(RotateTransform.Angle)"
+        From="0"
+        To="360"
+        Duration="0:0:3"
+        RepeatBehavior="Forever" />
+        </Storyboard>
+    </UserControl.Resources>
+    <StackPanel
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+        <Grid Width="auto" Height="auto">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Grid>
+                    
+                </Grid>
+                <TextBlock Name="Wait" FontFamily="{StaticResource FontAwesome}" FontSize="250" Text="&#xf110;" RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Label Name="DescriptionOfWork" FontFamily="Times New Roman" Content="" HorizontalContentAlignment="Center" FontSize="35"/>
+            </StackPanel>
+
+        </Grid>
             
-    </Grid>
+    </StackPanel>
 </UserControl>

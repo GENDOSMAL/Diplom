@@ -48,9 +48,9 @@ namespace RepairFlatWPF
             string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login.Text, password = base64Password });
 
             var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(LoginWork), nameof(MakeAuth)));
-            var deserializedProduct = JsonConvert.DeserializeObject<LoginModel>(task.ToString());
-
-            if (!deserializedProduct.success)
+            var deserializedProduct = JsonConvert.DeserializeObject<WhatReturn>(task.ToString());
+            // TODO ПОТОМ ПОМЕНЯТЬ
+            if (deserializedProduct.success)
             {
                 if(MakeSomeHelp.MakeMessageBox(deserializedProduct.description,MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
                 {
@@ -61,7 +61,15 @@ namespace RepairFlatWPF
             }
             else
             {
+                Model.SaveSomeData.IdUser = deserializedProduct.idUser;
+                Model.SaveSomeData.TypeOfUser = deserializedProduct.typeofpolz;
+                Model.SaveSomeData.LastNameAndIni = deserializedProduct.LastNameAndIni;
+
+
                 //TODO закрыть окно и перейти к загрузке
+                MakeSomeHelp.ChengeGridInMainWindow(new UserControls.MakeLoading());
+                MakeSomeHelp.ChengeGridBackGroundStyle("GradientForLoading");
+
             }
         }
 

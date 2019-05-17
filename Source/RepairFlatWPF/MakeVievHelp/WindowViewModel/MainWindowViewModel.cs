@@ -54,6 +54,9 @@ namespace RepairFlatWPF
         #endregion
 
         #region Public Member
+
+        public string LastNameAndIni { get; set; } = Model.SaveSomeData.LastNameAndIni;
+
         public double WindowMinimalWidth { get; set; } = 800;
 
         public double WindowMinimalHeight { get; set; } = 700;

@@ -135,7 +135,7 @@
                         <Button x:Name="ButtonCloseMenu"  VerticalAlignment="Top" Style="{StaticResource MenuOpperateButton}" Visibility="Collapsed" Click="ButtonOpenMenu_Click" >
                             <materialDesign:PackIcon Foreground="{StaticResource MenuTopTextColor}" Kind="Menu" Width="30" Height="30" />
                         </Button>
-                        <TextBlock x:Name="NameOfPolz" Margin="75,10,10,10"  Foreground="{StaticResource MenuTopTextColor}" FontFamily="Times New Roman" FontSize="22"/>
+                        <TextBlock x:Name="NameOfPolz" Text="{Binding LastNameAndIni}" Margin="75,10,0,10"  Foreground="{StaticResource MenuTopTextColor}" FontFamily="Times New Roman" FontSize="20"/>
                     </Grid>
                     <!--Верхнее меню-->
                     <ListView  x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" PreviewMouseLeftButtonUp="ListViewMenu_PreviewMouseLeftButtonUp"  >

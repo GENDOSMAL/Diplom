@@ -36,7 +36,8 @@ namespace RepairFlatRestApi.Controllers
                     {
                         sucess = true,
                         idUser = e1.IdLog,
-                        typeofpolz = e1.User.TypeOfUser
+                        typeofpolz = e1.User.TypeOfUser,
+                        LastNameAndIni= $"{e1.User.LastName} {e1.User.Name.Substring(0,1).ToUpper()}.{e1.User.Patronymic.Substring(0, 1)}."
                     }).FirstOrDefault();
                 }
             }, nameof(DBController),nameof(Logining));

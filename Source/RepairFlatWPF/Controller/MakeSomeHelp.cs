@@ -7,6 +7,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RepairFlatWPF
 {
@@ -49,6 +50,17 @@ namespace RepairFlatWPF
                 MessageBox.Show(ex.ToString());
                 return false;
             }
+        }
+
+        public static void ChengeGridInMainWindow(UserControl controls)
+        {
+            ((MainWindow)Application.Current.MainWindow).MainGrid.Children.Clear();
+            ((MainWindow)Application.Current.MainWindow).MainGrid.Children.Add(controls);
+        }
+
+        public static void ChengeGridBackGroundStyle(string NameOfStyle)
+        {
+            ((MainWindow)Application.Current.MainWindow).MainGrid.Background =(System.Windows.Media.Brush)Application.Current.Resources[NameOfStyle];
         }
     }
 }

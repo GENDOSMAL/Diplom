@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="MakeVievHelp/Resourses/HintAssist.xaml"/>
                 <ResourceDictionary Source="MakeVievHelp/Resourses/Colors.xaml"/>
                 <ResourceDictionary Source="MakeVievHelp/Resourses/TextResourses.xaml"/>
-                
+                <ResourceDictionary Source="MakeVievHelp/Resourses/Fonts.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                 <Setter Property="FontSize" Value="18"/>

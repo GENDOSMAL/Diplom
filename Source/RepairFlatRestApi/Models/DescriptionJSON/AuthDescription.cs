@@ -23,6 +23,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string typeofpolz;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string description;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string LastNameAndIni;
         }
 
         public class RegisterLoginPerson
