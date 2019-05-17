@@ -8,5 +8,8 @@
     <Setting Name="BaseAdressOfFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\My Documents</Value>
     </Setting>
+    <Setting Name="DefaultHeaderOfMessageBox" Type="System.String" Scope="User">
+      <Value Profile="(Default)">АИС Фирмы по ремонту квартир</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

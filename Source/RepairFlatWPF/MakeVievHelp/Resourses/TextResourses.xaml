@@ -3,6 +3,7 @@
                     xmlns:local="clr-namespace:RepairFlatWPF.ViewModel.Resourses"
                     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     
+    <!--Описание текстового поля бокового меню-->
     <Style TargetType="TextBlock" x:Key="LeftMenu">
         <Setter Property="Margin" Value="8"/>
         <Setter Property="Width" Value="220"/>
@@ -14,17 +15,19 @@
         <Setter Property="Background" Value="{x:Null}"/>
     </Style>
 
+    <!--Иконки боковго меню-->
     <Style TargetType="materialDesign:PackIcon" x:Key="IconFofMenu">
         <Setter Property="Width" Value="35"/>
         <Setter Property="Height" Value="35"/>
         <Setter Property="Margin" Value="8"/>
-    </Style>    
-    
-    <Style TargetType="materialDesign:PackIcon" x:Key="IconFofBottomMenu">
-        <Setter Property="Width" Value="35"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Margin" Value="8 0 0 0"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Left"/>
     </Style>
+
+    <!--Поле логирования на окне входа-->
+    <Style TargetType="TextBox" x:Key="ForTextInLoginForm">
+        <Setter Property="FontFamily" Value="Times New Roman"/>
+        <Setter Property="FontSize" Value="22"/>
+        <!--<Setter Property="Style" Value="{StaticResource MaterialDesignFloatingHintTextBox}"/>-->
+    </Style>
+        
+    
 </ResourceDictionary>

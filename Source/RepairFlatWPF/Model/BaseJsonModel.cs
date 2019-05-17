@@ -7,13 +7,17 @@ using System.Threading.Tasks;
 
 namespace RepairFlatWPF
 {
-    public class BaseJsonModel
+    public class BaseJSONModel
     {
         public class BaseResult
         {
             public bool success;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string description;
+        }
+        public class PingTest
+        {
+            public bool BDWork;            
         }
     }
 }

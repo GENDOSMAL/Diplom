@@ -58,8 +58,6 @@
         <Setter Property="Margin" Value="18,8,0,0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="BorderBrush" Value="{x:Null}"/>
-
-
     </Style>
     
 </ResourceDictionary>

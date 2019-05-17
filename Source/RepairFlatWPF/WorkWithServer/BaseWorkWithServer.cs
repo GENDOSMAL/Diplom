@@ -34,13 +34,13 @@ namespace RepairFlatWPF
 
                 using (var streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
-                     streamWriter.WriteAsync(WhatSend);
+                    streamWriter.WriteAsync(WhatSend);
                 }
-                var response =  (HttpWebResponse)request.GetResponse();
+                var response = (HttpWebResponse)request.GetResponse();
                 object result = new object();
                 using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
                 {
-                    result =  streamReader.ReadToEnd();
+                    result = streamReader.ReadToEnd();
                 }
                 return result;
             }
@@ -48,9 +48,34 @@ namespace RepairFlatWPF
             {
                 //Скопировать класс с сервера Logger.WriteToLog(Logger.TypeOfRecord.Exception, NameOfClass, nameOfMethod, ex.ToString().Replace(Environment.NewLine, ""));
                 // Что-то сделать с этим
-                throw new Exception("Произошла ошибка!");
+                throw new Exception("Произошла ошибка!" + ex.ToString());
             }
         }
+
+        public static object CatchErrorWithGet(string PosfixUrl, string typeOfMessage, string NameOfClass, string nameOfMethod)
+        {
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create(UrlSendMake(PosfixUrl));
+                request.ContentType = "application/json";
+                request.Method = typeOfMessage;
+                var response = (HttpWebResponse)request.GetResponse();
+                object result = new object();
+                using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
+                {
+                    result = streamReader.ReadToEnd();
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                //Скопировать класс с сервера Logger.WriteToLog(Logger.TypeOfRecord.Exception, NameOfClass, nameOfMethod, ex.ToString().Replace(Environment.NewLine, ""));
+                // Что-то сделать с этим
+
+                throw new Exception("Произошла ошибка! " + ex.ToString());
+            }
+        }
+
 
         /// <summary>
         /// Создание итоговой ссылки для работы из базового адреса сервера и постфикса для необхожимой операции

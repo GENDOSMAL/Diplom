@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RepairFlatWPF
 {
-    public class LoginModel: BaseJsonModel.BaseResult
+    public class LoginModel: BaseJSONModel.BaseResult
     {
         public class MakeAuth
         {

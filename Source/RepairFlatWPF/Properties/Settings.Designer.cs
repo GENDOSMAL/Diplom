@@ -46,5 +46,17 @@ namespace RepairFlatWPF.Properties {
                 this["BaseAdressOfFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("АИС Фирмы по ремонту квартир")]
+        public string DefaultHeaderOfMessageBox {
+            get {
+                return ((string)(this["DefaultHeaderOfMessageBox"]));
+            }
+            set {
+                this["DefaultHeaderOfMessageBox"] = value;
+            }
+        }
     }
 }
