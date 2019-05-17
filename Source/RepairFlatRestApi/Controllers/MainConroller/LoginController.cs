@@ -37,22 +37,6 @@ namespace RepairFlatRestApi.Controllers
                 return DBController.CreateLoginPerson(InformationAboutNewPerson);
             }, nameof(LoginController), nameof(MakeNewLoginPerson));
         }
-        /// <summary>
-        /// Метод для тестирования работоспособности сервера. В дальнейшем удалить
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet, Route("api/test")]
-        public HttpResponseMessage GEt()
-        {
-            WriteToLog(
-                TypeOfRecord.Information,
-                nameof(Logger),
-                nameof(DeleteAfter),
-                $"Удаление файла логов по адресу <>;");
-            return CatchError(() =>
-            {
-                return DBController.CreateLog();
-            }, nameof(LoginController), nameof(MakeNewLoginPerson));
-        }
+
     }
 }

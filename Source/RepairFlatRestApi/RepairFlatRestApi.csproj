@@ -169,6 +169,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\MainConroller\BaseController.cs" />
     <Compile Include="Controllers\MainConroller\MakeLoadingController.cs" />
+    <Compile Include="Controllers\MainConroller\MakeTest.cs" />
     <Compile Include="Controllers\MainConroller\SomeHelpController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
     <Compile Include="Controllers\MainConroller\WorkWithSubstitutableData.cs" />

@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace RepairFlatRestApi.Controllers
 {
-    public class WorkWithSubstitutableData:BaseController
+    public class WorkWithSubstitutableData : BaseController
     {
         #region Работа с предоставляемыми услугами
         /// <summary>
@@ -30,13 +30,14 @@ namespace RepairFlatRestApi.Controllers
         /// </summary>
         /// <param name="dateofclientlastupdate">Дата, в которую было последнее обновление</param>
         /// <returns></returns>
-        [HttpGet, Route("api/main/servises/get{dateofclientlastupdate}")]
-        public HttpResponseMessage SendAllUpdateServises(string dateofclientlastupdate)
+        [HttpGet, Route("api2/get")]
+        public HttpResponseMessage SendAllUpdateServises()
         {
             return CatchError(() =>
             {
+                return new BaseResult() { description = "sad" };
                 //return DBController.CreateLoginPerson(InformationAboutNewPerson);
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
             }, nameof(LoginController), nameof(SendAllUpdateServises));
         }
         #endregion
