@@ -40,6 +40,22 @@ namespace RepairFlatRestApi.Controllers
                 }
             }, nameof(DBController),nameof(Logining));
         }
+
+        internal static AuthDescription.ResultOfWorkDB TestDB()
+        {
+            return Run((db) =>
+            {
+                if (db.Database.Exists())
+                {
+                    return new AuthDescription.ResultOfWorkDB() { BDWork = true };
+                }
+                else
+                {
+                    return new AuthDescription.ResultOfWorkDB() { BDWork = false };
+                }
+            },nameof(DBController), nameof(TestDB));
+        }
+
         /// <summary>
         /// 
         /// </summary>

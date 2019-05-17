@@ -32,6 +32,12 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Guid idUser;
         }
 
+        public class ResultOfWorkDB
+        {
+            public bool BDWork;
+
+        }
+
 
     }
 }
