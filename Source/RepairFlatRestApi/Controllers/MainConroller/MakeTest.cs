@@ -10,7 +10,7 @@ namespace RepairFlatRestApi.Controllers
 {
     public class MakeTest:BaseController
     {
-        [HttpGet, Route("api/get")]
+        [HttpGet, Route("api/main/get")]
         public HttpResponseMessage SendAllUpdateServises()
         {
             return CatchError(() =>

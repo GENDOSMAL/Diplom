@@ -172,7 +172,7 @@
     <Compile Include="Controllers\MainConroller\MakeTest.cs" />
     <Compile Include="Controllers\MainConroller\SomeHelpController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
-    <Compile Include="Controllers\MainConroller\WorkWithSubstitutableData.cs" />
+    <Compile Include="Controllers\MainConroller\WWithSubsDT.cs" />
     <Compile Include="Controllers\OtherController\DBController.cs" />
     <Compile Include="Controllers\OtherController\HelperUS.cs" />
     <Compile Include="Controllers\OtherController\Logger.cs" />
