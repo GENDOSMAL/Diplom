@@ -10,6 +10,9 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
     public class MakeSubs : BaseResult
     {
         #region Make work with servises
+        /// <summary>
+        /// То что будет вернуто на запрос клинента
+        /// </summary>
         public class ServisesMake : BaseResult
         {
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
@@ -18,22 +21,20 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int kol;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfServisesWithTypeOfUpdate[] listOfServises;
+            public ListOfUpdatedServises[] ListOfServises;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public ListOfGuid[] ListOfDeleteServises;
         }
-
-        public class ListOfServisesWithTypeOfUpdate
+        /// <summary>
+        /// Список обновленных/добавленных сервисов. Необходимо для отправки на клиент
+        /// </summary>
+        public class ListOfUpdatedServises: ListOfServises
         {
-            public Guid idServises;
-            public string Nomination;
-            public string TypeOfServises;
-            public string UnitOfMeasue;
-            public Nullable<decimal> Cost;
-            public string Description;
             public string TypeOfUpdate;
         }
-
+        /// <summary>
+        /// Список сервисов для вставки в бд
+        /// </summary>
         public class ListOfServises
         {
             public Guid idServises;
@@ -43,8 +44,10 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Nullable<decimal> Cost;
             public string Description;
         }
-
-        public class MakeUpdateOrInserNew
+        /// <summary>
+        /// То что присылает пользователь при необходимости каких либо действий с данными
+        /// </summary>
+        public class MakeUpdOrInsServises
         {
             public string DateOfMake;
             public Guid idUser;
@@ -55,7 +58,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class ListOfGuid
         {
-            public Guid? idServises;
+            public Guid? idGuid;
         }
         #endregion
 
@@ -69,13 +72,104 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int kol;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfServisesWithTypeOfUpdate[] listOfServises;
+            public ListOfPremisesUpd[] listOfPremises;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfGuid[] ListOfDeleteServises;
+            public ListOfGuid[] ListOfDeletePremises;
         }
 
+        public class MakeUpdOrInsPremises
+        {
+            public string DateOfMake;
+            public Guid idUser;
+            public ListOfPremises[] listOfPremisesUpdate;
+            public ListOfPremises[] ListOfPremisesInsert;
+            public ListOfGuid[] ListOfDeletePremises;
+        }
 
+        public class ListOfPremises
+        {
+            public Guid idPremises;
+            public string Name;
+            public string Description;
+        }
+        public class ListOfPremisesUpd: ListOfPremises
+        {
+            public string TypeOfUpdate;
+        }
+        #endregion
 
+        #region Make work with materials
+
+        public class MaterialsMake : BaseResult
+        {
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(CustomDateTimeConverter))]
+            public DateTime DateOfMakeAnswer;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int kol;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfMaterialsUpd[] listOfMaterials;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfGuid[] ListOfDeleteMaterials;
+        }
+
+        public class MakeUpdOrInsMaterials
+        {
+            public string DateOfMake;
+            public Guid idUser;
+            public ListOfMaterials[] listOfMaterialsUpdate;
+            public ListOfMaterials[] ListOfMaterialsInsert;
+            public ListOfGuid[] ListOfDeletePremises;
+        }
+
+        public class ListOfMaterials
+        {
+            public Guid idMaterials;
+            public string NameOfMaterial;
+            public string Description;
+            public string UnitOfMeasue;
+            public Nullable<decimal> Cost;
+        }
+        public class ListOfMaterialsUpd: ListOfMaterials
+        {
+            public string TypeOfUpdate;
+        }
+        #endregion
+
+        #region Make work with Contacts
+        public class ContactsMake : BaseResult
+        {
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(CustomDateTimeConverter))]
+            public DateTime DateOfMakeAnswer;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int kol;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfContactsUpd[] listOfContacts;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfGuid[] ListOfDeleteContacts;
+        }
+
+        public class MakeUpdOrInsContacts
+        {
+            public string DateOfMake;
+            public Guid idUser;
+            public ListOfContacts[] listOfContactsUpdate;
+            public ListOfContacts[] ListOfContactsInsert;
+            public ListOfGuid[] ListOfDeleteContacts;
+        }
+
+        public class ListOfContacts
+        {
+            public Guid idContact;
+            public string Value;
+            public string Description;
+        }
+
+        public class ListOfContactsUpd : ListOfPremises
+        {
+            public string TypeOfUpdate;
+        }
         #endregion
 
 

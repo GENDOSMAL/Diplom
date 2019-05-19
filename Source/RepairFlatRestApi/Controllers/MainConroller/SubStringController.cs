@@ -18,7 +18,7 @@ namespace RepairFlatRestApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost, Route("servises/update")]
-        public HttpResponseMessage UpdateServises([FromBody] MakeSubs.MakeUpdateOrInserNew makeUpdateOrInserNew)
+        public HttpResponseMessage UpdateServises([FromBody] MakeSubs.MakeUpdOrInsServises makeUpdateOrInserNew)
         {
             return CatchError(() =>
             {

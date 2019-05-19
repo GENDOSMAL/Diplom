@@ -33,6 +33,7 @@ namespace RepairFlatRestApi.Models
         public virtual DbSet<ColoborationOfBrigade> ColoborationOfBrigade { get; set; }
         public virtual DbSet<ColoborationOfBrigateSoComp> ColoborationOfBrigateSoComp { get; set; }
         public virtual DbSet<ContactUpdate> ContactUpdate { get; set; }
+        public virtual DbSet<DeletedSubStr> DeletedSubStr { get; set; }
         public virtual DbSet<DeleteMessage> DeleteMessage { get; set; }
         public virtual DbSet<DialogMessage> DialogMessage { get; set; }
         public virtual DbSet<Dialogs> Dialogs { get; set; }

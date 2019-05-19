@@ -140,8 +140,8 @@ namespace RepairFlatRestApi.Controllers
                     if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastUpdate))
                     {//Если дату удалось распознать вернуть в соответствии с датой
                         var QueryWithOutUpdate = db.ServicesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate != SomeEnums.TypeOfUpdate.Delete.ToString());
-                        var ListOfServises = QueryWithOutUpdate.Select(e => new MakeSubs.ListOfServisesWithTypeOfUpdate
-                        {                            
+                        var ListOfServises = QueryWithOutUpdate.Select(e => new MakeSubs.ListOfUpdatedServises
+                        {
                             idServises = e.OurServices.idServis,
                             UnitOfMeasue = e.OurServices.UnitOfMeasue,
                             Nomination = e.OurServices.Nomination,
@@ -150,10 +150,11 @@ namespace RepairFlatRestApi.Controllers
                             Cost = e.OurServices.Cost,
                             TypeOfUpdate = e.TypeOfUpdate,
                         }).ToArray();
-                        var QueryForDelete = db.ServicesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate == SomeEnums.TypeOfUpdate.Delete.ToString());
+
+                        var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastUpdate && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Servises.ToString());
                         var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
-                        {//TODO Переписать
-                            //idServises = e.IdDelete
+                        {
+                            idGuid = e.idThingsDelete
                         }).ToArray();
 
 
@@ -162,7 +163,7 @@ namespace RepairFlatRestApi.Controllers
                             success = true,
                             kol = ListOfServises.Length + ListOfDelete.Length,
                             DateOfMakeAnswer = DateTime.Now,
-                            listOfServises = ListOfServises,
+                            ListOfServises = ListOfServises,
                             ListOfDeleteServises = ListOfDelete
                         };
                     }
@@ -179,7 +180,7 @@ namespace RepairFlatRestApi.Controllers
         }
 
 
-        internal static object MakeInserAndUpdateServises(MakeSubs.MakeUpdateOrInserNew makeUpdateOrInserNew)
+        internal static object MakeInserAndUpdateServises(MakeSubs.MakeUpdOrInsServises makeUpdateOrInserNew)
         {
             return Run((db) =>
             {
@@ -215,7 +216,7 @@ namespace RepairFlatRestApi.Controllers
                                 IdUser = makeUpdateOrInserNew.idUser,
                                 IdServices = WhatInsert.idServises,
                                 DateOfUpdate = DateOfInsert,
-                                TypeOfUpdate = SomeEnums.TypeOfUpdate.Add.ToString()                                
+                                TypeOfUpdate = SomeEnums.TypeOfUpdate.Add.ToString()
                             };
 
                             db.OurServices.Add(NewServises);
@@ -245,7 +246,7 @@ namespace RepairFlatRestApi.Controllers
                                     TypeOfUpdate = SomeEnums.TypeOfUpdate.Update.ToString()
                                 };
                                 db.ServicesUpdate.Add(InformationAboutIsert);
-                            }                             
+                            }
                         }
                     }
 
@@ -253,14 +254,14 @@ namespace RepairFlatRestApi.Controllers
                     {
                         foreach (var WhatDelete in makeUpdateOrInserNew.ListOfDeleteServises)
                         {
-                            var DeleteThings = db.OurServices.Where(e => e.idServis == WhatDelete.idServises).FirstOrDefault();
+                            var DeleteThings = db.OurServices.Where(e => e.idServis == WhatDelete.idGuid).FirstOrDefault();
                             if (DeleteThings != null)
                             {
                                 db.Entry(DeleteThings).Collection(c => c.ServicesUpdate).Load();
                                 db.OurServices.Remove(DeleteThings);
-                                db.ServicesUpdate.RemoveRange(db.ServicesUpdate.Where(c => c.IdServices == WhatDelete.idServises).ToArray());
+                                db.ServicesUpdate.RemoveRange(db.ServicesUpdate.Where(c => c.IdServices == WhatDelete.idGuid).ToArray());
 
-                                ListOfDeleteCodes.Add(WhatDelete.idServises);
+                                ListOfDeleteCodes.Add(WhatDelete.idGuid);
                             }
                         }
                     }
@@ -269,22 +270,22 @@ namespace RepairFlatRestApi.Controllers
                     {
                         foreach (var codes in ListOfDeleteCodes)
                         {
-                            var InformationAboutIsert = new ServicesUpdate
+
+                            var InformationAboutDelete = new DeletedSubStr
                             {
-                                //TODO  Переписать
-                                //idServUpdate = Guid.NewGuid(),
-                                //IdUser = makeUpdateOrInserNew.idUser,
-                                //IdDelete = codes,
-                                //DateOfUpdate = DateOfInsert,
-                                //TypeOfUpdate = SomeEnums.TypeOfUpdate.Delete.ToString()
+                                DateOfDelete = DateOfInsert,
+                                idDeleted = Guid.NewGuid(),
+                                idThingsDelete = codes,
+                                idUserDelete = makeUpdateOrInserNew.idUser,
+                                TypeOfDeleted = SomeEnums.TypeOfSubs.Servises.ToString()
                             };
-                            db.ServicesUpdate.Add(InformationAboutIsert);
+                            db.DeletedSubStr.Add(InformationAboutDelete);
                         }
                     }
                     db.SaveChanges();
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return new BaseResult
                     {
@@ -305,7 +306,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return Run((db) =>
             {
-                var listOfServise = db.OurServices.Select(e => new MakeSubs.ListOfServisesWithTypeOfUpdate
+                var listOfServise = db.OurServices.Select(e => new MakeSubs.ListOfUpdatedServises
                 {
                     idServises = e.idServis,
                     UnitOfMeasue = e.UnitOfMeasue,
@@ -318,7 +319,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     success = true,
                     kol = listOfServise.Length,
-                    listOfServises = listOfServise,
+                    ListOfServises = listOfServise,
                     DateOfMakeAnswer = DateTime.Now
                 };
             }, nameof(DBController), nameof(AllServisesHave));

@@ -24,5 +24,13 @@ namespace RepairFlatRestApi.Models
             BB
         }
 
+        public enum TypeOfSubs
+        {
+            Servises,
+            Premises,
+            Materials,
+            Contact
+        }
+
     }
 }
