@@ -18,6 +18,8 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.Guid> idPremises { get; set; }
         public Nullable<System.DateTime> DateOfUpdate { get; set; }
         public Nullable<System.Guid> IdUser { get; set; }
+        public string TypeOfUpdate { get; set; }
+        public Nullable<System.Guid> IdDelete { get; set; }
     
         public virtual PremisesType PremisesType { get; set; }
         public virtual User User { get; set; }

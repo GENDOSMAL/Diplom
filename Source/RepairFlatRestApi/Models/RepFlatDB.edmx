@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="RepairFlatDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="RepairFlatDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__RefactorLog">
           <Key>
             <PropertyRef Name="OperationKey" />
@@ -74,6 +74,8 @@
           <Property Name="idContact" Type="uniqueidentifier" />
           <Property Name="DataOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="idUser" Type="uniqueidentifier" />
+          <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="DeleteMessage">
           <Key>
@@ -138,6 +140,8 @@
           <Property Name="idMaterials" Type="uniqueidentifier" />
           <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="IdUser" Type="uniqueidentifier" />
+          <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
+          <Property Name="idDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="OrderElementOfMeasurments">
           <Key>
@@ -277,6 +281,8 @@
           <Property Name="idPremises" Type="uniqueidentifier" />
           <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="IdUser" Type="uniqueidentifier" />
+          <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="ServicesUpdate">
           <Key>
@@ -286,6 +292,8 @@
           <Property Name="IdServices" Type="uniqueidentifier" />
           <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="IdUser" Type="uniqueidentifier" />
+          <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
+          <Property Name="IdDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -457,6 +465,18 @@
             </Principal>
             <Dependent Role="ContactUpdate">
               <PropertyRef Name="idContact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContactUpdate_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ContactUpdate" Type="Self.ContactUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ContactUpdate">
+              <PropertyRef Name="idUser" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -976,6 +996,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="RepairFlatDBModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdressDescription" EntityType="Self.AdressDescription" Schema="dbo" store:Type="Tables" />
@@ -1037,6 +1088,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_ContactUpdate_TypeOfContact" Association="Self.FK_ContactUpdate_TypeOfContact">
             <End Role="TypeOfContact" EntitySet="TypeOfContact" />
+            <End Role="ContactUpdate" EntitySet="ContactUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContactUpdate_User" Association="Self.FK_ContactUpdate_User">
+            <End Role="User" EntitySet="User" />
             <End Role="ContactUpdate" EntitySet="ContactUpdate" />
           </AssociationSet>
           <AssociationSet Name="FK_DeleteMessage_DialogMessage" Association="Self.FK_DeleteMessage_DialogMessage">
@@ -1212,8 +1267,7 @@
             <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="RepairFlatDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1300,6 +1354,9 @@
           <Property Name="DataOfUpdate" Type="DateTime" Precision="7" />
           <Property Name="idUser" Type="Guid" />
           <NavigationProperty Name="TypeOfContact" Relationship="Self.FK_ContactUpdate_TypeOfContact" FromRole="ContactUpdate" ToRole="TypeOfContact" />
+          <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="RepairFlatDBModel.FK_ContactUpdate_User" FromRole="ContactUpdate" ToRole="User" />
+          <Property Name="IdDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="DeleteMessage">
           <Key>
@@ -1379,6 +1436,8 @@
           <Property Name="IdUser" Type="Guid" />
           <NavigationProperty Name="OurMaterials" Relationship="Self.FK_MaterialsUpdate_OurMaterials" FromRole="MaterialsUpdate" ToRole="OurMaterials" />
           <NavigationProperty Name="User" Relationship="Self.FK_MaterialsUpdate_User" FromRole="MaterialsUpdate" ToRole="User" />
+          <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="idDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="OrderElementOfMeasurments">
           <Key>
@@ -1550,6 +1609,8 @@
           <Property Name="IdUser" Type="Guid" />
           <NavigationProperty Name="PremisesType" Relationship="Self.FK_PremisesUpdate_PremisesType" FromRole="PremisesUpdate" ToRole="PremisesType" />
           <NavigationProperty Name="User" Relationship="Self.FK_PremisesUpdate_User" FromRole="PremisesUpdate" ToRole="User" />
+          <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IdDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="ServicesUpdate">
           <Key>
@@ -1561,6 +1622,8 @@
           <Property Name="IdUser" Type="Guid" />
           <NavigationProperty Name="OurServices" Relationship="Self.FK_ServicesUpdate_OurServices" FromRole="ServicesUpdate" ToRole="OurServices" />
           <NavigationProperty Name="User" Relationship="Self.FK_ServicesUpdate_User" FromRole="ServicesUpdate" ToRole="User" />
+          <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IdDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1604,6 +1667,7 @@
           <NavigationProperty Name="ServicesUpdate" Relationship="Self.FK_ServicesUpdate_User" FromRole="User" ToRole="ServicesUpdate" />
           <NavigationProperty Name="UserContact" Relationship="Self.FK_UserContact_User" FromRole="User" ToRole="UserContact" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkerDetails_User" FromRole="User" ToRole="WorkerDetails" />
+          <NavigationProperty Name="ContactUpdate" Relationship="RepairFlatDBModel.FK_ContactUpdate_User" FromRole="User" ToRole="ContactUpdate" />
         </EntityType>
         <EntityType Name="UserContact">
           <Key>
@@ -2521,7 +2585,64 @@
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="WorkersPayGive" EntitySet="WorkersPayGive" />
           </AssociationSet>
+          <AssociationSet Name="FK_ContactUpdate_User" Association="RepairFlatDBModel.FK_ContactUpdate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ContactUpdate" EntitySet="ContactUpdate" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(RepairFlatDBModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(RepairFlatDBModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
+        <Association Name="FK_ContactUpdate_User">
+          <End Type="RepairFlatDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.ContactUpdate" Role="ContactUpdate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="ContactUpdate">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2599,6 +2720,8 @@
           <EntitySetMapping Name="ContactUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.ContactUpdate">
               <MappingFragment StoreEntitySet="ContactUpdate">
+                <ScalarProperty Name="IdDelete" ColumnName="IdDelete" />
+                <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idContactUpdate" ColumnName="idContactUpdate" />
                 <ScalarProperty Name="idContact" ColumnName="idContact" />
                 <ScalarProperty Name="DataOfUpdate" ColumnName="DataOfUpdate" />
@@ -2670,6 +2793,8 @@
           <EntitySetMapping Name="MaterialsUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.MaterialsUpdate">
               <MappingFragment StoreEntitySet="MaterialsUpdate">
+                <ScalarProperty Name="idDelete" ColumnName="idDelete" />
+                <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idMaterialUpdate" ColumnName="idMaterialUpdate" />
                 <ScalarProperty Name="idMaterials" ColumnName="idMaterials" />
                 <ScalarProperty Name="DateOfUpdate" ColumnName="DateOfUpdate" />
@@ -2821,6 +2946,8 @@
           <EntitySetMapping Name="PremisesUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.PremisesUpdate">
               <MappingFragment StoreEntitySet="PremisesUpdate">
+                <ScalarProperty Name="IdDelete" ColumnName="IdDelete" />
+                <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idPremisesUpdate" ColumnName="idPremisesUpdate" />
                 <ScalarProperty Name="idPremises" ColumnName="idPremises" />
                 <ScalarProperty Name="DateOfUpdate" ColumnName="DateOfUpdate" />
@@ -2831,6 +2958,8 @@
           <EntitySetMapping Name="ServicesUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.ServicesUpdate">
               <MappingFragment StoreEntitySet="ServicesUpdate">
+                <ScalarProperty Name="IdDelete" ColumnName="IdDelete" />
+                <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idServUpdate" ColumnName="idServUpdate" />
                 <ScalarProperty Name="IdServices" ColumnName="IdServices" />
                 <ScalarProperty Name="DateOfUpdate" ColumnName="DateOfUpdate" />
@@ -2949,6 +3078,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="RepairFlatDBModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="RepairFlatDBModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="RepairFlatDBModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="RepairFlatDBModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RepairFlatDBModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="RepairFlatDBModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RepairFlatDBModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="RepairFlatDBModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="RepairFlatDBModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -20,8 +20,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                AuthDescription.ResultOfInformation resLog = DBController.Logining(InformationAboutAuth);
-                return resLog;
+                return DBController.Logining(InformationAboutAuth);
             }, nameof(LoginController), nameof(MakeAuth));
         }
         /// <summary>

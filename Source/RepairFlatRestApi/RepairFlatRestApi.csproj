@@ -32,6 +32,9 @@
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -168,8 +171,6 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\MainConroller\BaseController.cs" />
-    <Compile Include="Controllers\MainConroller\MakeLoadingController.cs" />
-    <Compile Include="Controllers\MainConroller\MakeTest.cs" />
     <Compile Include="Controllers\MainConroller\SomeHelpController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
     <Compile Include="Controllers\MainConroller\SubStringController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Models\DescriptionJSON\AuthDescription.cs" />
     <Compile Include="Models\DescriptionJSON\BaseResult.cs" />
     <Compile Include="Models\DescriptionJSON\BaseReturn.cs" />
+    <Compile Include="Models\DescriptionJSON\MakeSubs.cs" />
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
     <Compile Include="Models\DialogMessage.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
@@ -282,6 +284,13 @@
       <DependentUpon>RepFlatDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ServicesUpdate.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SomeEnums.cs" />
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">

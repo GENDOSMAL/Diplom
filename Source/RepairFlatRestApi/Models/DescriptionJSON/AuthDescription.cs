@@ -34,10 +34,9 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Guid idUser;
         }
 
-        public class ResultOfWorkDB
+        public class SucessNewUser:BaseResult
         {
-            public bool BDWork;
-
+            public Guid idUser;
         }
 
 

@@ -27,16 +27,5 @@ namespace RepairFlatRestApi.Controllers
             }, nameof(LoginController), nameof(CreateNewPerson));
         }
 
-        //[HttpGet, Route("api/main/get")]
-        //public HttpResponseMessage SendAllUpdateServises()
-        //{
-        //    return CatchError(() =>
-        //    {
-        //        return new BaseResult() { description = "sad" };
-        //        //return DBController.CreateLoginPerson(InformationAboutNewPerson);
-        //        //throw new NotImplementedException();
-        //    }, nameof(LoginController), nameof(SendAllUpdateServises));
-        //}
-
     }
 }
