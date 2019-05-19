@@ -206,6 +206,9 @@
     <Compile Include="Models\C__RefactorLog.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DeletedSubStr.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DeleteMessage.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>

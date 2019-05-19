@@ -59,7 +59,24 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         }
         #endregion
 
+        #region Make work with premises
 
+        public class PremisesMake : BaseResult
+        {
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(CustomDateTimeConverter))]
+            public DateTime DateOfMakeAnswer;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int kol;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfServisesWithTypeOfUpdate[] listOfServises;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfGuid[] ListOfDeleteServises;
+        }
+
+
+
+        #endregion
 
 
         class CustomDateTimeConverter : IsoDateTimeConverter

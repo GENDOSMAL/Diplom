@@ -19,7 +19,6 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.DateTime> DataOfUpdate { get; set; }
         public Nullable<System.Guid> idUser { get; set; }
         public string TypeOfUpdate { get; set; }
-        public Nullable<System.Guid> IdDelete { get; set; }
     
         public virtual TypeOfContact TypeOfContact { get; set; }
         public virtual User User { get; set; }

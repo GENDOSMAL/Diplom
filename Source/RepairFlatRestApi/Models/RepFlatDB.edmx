@@ -75,7 +75,16 @@
           <Property Name="DataOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="idUser" Type="uniqueidentifier" />
           <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
-          <Property Name="IdDelete" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="DeletedSubStr">
+          <Key>
+            <PropertyRef Name="idDeleted" />
+          </Key>
+          <Property Name="idDeleted" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idThingsDelete" Type="uniqueidentifier" />
+          <Property Name="TypeOfDeleted" Type="nvarchar" MaxLength="15" />
+          <Property Name="DateOfDelete" Type="datetime2" Precision="7" />
+          <Property Name="idUserDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="DeleteMessage">
           <Key>
@@ -141,7 +150,6 @@
           <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="IdUser" Type="uniqueidentifier" />
           <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
-          <Property Name="idDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="OrderElementOfMeasurments">
           <Key>
@@ -282,7 +290,6 @@
           <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="IdUser" Type="uniqueidentifier" />
           <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
-          <Property Name="IdDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="ServicesUpdate">
           <Key>
@@ -293,7 +300,6 @@
           <Property Name="DateOfUpdate" Type="datetime2" Precision="7" />
           <Property Name="IdUser" Type="uniqueidentifier" />
           <Property Name="TypeOfUpdate" Type="nvarchar" MaxLength="20" />
-          <Property Name="IdDelete" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -477,6 +483,18 @@
             </Principal>
             <Dependent Role="ContactUpdate">
               <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DeletedSubStr_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="DeletedSubStr" Type="Self.DeletedSubStr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DeletedSubStr">
+              <PropertyRef Name="idUserDelete" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1036,6 +1054,7 @@
           <EntitySet Name="ColoborationOfBrigade" EntityType="Self.ColoborationOfBrigade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ColoborationOfBrigateSoComp" EntityType="Self.ColoborationOfBrigateSoComp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactUpdate" EntityType="Self.ContactUpdate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeletedSubStr" EntityType="Self.DeletedSubStr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeleteMessage" EntityType="Self.DeleteMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DialogMessage" EntityType="Self.DialogMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dialogs" EntityType="Self.Dialogs" Schema="dbo" store:Type="Tables" />
@@ -1093,6 +1112,10 @@
           <AssociationSet Name="FK_ContactUpdate_User" Association="Self.FK_ContactUpdate_User">
             <End Role="User" EntitySet="User" />
             <End Role="ContactUpdate" EntitySet="ContactUpdate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DeletedSubStr_User" Association="Self.FK_DeletedSubStr_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeletedSubStr" EntitySet="DeletedSubStr" />
           </AssociationSet>
           <AssociationSet Name="FK_DeleteMessage_DialogMessage" Association="Self.FK_DeleteMessage_DialogMessage">
             <End Role="DialogMessage" EntitySet="DialogMessage" />
@@ -1356,7 +1379,6 @@
           <NavigationProperty Name="TypeOfContact" Relationship="Self.FK_ContactUpdate_TypeOfContact" FromRole="ContactUpdate" ToRole="TypeOfContact" />
           <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="RepairFlatDBModel.FK_ContactUpdate_User" FromRole="ContactUpdate" ToRole="User" />
-          <Property Name="IdDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="DeleteMessage">
           <Key>
@@ -1437,7 +1459,6 @@
           <NavigationProperty Name="OurMaterials" Relationship="Self.FK_MaterialsUpdate_OurMaterials" FromRole="MaterialsUpdate" ToRole="OurMaterials" />
           <NavigationProperty Name="User" Relationship="Self.FK_MaterialsUpdate_User" FromRole="MaterialsUpdate" ToRole="User" />
           <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="idDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="OrderElementOfMeasurments">
           <Key>
@@ -1610,7 +1631,6 @@
           <NavigationProperty Name="PremisesType" Relationship="Self.FK_PremisesUpdate_PremisesType" FromRole="PremisesUpdate" ToRole="PremisesType" />
           <NavigationProperty Name="User" Relationship="Self.FK_PremisesUpdate_User" FromRole="PremisesUpdate" ToRole="User" />
           <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IdDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="ServicesUpdate">
           <Key>
@@ -1623,7 +1643,6 @@
           <NavigationProperty Name="OurServices" Relationship="Self.FK_ServicesUpdate_OurServices" FromRole="ServicesUpdate" ToRole="OurServices" />
           <NavigationProperty Name="User" Relationship="Self.FK_ServicesUpdate_User" FromRole="ServicesUpdate" ToRole="User" />
           <Property Name="TypeOfUpdate" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="IdDelete" Type="Guid" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1668,6 +1687,7 @@
           <NavigationProperty Name="UserContact" Relationship="Self.FK_UserContact_User" FromRole="User" ToRole="UserContact" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkerDetails_User" FromRole="User" ToRole="WorkerDetails" />
           <NavigationProperty Name="ContactUpdate" Relationship="RepairFlatDBModel.FK_ContactUpdate_User" FromRole="User" ToRole="ContactUpdate" />
+          <NavigationProperty Name="DeletedSubStr" Relationship="RepairFlatDBModel.FK_DeletedSubStr_User" FromRole="User" ToRole="DeletedSubStr" />
         </EntityType>
         <EntityType Name="UserContact">
           <Key>
@@ -2619,6 +2639,11 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="DeletedSubStr" EntityType="RepairFlatDBModel.DeletedSubStr" />
+          <AssociationSet Name="FK_DeletedSubStr_User" Association="RepairFlatDBModel.FK_DeletedSubStr_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DeletedSubStr" EntitySet="DeletedSubStr" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_ContactUpdate_User">
           <End Type="RepairFlatDBModel.User" Role="User" Multiplicity="0..1" />
@@ -2643,6 +2668,29 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="DeletedSubStr">
+          <Key>
+            <PropertyRef Name="idDeleted" />
+          </Key>
+          <Property Name="idDeleted" Type="Guid" Nullable="false" />
+          <Property Name="idThingsDelete" Type="Guid" />
+          <Property Name="TypeOfDeleted" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfDelete" Type="DateTime" Precision="7" />
+          <Property Name="idUserDelete" Type="Guid" />
+          <NavigationProperty Name="User" Relationship="RepairFlatDBModel.FK_DeletedSubStr_User" FromRole="DeletedSubStr" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_DeletedSubStr_User">
+          <End Type="RepairFlatDBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.DeletedSubStr" Role="DeletedSubStr" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="DeletedSubStr">
+              <PropertyRef Name="idUserDelete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2720,7 +2768,6 @@
           <EntitySetMapping Name="ContactUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.ContactUpdate">
               <MappingFragment StoreEntitySet="ContactUpdate">
-                <ScalarProperty Name="IdDelete" ColumnName="IdDelete" />
                 <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idContactUpdate" ColumnName="idContactUpdate" />
                 <ScalarProperty Name="idContact" ColumnName="idContact" />
@@ -2793,7 +2840,6 @@
           <EntitySetMapping Name="MaterialsUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.MaterialsUpdate">
               <MappingFragment StoreEntitySet="MaterialsUpdate">
-                <ScalarProperty Name="idDelete" ColumnName="idDelete" />
                 <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idMaterialUpdate" ColumnName="idMaterialUpdate" />
                 <ScalarProperty Name="idMaterials" ColumnName="idMaterials" />
@@ -2946,7 +2992,6 @@
           <EntitySetMapping Name="PremisesUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.PremisesUpdate">
               <MappingFragment StoreEntitySet="PremisesUpdate">
-                <ScalarProperty Name="IdDelete" ColumnName="IdDelete" />
                 <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idPremisesUpdate" ColumnName="idPremisesUpdate" />
                 <ScalarProperty Name="idPremises" ColumnName="idPremises" />
@@ -2958,7 +3003,6 @@
           <EntitySetMapping Name="ServicesUpdate">
             <EntityTypeMapping TypeName="RepairFlatDBModel.ServicesUpdate">
               <MappingFragment StoreEntitySet="ServicesUpdate">
-                <ScalarProperty Name="IdDelete" ColumnName="IdDelete" />
                 <ScalarProperty Name="TypeOfUpdate" ColumnName="TypeOfUpdate" />
                 <ScalarProperty Name="idServUpdate" ColumnName="idServUpdate" />
                 <ScalarProperty Name="IdServices" ColumnName="IdServices" />
@@ -3102,6 +3146,17 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="RepairFlatDBModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="RepairFlatDBModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="DeletedSubStr">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.DeletedSubStr">
+              <MappingFragment StoreEntitySet="DeletedSubStr">
+                <ScalarProperty Name="idUserDelete" ColumnName="idUserDelete" />
+                <ScalarProperty Name="DateOfDelete" ColumnName="DateOfDelete" />
+                <ScalarProperty Name="TypeOfDeleted" ColumnName="TypeOfDeleted" />
+                <ScalarProperty Name="idThingsDelete" ColumnName="idThingsDelete" />
+                <ScalarProperty Name="idDeleted" ColumnName="idDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

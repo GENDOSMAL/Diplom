@@ -152,8 +152,8 @@ namespace RepairFlatRestApi.Controllers
                         }).ToArray();
                         var QueryForDelete = db.ServicesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate == SomeEnums.TypeOfUpdate.Delete.ToString());
                         var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
-                        {
-                            idServises = e.IdDelete
+                        {//TODO Переписать
+                            //idServises = e.IdDelete
                         }).ToArray();
 
 
@@ -271,11 +271,12 @@ namespace RepairFlatRestApi.Controllers
                         {
                             var InformationAboutIsert = new ServicesUpdate
                             {
-                                idServUpdate = Guid.NewGuid(),
-                                IdUser = makeUpdateOrInserNew.idUser,
-                                IdDelete = codes,
-                                DateOfUpdate = DateOfInsert,
-                                TypeOfUpdate = SomeEnums.TypeOfUpdate.Delete.ToString()
+                                //TODO  Переписать
+                                //idServUpdate = Guid.NewGuid(),
+                                //IdUser = makeUpdateOrInserNew.idUser,
+                                //IdDelete = codes,
+                                //DateOfUpdate = DateOfInsert,
+                                //TypeOfUpdate = SomeEnums.TypeOfUpdate.Delete.ToString()
                             };
                             db.ServicesUpdate.Add(InformationAboutIsert);
                         }
