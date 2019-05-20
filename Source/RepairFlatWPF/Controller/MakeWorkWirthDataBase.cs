@@ -29,10 +29,7 @@ namespace RepairFlatWPF.Controller
 
         public static void CheckAndMakeTableInDB()
         {
-            var Resourses = Properties.Resources.ResourceManager.GetObject("DescriprionOfDB") as byte[];
-            string json = Encoding.UTF8.GetString(Resourses);
-            var ListOFTablesDescription = JsonConvert.DeserializeObject<WorkWithDB.Tableses>(json);
-
+            var ListOFTablesDescription = MakeSomeHelp.ReturnJsonOfTable();
             foreach (var Table in ListOFTablesDescription.Tables)
             {
                 CreateTableIfNotExist(Table.NameOfTable, Table.ColumnOfTable);

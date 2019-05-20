@@ -52,6 +52,14 @@ namespace RepairFlatWPF
             }
         }
 
+        public static WorkWithDB.Tableses ReturnJsonOfTable()
+        {
+            var Resourses = Properties.Resources.ResourceManager.GetObject("DescriprionOfDB") as byte[];
+            string json = Encoding.UTF8.GetString(Resourses);
+            var ListOFTablesDescription = JsonConvert.DeserializeObject<WorkWithDB.Tableses>(json);
+            return ListOFTablesDescription;
+        }
+
         public static void ChengeGridInMainWindow(UserControl controls)
         {
             ((MainWindow)Application.Current.MainWindow).MainGrid.Children.Clear();
