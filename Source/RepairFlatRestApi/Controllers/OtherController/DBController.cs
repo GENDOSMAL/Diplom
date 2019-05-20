@@ -152,6 +152,7 @@ namespace RepairFlatRestApi.Controllers
         }
 
         #endregion
+
         #region Обработки при работе с подстовляемыми данными об услугах
 
         internal static MakeSubs.ServisesMake MakeDataAboutUpdateServises(string dateofclientlastupdate)
@@ -343,7 +344,6 @@ namespace RepairFlatRestApi.Controllers
         }
 
         #endregion
-
 
         #region Обработки при работе с подстовляемыми данными об типах помещений
         internal static object MakeDataAboutUpdatePremises(MakeSubs.MakeUpdOrInsPremises ListOfNewPremises)
@@ -873,9 +873,6 @@ namespace RepairFlatRestApi.Controllers
             }, nameof(DBController), nameof(MakeUpdateContacts));
         }
         #endregion
-
-
-
 
 
         /// <summary>
