@@ -45,7 +45,7 @@ namespace RepairFlatWPF.Controller
                 WorkWithDB.ColumnOfTable columnOfTableLast = columns.Last();
                 foreach (var colum in columns)
                 {
-                    CreateTableQuery.Append($" '{colum.NameOfCol}' {colum.TypeOfCol}");
+                   
                     if (colum.Equals(columnOfTableLast))
                     {
                         CreateTableQuery.Append($" '{colum.NameOfCol}' {colum.TypeOfCol}");

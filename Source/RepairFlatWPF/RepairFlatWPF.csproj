@@ -116,6 +116,7 @@
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MakeSubs.cs" />
     <Compile Include="Model\SaveSomeData.cs" />
+    <Compile Include="Model\SomeEnums.cs" />
     <Compile Include="Model\WorkWithDB.cs" />
     <Compile Include="UserControls\AditinalControl\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>

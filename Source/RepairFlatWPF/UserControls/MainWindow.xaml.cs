@@ -29,9 +29,8 @@ namespace RepairFlatWPF
         public MainWindow()
         {
             InitializeComponent();
-            //GridMenu.Width = 0;
             this.DataContext = new MainWindowViewModel(this);
-            setChildren(new LoginUserControl());           
+            MakeSomeHelp.MakeShowLoading();
         }
 
 

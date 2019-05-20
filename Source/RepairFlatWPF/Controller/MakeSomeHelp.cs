@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RepairFlatWPF.Properties;
+using RepairFlatWPF.UserControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,12 +64,45 @@ namespace RepairFlatWPF
         public static void ChengeGridInMainWindow(UserControl controls)
         {
             ((MainWindow)Application.Current.MainWindow).MainGrid.Children.Clear();
-            ((MainWindow)Application.Current.MainWindow).MainGrid.Children.Add(controls);
+            if(controls!=null)
+                ((MainWindow)Application.Current.MainWindow).MainGrid.Children.Add(controls);
         }
 
+        public static void MakeShowLoading()
+        {
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Visibility = Visibility.Visible;
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Clear();
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Add(new LoginUserControl());
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Background = (System.Windows.Media.Brush)Application.Current.Resources["BackLogAndLoadColor"];
+        }
+
+        public static void MakeLoading()
+        {
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Clear();
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Add(new MakeLoading());
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Background = (System.Windows.Media.Brush)Application.Current.Resources["GradientForLoading"];
+        }
+
+        public static void ShowMainGrid()
+        {
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Visibility = Visibility.Collapsed;
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Clear();
+        }
         public static void ChengeGridBackGroundStyle(string NameOfStyle)
         {
             ((MainWindow)Application.Current.MainWindow).MainGrid.Background =(System.Windows.Media.Brush)Application.Current.Resources[NameOfStyle];
+        }
+        public static void GridChengeGridBackGroundStyle(string NameOfStyle)
+        {
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Background = (System.Windows.Media.Brush)Application.Current.Resources[NameOfStyle];
+        }
+
+        public static void ShowOrCloseMenu(bool Open)
+        {
+            if(Open)
+                ((MainWindow)Application.Current.MainWindow).GridMenu.Width = 300;
+            else
+                ((MainWindow)Application.Current.MainWindow).GridMenu.Width = 0;
         }
     }
 }

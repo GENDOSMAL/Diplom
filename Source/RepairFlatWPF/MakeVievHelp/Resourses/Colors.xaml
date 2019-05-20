@@ -22,7 +22,9 @@
     <Color x:Key="ColorBackMenuOpen">#d2d9e3</Color>
     <SolidColorBrush x:Key="BackColorForMainFraime" Color="{StaticResource ColorBackMenuOpen}" />
 
-
+    <Color x:Key="TransparentColor">Transparent</Color>
+    <SolidColorBrush x:Key="Transparent" Color="{StaticResource TransparentColor}" />
+    
     <!--Цвет задника текста меню-->
     <Color x:Key="CorolForTextMenu">#E0E8EB</Color>
     <SolidColorBrush x:Key="MenuTextColor" Color="{StaticResource CorolForTextMenu}" />    

@@ -66,12 +66,7 @@ namespace RepairFlatWPF
                 Model.SaveSomeData.IdUser = deserializedProduct.idUser;
                 Model.SaveSomeData.TypeOfUser = deserializedProduct.typeofpolz;
                 Model.SaveSomeData.LastNameAndIni = deserializedProduct.LastNameAndIni;
-
-
-                //TODO закрыть окно и перейти к загрузке
-                MakeSomeHelp.ChengeGridInMainWindow(new UserControls.MakeLoading());
-                MakeSomeHelp.ChengeGridBackGroundStyle("GradientForLoading");
-
+                MakeSomeHelp.MakeLoading();
             }
         }
 

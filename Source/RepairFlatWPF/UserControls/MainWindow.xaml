@@ -116,7 +116,9 @@
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
         </EventTrigger>
     </Window.Triggers>
+    
     <Grid Name="MainGrid" Background="{StaticResource BackLogAndLoadColor}">
+
         <Grid Name="HelpGrid" Background="White">
             <Grid.ColumnDefinitions >
                 <ColumnDefinition Width="70"/>
@@ -151,15 +153,12 @@
                                     <materialDesign:PackIcon Kind="Person" Style="{StaticResource IconFofMenu}"/>
                                     <TextBlock  Text="Работа с клиентами" Style="{StaticResource LeftMenu}" />
                                 </StackPanel>
-                            </ListViewItem.Content>
-
-                            
+                            </ListViewItem.Content>                            
                         </ListViewItem>
                         <ListViewItem Height="80" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Details" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Справочные данные" Style="{StaticResource LeftMenu}"   />
-
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem Height="80" >
@@ -199,6 +198,9 @@
                 </ListView>            
             </Grid>
             
+
+        </Grid>
+        <Grid  Name="ForLogin" Visibility="Collapsed" >
 
         </Grid>
     </Grid>
