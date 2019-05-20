@@ -79,6 +79,10 @@ namespace RepairFlatRestApi.Controllers
             }, nameof(DBController), nameof(Logining));
         }
 
+        
+
+
+
         /// <summary>
         /// Метод создания новых данных о логине. В процессе создания данных происходит проверка на повторенность логина
         /// </summary>
@@ -124,7 +128,31 @@ namespace RepairFlatRestApi.Controllers
         }
         #endregion
 
-        #region Обработки при работе с подстовляемыми данными
+        #region Что-то общее
+
+        internal static DeletedSubStr[] MakeListAboutDelete(List<Guid?> ListOfDeleteCodes,DateTime DateOfDelete,Guid idUser, SomeEnums.TypeOfSubs typeOfSubs)
+        {
+            DeletedSubStr[] result = new DeletedSubStr[ListOfDeleteCodes.Count];
+            int l = 0;
+            foreach (var codes in ListOfDeleteCodes)
+            {
+                var InformationAboutDelete = new DeletedSubStr
+                {
+                    DateOfDelete = DateOfDelete,
+                    idDeleted = Guid.NewGuid(),
+                    idThingsDelete = codes,
+                    idUserDelete = idUser,
+                    TypeOfDeleted = typeOfSubs.ToString()
+                };
+
+                result[l]=InformationAboutDelete;
+                l++;
+            }
+            return result;
+        }
+
+        #endregion
+        #region Обработки при работе с подстовляемыми данными об услугах
 
         internal static MakeSubs.ServisesMake MakeDataAboutUpdateServises(string dateofclientlastupdate)
         {
@@ -139,7 +167,7 @@ namespace RepairFlatRestApi.Controllers
                     DateTime DateOfLastUpdate = new DateTime();
                     if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastUpdate))
                     {//Если дату удалось распознать вернуть в соответствии с датой
-                        var QueryWithOutUpdate = db.ServicesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate != SomeEnums.TypeOfUpdate.Delete.ToString());
+                        var QueryWithOutUpdate = db.ServicesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate != SomeEnums.TypeOfAction.Delete.ToString());
                         var ListOfServises = QueryWithOutUpdate.Select(e => new MakeSubs.ListOfUpdatedServises
                         {
                             idServises = e.OurServices.idServis,
@@ -216,7 +244,7 @@ namespace RepairFlatRestApi.Controllers
                                 IdUser = makeUpdateOrInserNew.idUser,
                                 IdServices = WhatInsert.idServises,
                                 DateOfUpdate = DateOfInsert,
-                                TypeOfUpdate = SomeEnums.TypeOfUpdate.Add.ToString()
+                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString()
                             };
 
                             db.OurServices.Add(NewServises);
@@ -243,7 +271,7 @@ namespace RepairFlatRestApi.Controllers
                                     IdUser = makeUpdateOrInserNew.idUser,
                                     IdServices = WhatUpdate.idServises,
                                     DateOfUpdate = DateOfInsert,
-                                    TypeOfUpdate = SomeEnums.TypeOfUpdate.Update.ToString()
+                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString()
                                 };
                                 db.ServicesUpdate.Add(InformationAboutIsert);
                             }
@@ -268,21 +296,10 @@ namespace RepairFlatRestApi.Controllers
                     db.SaveChanges();
                     if (ListOfDeleteCodes.Count != 0)
                     {
-                        foreach (var codes in ListOfDeleteCodes)
-                        {
-
-                            var InformationAboutDelete = new DeletedSubStr
-                            {
-                                DateOfDelete = DateOfInsert,
-                                idDeleted = Guid.NewGuid(),
-                                idThingsDelete = codes,
-                                idUserDelete = makeUpdateOrInserNew.idUser,
-                                TypeOfDeleted = SomeEnums.TypeOfSubs.Servises.ToString()
-                            };
-                            db.DeletedSubStr.Add(InformationAboutDelete);
-                        }
+                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfInsert, makeUpdateOrInserNew.idUser,SomeEnums.TypeOfSubs.Servises));
+                        db.SaveChanges();
                     }
-                    db.SaveChanges();
+
 
                 }
                 catch (Exception ex)
@@ -327,6 +344,181 @@ namespace RepairFlatRestApi.Controllers
 
         #endregion
 
+
+        #region Обработки при работе с подстовляемыми данными об типах помещений
+        internal static object MakeDataAboutUpdatePremises(MakeSubs.MakeUpdOrInsPremises ListOfNewPremises)
+        {
+            return Run((db) =>
+            {
+                List<Guid?> ListOfDeleteCodes = new List<Guid?>();
+                DateTime DateOfAction = new DateTime();
+                if (!DateTime.TryParseExact(ListOfNewPremises.DateOfMake, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfAction))
+                    return new MakeSubs.ServisesMake
+                    {
+                        success = false,
+                        description = "Ошибка при преобразовании данных о дате"
+                    };
+
+                try
+                {
+                    if (ListOfNewPremises.ListOfPremisesInsert != null)
+                    {
+                        
+                        foreach (var InsertThing in ListOfNewPremises.ListOfPremisesInsert)
+                        {
+
+                            var newPremise = new PremisesType
+                            {
+                                Descriprtion = InsertThing.Description,
+                                idPremises = InsertThing.idPremises,
+                                NameOfPremises = InsertThing.Name
+                            };
+                            db.PremisesType.Add(newPremise);
+
+                            var NewPremisesHistory = new PremisesUpdate
+                            {
+                                DateOfUpdate = DateOfAction,
+                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString(),
+                                IdUser = ListOfNewPremises.idUser,
+                                idPremises= InsertThing.idPremises,
+                                idPremisesUpdate = Guid.NewGuid()
+                            };
+                            db.PremisesUpdate.Add(NewPremisesHistory);
+                        }
+                    }
+
+                    if (ListOfNewPremises.listOfPremisesUpdate != null)
+                    {
+                        foreach (var whatUpdate in ListOfNewPremises.listOfPremisesUpdate)
+                        {
+                            var updatePremises = db.PremisesType.Where(e => e.idPremises == whatUpdate.idPremises).FirstOrDefault();
+                            if (updatePremises != null)
+                            {
+                                updatePremises.NameOfPremises = whatUpdate.Name;
+                                updatePremises.Descriprtion = whatUpdate.Description;
+
+                                var NewPremisesHistory = new PremisesUpdate
+                                {
+                                    DateOfUpdate = DateOfAction,
+                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString(),
+                                    IdUser = ListOfNewPremises.idUser,
+                                    idPremises= whatUpdate.idPremises,
+                                    idPremisesUpdate = Guid.NewGuid()
+                                };
+                                db.PremisesUpdate.Add(NewPremisesHistory);
+                            }
+                        }
+                    }
+
+                    if (ListOfNewPremises.ListOfDeletePremises != null)
+                    {
+                        foreach (var whatDelete in ListOfNewPremises.ListOfDeletePremises)
+                        {
+                            var deleteThings = db.PremisesType.Where(e => e.idPremises == whatDelete.idGuid).FirstOrDefault();
+                            if (deleteThings != null)
+                            {
+                                db.Entry(deleteThings).Collection(c => c.PremisesUpdate).Load();
+                                db.PremisesType.Remove(deleteThings);
+                                db.PremisesUpdate.RemoveRange(db.PremisesUpdate.Where(c => c.idPremises == whatDelete.idGuid).ToArray());
+                                ListOfDeleteCodes.Add(whatDelete.idGuid);
+                            }
+                        }
+
+                    }
+                    db.SaveChanges();
+                    if (ListOfDeleteCodes.Count != 0)
+                    {
+                        db.PremisesUpdate.RemoveRange(db.PremisesUpdate.Where(e => e.idPremises == null).ToArray());
+                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfAction, ListOfNewPremises.idUser,SomeEnums.TypeOfSubs.Premises));
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        success = false,
+                        description = $"Ошибка при работе с данными {ex.ToString()}!"
+                    };
+                }
+                return new BaseResult
+                {
+                    success = true,
+                    description = "Операции над данными были произведены!"
+                };
+            }, nameof(DBController), nameof(MakeDataAboutUpdatePremises));
+        }
+
+        internal static MakeSubs.PremisesMake GetAllPremises(string dateofclientlastupdate)
+        {
+            return Run((db) =>
+            {
+                if (string.IsNullOrEmpty(dateofclientlastupdate))
+                {//Если строка пустая возвращаем все
+                    return AllPremisesHave();
+                }
+                else
+                {
+                    DateTime DateOfLastUpdate = new DateTime();
+                    if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastUpdate))
+                    {//Если дату удалось распознать вернуть в соответствии с датой
+                        var QueryWithOutDelete = db.PremisesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate != SomeEnums.TypeOfAction.Delete.ToString());
+                        var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfPremisesUpd
+                        {
+                            idPremises=e.idPremises,
+                            Name=e.PremisesType.NameOfPremises,
+                            Description=e.PremisesType.Descriprtion,
+                            TypeOfUpdate = e.TypeOfUpdate,
+                        }).ToArray();
+
+                        var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastUpdate && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Premises.ToString());
+                        var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
+                        {
+                            idGuid = e.idThingsDelete
+                        }).ToArray();
+
+                        return new MakeSubs.PremisesMake
+                        {
+                            success = true,
+                            kol = ListPremises.Length + ListOfDelete.Length,
+                            DateOfMakeAnswer = DateTime.Now,
+                            listOfPremises = ListPremises,
+                            ListOfDeletePremises = ListOfDelete
+                        };
+                    }
+                    else
+                    {//Если дату не удалось распознать
+                        return new MakeSubs.PremisesMake
+                        {
+                            success = false,
+                            description = "Ошибка при преобразовании данных о дате"
+                        };
+                    }
+                }
+            }, nameof(DBController), nameof(GetAllPremises));
+        }
+
+        private static MakeSubs.PremisesMake AllPremisesHave()
+        {
+            return Run((db) =>
+            {
+                var listOfServise = db.PremisesType.Select(e => new MakeSubs.ListOfPremisesUpd
+                {
+                    idPremises=e.idPremises,
+                    Name=e.NameOfPremises,
+                    Description = e.Descriprtion
+                }).ToArray();
+                return new MakeSubs.PremisesMake
+                {
+                    success = true,
+                    kol = listOfServise.Length,
+                    listOfPremises = listOfServise,
+                    DateOfMakeAnswer = DateTime.Now
+                };
+            }, nameof(DBController), nameof(AllServisesHave));
+        }
+
+        #endregion
 
 
 

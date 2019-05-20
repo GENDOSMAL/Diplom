@@ -21,7 +21,7 @@ namespace RepairFlatRestApi.Models
             this.PremisesUpdate = new HashSet<PremisesUpdate>();
         }
     
-        public System.Guid idPremises { get; set; }
+        public System.Guid? idPremises { get; set; }
         public string NameOfPremises { get; set; }
         public string Descriprtion { get; set; }
     

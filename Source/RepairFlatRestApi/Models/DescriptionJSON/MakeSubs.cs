@@ -88,7 +88,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class ListOfPremises
         {
-            public Guid idPremises;
+            public Guid? idPremises;
             public string Name;
             public string Description;
         }

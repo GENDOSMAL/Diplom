@@ -46,27 +46,25 @@ namespace RepairFlatRestApi.Controllers
         /// Получение новых либо обновленных данных о типах помещений
         /// </summary>
         /// <returns></returns>
-        //[HttpPost, Route("~/api/sub/premises/update")]
-        //public HttpResponseMessage UpdatePremises()
-        //{
-        //    return CatchError(() =>
-        //    {
-        //        throw new NotImplementedException();
-        //        //return resLog;
-        //    }, nameof(SubStringController), nameof(UpdatePremises));
-        //}
+        [HttpPost, Route("premises/update")]
+        public HttpResponseMessage UpdatePremises([FromBody] MakeSubs.MakeUpdOrInsPremises makeUpdateOrInserNew)
+        {
+            return CatchError(() =>
+            {
+                return DBController.MakeDataAboutUpdatePremises(makeUpdateOrInserNew);
+            }, nameof(SubStringController), nameof(UpdatePremises));
+        }
         /// <summary>
         /// Отсылка данных об типах помещений, которые были обновлены после даты предоставленной клиентами
         /// </summary>
         /// <param name="dateofclientlastupdate"></param>
         /// <returns></returns>
-        [HttpGet, Route("~/api/sub/premises/get")]
-        public HttpResponseMessage SendAllUpdatePremises([FromUri] string dateofclientlastupdate = null)
+        [HttpGet, Route("premises/get")]
+        public HttpResponseMessage SendAllUpdatePremises([FromUri] string dateofclientlastupdate = "")
         {
             return CatchError(() =>
             {
-                //return DBController.CreateLoginPerson(InformationAboutNewPerson);
-                throw new NotImplementedException();
+                return DBController.GetAllPremises(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdatePremises));
         }
 
