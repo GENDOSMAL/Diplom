@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepairFlatWPF.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,6 +31,13 @@ namespace RepairFlatWPF.UserControls
 
         public async void MakeDownload()
         {
+            await Task.Run(() => MakeWorkWirthDataBase.MakeFilePathAndCheck());
+
+            string CheckLastDate = "";
+            #region Получение информации по обновлению списка контактов
+            //string UrlOfContact = $"api/main/getmaterial?dateofclient={DateTime.Now.ToString("dd.MM.yyyy")}";
+            #endregion
+
             #region Получение информаци по обновлению придлагаемых услуг
             string UrlServises = $"api/main/getservises?dateofclient={DateTime.Now.ToString("dd.MM.yyyy")}";
             var taskForServises = await Task.Run(() => BaseWorkWithServer.CatchErrorWithGet(UrlServises, "GET", nameof(MakeLoading), nameof(MakeDownload)));
@@ -43,6 +51,7 @@ namespace RepairFlatWPF.UserControls
             #region Получение информации по обновлению списка материалов
             string ThirdtUrl = $"api/main/getmaterial?dateofclient={DateTime.Now.ToString("dd.MM.yyyy")}";
             #endregion
+
         }
 
     }

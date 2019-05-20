@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RepairFlatWPF.Controller;
 using RepairFlatWPF.Properties;
 using System;
 using System.Collections.Generic;
@@ -29,13 +30,14 @@ namespace RepairFlatWPF
         public  LoginUserControl()
         {
             InitializeComponent();
+           
         }
         /// <summary>
         /// Проверка на то, что логин и пароль актуален
         /// </summary>
         public async void CheckLogin_Click(object sender, RoutedEventArgs e)
         {
-
+            
             var task2 = await Task.Run(() => MakeSomeHelp.MakePingToServer(Settings.Default.BaseAdress));
             string TextForUser = task2 ? "Связь с сервером установлена..." : "Сервер не доступен!";
             Result.Content = TextForUser;

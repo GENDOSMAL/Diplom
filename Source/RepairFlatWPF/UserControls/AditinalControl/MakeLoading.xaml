@@ -25,7 +25,7 @@
                 <Grid>
                     
                 </Grid>
-                <TextBlock Name="Wait" FontFamily="{StaticResource FontAwesome}" FontSize="250" Text="&#xf110;" RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Center">
+                <TextBlock Name="Wait" FontFamily="{StaticResource FontAwesome}" FontSize="200" Text="&#xf110;" RenderTransformOrigin="0.5, 0.5" HorizontalAlignment="Center">
                     <TextBlock.RenderTransform>
                         <RotateTransform Angle="0" />
                     </TextBlock.RenderTransform>
