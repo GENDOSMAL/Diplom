@@ -79,7 +79,7 @@ namespace RepairFlatRestApi.Controllers
             }, nameof(DBController), nameof(Logining));
         }
 
-        
+
 
 
 
@@ -130,7 +130,7 @@ namespace RepairFlatRestApi.Controllers
 
         #region Что-то общее
 
-        internal static DeletedSubStr[] MakeListAboutDelete(List<Guid?> ListOfDeleteCodes,DateTime DateOfDelete,Guid idUser, SomeEnums.TypeOfSubs typeOfSubs)
+        internal static DeletedSubStr[] MakeListAboutDelete(List<Guid?> ListOfDeleteCodes, DateTime DateOfDelete, Guid idUser, SomeEnums.TypeOfSubs typeOfSubs)
         {
             DeletedSubStr[] result = new DeletedSubStr[ListOfDeleteCodes.Count];
             int l = 0;
@@ -145,7 +145,7 @@ namespace RepairFlatRestApi.Controllers
                     TypeOfDeleted = typeOfSubs.ToString()
                 };
 
-                result[l]=InformationAboutDelete;
+                result[l] = InformationAboutDelete;
                 l++;
             }
             return result;
@@ -296,7 +296,7 @@ namespace RepairFlatRestApi.Controllers
                     db.SaveChanges();
                     if (ListOfDeleteCodes.Count != 0)
                     {
-                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfInsert, makeUpdateOrInserNew.idUser,SomeEnums.TypeOfSubs.Servises));
+                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfInsert, makeUpdateOrInserNew.idUser, SomeEnums.TypeOfSubs.Servises));
                         db.SaveChanges();
                     }
 
@@ -363,7 +363,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     if (ListOfNewPremises.ListOfPremisesInsert != null)
                     {
-                        
+
                         foreach (var InsertThing in ListOfNewPremises.ListOfPremisesInsert)
                         {
 
@@ -380,7 +380,7 @@ namespace RepairFlatRestApi.Controllers
                                 DateOfUpdate = DateOfAction,
                                 TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString(),
                                 IdUser = ListOfNewPremises.idUser,
-                                idPremises= InsertThing.idPremises,
+                                idPremises = InsertThing.idPremises,
                                 idPremisesUpdate = Guid.NewGuid()
                             };
                             db.PremisesUpdate.Add(NewPremisesHistory);
@@ -402,7 +402,7 @@ namespace RepairFlatRestApi.Controllers
                                     DateOfUpdate = DateOfAction,
                                     TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString(),
                                     IdUser = ListOfNewPremises.idUser,
-                                    idPremises= whatUpdate.idPremises,
+                                    idPremises = whatUpdate.idPremises,
                                     idPremisesUpdate = Guid.NewGuid()
                                 };
                                 db.PremisesUpdate.Add(NewPremisesHistory);
@@ -428,8 +428,9 @@ namespace RepairFlatRestApi.Controllers
                     db.SaveChanges();
                     if (ListOfDeleteCodes.Count != 0)
                     {
-                        db.PremisesUpdate.RemoveRange(db.PremisesUpdate.Where(e => e.idPremises == null).ToArray());
-                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfAction, ListOfNewPremises.idUser,SomeEnums.TypeOfSubs.Premises));
+                        //TODO Проверить необходимость и если надо добавить
+                        //db.PremisesUpdate.RemoveRange(db.PremisesUpdate.Where(e => e.idPremises == null).ToArray());
+                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfAction, ListOfNewPremises.idUser, SomeEnums.TypeOfSubs.Premises));
                         db.SaveChanges();
                     }
                 }
@@ -465,9 +466,9 @@ namespace RepairFlatRestApi.Controllers
                         var QueryWithOutDelete = db.PremisesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate != SomeEnums.TypeOfAction.Delete.ToString());
                         var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfPremisesUpd
                         {
-                            idPremises=e.idPremises,
-                            Name=e.PremisesType.NameOfPremises,
-                            Description=e.PremisesType.Descriprtion,
+                            idPremises = e.idPremises,
+                            Name = e.PremisesType.NameOfPremises,
+                            Description = e.PremisesType.Descriprtion,
                             TypeOfUpdate = e.TypeOfUpdate,
                         }).ToArray();
 
@@ -504,8 +505,8 @@ namespace RepairFlatRestApi.Controllers
             {
                 var listOfServise = db.PremisesType.Select(e => new MakeSubs.ListOfPremisesUpd
                 {
-                    idPremises=e.idPremises,
-                    Name=e.NameOfPremises,
+                    idPremises = e.idPremises,
+                    Name = e.NameOfPremises,
                     Description = e.Descriprtion
                 }).ToArray();
                 return new MakeSubs.PremisesMake
@@ -517,7 +518,360 @@ namespace RepairFlatRestApi.Controllers
                 };
             }, nameof(DBController), nameof(AllServisesHave));
         }
+        #endregion
 
+        #region Обработки при работе с подстовляемыми данными о материалах
+
+        internal static MakeSubs.MaterialsMake MakeAllDataAboutContackt()
+        {
+            return Run((db) =>
+            {
+                var ListOfMaterial = db.OurMaterials.Select(e => new MakeSubs.ListOfMaterialsUpd
+                {
+                    idMaterials = e.idMaterials,
+                    NameOfMaterial = e.NameOfMaterial,
+                    UnitOfMeasue = e.UnitOfMeasue,
+                    Cost = e.Cost,
+                    Description = e.Description
+                }).ToArray();
+                return new MakeSubs.MaterialsMake
+                {
+                    success = true,
+                    kol = ListOfMaterial.Length,
+                    listOfMaterials = ListOfMaterial,
+                    DateOfMakeAnswer = DateTime.Now
+                };
+            }, nameof(DBController), nameof(MakeAllDataAboutContackt));
+        }
+
+        internal static object MakeUpdateMaterials(MakeSubs.MakeUpdOrInsMaterials ListOfMaterials)
+        {
+            return Run((db) =>
+            {
+                List<Guid?> ListOfDeleteCodes = new List<Guid?>();
+                DateTime DateOfAction = new DateTime();
+                if (!DateTime.TryParseExact(ListOfMaterials.DateOfMake, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfAction))
+                    return new MakeSubs.ServisesMake
+                    {
+                        success = false,
+                        description = "Ошибка при преобразовании данных о дате"
+                    };
+
+                try
+                {
+                    if (ListOfMaterials.ListOfMaterialsInsert != null)
+                    {
+                        foreach (var NewMaterial in ListOfMaterials.ListOfMaterialsInsert)
+                        {
+                            var NMat = new OurMaterials
+                            {
+                                Cost = NewMaterial.Cost,
+                                Description = NewMaterial.Description,
+                                idMaterials = NewMaterial.idMaterials,
+                                NameOfMaterial = NewMaterial.NameOfMaterial,
+                                TypeOfMaterial = NewMaterial.TypeOfMaterial,
+                                UnitOfMeasue = NewMaterial.UnitOfMeasue
+                            };
+
+                            var NMatHistory = new MaterialsUpdate
+                            {
+                                DateOfUpdate = DateOfAction,
+                                IdUser = ListOfMaterials.idUser,
+                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString(),
+                                idMaterials = NewMaterial.idMaterials,
+                                idMaterialUpdate = Guid.NewGuid()
+                            };
+                            db.OurMaterials.Add(NMat);
+                            db.MaterialsUpdate.Add(NMatHistory);
+                        }
+                    }
+
+                    if (ListOfMaterials.listOfMaterialsUpdate != null)
+                    {
+                        foreach (var MatUpdate in ListOfMaterials.ListOfMaterialsInsert)
+                        {
+                            var MaterialUpdate = db.OurMaterials.Where(e => e.idMaterials == MatUpdate.idMaterials).FirstOrDefault();
+                            if (MaterialUpdate != null)
+                            {
+                                MaterialUpdate.NameOfMaterial = MatUpdate.NameOfMaterial;
+                                MaterialUpdate.UnitOfMeasue = MatUpdate.UnitOfMeasue;
+                                MaterialUpdate.Cost = MatUpdate.Cost;
+                                MaterialUpdate.Description = MatUpdate.Description;
+                                MaterialUpdate.TypeOfMaterial = MatUpdate.TypeOfMaterial;
+
+                                var HistOfMatUpd = new MaterialsUpdate
+                                {
+                                    DateOfUpdate = DateOfAction,
+                                    idMaterials = MatUpdate.idMaterials,
+                                    idMaterialUpdate = Guid.NewGuid(),
+                                    IdUser = ListOfMaterials.idUser
+                                };
+                                db.MaterialsUpdate.Add(HistOfMatUpd);
+                            }
+                        }
+                    }
+
+                    if (ListOfMaterials.ListOfDeletePremises != null)
+                    {
+                        foreach(var DelMaterila in ListOfMaterials.ListOfDeletePremises)
+                        {
+                            var DeleteThing = db.OurMaterials.Where(e => e.idMaterials == DelMaterila.idGuid).FirstOrDefault();
+                            if (DeleteThing != null)
+                            {
+                                db.Entry(DeleteThing).Collection(c => c.MaterialsUpdate).Load();
+                                db.OurMaterials.Remove(DeleteThing);
+                                db.MaterialsUpdate.RemoveRange(db.MaterialsUpdate.Where(c => c.idMaterials == DelMaterila.idGuid).ToArray());
+                                ListOfDeleteCodes.Add(DelMaterila.idGuid);
+                            }
+                        }
+                    }
+                    db.SaveChanges();
+                    if (ListOfDeleteCodes.Count != 0)
+                    {
+                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfAction, ListOfMaterials.idUser, SomeEnums.TypeOfSubs.Materials));
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        success = false,
+                        description = $"Ошибка при работе с данными {ex.ToString()}!"
+                    };
+                }
+                return new BaseResult
+                {
+                    success = true,
+                    description = "Операции над данными были произведены!"
+                };
+            }, nameof(DBController), nameof(MakeUpdateMaterials));
+        }
+
+        internal static object MakeListOfMaterials(string dateofclientlastupdate)
+        {
+            return Run((db) =>
+            {
+                if (string.IsNullOrEmpty(dateofclientlastupdate))
+                {//Если строка пустая возвращаем все
+                    return MakeAllDataAboutContackt();
+                }
+                else
+                {
+                    DateTime DateOfLastAction = new DateTime();
+                    if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastAction))
+                    {//Если дату удалось распознать вернуть в соответствии с датой
+                        var QueryWithOutDelete = db.MaterialsUpdate.Where((e) => e.DateOfUpdate > DateOfLastAction && e.TypeOfUpdate != SomeEnums.TypeOfAction.Delete.ToString());
+                        var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfMaterialsUpd
+                        {
+                            idMaterials = e.idMaterials,
+                            NameOfMaterial = e.OurMaterials.NameOfMaterial,
+                            UnitOfMeasue = e.OurMaterials.UnitOfMeasue,
+                            Cost = e.OurMaterials.Cost,
+                            Description = e.OurMaterials.Description,
+                            TypeOfUpdate = e.TypeOfUpdate
+
+                        }).ToArray();
+
+                        var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastAction && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Materials.ToString());
+                        var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
+                        {
+                            idGuid = e.idThingsDelete
+                        }).ToArray();
+
+                        return new MakeSubs.MaterialsMake
+                        {
+                            success = true,
+                            kol = ListPremises.Length + ListOfDelete.Length,
+                            DateOfMakeAnswer = DateTime.Now,
+                            listOfMaterials = ListPremises,
+                            ListOfDeleteMaterials = ListOfDelete
+                        };
+                    }
+                    else
+                    {//Если дату не удалось распознать
+                        return new MakeSubs.MaterialsMake
+                        {
+                            success = false,
+                            description = "Ошибка при преобразовании данных о дате"
+                        };
+                    }
+                }
+            }, nameof(DBController), nameof(MakeListOfMaterials));
+        }
+
+        #endregion
+
+        #region Обработки при работе с подстовляемыми данными о контактах
+
+        internal static MakeSubs.ContactsMake MakeAllDataAboutContacts()
+        {
+            return Run((db) =>
+            {
+                var ListOfContacts = db.TypeOfContact.Select(e => new MakeSubs.ListOfContactsUpd
+                {
+                    Description = e.Description,
+                    Value = e.Value,
+                    idContact = e.idContact
+                }).ToArray();
+
+                return new MakeSubs.ContactsMake
+                {
+                    success = true,
+                    kol = ListOfContacts.Length,
+                    listOfContacts = ListOfContacts,
+                    DateOfMakeAnswer = DateTime.Now
+                };
+            }, nameof(DBController), nameof(MakeAllDataAboutContackt));
+        }
+
+        internal static object MakeUpdateContacts(MakeSubs.MakeUpdOrInsContacts ListOfContacts)
+        {
+            return Run((db) =>
+            {
+                List<Guid?> ListOfDeleteCodes = new List<Guid?>();
+                DateTime DateOfAction = new DateTime();
+                if (!DateTime.TryParseExact(ListOfContacts.DateOfMake, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfAction))
+                    return new MakeSubs.ServisesMake
+                    {
+                        success = false,
+                        description = "Ошибка при преобразовании данных о дате"
+                    };
+                try
+                {
+                    if (ListOfContacts.ListOfContactsInsert != null)
+                    {
+                        foreach(var ListOfInsContacts in ListOfContacts.ListOfContactsInsert)
+                        {
+                            var NTContact = new TypeOfContact
+                            {
+                                idContact = ListOfInsContacts.idContact,
+                                Description = ListOfInsContacts.Description,
+                                Value = ListOfInsContacts.Value
+                            };
+
+                            var HistOfInsContact = new ContactUpdate
+                            {
+                                idUser = ListOfContacts.idUser,
+                                idContact = ListOfInsContacts.idContact,
+                                DataOfUpdate = DateOfAction,
+                                idContactUpdate = Guid.NewGuid(),
+                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString()
+                            };
+                            db.TypeOfContact.Add(NTContact);
+                            db.ContactUpdate.Add(HistOfInsContact);
+                        }
+                    }
+
+                    if (ListOfContacts.listOfContactsUpdate != null)
+                    {
+                        foreach(var ContactUpdate in ListOfContacts.listOfContactsUpdate)
+                        {
+                            var UpdatedContact = db.TypeOfContact.Where(e => e.idContact == ContactUpdate.idContact).FirstOrDefault();
+                            if (UpdatedContact != null)
+                            {
+                                UpdatedContact.Value = ContactUpdate.Value;
+                                UpdatedContact.Description = ContactUpdate.Description;
+
+                                var HistOfUpdate = new ContactUpdate
+                                {
+                                    DataOfUpdate = DateOfAction,
+                                    idContact = ContactUpdate.idContact,
+                                    idUser = ListOfContacts.idUser,
+                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString(),
+                                    idContactUpdate = Guid.NewGuid()
+
+                                };
+                                db.ContactUpdate.Add(HistOfUpdate);
+                            }
+                        }
+                    }
+
+                    if (ListOfContacts.ListOfDeleteContacts != null)
+                    {
+                        foreach(var DeleteContact in ListOfContacts.ListOfDeleteContacts)
+                        {
+                            var Query = db.TypeOfContact.Where(e => e.idContact == DeleteContact.idGuid).FirstOrDefault();
+                            if (Query != null)
+                            {
+                                db.Entry(Query).Collection(c => c.ContactUpdate).Load();
+                                db.TypeOfContact.Remove(Query);
+                                db.ContactUpdate.RemoveRange(db.ContactUpdate.Where(c => c.idContactUpdate == DeleteContact.idGuid).ToArray());
+                                ListOfDeleteCodes.Add(DeleteContact.idGuid);
+                            }
+                        }
+                    }
+                    db.SaveChanges();
+                    if (ListOfDeleteCodes.Count != 0)
+                    {
+                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfAction, ListOfContacts.idUser, SomeEnums.TypeOfSubs.Contact));
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        success = false,
+                        description = $"Ошибка при работе с данными {ex.ToString()}!"
+                    };
+                }
+                return new BaseResult
+                {
+                    success = true,
+                    description = "Операции над данными были произведены!"
+                };
+            }, nameof(DBController), nameof(MakeUpdateContacts));
+        }
+
+        internal static object MakeListOfContacts(string dateOfLastClientAction)
+        {
+            return Run((db) =>
+            {
+                if (string.IsNullOrEmpty(dateOfLastClientAction))
+                {//Если строка пустая возвращаем все
+                    return MakeAllDataAboutContacts();
+                }
+                else
+                {
+                    DateTime DateOfLastAction = new DateTime();
+                    if (DateTime.TryParseExact(dateOfLastClientAction, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastAction))
+                    {//Если дату удалось распознать вернуть в соответствии с датой
+                        var QueryWithOutDelete = db.ContactUpdate.Where((e) => e.DataOfUpdate > DateOfLastAction);
+                        var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfContactsUpd
+                        {
+                            Description=e.TypeOfContact.Description,
+                            idContact=e.idContact,
+                            Value=e.TypeOfContact.Value,
+                            TypeOfUpdate = e.TypeOfUpdate
+                        }).ToArray();
+
+                        var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastAction && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Contact.ToString());
+                        var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
+                        {
+                            idGuid = e.idThingsDelete
+                        }).ToArray();
+
+                        return new MakeSubs.ContactsMake
+                        {
+                            success = true,
+                            kol = ListPremises.Length + ListOfDelete.Length,
+                            DateOfMakeAnswer = DateTime.Now,
+                            listOfContacts = ListPremises,
+                            ListOfDeleteContacts = ListOfDelete
+                        };
+                    }
+                    else
+                    {//Если дату не удалось распознать
+                        return new MakeSubs.ContactsMake
+                        {
+                            success = false,
+                            description = "Ошибка при преобразовании данных о дате"
+                        };
+                    }
+                }
+            }, nameof(DBController), nameof(MakeUpdateContacts));
+        }
         #endregion
 
 

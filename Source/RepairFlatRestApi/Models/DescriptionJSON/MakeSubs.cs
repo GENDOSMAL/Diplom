@@ -124,11 +124,12 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class ListOfMaterials
         {
-            public Guid idMaterials;
+            public Guid? idMaterials;
             public string NameOfMaterial;
             public string Description;
             public string UnitOfMeasue;
             public Nullable<decimal> Cost;
+            public string TypeOfMaterial;
         }
         public class ListOfMaterialsUpd: ListOfMaterials
         {
@@ -161,12 +162,12 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class ListOfContacts
         {
-            public Guid idContact;
+            public Guid? idContact;
             public string Value;
             public string Description;
         }
 
-        public class ListOfContactsUpd : ListOfPremises
+        public class ListOfContactsUpd : ListOfContacts
         {
             public string TypeOfUpdate;
         }

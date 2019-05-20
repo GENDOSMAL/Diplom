@@ -21,7 +21,7 @@ namespace RepairFlatRestApi.Models
             this.OrderMaterial = new HashSet<OrderMaterial>();
         }
     
-        public System.Guid idMaterials { get; set; }
+        public System.Guid? idMaterials { get; set; }
         public string NameOfMaterial { get; set; }
         public string UnitOfMeasue { get; set; }
         public Nullable<decimal> Cost { get; set; }
