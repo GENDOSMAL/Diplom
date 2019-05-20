@@ -119,7 +119,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Guid idUser;
             public ListOfMaterials[] listOfMaterialsUpdate;
             public ListOfMaterials[] ListOfMaterialsInsert;
-            public ListOfGuid[] ListOfDeletePremises;
+            public ListOfGuid[] ListOfDeleteMaterials;
         }
 
         public class ListOfMaterials

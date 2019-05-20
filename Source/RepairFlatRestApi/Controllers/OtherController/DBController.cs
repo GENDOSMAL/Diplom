@@ -588,7 +588,7 @@ namespace RepairFlatRestApi.Controllers
 
                     if (ListOfMaterials.listOfMaterialsUpdate != null)
                     {
-                        foreach (var MatUpdate in ListOfMaterials.ListOfMaterialsInsert)
+                        foreach (var MatUpdate in ListOfMaterials.listOfMaterialsUpdate)
                         {
                             var MaterialUpdate = db.OurMaterials.Where(e => e.idMaterials == MatUpdate.idMaterials).FirstOrDefault();
                             if (MaterialUpdate != null)
@@ -604,16 +604,17 @@ namespace RepairFlatRestApi.Controllers
                                     DateOfUpdate = DateOfAction,
                                     idMaterials = MatUpdate.idMaterials,
                                     idMaterialUpdate = Guid.NewGuid(),
-                                    IdUser = ListOfMaterials.idUser
+                                    IdUser = ListOfMaterials.idUser,
+                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString()
                                 };
                                 db.MaterialsUpdate.Add(HistOfMatUpd);
                             }
                         }
                     }
 
-                    if (ListOfMaterials.ListOfDeletePremises != null)
+                    if (ListOfMaterials.ListOfDeleteMaterials != null)
                     {
-                        foreach(var DelMaterila in ListOfMaterials.ListOfDeletePremises)
+                        foreach(var DelMaterila in ListOfMaterials.ListOfDeleteMaterials)
                         {
                             var DeleteThing = db.OurMaterials.Where(e => e.idMaterials == DelMaterila.idGuid).FirstOrDefault();
                             if (DeleteThing != null)

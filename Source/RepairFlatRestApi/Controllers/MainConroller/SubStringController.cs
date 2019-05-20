@@ -75,29 +75,29 @@ namespace RepairFlatRestApi.Controllers
         /// Обновление либо добавление данных о материалах
         /// </summary>
         /// <returns></returns>
-        //[HttpPost, Route("~/api/sub/material/update")]
-        //public HttpResponseMessage UpdateMaterial()
-        //{
-        //    return CatchError(() =>
-        //    {
-        //        throw new NotImplementedException();
-             
-        //    }, nameof(SubStringController), nameof(UpdateMaterial));
-        //}
+        [HttpPost, Route("material/update")]
+        public HttpResponseMessage UpdateMaterial([FromBody]MakeSubs.MakeUpdOrInsMaterials ListOfMaterials )
+        {
+            return CatchError(() =>
+            {
+                return DBController.MakeUpdateMaterials(ListOfMaterials);
+
+            }, nameof(SubStringController), nameof(UpdateMaterial));
+        }
 
         /// <summary>
         /// Отсылание данных о материалах, которые были обновлены после указанной клиентом даты
         /// </summary>
         /// <param name="dateofclientlastupdate"></param>
         /// <returns></returns>
-        //[HttpGet, Route("~/api/sub/material/get")]
-        //public HttpResponseMessage SendAllUpdateMaterial([FromUri] string dateofclientlastupdate = null)
-        //{
-        //    return CatchError(() =>
-        //    {
-        //        throw new NotImplementedException();
-        //    }, nameof(LoginController), nameof(SendAllUpdateMaterial));
-        //}
+        [HttpGet, Route("material/get")]
+        public HttpResponseMessage SendAllUpdateMaterial([FromUri] string dateofclientlastupdate = null)
+        {
+            return CatchError(() =>
+            {
+                return DBController.MakeListOfMaterials(dateofclientlastupdate);
+            }, nameof(LoginController), nameof(SendAllUpdateMaterial));
+        }
 
         #endregion
 
@@ -106,29 +106,28 @@ namespace RepairFlatRestApi.Controllers
         /// Обновление либо добавление данных о контактах
         /// </summary>
         /// <returns></returns>
-        //[HttpPost, Route("~/api/sub/contact/update")]
-        //public HttpResponseMessage UpdateContacts()
-        //{
-        //    return CatchError(() =>
-        //    {
-        //        throw new NotImplementedException();
-
-        //    }, nameof(SubStringController), nameof(UpdateContacts));
-        //}
+        [HttpPost, Route("contact/update")]
+        public HttpResponseMessage UpdateContacts(MakeSubs.MakeUpdOrInsContacts ListOfContacts)
+        {
+            return CatchError(() =>
+            {
+                return DBController.MakeUpdateContacts(ListOfContacts);
+            }, nameof(SubStringController), nameof(UpdateContacts));
+        }
 
         /// <summary>
         /// Отсылание данных о контактах, которые были обновлены после указанной клиентом даты
         /// </summary>
         /// <param name="dateofclientlastupdate"></param>
         ///// <returns></returns>
-        //[HttpGet, Route("~/api/sub/contact/get}")]
-        //public HttpResponseMessage SendAllUpdateContacts([FromUri] string dateofclientlastupdate = null)
-        //{
-        //    return CatchError(() =>
-        //    {
-        //        throw new NotImplementedException();
-        //    }, nameof(LoginController), nameof(SendAllUpdateContacts));
-        //}
+        [HttpGet, Route("contact/get")]
+        public HttpResponseMessage SendAllUpdateContacts([FromUri] string dateofclientlastupdate = null)
+        {
+            return CatchError(() =>
+            {
+                return DBController.MakeListOfContacts(dateofclientlastupdate);
+            }, nameof(LoginController), nameof(SendAllUpdateContacts));
+        }
         #endregion
 
     }
