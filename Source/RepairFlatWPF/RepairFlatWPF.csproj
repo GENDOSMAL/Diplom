@@ -110,12 +110,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AttachesProperty\BaseAttachedProperty.cs" />
-    <Compile Include="AttachesProperty\PasswordBoxAttachProperty.cs" />
     <Compile Include="Controller\MakeSomeHelp.cs" />
     <Compile Include="Controller\MakeWorkWirthDataBase.cs" />
     <Compile Include="Model\BaseJsonModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Model\MakeSubs.cs" />
     <Compile Include="Model\SaveSomeData.cs" />
     <Compile Include="Model\WorkWithDB.cs" />
     <Compile Include="UserControls\AditinalControl\LoginUserControl.xaml.cs">

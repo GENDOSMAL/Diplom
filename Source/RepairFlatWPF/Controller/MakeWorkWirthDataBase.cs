@@ -21,7 +21,7 @@ namespace RepairFlatWPF.Controller
             string PathToDataBase = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), NameOfSqlFile);
             if (!File.Exists(PathToDataBase))
             {
-                SQLiteConnection.CreateFile(PathToDataBase);               
+                SQLiteConnection.CreateFile(PathToDataBase);
             }
             PathToDB = $"Data Source= {PathToDataBase}";
             CheckAndMakeTableInDB();
@@ -31,7 +31,7 @@ namespace RepairFlatWPF.Controller
         {
             var Resourses = Properties.Resources.ResourceManager.GetObject("DescriprionOfDB") as byte[];
             string json = Encoding.UTF8.GetString(Resourses);
-            var ListOFTablesDescription = JsonConvert.DeserializeObject<WorkWithDB.Tableses>(json)  ;
+            var ListOFTablesDescription = JsonConvert.DeserializeObject<WorkWithDB.Tableses>(json);
 
             foreach (var Table in ListOFTablesDescription.Tables)
             {
@@ -75,7 +75,7 @@ namespace RepairFlatWPF.Controller
             string query = "SELECT name FROM sqlite_master WHERE type='table' AND name=@tableName;";
             SQLiteParameter[] parameters = new SQLiteParameter[1];
             parameters[0] = new SQLiteParameter("@tableName", NameOfTable);
-            string[] whatSelect = new string[]{ "name" };
+            string[] whatSelect = new string[] { "name" };
             var makeWork = MakeSomeQueryWork(query, parameters: parameters, SelectedColumns: whatSelect);
             if (makeWork != null)
             {
@@ -84,29 +84,29 @@ namespace RepairFlatWPF.Controller
                 {
                     try
                     {
-                        if(dd[0]== NameOfTable)
+                        if (dd[0] == NameOfTable)
                         {
                             return true;
                         }
                     }
-                    catch 
+                    catch
                     {
                         return false;
-                    }                    
+                    }
                 }
                 return true;
             }
             return false;
         }
 
-        public static object MakeSomeQueryWork(string query, string[] SelectedColumns=null,bool WorkWithTables=false,SQLiteParameter[] parameters=null)
+        public static object MakeSomeQueryWork(string query, string[] SelectedColumns = null, bool WorkWithTables = false, SQLiteParameter[] parameters = null)
         {
             try
             {
-                using(SQLiteConnection connection =new SQLiteConnection(PathToDB))
+                using (SQLiteConnection connection = new SQLiteConnection(PathToDB))
                 {
                     connection.Open();
-                    using (SQLiteCommand command =new SQLiteCommand(query, connection))
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
                     {
                         if (parameters != null)
                         {
@@ -153,7 +153,7 @@ namespace RepairFlatWPF.Controller
                         else
                         {
                             DataTable ResultTable = new DataTable("Result");
-                            using (SQLiteDataAdapter dataAdapter =new SQLiteDataAdapter(command))
+                            using (SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter(command))
                             {
                                 dataAdapter.Fill(ResultTable);
                                 if (ResultTable.Rows.Count != 0)
@@ -170,11 +170,35 @@ namespace RepairFlatWPF.Controller
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Произошла ошибка при работе с базой данных <{ex.Message}>");
             }
             return null;
+        }
+
+        public static void Run(Action<SQLiteCommand> dbAction)
+        {
+            try
+            {
+                using (SQLiteConnection connection = new SQLiteConnection(PathToDB))
+                {
+                    connection.Open();
+                    using (SQLiteCommand command = new SQLiteCommand(connection))
+                    {
+                        using (var transaction = connection.BeginTransaction())
+                        {
+                            dbAction(command);
+
+                            transaction.Commit();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка при работе с базой данных <{ex.Message}>");
+            }
         }
     }
 }
