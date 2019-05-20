@@ -47,13 +47,16 @@ namespace RepairFlatWPF.UserControls
                     DescriptionOfWork.Content = "Запись данных в локальную базу данных ...";
 
                     #region Преобразование данных в читаемое состояние
-                    MakeSubs.ServisesMake servisesMake = JsonConvert.DeserializeObject<MakeSubs.ServisesMake>(ServisesDownload.ToString());
+                    MakeSubs.ServisesMake ServisesMake = JsonConvert.DeserializeObject<MakeSubs.ServisesMake>(ServisesDownload.ToString());
+                    MakeSubs.ContactsMake ContactsMake = JsonConvert.DeserializeObject<MakeSubs.ContactsMake>(ContaktsDownload.ToString());
+                    MakeSubs.PremisesMake PremisesMake = JsonConvert.DeserializeObject<MakeSubs.PremisesMake>(PremisesDownload.ToString());
+                    MakeSubs.MaterialsMake MaterialsMake = JsonConvert.DeserializeObject<MakeSubs.MaterialsMake>(MaterialDownload.ToString());
 
                     #endregion
 
                     #region Загрузка данных в локальную БД
-                    if (servisesMake.success)
-                        await Task.Run(() => ServisesUplToDB(servisesMake));
+                    if (ServisesMake.success)
+                        await Task.Run(() => ServisesUplToDB(ServisesMake));
                     #endregion
 
 
@@ -62,7 +65,6 @@ namespace RepairFlatWPF.UserControls
 
             }
             //Берем все
-            //TODO ПРОТЕСТИТЬ
             //TODO Загрузить
             //TODO Протестить локаль          
         }

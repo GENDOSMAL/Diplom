@@ -168,16 +168,16 @@ namespace RepairFlatRestApi.Controllers
                     DateTime DateOfLastUpdate = new DateTime();
                     if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastUpdate))
                     {//Если дату удалось распознать вернуть в соответствии с датой
-                        var QueryWithOutUpdate = db.ServicesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate != SomeEnums.TypeOfAction.Delete.ToString());
+                        var QueryWithOutUpdate = db.OurServices.Where((e) => e.ServicesUpdate.FirstOrDefault().DateOfUpdate > DateOfLastUpdate);
                         var ListOfServises = QueryWithOutUpdate.Select(e => new MakeSubs.ListOfUpdatedServises
                         {
-                            idServises = e.OurServices.idServis,
-                            UnitOfMeasue = e.OurServices.UnitOfMeasue,
-                            Nomination = e.OurServices.Nomination,
-                            TypeOfServises = e.OurServices.TypeOfServices,
-                            Description = e.OurServices.Description,
-                            Cost = e.OurServices.Cost,
-                            TypeOfUpdate = e.TypeOfUpdate,
+                            idServises = e.idServis,
+                            UnitOfMeasue = e.UnitOfMeasue,
+                            Nomination = e.Nomination,
+                            TypeOfServises = e.TypeOfServices,
+                            Description = e.Description,
+                            Cost = e.Cost,
+                            TypeOfUpdate = e.ServicesUpdate.FirstOrDefault().TypeOfUpdate,
                         }).ToArray();
 
                         var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastUpdate && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Servises.ToString());
@@ -463,13 +463,13 @@ namespace RepairFlatRestApi.Controllers
                     DateTime DateOfLastUpdate = new DateTime();
                     if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastUpdate))
                     {//Если дату удалось распознать вернуть в соответствии с датой
-                        var QueryWithOutDelete = db.PremisesUpdate.Where((e) => e.DateOfUpdate > DateOfLastUpdate && e.TypeOfUpdate != SomeEnums.TypeOfAction.Delete.ToString());
+                        var QueryWithOutDelete = db.PremisesType.Where((e) => e.PremisesUpdate.FirstOrDefault().DateOfUpdate > DateOfLastUpdate );
                         var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfPremisesUpd
                         {
                             idPremises = e.idPremises,
-                            Name = e.PremisesType.NameOfPremises,
-                            Description = e.PremisesType.Descriprtion,
-                            TypeOfUpdate = e.TypeOfUpdate,
+                            Name = e.NameOfPremises,
+                            Description = e.Descriprtion,
+                            TypeOfUpdate = e.PremisesUpdate.FirstOrDefault().TypeOfUpdate,
                         }).ToArray();
 
                         var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastUpdate && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Premises.ToString());
@@ -662,15 +662,15 @@ namespace RepairFlatRestApi.Controllers
                     DateTime DateOfLastAction = new DateTime();
                     if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastAction))
                     {//Если дату удалось распознать вернуть в соответствии с датой
-                        var QueryWithOutDelete = db.MaterialsUpdate.Where((e) => e.DateOfUpdate > DateOfLastAction && e.TypeOfUpdate != SomeEnums.TypeOfAction.Delete.ToString());
+                        var QueryWithOutDelete = db.OurMaterials.Where((e) => e.MaterialsUpdate.FirstOrDefault().DateOfUpdate > DateOfLastAction);
                         var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfMaterialsUpd
                         {
                             idMaterials = e.idMaterials,
-                            NameOfMaterial = e.OurMaterials.NameOfMaterial,
-                            UnitOfMeasue = e.OurMaterials.UnitOfMeasue,
-                            Cost = e.OurMaterials.Cost,
-                            Description = e.OurMaterials.Description,
-                            TypeOfUpdate = e.TypeOfUpdate
+                            NameOfMaterial = e.NameOfMaterial,
+                            UnitOfMeasue = e.UnitOfMeasue,
+                            Cost = e.Cost,
+                            Description = e.Description,
+                            TypeOfUpdate = e.MaterialsUpdate.FirstOrDefault().TypeOfUpdate
 
                         }).ToArray();
 
