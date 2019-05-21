@@ -74,7 +74,7 @@ namespace RepairFlatWPF
                 switch (index)
                 {
                     case 0:
-                        //Работа с заказами
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.MainOrderUserControler());
                         break;
                     case 1:
                         //Работа с клиентами

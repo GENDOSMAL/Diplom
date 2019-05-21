@@ -4,35 +4,48 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:RepairFlatWPF.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Height="auto" Width="auto">
-    <Grid>
+    <materialDesign:TransitioningContent>
         <Grid  >
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="85"/>
+
+
             </Grid.RowDefinitions>
-
-            <Viewbox Margin="0,5,60,0" Grid.Row="0" >
-                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите заказа" FontFamily="Times New Roman" FontSize="35 "/>
+            <!--Заголовок-->
+            <Viewbox Margin="0,5,60,5" Grid.Row="0" >
+                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите заказа" FontFamily="Times New Roman" FontSize="45 "/>
             </Viewbox>
-            
-            <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="10,10,10,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+            <!--Область поиска-->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="2" Background="Beige">
-                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите заказа" FontFamily="Times New Roman" FontSize="35 "/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedType" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
+                <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchText" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
+                <Button Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
+            </Grid>
+            <!--Таблица-->
+            <DataGrid Grid.Row="2" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+            <!--Кнопки-->
+            <Grid Grid.Row="3" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление " Name="AddOrder" Click="AddOrder_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактирование" Name="EditOrder" Click="EditOrder_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 15 15" Width="220" Height="60" Content="Выбор" Name="SelectOrder" Click="SelectOrder_Click" />
             </Grid>
         </Grid>
-
-        <!--
-        <DataGrid  x:Name="DataGrid" HorizontalAlignment="Center" Height="561" ColumnWidth="auto" VerticalAlignment="Center" Width="1410" Margin="10,103,10,96" Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeRows="False" Grid.ColumnSpan="4"   />
-        -->
-        <!--<Label Content="Выберите заказа" Margin="230.5,24,230.5,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Times New Roman" FontSize="35 " Grid.ColumnSpan="2" Height="52" Width="254" Grid.Column="1"/>-->
-        <!--
-        <Button x:Name="AddZak" Content="Добавление заказа" FontFamily="Times New Roman" FontSize="28" HorizontalAlignment="Left" Margin="202,683,0,0" VerticalAlignment="Top" Width="314" Height="60" Grid.ColumnSpan="2"/>
-        <Button x:Name="ChoseClient" Content="Выбор заказа" FontFamily="Times New Roman" FontSize="28" HorizontalAlignment="Left" Margin="1074,682,0,0" VerticalAlignment="Top" Width="316" Height="60"/>
-        <Button x:Name="RedactZakaz" Content="Редактирование " FontFamily="Times New Roman" FontSize="28" HorizontalAlignment="Left" Margin="645,681,0,0" VerticalAlignment="Top" Width="252" Height="60"/>-->
-
-    </Grid>
+    </materialDesign:TransitioningContent>
 </UserControl>

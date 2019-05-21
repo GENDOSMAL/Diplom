@@ -125,8 +125,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid Name="GridForContent" Grid.Column="1" >
-                <Grid Name="Bluring" Background="{StaticResource BackColorForMainFraime}" Opacity="0.3"/>
             </Grid>
+            <Grid Name="Bluring" Background="Black" Grid.Column="1" Opacity="0.3"/>
+            
             <Grid Name="GridMenu" Background="{StaticResource MenuColor}"   Grid.Column="0" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Left" >
                 <StackPanel>
                     <!--Кнопки и надпись ФИО текущего работника-->
@@ -139,7 +140,7 @@
                         </Button>
                         <TextBlock x:Name="NameOfPolz" Text="{Binding LastNameAndIni}" Margin="75,10,0,10"  Foreground="{StaticResource MenuTopTextColor}" FontFamily="Times New Roman" FontSize="20"/>
                     </Grid>
-                    <!--Верхнее меню-->
+                    <!--Верхняя часть меню-->
                     <ListView  x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" PreviewMouseLeftButtonUp="ListViewMenu_PreviewMouseLeftButtonUp"  >
                         <ListViewItem Height="80" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0" >
@@ -200,6 +201,7 @@
             
 
         </Grid>
+        
         <Grid  Name="ForLogin" Visibility="Collapsed" >
 
         </Grid>

@@ -20,9 +20,34 @@ namespace RepairFlatWPF.UserControls
     /// </summary>
     public partial class MainOrderUserControler : UserControl
     {
+        
         public MainOrderUserControler()
         {
             InitializeComponent();
+            foreach(var type in Model.SomeEnums.RypeOfSearch)
+            {
+                SelectedType.Items.Add(type);
+            }
+        }
+
+
+        private void AddOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var OrderWork = new OrderWork.MakeNewOrder(true);
+            if (OrderWork.ShowDialog() != true)
+            {
+                MessageBox.Show("sad");
+            }
+        }
+
+        private void EditOrder_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SelectOrder_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
