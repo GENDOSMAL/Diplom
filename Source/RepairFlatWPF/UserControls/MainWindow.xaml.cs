@@ -30,7 +30,8 @@ namespace RepairFlatWPF
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel(this);
-            MakeSomeHelp.MakeShowLoading();
+            //TODO Для логирования убрать
+            //MakeSomeHelp.MakeShowLoading();
         }
 
 
@@ -42,7 +43,7 @@ namespace RepairFlatWPF
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
-            open = false;
+            open = true;
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             Bluring.Visibility = Visibility.Visible;
         }
@@ -54,7 +55,7 @@ namespace RepairFlatWPF
         private void ButtonMenuClose_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
-            open = true;
+            open = false;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
             Bluring.Visibility = Visibility.Collapsed;
         }
@@ -69,27 +70,50 @@ namespace RepairFlatWPF
         {
             if (open)
             {
-                var animation = (Storyboard)FindResource("CloseMenu");
+                
                 int index = ListViewMenu.SelectedIndex;
                 switch (index)
                 {
                     case 0:
+                        //Работа с заказами
+                        CloseMenu();                       
                         MakeSomeHelp.DataGridMakeWork(new UserControls.MainOrderUserControler());
                         break;
                     case 1:
                         //Работа с клиентами
+                        CloseMenu();
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.ClientWork.SelectWorkerUserControl(Model.SomeEnums.TypeOfConrols.UserControl));
+                        break;
+                    
                     case 2:
                         //Справочные данные
+                        CloseMenu();
+                        MakeSomeHelp.MakeMessageBox("Не реализовано");
                         break;
                     case 3:
                         //Работа с кадрами
+                        CloseMenu();
+                        MakeSomeHelp.MakeMessageBox("Не реализовано");
                         break;
                     case 4:
                         //Работа с финансами
+                        CloseMenu();
+                        MakeSomeHelp.MakeMessageBox("Не реализовано");
+
                         break;
 
                 }
             }
+        }
+
+        void CloseMenu()
+        {
+            var animation = (Storyboard)FindResource("CloseMenu");
+            animation.Begin();
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            open = false;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+            Bluring.Visibility = Visibility.Collapsed;
         }
         /// <summary>
         /// Отлавливание событий выбора нижней части меню 

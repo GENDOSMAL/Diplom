@@ -127,6 +127,9 @@
     <Compile Include="UserControls\AditinalControl\MakeLoading.xaml.cs">
       <DependentUpon>MakeLoading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ClientWork\SelectWorkerUserControl.xaml.cs">
+      <DependentUpon>SelectWorkerUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderWork\MainOrderUserControler.xaml.cs">
       <DependentUpon>MainOrderUserControler.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
     </Compile>
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
     <Compile Include="WorkWithServer\LoginWork.cs" />
+    <Page Include="UserControls\ClientWork\SelectWorkerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -223,7 +230,6 @@
     <Resource Include="IoC.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="UserControls\ClientWork\" />
     <Folder Include="UserControls\MoneyInformation\" />
     <Folder Include="UserControls\Settings\" />
     <Folder Include="UserControls\WorkerInformation\" />

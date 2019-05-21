@@ -148,7 +148,7 @@
                                 <TextBlock Text="Работа с заказами" Style="{StaticResource LeftMenu}" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="80" >
+                        <ListViewItem Height="80" Name="ClientWork">
                             <ListViewItem.Content>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
                                     <materialDesign:PackIcon Kind="Person" Style="{StaticResource IconFofMenu}"/>
@@ -156,19 +156,19 @@
                                 </StackPanel>
                             </ListViewItem.Content>                            
                         </ListViewItem>
-                        <ListViewItem Height="80" >
+                        <ListViewItem Height="80" Name="Spravoch">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Details" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Справочные данные" Style="{StaticResource LeftMenu}"   />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="80" >
+                        <ListViewItem Height="80" Name="KadrWork">
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="NaturePeople" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Работа с кадрами" Style="{StaticResource LeftMenu}"   />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="80" >
+                        <ListViewItem Height="80" Name="Finans" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="CodeArray" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Работа с финансами" Style="{StaticResource LeftMenu}"  />
