@@ -97,6 +97,13 @@ namespace RepairFlatWPF
             ((MainWindow)Application.Current.MainWindow).ForLogin.Background = (System.Windows.Media.Brush)Application.Current.Resources[NameOfStyle];
         }
 
+        public static void DataGridMakeWork(UserControl controls)
+        {
+            ((MainWindow)Application.Current.MainWindow).GridForContent.Children.Clear();
+            if (controls != null)
+                ((MainWindow)Application.Current.MainWindow).GridForContent.Children.Add(controls);
+        }
+
         public static void ShowOrCloseMenu(bool Open)
         {
             if(Open)

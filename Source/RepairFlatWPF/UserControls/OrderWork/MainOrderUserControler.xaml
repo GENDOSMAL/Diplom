@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="RepairFlatWPF.UserControls.MainOrderUserControler"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RepairFlatWPF.UserControls"
+             mc:Ignorable="d" 
+             Height="auto" Width="auto">
+    <Grid>
+        <Grid  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Viewbox Margin="0,5,60,0" Grid.Row="0" >
+                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите заказа" FontFamily="Times New Roman" FontSize="35 "/>
+            </Viewbox>
+            
+            <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="10,10,10,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+
+            <Grid Grid.Row="2" Background="Beige">
+                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите заказа" FontFamily="Times New Roman" FontSize="35 "/>
+            </Grid>
+        </Grid>
+
+        <!--
+        <DataGrid  x:Name="DataGrid" HorizontalAlignment="Center" Height="561" ColumnWidth="auto" VerticalAlignment="Center" Width="1410" Margin="10,103,10,96" Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All" CanUserDeleteRows="False" CanUserAddRows="False" CanUserResizeRows="False" Grid.ColumnSpan="4"   />
+        -->
+        <!--<Label Content="Выберите заказа" Margin="230.5,24,230.5,0" VerticalAlignment="Top" HorizontalAlignment="Center" FontFamily="Times New Roman" FontSize="35 " Grid.ColumnSpan="2" Height="52" Width="254" Grid.Column="1"/>-->
+        <!--
+        <Button x:Name="AddZak" Content="Добавление заказа" FontFamily="Times New Roman" FontSize="28" HorizontalAlignment="Left" Margin="202,683,0,0" VerticalAlignment="Top" Width="314" Height="60" Grid.ColumnSpan="2"/>
+        <Button x:Name="ChoseClient" Content="Выбор заказа" FontFamily="Times New Roman" FontSize="28" HorizontalAlignment="Left" Margin="1074,682,0,0" VerticalAlignment="Top" Width="316" Height="60"/>
+        <Button x:Name="RedactZakaz" Content="Редактирование " FontFamily="Times New Roman" FontSize="28" HorizontalAlignment="Left" Margin="645,681,0,0" VerticalAlignment="Top" Width="252" Height="60"/>-->
+
+    </Grid>
+</UserControl>

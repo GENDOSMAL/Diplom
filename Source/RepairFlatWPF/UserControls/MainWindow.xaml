@@ -124,7 +124,7 @@
                 <ColumnDefinition Width="70"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Background="Black" Name="Grid" Grid.Column="1" >
+            <Grid Name="GridForContent" Grid.Column="1" >
                 <Grid Name="Bluring" Background="{StaticResource BackColorForMainFraime}" Opacity="0.3"/>
             </Grid>
             <Grid Name="GridMenu" Background="{StaticResource MenuColor}"   Grid.Column="0" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Left" >

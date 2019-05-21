@@ -124,10 +124,11 @@ namespace RepairFlatWPF.UserControls
             if (ContactsMake.success)
                 await Task.Run(() => ContactUpdlocToDB(ContactsMake));
             #endregion
-            Thread.Sleep(2000);
+            Thread.Sleep(1500);
             ((Storyboard)FindResource("WaitStoryboard")).Stop();
             DescriptionOfWork.Content = "Данные обновлены";            
             MakeSomeHelp.ShowMainGrid();
+            MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
         }
 
         public object MakeDownloadByLink(string UrlOfDownload)

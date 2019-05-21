@@ -127,6 +127,9 @@
     <Compile Include="UserControls\AditinalControl\MakeLoading.xaml.cs">
       <DependentUpon>MakeLoading.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderWork\MainOrderUserControler.xaml.cs">
+      <DependentUpon>MainOrderUserControler.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
     <Compile Include="WorkWithServer\LoginWork.cs" />
     <Page Include="UserControls\MainWindow.xaml">
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\AditinalControl\MakeLoading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\MainOrderUserControler.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,7 +218,6 @@
   <ItemGroup>
     <Folder Include="UserControls\ClientWork\" />
     <Folder Include="UserControls\MoneyInformation\" />
-    <Folder Include="UserControls\OrderWork\" />
     <Folder Include="UserControls\Settings\" />
     <Folder Include="UserControls\WorkerInformation\" />
   </ItemGroup>
