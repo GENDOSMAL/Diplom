@@ -40,10 +40,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Назад" Name="ReturnBTN" Click="ReturnBTN_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddClientUserControl" Click="Add_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактирование" Name="EditClientUserControl" Click="EditClient_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="3" Margin="7.5 10 15 15" Width="220" Height="60" Content="Выбор" Name="SelectClientUserControl" Click="SelectClient_Click" />
+                <Button Style="{StaticResource AllButtonAction}" FontSize="24" Grid.Column="0" Margin="15 10 7.5 15" Width="180" Height="60" Content="Назад" Name="ReturnBTN" Click="ReturnBTN_Click" />
+                <Button Style="{StaticResource AllButtonAction}" FontSize="24" Grid.Column="1" Margin="7.5 10 7.5 15" Width="180" Height="60" Content="Добавление" Name="AddClientUserControl" Click="Add_Click" />
+                <Button Style="{StaticResource AllButtonAction}" FontSize="22" Grid.Column="2" Margin="7.5 10 7.5 15" Width="180" Height="60" Content="Редактирование" Name="EditClientUserControl" Click="EditClient_Click" />
+                <Button Style="{StaticResource AllButtonAction}" FontSize="24" Grid.Column="3" Margin="7.5 10 15 15" Width="180" Height="60" Content="Выбор" Name="SelectClientUserControl" Click="SelectClient_Click" />
             </Grid>
             <Grid Grid.Row="3" Name="ForUserControl"  Visibility="Collapsed">
                 <Grid.ColumnDefinitions>

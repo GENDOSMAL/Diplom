@@ -29,7 +29,7 @@ namespace RepairFlatWPF
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
+            this.DataContext = new MainWindowViewModel(this,"");
             //TODO Для логирования убрать
             //MakeSomeHelp.MakeShowLoading();
         }
@@ -76,7 +76,8 @@ namespace RepairFlatWPF
                 {
                     case 0:
                         //Работа с заказами
-                        CloseMenu();                       
+                        CloseMenu();       
+                        
                         MakeSomeHelp.DataGridMakeWork(new UserControls.MainOrderUserControler());
                         break;
                     case 1:

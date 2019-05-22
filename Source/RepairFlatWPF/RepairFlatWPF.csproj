@@ -133,8 +133,11 @@
     <Compile Include="UserControls\OrderWork\MainOrderUserControler.xaml.cs">
       <DependentUpon>MainOrderUserControler.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\OrderWork\MakeNewOrder.xaml.cs">
-      <DependentUpon>MakeNewOrder.xaml</DependentUpon>
+    <Compile Include="UserControls\BaseWindow.xaml.cs">
+      <DependentUpon>BaseWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\MakeNewOrderUserControl.xaml.cs">
+      <DependentUpon>MakeNewOrderUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
     <Compile Include="WorkWithServer\LoginWork.cs" />
@@ -186,7 +189,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\OrderWork\MakeNewOrder.xaml">
+    <Page Include="UserControls\BaseWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\MakeNewOrderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

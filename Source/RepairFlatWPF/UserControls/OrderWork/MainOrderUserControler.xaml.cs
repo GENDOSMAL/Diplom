@@ -33,7 +33,7 @@ namespace RepairFlatWPF.UserControls
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
-            var OrderWork = new OrderWork.MakeNewOrder(true);
+            var OrderWork = new BaseWindow(true, new OrderWork.MakeNewOrderUserControl(),"Текстик");
             if (OrderWork.ShowDialog() != true)
             {
                 MessageBox.Show("sad");

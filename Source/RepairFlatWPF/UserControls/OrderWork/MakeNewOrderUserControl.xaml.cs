@@ -10,27 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace RepairFlatWPF.UserControls.OrderWork
 {
     /// <summary>
-    /// Interaction logic for MakeNewOrder.xaml
+    /// Interaction logic for MakeNewOrderUserControl.xaml
     /// </summary>
-    public partial class MakeNewOrder : Window
+    public partial class MakeNewOrderUserControl : UserControl
     {
-        bool NewOrder = true;
-        Guid idSelectUser;
-        public MakeNewOrder(bool NewOrder)
-        {           
+        public MakeNewOrderUserControl()
+        {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this);
-            this.NewOrder = NewOrder;
-            foreach(var StatOfOrder in Model.SomeEnums.StatusOfOrder)
+
+            foreach (var StatOfOrder in Model.SomeEnums.StatusOfOrder)
             {
                 StatusOfOrders.Items.Add(StatOfOrder);
             }
-            
         }
 
         private void CreateNewOrder_Click(object sender, RoutedEventArgs e)
@@ -54,6 +51,12 @@ namespace RepairFlatWPF.UserControls.OrderWork
         }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            UserControls.BaseWindow baseWindow = new BaseWindow(false,new MainOrderUserControler(),"ЧТОТО");
+            baseWindow.ShowDialog();
+        }
+
+        private void AddContactData_Click(object sender, RoutedEventArgs e)
         {
 
         }

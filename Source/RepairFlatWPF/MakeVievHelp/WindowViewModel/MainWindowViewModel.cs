@@ -19,8 +19,9 @@ namespace RepairFlatWPF
         #endregion
 
         #region Constructor
-        public MainWindowViewModel(Window window)
+        public MainWindowViewModel(Window window, string Title)
         {
+            this.Title = Title;
             mWindow = window;
             mWindow.StateChanged += (sender, e) =>
             {
@@ -56,6 +57,7 @@ namespace RepairFlatWPF
         #region Public Member
 
         public string LastNameAndIni { get; set; } = Model.SaveSomeData.LastNameAndIni;
+        public string Title { get; set; } = Model.SaveSomeData.LastNameAndIni;
 
         public double WindowMinimalWidth { get; set; } = 800;
 
