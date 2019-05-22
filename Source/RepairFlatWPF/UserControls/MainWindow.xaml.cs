@@ -89,18 +89,17 @@ namespace RepairFlatWPF
                     case 2:
                         //Справочные данные
                         CloseMenu();
-                        MakeSomeHelp.MakeMessageBox("Не реализовано");
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.WorkWithSubInfromation());
                         break;
                     case 3:
                         //Работа с кадрами
                         CloseMenu();
-                        MakeSomeHelp.MakeMessageBox("Не реализовано");
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.KadrWork.MenuKadrWork());
                         break;
                     case 4:
                         //Работа с финансами
                         CloseMenu();
-                        MakeSomeHelp.MakeMessageBox("Не реализовано");
-
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.MoneyInformation.FinansInformation());
                         break;
 
                 }
@@ -126,25 +125,21 @@ namespace RepairFlatWPF
             //Проверка на то, что окно открыто или нет, сделано, для того, что бы не работа при закрытом
             if (open)
             {
-                var animation = (Storyboard)FindResource("CloseMenu");
                 int index = BottomListView.SelectedIndex;
                 switch (index)
                 {
                     case 0:
                         //Переход на отображение настроек
+                        CloseMenu();
                         break;
                     case 1:
                         //Смена профиля
                         //bright.Visibility = Visibility.Collapsed;
+                        CloseMenu();
                         if (MessageBox.Show("Вы действительно хотите сменить пользователя?", "АИС Фирмы по ремонту квартир", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                         {
-                            animation.Begin();
                             GridMenu.Width = 0;
-                            //ChildGrid.Children.Clear();
-                            //LoginChild.Children.Clear();
-                            //LoginChild.Children.Add(new Views.LoginUsersControl());
-                            //Classes.ClassWitSettings.Prava = 0;
-                            //Classes.ClassWitSettings.idPolzovat = 0;
+                            MakeSomeHelp.MakeShowLoading();
                             open = false;
                         }
                         break;

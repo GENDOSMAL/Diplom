@@ -133,6 +133,12 @@
     <Compile Include="UserControls\ClientWork\SelectWorkerUserControl.xaml.cs">
       <DependentUpon>SelectWorkerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\MenuKadrWork.xaml.cs">
+      <DependentUpon>MenuKadrWork.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoneyInformation\FinansInformation.xaml.cs">
+      <DependentUpon>FinansInformation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderWork\MainOrderUserControler.xaml.cs">
       <DependentUpon>MainOrderUserControler.xaml</DependentUpon>
     </Compile>
@@ -141,6 +147,9 @@
     </Compile>
     <Compile Include="UserControls\OrderWork\MakeNewOrderUserControl.xaml.cs">
       <DependentUpon>MakeNewOrderUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\WorkWithSubInfromation.xaml.cs">
+      <DependentUpon>WorkWithSubInfromation.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\WorkerInformation\BrigadeWork\SelectBrigade.xaml.cs">
       <DependentUpon>SelectBrigade.xaml</DependentUpon>
@@ -152,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ClientWork\SelectWorkerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\MenuKadrWork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,6 +208,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\MoneyInformation\FinansInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\OrderWork\MainOrderUserControler.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\OrderWork\MakeNewOrderUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\WorkWithSubInfromation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,10 +271,7 @@
   <ItemGroup>
     <Resource Include="IoC.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\MoneyInformation\" />
-    <Folder Include="UserControls\Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.5.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.5.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
