@@ -68,6 +68,12 @@ namespace RepairFlatWPF
                 ((MainWindow)Application.Current.MainWindow).MainGrid.Children.Add(controls);
         }
 
+        public static void CloseBaseWindow()
+        {
+            ((UserControls.BaseWindow)Application.Current.MainWindow).Close();
+        }
+
+
         public static void MakeShowLoading()
         {
             ((MainWindow)Application.Current.MainWindow).ForLogin.Visibility = Visibility.Visible;

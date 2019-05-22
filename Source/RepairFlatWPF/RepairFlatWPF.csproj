@@ -118,6 +118,9 @@
     <Compile Include="Model\SaveSomeData.cs" />
     <Compile Include="Model\SomeEnums.cs" />
     <Compile Include="Model\WorkWithDB.cs" />
+    <Compile Include="UserControls\AditinalControl\AddInformationAboutAdress.xaml.cs">
+      <DependentUpon>AddInformationAboutAdress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\AditinalControl\LoginUserControl.xaml.cs">
       <DependentUpon>LoginUserControl.xaml</DependentUpon>
     </Compile>
@@ -127,7 +130,7 @@
     <Compile Include="UserControls\AditinalControl\MakeLoading.xaml.cs">
       <DependentUpon>MakeLoading.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ClientWork\AddContactUserConrol.xaml.cs">
+    <Compile Include="UserControls\AditinalControl\AddContactUserConrol.xaml.cs">
       <DependentUpon>AddContactUserConrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ClientWork\SelectWorkerUserControl.xaml.cs">
@@ -156,7 +159,11 @@
     </Compile>
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
     <Compile Include="WorkWithServer\LoginWork.cs" />
-    <Page Include="UserControls\ClientWork\AddContactUserConrol.xaml">
+    <Page Include="UserControls\AditinalControl\AddContactUserConrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AditinalControl\AddInformationAboutAdress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

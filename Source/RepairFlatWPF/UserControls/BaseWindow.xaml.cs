@@ -21,12 +21,13 @@ namespace RepairFlatWPF.UserControls
     {
         bool NewOrder = true;
         Guid idSelectUser;
-        public BaseWindow(bool NewOrder, UserControl userControl, string Title)
+        public BaseWindow(UserControl userControl, string Title)
         {           
             InitializeComponent();
             this.DataContext = new MainWindowViewModel(this, Title);
             GridForContent.Children.Clear();
             GridForContent.Children.Add(userControl);
         }
+
     }
 }

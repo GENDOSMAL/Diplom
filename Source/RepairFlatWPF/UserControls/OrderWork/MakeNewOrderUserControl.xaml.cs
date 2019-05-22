@@ -30,6 +30,10 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
             InitializeComponent();
             this.NewOrder = NewOrder;
+            if (!NewOrder)
+            {
+                SelectClient.IsEnabled = false;
+            }
             foreach (var StatOfOrder in Model.SomeEnums.StatusOfOrder)
             {
                 StatusOfOrders.Items.Add(StatOfOrder);
@@ -45,33 +49,44 @@ namespace RepairFlatWPF.UserControls.OrderWork
         private void SelectClient_Click(object sender, RoutedEventArgs e)
         {
             //TODO Выбор клиента
-            UserControls.BaseWindow baseWindow = new BaseWindow(false, new ClientWork.SelectWorkerUserControl(Model.SomeEnums.TypeOfConrols.Window), "Выберите клиента");
+            
+            UserControls.BaseWindow baseWindow = new BaseWindow( new ClientWork.SelectWorkerUserControl(Model.SomeEnums.TypeOfConrols.Window), "Выберите клиента");
             baseWindow.ShowDialog();
         }
 
         private void AddAdress_Click(object sender, RoutedEventArgs e)
         {
             //TODO Добавление Адреса
+            this.idAdress = Guid.NewGuid();
+            UserControls.BaseWindow baseWindow = new BaseWindow(new AditinalControl.AddInformationAboutAdress(idAdress), "Укажите адресс");
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
 
         }
 
         private void SelectBrigade_Click(object sender, RoutedEventArgs e)
         {
             //TODO Выбор бригады
-            UserControls.BaseWindow baseWindow = new BaseWindow(false, new WorkerInformation.SelectBrigadeTable(Model.SomeEnums.TypeOfConrols.Window), "Выберите бригаду");
+            UserControls.BaseWindow baseWindow = new BaseWindow( new WorkerInformation.SelectBrigadeTable(Model.SomeEnums.TypeOfConrols.Window), "Выберите бригаду");
             baseWindow.ShowDialog();
         }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            UserControls.BaseWindow baseWindow = new BaseWindow(false,new MainOrderUserControler(),"Тестирование");
+            UserControls.BaseWindow baseWindow = new BaseWindow(new MainOrderUserControler(),"Тестирование");
             baseWindow.ShowDialog();
         }
 
         private void AddContactData_Click(object sender, RoutedEventArgs e)
         {
             //TODO Выбор контакта
-            UserControls.BaseWindow baseWindow = new BaseWindow(false, new ClientWork.AddContactUserConrol(IdUser), "Добавление контакной информации");
+            UserControls.BaseWindow baseWindow = new BaseWindow( new AddContactUserConrol(IdUser), "Добавление контакной информации");
             baseWindow.ShowDialog();
         }
     }

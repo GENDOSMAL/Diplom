@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace RepairFlatWPF.UserControls
     /// </summary>
     public partial class MainOrderUserControler : UserControl
     {
+        DataTable AllDataOfOrder;
         
         public MainOrderUserControler()
         {
@@ -33,21 +35,46 @@ namespace RepairFlatWPF.UserControls
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
-            var OrderWork = new BaseWindow(true, new OrderWork.MakeNewOrderUserControl(),"Текстик");
-            if (OrderWork.ShowDialog() != true)
-            {
-                MessageBox.Show("sad");
-            }
+            var OrderWork = new BaseWindow( new OrderWork.MakeNewOrderUserControl(),"Cоздание нового заказа");
+            OrderWork.ShowDialog();
         }
 
         private void EditOrder_Click(object sender, RoutedEventArgs e)
         {
+            int NumberOfOrder = 0;
+            var OrderWork = new BaseWindow(new OrderWork.MakeNewOrderUserControl(false),$"Редактирование заказа №{NumberOfOrder}");
+            OrderWork.ShowDialog();
+        }
 
+
+        private bool MakeSomeCheck()
+        {
+            bool result = true;
+            if (SelectedType.SelectedIndex == -1)
+            {
+                MakeSomeHelp.MakeMessageBox("Укажите критерий поиска", MsgBoxImage: MessageBoxImage.Warning);
+                result = false;
+            }
+            if (string.IsNullOrEmpty(SearchText.Text.Trim()))
+            {
+                result = false;
+                MakeSomeHelp.MakeMessageBox("Укажите текст для поиска", MsgBoxImage: MessageBoxImage.Warning);
+            }
+            return result;
         }
 
         private void SelectOrder_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MakeSomeCheck())
+            {
+                string sortOrder = "CompanyName ASC";
+                string expression = "";
+                DataRow[] foundRows;
+                DataTable dataTable=new DataTable();
+                foundRows = AllDataOfOrder.Select(expression, sortOrder);
+                //Заполнить побочный
+                
+            }
         }
     }
 }

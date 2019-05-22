@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RepairFlatWPF.UserControls.ClientWork
+namespace RepairFlatWPF.UserControls
 {
     /// <summary>
     /// Interaction logic for AddContactUserConrol.xaml
