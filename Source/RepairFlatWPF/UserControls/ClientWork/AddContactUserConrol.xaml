@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="RepairFlatWPF.UserControls.ClientWork.AddContactUserConrol"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RepairFlatWPF.UserControls.ClientWork"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
+             MaxHeight="600"
+             MaxWidth="800"
+             Height="auto" Width="auto">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>  
+            <RowDefinition Height="*"/>            
+        </Grid.RowDefinitions>
+        <ComboBox Name="TypeOFContact" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="0" Margin="15,0,15,10" materialDesign:HintAssist.Hint="Тип контактной информации" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center"  />
+        <TextBox Name="Value" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="1" Margin="15,10,15,10" materialDesign:HintAssist.Hint="Данные о контакте" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="2"  Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" TextWrapping="WrapWithOverflow" MaxLength="50"/>
+        <Button Name="CreateContact" Click="CreateContact_Click" Grid.ColumnSpan="2" Grid.Row="3" VerticalAlignment="Bottom" Height="60" Width="300" Margin="0 0 0 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Добавление контакта" />
+
+    </Grid>
+</UserControl>
