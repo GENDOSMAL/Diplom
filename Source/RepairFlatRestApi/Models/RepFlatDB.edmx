@@ -180,6 +180,7 @@
           <Property Name="IdColoboration" Type="uniqueidentifier" />
           <Property Name="Number" Type="int" />
           <Property Name="MainContactID" Type="uniqueidentifier" />
+          <Property Name="DateEnd" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="OrderMaterial">
           <Key>
@@ -1519,6 +1520,7 @@
           <NavigationProperty Name="OrderTasks" Relationship="Self.FK_OrderTasks_OrderInformation1" FromRole="OrderInformation" ToRole="OrderTasks" />
           <Property Name="MainContactID" Type="Guid" />
           <NavigationProperty Name="UserContact" Relationship="RepairFlatDBModel.FK_OrderInformation_UserContact" FromRole="OrderInformation" ToRole="UserContact" />
+          <Property Name="DateEnd" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="OrderMaterial">
           <Key>
@@ -2903,6 +2905,7 @@
           <EntitySetMapping Name="OrderInformation">
             <EntityTypeMapping TypeName="RepairFlatDBModel.OrderInformation">
               <MappingFragment StoreEntitySet="OrderInformation">
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
                 <ScalarProperty Name="MainContactID" ColumnName="MainContactID" />
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
                 <ScalarProperty Name="IdAdress" ColumnName="IdAdress" />

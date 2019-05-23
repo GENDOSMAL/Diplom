@@ -35,6 +35,7 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.Guid> IdColoboration { get; set; }
         public Nullable<int> Number { get; set; }
         public Nullable<System.Guid> MainContactID { get; set; }
+        public Nullable<System.DateTime> DateEnd { get; set; }
     
         public virtual AdressDescription AdressDescription { get; set; }
         public virtual ClientDetails ClientDetails { get; set; }
