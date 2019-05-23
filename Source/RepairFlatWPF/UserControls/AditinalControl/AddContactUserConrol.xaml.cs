@@ -20,14 +20,32 @@ namespace RepairFlatWPF.UserControls
     /// </summary>
     public partial class AddContactUserConrol : UserControl
     {
-        public AddContactUserConrol(Guid idUser)
+        Guid idUser;
+        Guid idContact;
+        bool NewContact = true;
+        public AddContactUserConrol(Guid idUser, Guid idContact, bool NewContact=true)
         {
             InitializeComponent();
+            this.idContact = idContact;
+            this.idUser = idUser;
+            this.NewContact = NewContact;
         }
 
         private void CreateContact_Click(object sender, RoutedEventArgs e)
         {
+            if (NewContact)
+            {
+                //Если новый
+            }
+            else
+            {
+                //Если редактирование
+            }
+        }
 
+        private void ReturnBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MakeSomeHelp.CloseBaseWindow();
         }
     }
 }

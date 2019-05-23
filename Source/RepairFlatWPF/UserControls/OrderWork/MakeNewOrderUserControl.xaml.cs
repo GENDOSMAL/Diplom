@@ -51,7 +51,14 @@ namespace RepairFlatWPF.UserControls.OrderWork
             //TODO Выбор клиента
             
             UserControls.BaseWindow baseWindow = new BaseWindow( new ClientWork.SelectWorkerUserControl(Model.SomeEnums.TypeOfConrols.Window), "Выберите клиента");
-            baseWindow.ShowDialog();
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
 
         private void AddAdress_Click(object sender, RoutedEventArgs e)
@@ -74,20 +81,35 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
             //TODO Выбор бригады
             UserControls.BaseWindow baseWindow = new BaseWindow( new WorkerInformation.SelectBrigadeTable(Model.SomeEnums.TypeOfConrols.Window), "Выберите бригаду");
-            baseWindow.ShowDialog();
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            UserControls.BaseWindow baseWindow = new BaseWindow(new MainOrderUserControler(),"Тестирование");
-            baseWindow.ShowDialog();
+            //Возврат назад
+            MakeSomeHelp.CloseBaseWindow();
         }
 
         private void AddContactData_Click(object sender, RoutedEventArgs e)
         {
             //TODO Выбор контакта
-            UserControls.BaseWindow baseWindow = new BaseWindow( new AddContactUserConrol(IdUser), "Добавление контакной информации");
-            baseWindow.ShowDialog();
+            idContact = Guid.NewGuid();
+            UserControls.BaseWindow baseWindow = new BaseWindow( new AddContactUserConrol(IdUser,idContact), "Добавление контакной информации");
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
     }
 }

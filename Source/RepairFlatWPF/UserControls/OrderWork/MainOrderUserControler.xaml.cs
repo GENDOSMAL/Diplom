@@ -26,7 +26,7 @@ namespace RepairFlatWPF.UserControls
         public MainOrderUserControler()
         {
             InitializeComponent();
-            foreach(var type in Model.SomeEnums.RypeOfSearch)
+            foreach(var type in Model.SomeEnums.RypeOfSearchOrder)
             {
                 SelectedType.Items.Add(type);
             }
@@ -36,14 +36,28 @@ namespace RepairFlatWPF.UserControls
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
             var OrderWork = new BaseWindow( new OrderWork.MakeNewOrderUserControl(),"Cоздание нового заказа");
-            OrderWork.ShowDialog();
+            try
+            {
+                OrderWork.ShowDialog();
+            }
+            catch
+            {
+                OrderWork.Close();
+            }
         }
 
         private void EditOrder_Click(object sender, RoutedEventArgs e)
         {
             int NumberOfOrder = 0;
             var OrderWork = new BaseWindow(new OrderWork.MakeNewOrderUserControl(false),$"Редактирование заказа №{NumberOfOrder}");
-            OrderWork.ShowDialog();
+            try
+            {
+                OrderWork.ShowDialog();
+            }
+            catch
+            {
+                OrderWork.Close();
+            }
         }
 
 
@@ -52,29 +66,71 @@ namespace RepairFlatWPF.UserControls
             bool result = true;
             if (SelectedType.SelectedIndex == -1)
             {
-                MakeSomeHelp.MakeMessageBox("Укажите критерий поиска", MsgBoxImage: MessageBoxImage.Warning);
+                MakeSomeHelp.MSG("Укажите критерий поиска", MsgBoxImage: MessageBoxImage.Warning);
                 result = false;
             }
             if (string.IsNullOrEmpty(SearchText.Text.Trim()))
             {
                 result = false;
-                MakeSomeHelp.MakeMessageBox("Укажите текст для поиска", MsgBoxImage: MessageBoxImage.Warning);
+                MakeSomeHelp.MSG("Укажите текст для поиска", MsgBoxImage: MessageBoxImage.Warning);
             }
             return result;
         }
 
         private void SelectOrder_Click(object sender, RoutedEventArgs e)
+        {//TODO тут открытие без проверки
+            MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(Guid.NewGuid()));
+
+            int SelectIndex = DataGrid.SelectedIndex;
+            if (SelectIndex != -1)
+            {
+                Guid IdOrder = SelectGuidById(SelectIndex);
+                MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(IdOrder));
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Не выбрана заказ для дальнейшей работы",MsgBoxImage: MessageBoxImage.Warning);
+            }
+        }
+
+
+
+        private void Search_Click(object sender, RoutedEventArgs e)
         {
             if (MakeSomeCheck())
             {
-                string sortOrder = "CompanyName ASC";
-                string expression = "";
-                DataRow[] foundRows;
-                DataTable dataTable=new DataTable();
-                foundRows = AllDataOfOrder.Select(expression, sortOrder);
-                //Заполнить побочный
-                
+                try
+                {
+                    string sortOrder = $"{AllDataOfOrder.Columns[0].Caption} ASC";
+                    string expression = "";
+                    DataRow[] foundRows;
+                    DataTable dataTable = new DataTable();
+                    foundRows = AllDataOfOrder.Select(expression, sortOrder);
+
+                }
+                catch
+                {
+                    MakeSomeHelp.MSG("Произошла ошибка при поиске");
+                }
+                finally
+                {
+
+                }
             }
+        }
+
+
+        private int SelectNummberById(int id)
+        {
+            //TODO скопировать способ нахождения номера по id
+
+            throw new NotImplementedException();
+        }
+
+        private Guid SelectGuidById(int SelectIndex)
+        {
+            int Number = SelectNummberById(SelectIndex);
+            throw new NotImplementedException();
         }
     }
 }

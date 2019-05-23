@@ -136,6 +136,21 @@
     <Compile Include="UserControls\ClientWork\SelectWorkerUserControl.xaml.cs">
       <DependentUpon>SelectWorkerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderWork\InformationAboutOrder\InformationAboutOrderPay.xaml.cs">
+      <DependentUpon>InformationAboutOrderPay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\InformationAboutOrder\WorkWithMeasurment.xaml.cs">
+      <DependentUpon>WorkWithMeasurment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderMaterialsUserControl.xaml.cs">
+      <DependentUpon>WorkWithOrderMaterialsUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderServiseUserControl.xaml.cs">
+      <DependentUpon>WorkWithOrderServiseUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\MainWorkWithOrderUserControl.xaml.cs">
+      <DependentUpon>MainWorkWithOrderUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\MenuKadrWork.xaml.cs">
       <DependentUpon>MenuKadrWork.xaml</DependentUpon>
     </Compile>
@@ -168,6 +183,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ClientWork\SelectWorkerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\InformationAboutOrder\InformationAboutOrderPay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\InformationAboutOrder\WorkWithMeasurment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderMaterialsUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderServiseUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\MainWorkWithOrderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

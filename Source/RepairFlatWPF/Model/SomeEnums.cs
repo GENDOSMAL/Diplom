@@ -9,7 +9,8 @@ namespace RepairFlatWPF.Model
     {
         #region Место описани пунктов Combobox
         public static string[] StatusOfOrder = new string[] { "Принят", "В исполнении", "Выполнен", "Отмен" };
-        public static string[] RypeOfSearch = new string[] { "Номер", "Статус", "Дата начала", "Фамилия клиента" };
+
+        public static string[] RypeOfSearchOrder = new string[] { "Номер", "Статус", "Дата начала", "Фамилия клиента" };
 
         #endregion
 

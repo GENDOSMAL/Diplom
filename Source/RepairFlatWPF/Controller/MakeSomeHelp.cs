@@ -24,7 +24,7 @@ namespace RepairFlatWPF
         /// <param name="MsgBoxButton"></param>
         /// <param name="MsgBoxImage"></param>
         /// <returns></returns>
-        public static MessageBoxResult MakeMessageBox(string Message,MessageBoxButton MsgBoxButton=MessageBoxButton.OK,MessageBoxImage MsgBoxImage=MessageBoxImage.None)
+        public static MessageBoxResult MSG(string Message,MessageBoxButton MsgBoxButton=MessageBoxButton.OK,MessageBoxImage MsgBoxImage=MessageBoxImage.None)
         {
             return MessageBox.Show(Message,Settings.Default.DefaultHeaderOfMessageBox,MsgBoxButton,MsgBoxImage);
         }

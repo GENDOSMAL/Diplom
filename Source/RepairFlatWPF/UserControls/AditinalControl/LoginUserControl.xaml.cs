@@ -54,7 +54,7 @@ namespace RepairFlatWPF
             // TODO ПОТОМ ПОМЕНЯТЬ
             if (deserializedProduct.success)
             {
-                if(MakeSomeHelp.MakeMessageBox(deserializedProduct.description,MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+                if(MakeSomeHelp.MSG(deserializedProduct.description,MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
                 {
                     Result.Content = "";
                     CheckLogin.Content = "Авторизация";
