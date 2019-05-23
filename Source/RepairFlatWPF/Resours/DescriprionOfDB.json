@@ -1,0 +1,129 @@
+{
+  "Tables": [
+    {
+      "NameOfTable": "ContactType",
+      "ColumnOfTable": [
+        {
+          "NameOfCol": "idContact",
+          "TypeOfCol": "Text",
+          "IsPk": true
+        },
+        {
+          "NameOfCol": "Value",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "Description",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        }
+      ]
+    },
+    {
+      "NameOfTable": "PremisesType",
+      "ColumnOfTable": [
+        {
+          "NameOfCol": "idPremises",
+          "TypeOfCol": "Text",
+          "IsPk": true
+        },
+        {
+          "NameOfCol": "NameOfPremises",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "Descriprtion",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        }
+      ]
+    },
+    {
+      "NameOfTable": "OurMaterials",
+      "ColumnOfTable": [
+        {
+          "NameOfCol": "idMaterials",
+          "TypeOfCol": "Text",
+          "IsPk": true
+        },
+        {
+          "NameOfCol": "NameOfMaterial",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "UnitOfMeasue",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "Cost",
+          "TypeOfCol": "REAL",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "Descriprtion",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        }
+      ]
+    },
+    {
+      "NameOfTable": "OurServices",
+      "ColumnOfTable": [
+        {
+          "NameOfCol": "idServis",
+          "TypeOfCol": "Text",
+          "IsPk": true
+        },
+        {
+          "NameOfCol": "Nomination",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "TypeOfServices",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "UnitOfMeasue",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "Cost",
+          "TypeOfCol": "REAL",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "Descriprtion",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        }
+      ]
+    },
+    {
+      "NameOfTable": "DateOfLastUpdate",
+      "ColumnOfTable": [
+        {
+          "NameOfCol": "idUpdate",
+          "TypeOfCol": "INTEGER PRIMARY KEY AUTOINCREMENT",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "TypeOfSubs",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "DateOfUpdate",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        }
+      ]
+    }
+  ]
+}

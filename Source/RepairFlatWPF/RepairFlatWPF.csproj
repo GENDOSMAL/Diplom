@@ -418,6 +418,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Resours\DescriprionOfDB.json" />
     <Resource Include="Image\fontawesome-webfont.ttf" />
     <None Include="bin\Debug\DescriprionOfDB.json" />
     <None Include="packages.config" />
