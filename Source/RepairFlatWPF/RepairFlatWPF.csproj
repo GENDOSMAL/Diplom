@@ -136,11 +136,17 @@
     <Compile Include="UserControls\ClientWork\SelectWorkerUserControl.xaml.cs">
       <DependentUpon>SelectWorkerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddElementOfPremises.xaml.cs">
+      <DependentUpon>AddElementOfPremises.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddInfromationAboutMaterials.xaml.cs">
       <DependentUpon>AddInfromationAboutMaterials.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddPaymentInformation.xaml.cs">
       <DependentUpon>AddPaymentInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddPremises.xaml.cs">
+      <DependentUpon>AddPremises.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddServisesInOrder.xaml.cs">
       <DependentUpon>AddServisesInOrder.xaml</DependentUpon>
@@ -182,7 +188,6 @@
       <DependentUpon>SelectBrigade.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
-    <Compile Include="WorkWithServer\LoginWork.cs" />
     <Page Include="UserControls\AditinalControl\AddContactUserConrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,11 +200,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddElementOfPremises.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddInfromationAboutMaterials.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddPaymentInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddPremises.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
