@@ -48,5 +48,10 @@ namespace RepairFlatWPF.UserControls.ClientWork
         {
 
         }
+
+        private void GetLoginInformation_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

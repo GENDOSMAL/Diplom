@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 {
@@ -20,19 +10,67 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
     /// </summary>
     public partial class AddElementOfPremises : UserControl
     {
-        public AddElementOfPremises()
+        Guid idPremises;
+        bool NewElement = true;
+        double lenghtData, WidthData, heightData;
+        public AddElementOfPremises(Guid idOfPremises, object InformationAbouElement=null)
         {
             InitializeComponent();
+            if (InformationAbouElement != null)
+            {
+                NewElement = false;
+                AddBtn.Content = "Редактировать";
+            }
+            else
+            {
+                idPremises = Guid.NewGuid();
+            }
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            if (CheckFields())
+            {
+                if (NewElement)
+                {
+                    //Добавление
+                }
+                else
+                {
+                    //Редактирование
+                }
+            }
         }
 
+        
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
         {
+            MakeSomeHelp.CloseBaseWindow();
+        }
 
+        private bool CheckFields()
+        {
+            if (TypeOfElement.SelectedIndex == -1)
+            {
+                MakeSomeHelp.MSG("Необходимо указать тип элемента",MsgBoxImage:MessageBoxImage.Error);
+                return false;
+            }
+            if(!double.TryParse(Lenght.Text.Trim(),out lenghtData))
+            {
+                MakeSomeHelp.MSG("Необходимо указать длину", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+            }
+            if (!double.TryParse(Height.Text.Trim(),out heightData))
+            {
+                MakeSomeHelp.MSG("Необходимо указать высоту", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+            }
+            if (!double.TryParse(Width.Text.Trim(),out WidthData))
+            {
+                MakeSomeHelp.MSG("Необходимо указать ширину", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -112,6 +112,7 @@
     </ApplicationDefinition>
     <Compile Include="Controller\MakeSomeHelp.cs" />
     <Compile Include="Controller\MakeWorkWirthDataBase.cs" />
+    <Compile Include="Controller\MakeWorkWithWord.cs" />
     <Compile Include="Model\BaseJsonModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MakeSubs.cs" />
@@ -132,6 +133,12 @@
     </Compile>
     <Compile Include="UserControls\AditinalControl\AddContactUserConrol.xaml.cs">
       <DependentUpon>AddContactUserConrol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AditinalControl\ShowDataForAuth.xaml.cs">
+      <DependentUpon>ShowDataForAuth.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AditinalControl\ShowPassword.xaml.cs">
+      <DependentUpon>ShowPassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ClientWork\AddUserControl.xaml.cs">
       <DependentUpon>AddUserControl.xaml</DependentUpon>
@@ -232,6 +239,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\AditinalControl\AddInformationAboutAdress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AditinalControl\ShowDataForAuth.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\AditinalControl\ShowPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

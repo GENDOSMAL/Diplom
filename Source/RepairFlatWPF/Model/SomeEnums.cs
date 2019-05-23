@@ -12,6 +12,9 @@ namespace RepairFlatWPF.Model
 
         public static string[] RypeOfSearchOrder = new string[] { "Номер", "Статус", "Дата начала", "Фамилия клиента" };
 
+        public static string[] TypeOfElementOfPremises= new string[] { "Оконо", "Дверь" };
+
+
         #endregion
 
         public enum TypeOfAction
