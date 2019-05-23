@@ -136,6 +136,15 @@
     <Compile Include="UserControls\ClientWork\SelectWorkerUserControl.xaml.cs">
       <DependentUpon>SelectWorkerUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddInfromationAboutMaterials.xaml.cs">
+      <DependentUpon>AddInfromationAboutMaterials.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddPaymentInformation.xaml.cs">
+      <DependentUpon>AddPaymentInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddServisesInOrder.xaml.cs">
+      <DependentUpon>AddServisesInOrder.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderWork\InformationAboutOrder\InformationAboutOrderPay.xaml.cs">
       <DependentUpon>InformationAboutOrderPay.xaml</DependentUpon>
     </Compile>
@@ -183,6 +192,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ClientWork\SelectWorkerUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddInfromationAboutMaterials.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddPaymentInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddServisesInOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
