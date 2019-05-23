@@ -22,6 +22,7 @@ namespace RepairFlatRestApi.Models
         public Nullable<double> POfElement { get; set; }
         public Nullable<double> WidthOfSlope { get; set; }
         public string Description { get; set; }
+        public Nullable<double> Height { get; set; }
     
         public virtual OrderMeasurements OrderMeasurements { get; set; }
     }

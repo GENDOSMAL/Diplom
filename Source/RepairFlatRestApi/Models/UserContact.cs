@@ -14,6 +14,12 @@ namespace RepairFlatRestApi.Models
     
     public partial class UserContact
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public UserContact()
+        {
+            this.OrderInformation = new HashSet<OrderInformation>();
+        }
+    
         public System.Guid id { get; set; }
         public System.Guid idUser { get; set; }
         public Nullable<System.Guid> idType { get; set; }
@@ -23,5 +29,7 @@ namespace RepairFlatRestApi.Models
     
         public virtual TypeOfContact TypeOfContact { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderInformation> OrderInformation { get; set; }
     }
 }

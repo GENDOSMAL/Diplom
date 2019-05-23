@@ -18,7 +18,6 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.Guid> IdOrder { get; set; }
         public Nullable<System.Guid> IdWorkerMake { get; set; }
         public Nullable<System.DateTime> DatePaymnent { get; set; }
-        public Nullable<System.Guid> idDocAccepted { get; set; }
         public string Description { get; set; }
         public Nullable<decimal> Summa { get; set; }
     

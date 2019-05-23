@@ -159,6 +159,7 @@
           <Property Name="idMeasurements" Type="uniqueidentifier" />
           <Property Name="TypeOfElement" Type="nchar" MaxLength="20" />
           <Property Name="Lenght" Type="float" />
+          <Property Name="Height" Type="float" />
           <Property Name="Width" Type="float" />
           <Property Name="POfElement" Type="float" />
           <Property Name="WidthOfSlope" Type="float" />
@@ -178,6 +179,7 @@
           <Property Name="Description" Type="nchar" MaxLength="50" />
           <Property Name="IdColoboration" Type="uniqueidentifier" />
           <Property Name="Number" Type="int" />
+          <Property Name="MainContactID" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="OrderMaterial">
           <Key>
@@ -214,7 +216,7 @@
           <Property Name="IdOrder" Type="uniqueidentifier" />
           <Property Name="IdWorkerMake" Type="uniqueidentifier" />
           <Property Name="DatePaymnent" Type="datetime2" Precision="7" />
-          <Property Name="idDocAccepted" Type="uniqueidentifier" />
+          <Property Name="idDocAccepted" Type="nchar" MaxLength="50" />
           <Property Name="Description" Type="nchar" MaxLength="50" />
           <Property Name="Summa" Type="money" />
         </EntityType>
@@ -675,6 +677,18 @@
             </Principal>
             <Dependent Role="OrderInformation">
               <PropertyRef Name="IdColoboration" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_UserContact">
+          <End Role="UserContact" Type="Self.UserContact" Multiplicity="0..1" />
+          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserContact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="MainContactID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1177,6 +1191,10 @@
             <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_UserContact" Association="Self.FK_OrderInformation_UserContact">
+            <End Role="UserContact" EntitySet="UserContact" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
           <AssociationSet Name="FK_OrderInformation_WorkerDetails" Association="Self.FK_OrderInformation_WorkerDetails">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
@@ -1473,6 +1491,7 @@
           <Property Name="WidthOfSlope" Type="Double" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="OrderMeasurements" Relationship="Self.FK_OrderElementOfMeasurments_OrderMeasurements" FromRole="OrderElementOfMeasurments" ToRole="OrderMeasurements" />
+          <Property Name="Height" Type="Double" />
         </EntityType>
         <EntityType Name="OrderInformation">
           <Key>
@@ -1498,6 +1517,8 @@
           <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_OrderInformation" FromRole="OrderInformation" ToRole="OrderPayment" />
           <NavigationProperty Name="OrderServises" Relationship="Self.FK_OrderServises_OrderInformation" FromRole="OrderInformation" ToRole="OrderServises" />
           <NavigationProperty Name="OrderTasks" Relationship="Self.FK_OrderTasks_OrderInformation1" FromRole="OrderInformation" ToRole="OrderTasks" />
+          <Property Name="MainContactID" Type="Guid" />
+          <NavigationProperty Name="UserContact" Relationship="RepairFlatDBModel.FK_OrderInformation_UserContact" FromRole="OrderInformation" ToRole="UserContact" />
         </EntityType>
         <EntityType Name="OrderMaterial">
           <Key>
@@ -1539,7 +1560,6 @@
           <Property Name="IdOrder" Type="Guid" />
           <Property Name="IdWorkerMake" Type="Guid" />
           <Property Name="DatePaymnent" Type="DateTime" Precision="7" />
-          <Property Name="idDocAccepted" Type="Guid" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Summa" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderPayment_OrderInformation" FromRole="OrderPayment" ToRole="OrderInformation" />
@@ -1701,6 +1721,7 @@
           <Property Name="DateAdd" Type="DateTime" Precision="7" />
           <NavigationProperty Name="TypeOfContact" Relationship="Self.FK_UserContact_TypeOfContact" FromRole="UserContact" ToRole="TypeOfContact" />
           <NavigationProperty Name="User" Relationship="Self.FK_UserContact_User" FromRole="UserContact" ToRole="User" />
+          <NavigationProperty Name="OrderInformation" Relationship="RepairFlatDBModel.FK_OrderInformation_UserContact" FromRole="UserContact" ToRole="OrderInformation" />
         </EntityType>
         <EntityType Name="WorkerCanditate">
           <Key>
@@ -2644,6 +2665,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="DeletedSubStr" EntitySet="DeletedSubStr" />
           </AssociationSet>
+          <AssociationSet Name="FK_OrderInformation_UserContact" Association="RepairFlatDBModel.FK_OrderInformation_UserContact">
+            <End Role="UserContact" EntitySet="UserContact" />
+            <End Role="OrderInformation" EntitySet="OrderInformation" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_ContactUpdate_User">
           <End Type="RepairFlatDBModel.User" Role="User" Multiplicity="0..1" />
@@ -2688,6 +2713,18 @@
             </Principal>
             <Dependent Role="DeletedSubStr">
               <PropertyRef Name="idUserDelete" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInformation_UserContact">
+          <End Type="RepairFlatDBModel.UserContact" Role="UserContact" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.OrderInformation" Role="OrderInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserContact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderInformation">
+              <PropertyRef Name="MainContactID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2851,6 +2888,7 @@
           <EntitySetMapping Name="OrderElementOfMeasurments">
             <EntityTypeMapping TypeName="RepairFlatDBModel.OrderElementOfMeasurments">
               <MappingFragment StoreEntitySet="OrderElementOfMeasurments">
+                <ScalarProperty Name="Height" ColumnName="Height" />
                 <ScalarProperty Name="idElement" ColumnName="idElement" />
                 <ScalarProperty Name="idMeasurements" ColumnName="idMeasurements" />
                 <ScalarProperty Name="TypeOfElement" ColumnName="TypeOfElement" />
@@ -2865,6 +2903,7 @@
           <EntitySetMapping Name="OrderInformation">
             <EntityTypeMapping TypeName="RepairFlatDBModel.OrderInformation">
               <MappingFragment StoreEntitySet="OrderInformation">
+                <ScalarProperty Name="MainContactID" ColumnName="MainContactID" />
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
                 <ScalarProperty Name="IdAdress" ColumnName="IdAdress" />
                 <ScalarProperty Name="IdWorkerMake" ColumnName="IdWorkerMake" />
@@ -2914,7 +2953,6 @@
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
                 <ScalarProperty Name="IdWorkerMake" ColumnName="IdWorkerMake" />
                 <ScalarProperty Name="DatePaymnent" ColumnName="DatePaymnent" />
-                <ScalarProperty Name="idDocAccepted" ColumnName="idDocAccepted" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Summa" ColumnName="Summa" />
               </MappingFragment>

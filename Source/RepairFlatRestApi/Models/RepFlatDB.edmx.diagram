@@ -95,6 +95,7 @@
         <AssociationConnector Association="RepairFlatDBModel.FK_ContactUpdate_User" />
         <EntityTypeShape EntityType="RepairFlatDBModel.DeletedSubStr" Width="1.5" PointX="3" PointY="42.125" />
         <AssociationConnector Association="RepairFlatDBModel.FK_DeletedSubStr_User" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_OrderInformation_UserContact" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
