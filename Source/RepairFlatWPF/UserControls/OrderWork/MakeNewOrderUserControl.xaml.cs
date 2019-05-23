@@ -49,8 +49,8 @@ namespace RepairFlatWPF.UserControls.OrderWork
         private void SelectClient_Click(object sender, RoutedEventArgs e)
         {
             //TODO Выбор клиента
-            
-            UserControls.BaseWindow baseWindow = new BaseWindow( new ClientWork.SelectWorkerUserControl(Model.SomeEnums.TypeOfConrols.Window), "Выберите клиента");
+                       
+            BaseWindow baseWindow = new BaseWindow( new ClientWork.SelectClientUserControl(Model.SomeEnums.TypeOfConrols.Window), "Выберите клиента");
             try
             {
                 baseWindow.ShowDialog();

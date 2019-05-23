@@ -133,8 +133,11 @@
     <Compile Include="UserControls\AditinalControl\AddContactUserConrol.xaml.cs">
       <DependentUpon>AddContactUserConrol.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ClientWork\SelectWorkerUserControl.xaml.cs">
-      <DependentUpon>SelectWorkerUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\ClientWork\AddUserControl.xaml.cs">
+      <DependentUpon>AddUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ClientWork\SelectClientUserControl.xaml.cs">
+      <DependentUpon>SelectClientUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddElementOfPremises.xaml.cs">
       <DependentUpon>AddElementOfPremises.xaml</DependentUpon>
@@ -166,6 +169,36 @@
     <Compile Include="UserControls\OrderWork\MainWorkWithOrderUserControl.xaml.cs">
       <DependentUpon>MainWorkWithOrderUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\MakeUploadUserControl.xaml.cs">
+      <DependentUpon>MakeUploadUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\RedactSubInformation.xaml.cs">
+      <DependentUpon>RedactSubInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\SelectSomeSubs.xaml.cs">
+      <DependentUpon>SelectSomeSubs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\SettingsUserControls.xaml.cs">
+      <DependentUpon>SettingsUserControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\BrigadeWork\BragadeContent.xaml.cs">
+      <DependentUpon>BragadeContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\BrigadeWork\MakeNewBrigade.xaml.cs">
+      <DependentUpon>MakeNewBrigade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\AllDataAboutWorkesPost.xaml.cs">
+      <DependentUpon>AllDataAboutWorkesPost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\CreateNewWorker.xaml.cs">
+      <DependentUpon>CreateNewWorker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\MakeCanditateToWork.xaml.cs">
+      <DependentUpon>MakeCanditateToWork.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\MakeOperatsWithWorkers.xaml.cs">
+      <DependentUpon>MakeOperatsWithWorkers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\MenuKadrWork.xaml.cs">
       <DependentUpon>MenuKadrWork.xaml</DependentUpon>
     </Compile>
@@ -187,6 +220,12 @@
     <Compile Include="UserControls\WorkerInformation\BrigadeWork\SelectBrigade.xaml.cs">
       <DependentUpon>SelectBrigade.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\SelectWorkerPost.xaml.cs">
+      <DependentUpon>SelectWorkerPost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\ShowAllWorkers.xaml.cs">
+      <DependentUpon>ShowAllWorkers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
     <Page Include="UserControls\AditinalControl\AddContactUserConrol.xaml">
       <SubType>Designer</SubType>
@@ -196,7 +235,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\ClientWork\SelectWorkerUserControl.xaml">
+    <Page Include="UserControls\ClientWork\AddUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ClientWork\SelectClientUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,6 +280,46 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\OrderWork\MainWorkWithOrderUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\MakeUploadUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\RedactSubInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\SelectSomeSubs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\SettingsUserControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\BrigadeWork\BragadeContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\BrigadeWork\MakeNewBrigade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\AllDataAboutWorkesPost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\CreateNewWorker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\MakeCanditateToWork.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\MakeOperatsWithWorkers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,6 +388,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\WorkerInformation\BrigadeWork\SelectBrigade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\SelectWorkerPost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\ShowAllWorkers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

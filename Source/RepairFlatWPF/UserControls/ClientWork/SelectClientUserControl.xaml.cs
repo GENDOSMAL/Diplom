@@ -6,11 +6,11 @@ namespace RepairFlatWPF.UserControls.ClientWork
     /// <summary>
     /// Interaction logic for SelectWorkerUserControl.xaml
     /// </summary>
-    public partial class SelectWorkerUserControl : UserControl
+    public partial class SelectClientUserControl : UserControl
     {
         Model.SomeEnums.TypeOfConrols typeOfConrols;
 
-        public SelectWorkerUserControl(Model.SomeEnums.TypeOfConrols typeOfConrols)
+        public SelectClientUserControl(Model.SomeEnums.TypeOfConrols typeOfConrols)
         {
             InitializeComponent();
             this.typeOfConrols = typeOfConrols;
@@ -41,7 +41,7 @@ namespace RepairFlatWPF.UserControls.ClientWork
 
         private void ReturnBTN_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.CloseBaseWindow();
         }
 
         private void DeleteClient_Click(object sender, RoutedEventArgs e)

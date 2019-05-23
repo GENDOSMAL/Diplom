@@ -23,12 +23,18 @@ namespace RepairFlatWPF.UserControls
         Guid idUser;
         Guid idContact;
         bool NewContact = true;
-        public AddContactUserConrol(Guid idUser, Guid idContact, bool NewContact=true)
+        public AddContactUserConrol(Guid idUser, object InformationAboutContact=null)
         {
             InitializeComponent();
-            this.idContact = idContact;
-            this.idUser = idUser;
-            this.NewContact = NewContact;
+            
+            if (InformationAboutContact == null)
+            {
+                this.idContact = Guid.NewGuid();
+            }
+            else
+            {
+                this.NewContact = false;
+            }         
         }
 
         private void CreateContact_Click(object sender, RoutedEventArgs e)
