@@ -37,27 +37,27 @@ namespace RepairFlatWPF.UserControls.WorkerInformation
 
         private void DeletBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
 
         private void EditBrigade_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
 
         private void AddBrigade_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.CloseBaseWindow();
         }
 
         private void SelectBrigade_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
     }
 }

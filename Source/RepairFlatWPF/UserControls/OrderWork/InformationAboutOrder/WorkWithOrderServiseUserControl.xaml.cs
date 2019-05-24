@@ -29,22 +29,39 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void DeleteServises_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
 
         private void EditServises_Click(object sender, RoutedEventArgs e)
         {
-
+            object f = new object();
+            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddServisesInOrder(idOrder,f), "Обвновление данных об услугах");
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
 
         private void AddServises_Click(object sender, RoutedEventArgs e)
         {
-
+            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddServisesInOrder(idOrder), "Добавление данных об услугах");
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
     }
 }

@@ -24,6 +24,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         #region Переменные
         bool NewData = true;
         Guid idOrder;
+        Guid idPremises;
 
         DataTable DataAboutElement;
         double LenghtData, HeightData, WidthData;
@@ -51,7 +52,15 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             int index = DataGrid.SelectedIndex;
             if (index != -1)
             {
-
+                BaseWindow baseWindow = new BaseWindow(new AddElementOfPremises(idPremises,index), "Редактирование данных об элементах помщений");
+                try
+                {
+                    baseWindow.ShowDialog();
+                }
+                catch
+                {
+                    baseWindow.Close();
+                }
             }
             else
             {
@@ -74,7 +83,20 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
         {
+            MakeSomeHelp.CloseBaseWindow();
+        }
 
+        private void AddElementof_Click(object sender, RoutedEventArgs e)
+        {
+            BaseWindow baseWindow = new BaseWindow(new AddElementOfPremises(idPremises), "Добавление данных об элементах помщений");
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)

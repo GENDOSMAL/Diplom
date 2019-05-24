@@ -31,7 +31,7 @@ namespace RepairFlatWPF
             InitializeComponent();
             this.DataContext = new MainWindowViewModel(this,"");
             //TODO Для логирования убрать
-            //MakeSomeHelp.MakeShowLoading();
+            MakeSomeHelp.MakeShowLoading();
         }
 
 

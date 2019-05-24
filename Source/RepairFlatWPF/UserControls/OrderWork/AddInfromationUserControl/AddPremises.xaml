@@ -52,7 +52,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="addElement" Click="AddElement_Click" Content="Добавить" Style="{StaticResource AllButtonAction}" Grid.Column="0"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
+            <Button Name="addElementof" Click="AddElementof_Click" Content="Добавить" Style="{StaticResource AllButtonAction}" Grid.Column="0"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
             <Button Name="RedactElement" Click="RedactElement_Click" Content="Редактировать" FontSize="21" Style="{StaticResource AllButtonAction}" Grid.Column="1"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
             <Button Name="DeleteElement" Click="DeleteElement_Click" Content="Удалить"  Style="{StaticResource AllButtonAction}" Grid.Column="2"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
         </Grid>

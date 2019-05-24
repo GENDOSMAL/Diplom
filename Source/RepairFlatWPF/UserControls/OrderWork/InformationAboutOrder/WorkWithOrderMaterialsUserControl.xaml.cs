@@ -29,22 +29,39 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void DeleteMaterials_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
 
         private void EditMaterials_Click(object sender, RoutedEventArgs e)
         {
-
+            object f = new object();
+            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddInfromationAboutMaterials(idOrder,f),"Обвновление данных о материалах");
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
 
         private void AddMaterials_Click(object sender, RoutedEventArgs e)
         {
-
+            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddInfromationAboutMaterials(idOrder), "Добавление данных о материалах");
+            try
+            {
+                baseWindow.ShowDialog();
+            }
+            catch
+            {
+                baseWindow.Close();
+            }
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.MSG("Не реализовано");
         }
     }
 }
