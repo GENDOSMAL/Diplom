@@ -83,7 +83,7 @@ namespace RepairFlatWPF
                     case 1:
                         //Работа с клиентами
                         CloseMenu();
-                        MakeSomeHelp.DataGridMakeWork(new UserControls.ClientWork.SelectWorkerUserControl(Model.SomeEnums.TypeOfConrols.UserControl));
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.ClientWork.SelectClientUserControl(Model.SomeEnums.TypeOfConrols.UserControl));
                         break;
                     
                     case 2:

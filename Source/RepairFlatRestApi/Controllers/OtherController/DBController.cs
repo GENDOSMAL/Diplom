@@ -14,35 +14,143 @@ namespace RepairFlatRestApi.Controllers
     {
         #region Обработки при работе с данными пользователя
         /// <summary>
-        /// Создание нового пользователя системы
+        /// Создание нового клиента
         /// </summary>
-        /// <param name="descriptionUser">Струкутура с информацией о данных новго пользователя</param>
-        /// <returns></returns>
-        internal static PersonDesctiption.ResultDescription CreateUser(PersonDesctiption.DescriptionOfNewUser descriptionUser)
+        internal static BaseResult CreateNewClient(PersonDesctiption.CreateNewClient descriptionUser)
         {
             return Run((db) =>
             {
-                Guid IdNewUser = Guid.NewGuid();
-                var user = new User
+                try
                 {
-                    idUser = IdNewUser,
-                    Name = descriptionUser.Name,
-                    LastName = descriptionUser.Lastname,
-                    Patronymic = descriptionUser.Patronymic,
-                    Pasport = descriptionUser.Pasport,
-                    Female = descriptionUser.Female,
-                    BirstDay = descriptionUser.Birstday,
-                    TypeOfUser = descriptionUser.TypeOfUser
-                };
-                db.User.Add(user);
-                db.SaveChanges();
-                return new PersonDesctiption.ResultDescription()
+                    db.User.Add(new User
+                    {
+                        idUser = descriptionUser.idUser,
+                        Name = descriptionUser.Name,
+                        LastName = descriptionUser.Lastname,
+                        Patronymic = descriptionUser.Patronymic,
+                        Pasport = descriptionUser.Pasport,
+                        Female = descriptionUser.Female,
+                        BirstDay = descriptionUser.Birstday,
+                        TypeOfUser = descriptionUser.TypeOfUser
+                    });
+                    db.ClientDetails.Add(new ClientDetails
+                    {
+                        IdClient = descriptionUser.idUser,
+                        Description = descriptionUser.Desc,
+                    });
+
+                    db.SaveChanges();
+                    return new BaseResult(){success = true};
+                }
+                catch(Exception ex)
                 {
-                    description = "Пользователь создан",
-                    idUser = IdNewUser,
-                    success = true,
+                    return new BaseResult()
+                    {
+                        success = true,
+                        description = ex.ToString()
+                    };
+                }
+
+            }, nameof(DBController), nameof(CreateNewClient));
+        }
+
+        internal static WorkWithOrder.DataForRedact SelectAllDataAboutOrder(Guid idOrder)
+        {
+            return Run((db) => 
+            {
+                var informationAbOrder = db.OrderInformation.Where(e => e.IdOrder == idOrder).First();
+                var selectuser = db.User.Where(e => e.idUser == informationAbOrder.idClient).FirstOrDefault();
+                var selectContact = db.UserContact.Where(e => e.idUser == informationAbOrder.idClient).First();
+                var adressDesc = db.AdressDescription.Where(e => e.idAdress == informationAbOrder.IdAdress).First();
+
+                WorkWithOrder.DataForRedact dataForRedact = new WorkWithOrder.DataForRedact();
+                dataForRedact.FioClient =$"{selectuser.LastName} {selectuser.Name.Substring(0,1)}.{selectuser.Patronymic.Substring(0, 1)}.";
+                dataForRedact.MainSS = $"{selectContact.TypeOfContact.Value} : {selectContact.Value}";
+                dataForRedact.DescAboutAdress = $"{adressDesc.RegionName} {adressDesc.CiryName} {adressDesc.MicroAreaName} {adressDesc.Street} {adressDesc.House} {adressDesc.Entrance} {adressDesc.NumberOfDelen}";
+                dataForRedact.IformationAboutOrder = new WorkWithOrder.BaseOrderInformation
+                {
+                    idAdress = informationAbOrder.IdAdress,
+                    Allsumma = informationAbOrder.AllSumma,
+                    DataStart= informationAbOrder.DateStart,
+                    DateEnd= informationAbOrder.DateEnd,
+                    Desc= informationAbOrder.Description,
+                    idClient= informationAbOrder.idClient,
+                    idColoboration= informationAbOrder.IdColoboration,
+                    idOrder= informationAbOrder.IdOrder,
+                    idWorkerMake= informationAbOrder.IdWorkerMake,
+                    MainContactID= informationAbOrder.MainContactID,
+                    Status= informationAbOrder.Status
                 };
-            }, nameof(DBController), nameof(CreateUser));
+
+                return dataForRedact;
+            }, nameof(DBController), nameof(CreateNewClient));
+        }
+
+        internal static object CreateNewServis(WorkWithOrder.DataAboutServis newServisData)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        #endregion
+
+        #region Работа с адресом
+        internal static object CreaNewAdress(AdressDescription newAdress)
+        {
+            return Run((db) => 
+            {
+                try
+                {
+                    db.AdressDescription.Add(new AdressDescription
+                    {
+                        AreaName=newAdress.AreaName,
+                        CiryName=newAdress.CiryName,
+                        Description=newAdress.Description,
+                        Entrance=newAdress.Entrance,
+                        House=newAdress.House,
+                        idAdress=newAdress.idAdress,
+                        MicroAreaName=newAdress.MicroAreaName,
+                        NumberOfDelen=newAdress.NumberOfDelen,
+                        RegionName=newAdress.RegionName,
+                        Street=newAdress.Street
+                    });
+                    db.SaveChanges();
+                    return new BaseResult { success = true};
+                }
+                catch(Exception ex)
+                {
+                    return new BaseResult { success = false, description=ex.ToString()};
+                }
+            }, nameof(DBController), nameof(CreateNewClient));
+        }
+
+        internal static object UpdateDataAboutAdress(AdressDescription newAdress)
+        {
+            return Run((db) => 
+            {
+                try
+                {
+                    var UpdatedAdress = db.AdressDescription.Where(e => e.idAdress == newAdress.idAdress).FirstOrDefault();
+                    UpdatedAdress.AreaName = newAdress.AreaName;
+                    UpdatedAdress.CiryName = newAdress.CiryName;
+                    UpdatedAdress.Description = newAdress.Description;
+                    UpdatedAdress.Entrance = newAdress.Entrance;
+                    UpdatedAdress.House = newAdress.House;
+                    UpdatedAdress.idAdress = newAdress.idAdress;
+                    UpdatedAdress.MicroAreaName = newAdress.MicroAreaName;
+                    UpdatedAdress.NumberOfDelen = newAdress.NumberOfDelen;
+                    UpdatedAdress.RegionName = newAdress.RegionName;
+                    UpdatedAdress.Street = newAdress.Street;
+
+                    db.SaveChanges();
+                    return new BaseResult { success = true};
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult { success = false, description = ex.ToString() };
+                }
+            }, nameof(DBController), nameof(CreateNewClient)); 
         }
 
         #endregion
@@ -876,6 +984,106 @@ namespace RepairFlatRestApi.Controllers
         #endregion
 
 
+        #region Работа с заказами
+
+        internal static WorkWithOrder.DataAboutAllOrder MakeDataAboutAllOrder()
+        {
+            return Run((db) =>
+            {
+                List<WorkWithOrder.OrderInTable> orders = new List<WorkWithOrder.OrderInTable>();
+                foreach (var order in db.OrderInformation.AsEnumerable())
+                {//TODO Оптимизировать
+                    string F = db.User.Where(e => e.idUser == order.idClient).Select(e => e.LastName).FirstOrDefault();
+                    string I = db.User.Where(e => e.idUser == order.idClient).Select(e => e.Name.Substring(0, 1)).FirstOrDefault();
+                    string O = db.User.Where(e => e.idUser == order.idClient).Select(e => e.Patronymic.Substring(0, 1)).FirstOrDefault();
+                    string NameOfCleint = $"{F} {I}.{O}.";
+                    string TypeOfContact = db.TypeOfContact.Where((e) => e.UserContact.First().id== order.MainContactID).Select(e => e.Value).FirstOrDefault();
+                    string ValuesOfContact = db.UserContact.Where(e => e.id == order.MainContactID).Select(e => e.Value).First();
+                    string ContactInformatiom = $"{TypeOfContact} : {ValuesOfContact}";
+                    string NameOfBrigade = db.ColoborationOfBrigade.Where(e => e.IdColoboration == order.IdColoboration).Select(e => e.Name).First();
+
+                    var informationAboutAdress = db.AdressDescription.Where(e => e.idAdress == order.IdAdress).Select(e => new AdressDescription { idAdress = e.idAdress, AreaName = e.AreaName, Entrance = e.Entrance, CiryName = e.CiryName, Description = e.Description, House = e.House, MicroAreaName = e.MicroAreaName, NumberOfDelen = e.NumberOfDelen, RegionName = e.RegionName, Street = e.Street}).First();
+
+                    string Adressinformation = $"{informationAboutAdress.RegionName} {informationAboutAdress.CiryName} {informationAboutAdress.MicroAreaName} {informationAboutAdress.Street} {informationAboutAdress.House} {informationAboutAdress.Entrance} {informationAboutAdress.NumberOfDelen}";
+                    orders.Add(new WorkWithOrder.OrderInTable
+                    {
+                        BrigadeInformation = NameOfBrigade,
+                        DataAboutContact = ContactInformatiom,
+                        DataStart = order.DateStart,
+                        FIOCLient = NameOfCleint,
+                        idOrder = order.IdOrder,
+                        InformationAboutAdress = Adressinformation,
+                        money = order.AllSumma,
+                        number = order.Number,
+                        Status = order.Status
+                    });
+
+                }
+                return new WorkWithOrder.DataAboutAllOrder() { success = true,orders=orders,Count=orders.Count };
+            }, nameof(DBController), nameof(MakeDataAboutAllOrder));
+        }
+
+        internal static object CreateNewOrder(WorkWithOrder.BaseOrderInformation newOrderData)
+        {
+            return Run((db) =>
+            {
+                try
+                {
+                    db.OrderInformation.Add(new OrderInformation
+                    {
+                        Status = newOrderData.Status,
+                        AllSumma = newOrderData.Allsumma,
+                        IdAdress = newOrderData.idClient,
+                        idClient = newOrderData.idClient,
+                        DateEnd = newOrderData.DateEnd,
+                        IdColoboration = newOrderData.idColoboration,
+                        Number = newOrderData.Number,
+                        MainContactID = newOrderData.MainContactID,
+                        IdOrder = newOrderData.idOrder,
+                        DateStart = newOrderData.DataStart,
+                        IdWorkerMake = newOrderData.idWorkerMake,
+                        Description = newOrderData.Desc,
+                    });
+                    db.SaveChanges();
+                    return new BaseResult { success = true};
+                }
+                catch(Exception ex)
+                {
+                    return new BaseResult { success=false, description=ex.Message};
+                }                
+            }, nameof(DBController), nameof(CreateNewOrder));
+        }
+        internal static object UpdateDataAboutOrder(WorkWithOrder.BaseOrderInformation updateDataAbOrder)
+        {
+            return Run((db) =>
+            {
+                try
+                {
+                    var selectWorkersOrder = db.OrderInformation.Where(e => e.IdOrder == updateDataAbOrder.idOrder).FirstOrDefault();
+                    selectWorkersOrder.Status = updateDataAbOrder.Status;
+                    selectWorkersOrder.AllSumma = updateDataAbOrder.Allsumma;
+                    selectWorkersOrder.IdAdress = updateDataAbOrder.idClient;
+                    selectWorkersOrder.idClient = updateDataAbOrder.idClient;
+                    selectWorkersOrder.DateEnd = updateDataAbOrder.DateEnd;
+                    selectWorkersOrder.IdColoboration = updateDataAbOrder.idColoboration;
+                    selectWorkersOrder.Number = updateDataAbOrder.Number;
+                    selectWorkersOrder.MainContactID = updateDataAbOrder.MainContactID;
+                    selectWorkersOrder.DateStart = updateDataAbOrder.DataStart;
+                    selectWorkersOrder.IdWorkerMake = updateDataAbOrder.idWorkerMake;
+                    selectWorkersOrder.Description = updateDataAbOrder.Desc;
+                    db.SaveChanges();
+                    return new BaseResult { success = true };
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult { success = false, description = ex.Message };
+                }
+            }, nameof(DBController), nameof(CreateNewOrder));
+        }
+
+
+        #endregion
+        #region Базовые вещи
         /// <summary>
         /// Базовый метод обработки запросов который также обрабатывает ошибки
         /// </summary>
@@ -917,5 +1125,6 @@ namespace RepairFlatRestApi.Controllers
                 }
             }
         }
+        #endregion
     }
 }

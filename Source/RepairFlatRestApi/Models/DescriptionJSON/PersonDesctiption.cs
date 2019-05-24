@@ -14,6 +14,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         /// </summary>
         public class DescriptionOfNewUser
         {
+            public Guid? idUser;
             public string Name;
             public string Lastname;
             public string Patronymic;
@@ -22,6 +23,20 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string TypeOfUser;
             public string Pasport;
             public int? Female;
+        }
+
+        public class CreateNewClient
+        {
+            public Guid? idUser;
+            public string Name;
+            public string Lastname;
+            public string Patronymic;
+            [JsonConverter(typeof(CustomDateTimeConverter))]
+            public DateTime Birstday;
+            public string TypeOfUser;
+            public string Pasport;
+            public int? Female;
+            public string Desc;
         }
         /// <summary>
         /// Описание того, что будет вернуто на запрос о создании нового пользователя

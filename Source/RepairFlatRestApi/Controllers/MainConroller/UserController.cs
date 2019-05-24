@@ -8,9 +8,7 @@ using System.Web.Http;
 
 namespace RepairFlatRestApi.Controllers
 {
-    /// <summary>
-    /// Класс для работы с информацией о пользователях в том добавлении информации о новом пользователе и еще много чего...
-    /// </summary>
+    [RoutePrefix("api/User")]
     public class UserController:BaseController
     {
         /// <summary>
@@ -18,12 +16,12 @@ namespace RepairFlatRestApi.Controllers
         /// </summary>
         /// <param name="DescriptionPerson"></param>
         /// <returns></returns>
-        [HttpPost, Route("api/main/createperson")]
-        public HttpResponseMessage CreateNewPerson([FromBody] PersonDesctiption.DescriptionOfNewUser DescriptionPerson)
+        [HttpPost, Route("create")]
+        public HttpResponseMessage CreateNewPerson([FromBody] PersonDesctiption.CreateNewClient DescriptionPerson)
         {
             return CatchError(() =>
             {
-                return DBController.CreateUser(DescriptionPerson);
+                return DBController.CreateNewClient(DescriptionPerson);
             }, nameof(LoginController), nameof(CreateNewPerson));
         }
 

@@ -28,7 +28,7 @@ namespace RepairFlatRestApi.Models
             this.DeletedSubStr = new HashSet<DeletedSubStr>();
         }
     
-        public System.Guid idUser { get; set; }
+        public System.Guid? idUser { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Patronymic { get; set; }

@@ -24,7 +24,7 @@ namespace RepairFlatRestApi.Models
             this.OrderTasks = new HashSet<OrderTasks>();
         }
     
-        public System.Guid IdOrder { get; set; }
+        public System.Guid? IdOrder { get; set; }
         public Nullable<System.Guid> IdAdress { get; set; }
         public Nullable<System.Guid> IdWorkerMake { get; set; }
         public Nullable<System.Guid> idClient { get; set; }

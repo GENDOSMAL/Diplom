@@ -20,7 +20,7 @@ namespace RepairFlatRestApi.Models
             this.OrderInformation = new HashSet<OrderInformation>();
         }
     
-        public System.Guid IdClient { get; set; }
+        public System.Guid? IdClient { get; set; }
         public string Description { get; set; }
     
         public virtual User User { get; set; }
