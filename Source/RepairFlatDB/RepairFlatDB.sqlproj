@@ -62,6 +62,7 @@
     <Folder Include="BrigadeDescription" />
     <Folder Include="ClientInformation" />
     <Folder Include="Dialog" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Some repeteble description\User.sql" />
@@ -100,6 +101,14 @@
     <Build Include="Dialog\DialogUser.sql" />
     <Build Include="Worker\WorkerDetails.sql" />
     <Build Include="Some repeteble description\WorkerOrderInformation.sql" />
+    <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
+    <Build Include="OrderInformation\TaskServis.sql" />
+    <Build Include="OrderInformation\TaskMeasurment.sql" />
+    <Build Include="OrderInformation\TaskMaterials.sql" />
+    <Build Include="Some repeteble description\PostsUpdate.sql" />
+    <Build Include="OrderInformation\InformatioForPayment.sql" />
+    <Build Include="Some repeteble description\DeletedSubStr.sql" />
+    <Build Include="OrderInformation\DocPayment.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RepairFlatDB.refactorlog" />

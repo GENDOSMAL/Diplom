@@ -1,7 +1,10 @@
-﻿CREATE TABLE [dbo].[BrigateSeparation]
+﻿CREATE TABLE [dbo].[BrigateSeparation](
+	[IdBrigate] [uniqueidentifier] NOT NULL,
+	[Name] [nchar](30) NULL,
+	[Description] [nchar](100) NULL,
+	[DateStart] [date] NULL,
+PRIMARY KEY CLUSTERED 
 (
-	[IdBrigate] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [Name] NCHAR(30) NULL, 
-    [Description] NCHAR(100) NULL, 
-    [DateStart] DATE NULL
-)
+	[IdBrigate] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
