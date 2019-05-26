@@ -9,7 +9,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
     public partial class WorkWithTasksUserControl : UserControl
     {
         Guid idOrder;
-
+        public static BaseWindow baseWindow1;
         public WorkWithTasksUserControl(Guid idOrder, object DataAboutTasks=null)
         {
             InitializeComponent();
@@ -23,28 +23,26 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void EditTask_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            
-            BaseWindow baseWindow = new BaseWindow(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder,idOrder), "Редактирование сущестующего задания");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow redactwindow = new BaseWindow("Редактирование сущестующего задания");
+            redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder, ref redactwindow, idOrder));
+            redactwindow.ShowDialog();
+
+            //baseWindow1 = new BaseWindow(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder,ref baseWindow1, idOrder), "Редактирование сущестующего задания");
+            //baseWindow1.ShowDialog();
+
+
         }
 
         private void AddTask_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder), "Создание нового задания");
+            baseWindow1 = new BaseWindow(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder, ref baseWindow1), "Создание нового задания");
             try
             {
-                baseWindow.ShowDialog();
+                baseWindow1.ShowDialog();
             }
             catch
             {
-                baseWindow.Close();
+                baseWindow1.Close();
             }
         }
 

@@ -74,8 +74,15 @@ namespace RepairFlatWPF.Model
             Servises,
             Premises,
             Materials,
-            Contact
+            Contact,
+            Post
         }
 
+
+        public enum TypeOfSelect
+        {
+            Servises,
+            Premises
+        }
     }
 }

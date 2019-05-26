@@ -25,15 +25,16 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         Guid idOrder;
         Guid idTask;
         bool NewTask;
+        BaseWindow Window;
         #endregion
 
-
         #region Конструктор
-        public AddNewTaskInOrderUserControl(Guid idOrder, object DataAboutUpdateTask=null)
+        public AddNewTaskInOrderUserControl(Guid idOrder,ref BaseWindow baseWindow, object DataAboutUpdateTask=null)
         {
             InitializeComponent();
             this.idOrder = idOrder;
             ShowFirstPage();
+            Window = baseWindow;
             if (DataAboutUpdateTask != null)
             {
                 NewTask = false;
@@ -46,6 +47,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             
         }
         #endregion
+
         #region Обработки основной части формы
         private void SelectTabsClick(object sender, RoutedEventArgs e)
         {
@@ -70,7 +72,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            Window.Close();
         }
 
         private void ShowPremises_Click(object sender, RoutedEventArgs e)
@@ -97,7 +99,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void DeleteSerises_Click(object sender, RoutedEventArgs e)
         {
-
+            WorkWithTasksUserControl.baseWindow1.Close();
         }
 
         private void BtnSearchServis_Click(object sender, RoutedEventArgs e)
