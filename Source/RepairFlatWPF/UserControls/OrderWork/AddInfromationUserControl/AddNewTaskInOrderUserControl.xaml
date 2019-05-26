@@ -7,47 +7,51 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
              Height="auto" Width="auto">
     <Grid>
-        <Grid   Background="#e9e9e9"  >
+        <Grid    >
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="55"/>
                 
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Background="#e9e9e9" Margin="0 15 0 0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="55"/>
                     <RowDefinition Height="5"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <Button Uid="0" Grid.Column="0"  Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
-                    <Button.Content>
-                        <Viewbox  >
-                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Основная информация" FontFamily="Times New Roman" FontSize="45 "/>
-                        </Viewbox>
-                    </Button.Content>
-                </Button>
-                <Button Uid="1" Grid.Column="1"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
-                    <Button.Content>
-                        <Viewbox  >
-                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация об услугах" FontFamily="Times New Roman" FontSize="45 "/>
-                        </Viewbox>
-                    </Button.Content>
-                </Button>
-                <Button Uid="2" Grid.Column="2"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
-                    <Button.Content>
-                        <Viewbox  >
-                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация о материалах" FontFamily="Times New Roman" FontSize="45 "/>
-                        </Viewbox>
-                    </Button.Content>
-                </Button>
+
+                <Grid Grid.Row="0" Name="ForTopButton">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Uid="0" Grid.Column="0"   Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                        <Button.Content>
+                            <Viewbox  >
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Основная информация" FontFamily="Times New Roman" FontSize="45 "/>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                    <Button Uid="1" Grid.Column="1" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                        <Button.Content>
+                            <Viewbox  >
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация об услугах" FontFamily="Times New Roman" FontSize="45 "/>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                    <Button Uid="2" Grid.Column="2"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
+                        <Button.Content>
+                            <Viewbox  >
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация о материалах" FontFamily="Times New Roman" FontSize="45 "/>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+               
 
                 <Grid Grid.Row="1" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
@@ -57,115 +61,116 @@
                     </Grid.ColumnDefinitions>
                     <Rectangle Name="GridCursor" Grid.Column="0" Fill="#673ab7" />
                 </Grid>
+                <Grid x:Name="GridForMainContent" Grid.Row="2" Grid.ColumnSpan="3" >
+                    <!--Для основной информации о задании-->
+                    <Grid Name="ForMainData" MaxWidth="800" MaxHeight="700" Visibility="Collapsed" >
+                        <Grid.RowDefinitions>
+                            <!--Для описания-->
+                            <RowDefinition Height="*"/>
+                            <!--Для даты окончания-->
+                            <RowDefinition Height="*"/>
+                            <!--Для даты окончания-->
+                            <RowDefinition Height="*"/>
+                            <!--Для суммы данной операции-->
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBox Name="Description" Grid.Row="0" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" />
+                        <DatePicker  Name="DateStart" Grid.Row="1" materialDesign:HintAssist.Hint="Дата начала выполнения"  Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,15,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="IsReadOnly" Value="False"/>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                        <DatePicker  Name="DateEnd" Grid.Row="2" materialDesign:HintAssist.Hint="Примерная дата окончания" Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,20,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                            <DatePicker.Resources>
+                                <Style TargetType="DatePickerTextBox">
+                                    <Setter Property="IsReadOnly" Value="False"/>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                        <TextBox Name="AllSumma" Grid.Row="3" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Стоимость задания" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" IsEnabled="False" />
+
+                    </Grid>
+                    <!--Для информации об услугах-->
+                    <Grid Name="ForServises"   >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <!--Область поиска-->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedTypeServises" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
+                            <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchTextServises" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
+                            <Button Name="BtnSearchServis" Click="BtnSearchServis_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
+                        </Grid>
+                        <!--Таблица-->
+                        <DataGrid Grid.Row="1" x:Name="DataAboutServises" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+                        <!--Кнопки-->
+                        <Grid Grid.Row="2" Name="ForUser"  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Добавление" Name="AddServises" Click="AddServises_Click" />
+                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Редактировние" Name="EditServises" Click="EditServises_Click" />
+                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Удаление" Name="DeleteSerises" Click="DeleteSerises_Click" />
+                        </Grid>
+
+                    </Grid>
+                    <!--Для информации о материалах-->
+                    <Grid Name="ForMaterials" Visibility="Collapsed" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <!--Область поиска-->
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedTypeMeasurment" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
+                            <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchTextMeasurment" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
+                            <Button Name="BtnSearchMaterials" Click="BtnSearchMaterials_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
+                        </Grid>
+                        <!--Таблица-->
+                        <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+                        <!--Кнопки-->
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Добавление" Name="AddMaterials" Click="AddMaterials_Click" />
+                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Редактировние" Name="EditMaterials" Click="EditMaterials_Click" />
+                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Удаление" Name="DeleteMaterials" Click="DeleteMaterials_Click" />
+                        </Grid>
+                    </Grid>
+                </Grid>
             </Grid>
 
-            <Grid x:Name="GridForMainContent" Grid.Row="1" Grid.ColumnSpan="3" >
-                <!--Для основной информации о задании-->
-                <Grid Name="ForMainData" MaxWidth="800" MaxHeight="800" Visibility="Collapsed" >
-                    <Grid.RowDefinitions>
-                        <!--Для описания-->                       
-                        <RowDefinition Height="*"/>
-                        <!--Для даты окончания-->
-                        <RowDefinition Height="*"/>
-                        <!--Для даты окончания-->
-                        <RowDefinition Height="*"/>
-                        <!--Для суммы данной операции-->
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <TextBox Name="Description" Grid.Row="0" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" />
-                    <DatePicker  Name="DateStart" Grid.Row="1" materialDesign:HintAssist.Hint="Дата начала выполнения"  Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,15,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
-                        <DatePicker.Resources>
-                            <Style TargetType="DatePickerTextBox">
-                                <Setter Property="IsReadOnly" Value="False"/>
-                            </Style>
-                        </DatePicker.Resources>
-                    </DatePicker>                    
-                    <DatePicker  Name="DateEnd" Grid.Row="2" materialDesign:HintAssist.Hint="Примерная дата окончания" Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,20,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
-                        <DatePicker.Resources>
-                            <Style TargetType="DatePickerTextBox">
-                                <Setter Property="IsReadOnly" Value="False"/>
-                            </Style>
-                        </DatePicker.Resources>
-                    </DatePicker>
-                    <TextBox Name="AllSumma" Grid.Row="3" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Стоимость задания" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" IsEnabled="False" />
+            
 
-                </Grid>
-                <!--Для информации об услугах-->
-                <Grid Name="ForServises"  Visibility="Collapsed" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-                    <!--Область поиска-->
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedTypeServises" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
-                        <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchTextServises" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
-                        <Button Name="BtnSearchServis" Click="BtnSearchServis_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
-                    </Grid>
-                    <!--Таблица-->
-                    <DataGrid Grid.Row="1" x:Name="DataAboutServises" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
-                    <!--Кнопки-->
-                    <Grid Grid.Row="2" Name="ForUser"  >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 0 7.5 0" Width="220" Height="40" Content="Добавление" Name="AddServises" Click="AddServises_Click" />
-                        <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="220" Height="40" Content="Редактировние" Name="EditServises" Click="EditServises_Click" />
-                        <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 15 0" Width="220" Height="40" Content="Удаление" Name="DeleteSerises" Click="DeleteSerises_Click" />
-                    </Grid>
-
-                </Grid>
-                <!--Для информации о материалах-->
-                <Grid Name="ForMaterials" Visibility="Collapsed" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="85"/>
-                    </Grid.RowDefinitions>
-                    <!--Область поиска-->
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedTypeMeasurment" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
-                        <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchTextMeasurment" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
-                        <Button Name="BtnSearchMaterials" Click="BtnSearchMaterials_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
-                    </Grid>
-                    <!--Таблица-->
-                    <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
-                    <!--Кнопки-->
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 15 0" Width="220" Height="40" Content="Добавление" Name="AddMaterials" Click="AddMaterials_Click" />
-                        <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 15 0" Width="220" Height="40" Content="Редактировние" Name="EditMaterials" Click="EditMaterials_Click" />
-                        <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 15 0" Width="220" Height="40" Content="Удаление" Name="DeleteMaterials" Click="DeleteMaterials_Click" />
-                    </Grid>
-                </Grid>
-            </Grid>
-
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0"   VerticalAlignment="Center" Height="40" Width="240"/>
+                <Button x:Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0"   VerticalAlignment="Center" Height="40" Width="240" Margin="0"/>
                 <Button x:Name="ShowPremises" Click="ShowPremises_Click"  Content="Помещения"  Style="{StaticResource AllButtonAction}" Grid.Column="1"  VerticalAlignment="Center" Height="40" Width="240"/>
                 <Button x:Name="ExtionButton" Click="ExtionButton_Click"  Content="Сохранить"  Style="{StaticResource AllButtonAction}" Grid.Column="2"  VerticalAlignment="Center" Height="40" Width="240"/>
             </Grid>
