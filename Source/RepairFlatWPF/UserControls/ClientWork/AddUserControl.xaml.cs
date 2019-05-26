@@ -127,6 +127,11 @@ namespace RepairFlatWPF.UserControls
                 MakeSomeHelp.MSG("Укажите данные об отчестве клиента", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
+            if (string.IsNullOrEmpty(Pasport.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Укажите данные об паспорте клиента", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+            }
             if (Female.SelectedIndex == -1)
             {
                 MakeSomeHelp.MSG("Укажите данные об половой принаждежности клиента", MsgBoxImage: MessageBoxImage.Error);

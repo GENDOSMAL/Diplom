@@ -21,6 +21,8 @@
             <!--Для Фамилии-->
             <RowDefinition Height="*"/>
             <!--Для Отчества-->
+            <RowDefinition Height="*"/>     
+            <!--Для Паспорта-->
             <RowDefinition Height="*"/>
             <!--Для Даты рождения и пола-->
             <RowDefinition Height="2*"/>
@@ -33,15 +35,16 @@
         <TextBox Name="Name" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="0" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Имя" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
         <TextBox Name="Famil" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="1" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Фамилия" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
         <TextBox Name="Patronymic" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Отчество" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
-        <ComboBox Name="Female" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="3" Margin="15,0,20,0" materialDesign:HintAssist.Hint="Пол" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center" />
-        <DatePicker  Name="DateOfBirsd" Grid.Row="3" Grid.Column="1" materialDesign:HintAssist.Hint="Дата рождения" Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,0,20,0"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
+        <TextBox Name="Pasport" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Паспорт" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
+        <ComboBox Name="Female" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="4" Margin="15,0,20,0" materialDesign:HintAssist.Hint="Пол" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center" />
+        <DatePicker  Name="DateOfBirsd" Grid.Row="4" Grid.Column="1" materialDesign:HintAssist.Hint="Дата рождения" Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,0,20,0"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
             <DatePicker.Resources>
                 <Style TargetType="DatePickerTextBox">
                     <Setter Property="IsReadOnly" Value="False"/>
                 </Style>
             </DatePicker.Resources>
         </DatePicker>
-        <Grid Grid.ColumnSpan="2" Grid.Row="4">
+        <Grid Grid.ColumnSpan="2" Grid.Row="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
@@ -60,8 +63,8 @@
             <Button Name="RedactElement" Click="RedactElement_Click" Content="Редактировать" FontSize="21" Style="{StaticResource AllButtonAction}" Grid.Row="2" Grid.Column="1"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
             <Button Name="DeleteElement" Click="DeleteElement_Click" Content="Удалить"  Style="{StaticResource AllButtonAction}" Grid.Column="2" Grid.Row="2"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
         </Grid>
-        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="5" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
-        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="6"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
-        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="6" Margin="15,0,15,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="6" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
+        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="7"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="7" Margin="15,0,15,0" VerticalAlignment="Center" Height="40" Width="240"/>
     </Grid>
 </UserControl>
