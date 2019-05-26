@@ -26,6 +26,7 @@ namespace RepairFlatRestApi.Models
             this.UserContact = new HashSet<UserContact>();
             this.ContactUpdate = new HashSet<ContactUpdate>();
             this.DeletedSubStr = new HashSet<DeletedSubStr>();
+            this.PostsUpdate = new HashSet<PostsUpdate>();
         }
     
         public System.Guid? idUser { get; set; }
@@ -58,5 +59,7 @@ namespace RepairFlatRestApi.Models
         public virtual ICollection<ContactUpdate> ContactUpdate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeletedSubStr> DeletedSubStr { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PostsUpdate> PostsUpdate { get; set; }
     }
 }

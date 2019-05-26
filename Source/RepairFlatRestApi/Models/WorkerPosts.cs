@@ -19,6 +19,7 @@ namespace RepairFlatRestApi.Models
         {
             this.EstabilismentPost = new HashSet<EstabilismentPost>();
             this.WorkerCanditate = new HashSet<WorkerCanditate>();
+            this.PostsUpdate = new HashSet<PostsUpdate>();
         }
     
         public System.Guid idPost { get; set; }
@@ -29,5 +30,7 @@ namespace RepairFlatRestApi.Models
         public virtual ICollection<EstabilismentPost> EstabilismentPost { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkerCanditate> WorkerCanditate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PostsUpdate> PostsUpdate { get; set; }
     }
 }

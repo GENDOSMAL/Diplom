@@ -96,6 +96,27 @@
         <EntityTypeShape EntityType="RepairFlatDBModel.DeletedSubStr" Width="1.5" PointX="3" PointY="42.125" />
         <AssociationConnector Association="RepairFlatDBModel.FK_DeletedSubStr_User" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderInformation_UserContact" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.DocPayment" Width="1.5" PointX="13.5" PointY="15.125" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.InformatioForPayment" Width="1.5" PointX="8.25" PointY="7.5" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.PostsUpdate" Width="1.5" PointX="16.25" PointY="23.25" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.TaskMaterials" Width="1.5" PointX="14.75" PointY="36.625" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.TaskMeasurment" Width="1.5" PointX="13.75" PointY="39.375" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.TaskServis" Width="1.5" PointX="16.75" PointY="33.125" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation1" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_OrderTasks_BrigateSeparation" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_DocPayment_ClientDetails" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_DocPayment_InformatioForPayment" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_DocPayment_WorkerDetails" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_OrderPayment_DocPayment" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_InformatioForPayment_WorkerDetails" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_TaskMaterials_OrderMaterial" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_TaskMeasurment_OrderMeasurements" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_TaskServis_OrderServises" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_TaskMaterials_OrderTasks" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_TaskMeasurment_OrderTasks" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_TaskServis_OrderTasks" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_PostsUpdate_User" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_PostsUpdate_WorkerPosts" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,16 +18,28 @@ namespace RepairFlatRestApi.Models
         public OrderTasks()
         {
             this.OrderTasksState = new HashSet<OrderTasksState>();
+            this.TaskMaterials = new HashSet<TaskMaterials>();
+            this.TaskMeasurment = new HashSet<TaskMeasurment>();
+            this.TaskServis = new HashSet<TaskServis>();
         }
     
         public System.Guid IdTask { get; set; }
         public Nullable<System.Guid> IdOrder { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> DateStart { get; set; }
-        public Nullable<System.DateTime> DeadLine { get; set; }
+        public Nullable<System.DateTime> DeadEnd { get; set; }
+        public Nullable<decimal> SummaAboutTask { get; set; }
+        public Nullable<System.Guid> idBrigade { get; set; }
     
         public virtual OrderInformation OrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderTasksState> OrderTasksState { get; set; }
+        public virtual BrigateSeparation BrigateSeparation { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskMaterials> TaskMaterials { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskMeasurment> TaskMeasurment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskServis> TaskServis { get; set; }
     }
 }

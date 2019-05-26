@@ -12,15 +12,13 @@ namespace RepairFlatRestApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BrigateContent
+    public partial class TaskMeasurment
     {
-        public System.Guid Id { get; set; }
-        public Nullable<System.Guid> idWorker { get; set; }
-        public string WorkerRole { get; set; }
-        public Nullable<System.Guid> idColoboration { get; set; }
+        public System.Guid idOfCompare { get; set; }
+        public Nullable<System.Guid> idMeasurment { get; set; }
+        public Nullable<System.Guid> idOrderTask { get; set; }
     
-        public virtual BrigateSeparation BrigateSeparation { get; set; }
-        public virtual WorkerDetails WorkerDetails { get; set; }
-        public virtual BrigateSeparation BrigateSeparation1 { get; set; }
+        public virtual OrderMeasurements OrderMeasurements { get; set; }
+        public virtual OrderTasks OrderTasks { get; set; }
     }
 }

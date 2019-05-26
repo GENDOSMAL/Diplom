@@ -40,7 +40,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         }
         public class BaseOrderInformation : BaseResult
         {
-            public Guid? idOrder;
+            public Guid idOrder;
             public Guid? idAdress;
             public Guid? idWorkerMake;
             public Guid? idClient;

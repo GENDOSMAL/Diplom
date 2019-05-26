@@ -26,6 +26,8 @@ namespace RepairFlatRestApi.Models
             this.WorkersOperats = new HashSet<WorkersOperats>();
             this.WorkersPayGive = new HashSet<WorkersPayGive>();
             this.WorkersPayGive1 = new HashSet<WorkersPayGive>();
+            this.DocPayment = new HashSet<DocPayment>();
+            this.InformatioForPayment = new HashSet<InformatioForPayment>();
         }
     
         public System.Guid IdWorker { get; set; }
@@ -51,5 +53,9 @@ namespace RepairFlatRestApi.Models
         public virtual ICollection<WorkersPayGive> WorkersPayGive { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkersPayGive> WorkersPayGive1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DocPayment> DocPayment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InformatioForPayment> InformatioForPayment { get; set; }
     }
 }

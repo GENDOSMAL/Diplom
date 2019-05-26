@@ -191,7 +191,13 @@
     <Compile Include="Models\DialogUser.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DocPayment.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EstabilismentPost.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InformatioForPayment.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginInformation.cs">
@@ -230,6 +236,9 @@
     <Compile Include="Models\OurServices.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PostsUpdate.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PremisesType.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
@@ -262,6 +271,15 @@
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskMaterials.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskMeasurment.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TaskServis.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeOfContact.cs">

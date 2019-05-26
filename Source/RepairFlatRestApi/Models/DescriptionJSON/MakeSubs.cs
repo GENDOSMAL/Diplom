@@ -88,7 +88,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class ListOfPremises
         {
-            public Guid? idPremises;
+            public Guid idPremises;
             public string Name;
             public string Description;
         }
@@ -124,7 +124,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class ListOfMaterials
         {
-            public Guid? idMaterials;
+            public Guid idMaterials;
             public string NameOfMaterial;
             public string Description;
             public string UnitOfMeasue;

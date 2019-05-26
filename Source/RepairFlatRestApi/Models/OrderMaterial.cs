@@ -14,6 +14,12 @@ namespace RepairFlatRestApi.Models
     
     public partial class OrderMaterial
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OrderMaterial()
+        {
+            this.TaskMaterials = new HashSet<TaskMaterials>();
+        }
+    
         public System.Guid idMaterialINOrder { get; set; }
         public Nullable<System.Guid> IdOrder { get; set; }
         public Nullable<System.Guid> idMaterial { get; set; }
@@ -23,5 +29,7 @@ namespace RepairFlatRestApi.Models
     
         public virtual OrderInformation OrderInformation { get; set; }
         public virtual OurMaterials OurMaterials { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskMaterials> TaskMaterials { get; set; }
     }
 }

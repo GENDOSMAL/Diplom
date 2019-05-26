@@ -18,6 +18,8 @@ namespace RepairFlatRestApi.Models
         public BrigateSeparation()
         {
             this.ColoborationOfBrigateSoComp = new HashSet<ColoborationOfBrigateSoComp>();
+            this.BrigateContent1 = new HashSet<BrigateContent>();
+            this.OrderTasks = new HashSet<OrderTasks>();
         }
     
         public System.Guid IdBrigate { get; set; }
@@ -28,5 +30,9 @@ namespace RepairFlatRestApi.Models
         public virtual BrigateContent BrigateContent { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ColoborationOfBrigateSoComp> ColoborationOfBrigateSoComp { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BrigateContent> BrigateContent1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderTasks> OrderTasks { get; set; }
     }
 }

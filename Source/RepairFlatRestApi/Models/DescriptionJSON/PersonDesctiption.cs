@@ -27,7 +27,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class CreateNewClient
         {
-            public Guid? idUser;
+            public Guid idUser;
             public string Name;
             public string Lastname;
             public string Patronymic;

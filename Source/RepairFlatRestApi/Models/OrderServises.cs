@@ -14,6 +14,12 @@ namespace RepairFlatRestApi.Models
     
     public partial class OrderServises
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public OrderServises()
+        {
+            this.TaskServis = new HashSet<TaskServis>();
+        }
+    
         public System.Guid IdServises { get; set; }
         public Nullable<System.Guid> IdOrder { get; set; }
         public Nullable<System.Guid> idServis { get; set; }
@@ -24,5 +30,7 @@ namespace RepairFlatRestApi.Models
     
         public virtual OrderInformation OrderInformation { get; set; }
         public virtual OurServices OurServices { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskServis> TaskServis { get; set; }
     }
 }

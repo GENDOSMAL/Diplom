@@ -12,22 +12,27 @@ namespace RepairFlatRestApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ClientDetails
+    public partial class InformatioForPayment
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ClientDetails()
+        public InformatioForPayment()
         {
-            this.OrderInformation = new HashSet<OrderInformation>();
             this.DocPayment = new HashSet<DocPayment>();
         }
     
-        public System.Guid IdClient { get; set; }
-        public string Description { get; set; }
+        public System.Guid idInfPayment { get; set; }
+        public Nullable<System.Guid> idWorkerMake { get; set; }
+        public string NameOfRecipient { get; set; }
+        public string InnOfOrganization { get; set; }
+        public string KppOfOrganization { get; set; }
+        public string BankOfPayment { get; set; }
+        public string CheckingAcount { get; set; }
+        public string BIK { get; set; }
+        public string YIN { get; set; }
+        public Nullable<System.DateTime> DateOfInsert { get; set; }
     
-        public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderInformation> OrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocPayment> DocPayment { get; set; }
+        public virtual WorkerDetails WorkerDetails { get; set; }
     }
 }

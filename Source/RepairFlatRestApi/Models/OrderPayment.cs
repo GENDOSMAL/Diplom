@@ -17,11 +17,11 @@ namespace RepairFlatRestApi.Models
         public System.Guid IdPayment { get; set; }
         public Nullable<System.Guid> IdOrder { get; set; }
         public Nullable<System.Guid> IdWorkerMake { get; set; }
-        public Nullable<System.DateTime> DatePaymnent { get; set; }
         public string Description { get; set; }
-        public Nullable<decimal> Summa { get; set; }
+        public Nullable<System.Guid> idDocPayment { get; set; }
     
         public virtual OrderInformation OrderInformation { get; set; }
         public virtual WorkerDetails WorkerDetails { get; set; }
+        public virtual DocPayment DocPayment { get; set; }
     }
 }
