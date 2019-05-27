@@ -26,12 +26,14 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         Guid idPayment;
         bool NewOrder = true;
         double SummaPay;
+        BaseWindow window;
         #endregion
 
         #region Обработки
-        public AddPaymentInformation(Guid idOrder, object InfromationAboutPayment = null)
+        public AddPaymentInformation(Guid idOrder,ref BaseWindow baseWindow, object InfromationAboutPayment = null)
         {
             InitializeComponent();
+            window = baseWindow;
             this.idOrder = idOrder;
             if (InfromationAboutPayment != null)
             {
@@ -63,7 +65,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         #endregion

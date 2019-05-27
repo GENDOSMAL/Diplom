@@ -35,28 +35,16 @@ namespace RepairFlatWPF.UserControls.OrderWork
         private void EditServises_Click(object sender, RoutedEventArgs e)
         {
             object f = new object();
-            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddServisesInOrder(idOrder,f), "Обвновление данных об услугах");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Обвновление данных об услугах");
+            baseWindow.MakeOpen(new AddInfromationUserControl.AddServisesInOrder(idOrder,ref baseWindow, f));
+            baseWindow.ShowDialog();
         }
 
         private void AddServises_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddServisesInOrder(idOrder), "Добавление данных об услугах");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление данных об услугах");
+            baseWindow.MakeOpen(new AddInfromationUserControl.AddServisesInOrder(idOrder,ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)

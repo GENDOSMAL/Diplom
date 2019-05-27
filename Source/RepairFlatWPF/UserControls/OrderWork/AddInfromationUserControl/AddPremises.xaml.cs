@@ -31,12 +31,14 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         bool NotElement = false;
         double LenghtData, HeightData, WidthData;
 
+        BaseWindow window;
         #endregion
 
         #region Обработка событий и конструктор
-        public AddPremises(Guid idOrder, object InformatioAboutPremises = null)
+        public AddPremises(Guid idOrder,ref BaseWindow baseWindow, object InformatioAboutPremises = null)
         {
             InitializeComponent();
+            window = baseWindow;
             this.idOrder = idOrder;
             if (InformatioAboutPremises != null)
             {
@@ -75,7 +77,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void AddElement_Click(object sender, RoutedEventArgs e)
         {
-           
+
         }
 
         private void RedactElement_Click(object sender, RoutedEventArgs e)
@@ -83,15 +85,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             int index = DataGrid.SelectedIndex;
             if (index != -1)
             {
-                BaseWindow baseWindow = new BaseWindow(new AddElementOfPremises(idPremises,index), "Редактирование данных об элементах помщений");
-                try
-                {
-                    baseWindow.ShowDialog();
-                }
-                catch
-                {
-                    baseWindow.Close();
-                }
+                BaseWindow baseWindow = new BaseWindow("Редактирование данных об элементах помщений");
+                baseWindow.MakeOpen(new AddElementOfPremises(idPremises, ref baseWindow, index));
+                baseWindow.ShowDialog();
             }
             else
             {
@@ -114,20 +110,14 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         private void AddElementof_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new AddElementOfPremises(idPremises), "Добавление данных об элементах помщений");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление данных об элементах помщений");
+            baseWindow.MakeOpen(new AddElementOfPremises(idPremises, ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
@@ -148,7 +138,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             }
             else
             {
-                MakeSomeHelp.MSG("Необходимо загрузить данные о типах помщений в справочную информацию",MsgBoxImage:MessageBoxImage.Error);
+                MakeSomeHelp.MSG("Необходимо загрузить данные о типах помщений в справочную информацию", MsgBoxImage: MessageBoxImage.Error);
             }
         }
         #endregion
@@ -179,7 +169,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
             if (DataAboutElement.Rows.Count == 0)
             {
-                if(MakeSomeHelp.MSG("Вы действительно хотите не добавлять данные об элементах помешения?", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.Cancel)
+                if (MakeSomeHelp.MSG("Вы действительно хотите не добавлять данные об элементах помешения?", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.Cancel)
                 {
                     return false;
                 }

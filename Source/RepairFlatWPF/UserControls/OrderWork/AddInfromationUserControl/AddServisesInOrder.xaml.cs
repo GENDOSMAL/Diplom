@@ -27,12 +27,14 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         bool NewInfromation = true;
         bool IsSelect = false;
         double Count;
+        BaseWindow window;
 
         #endregion
         #region Обработка событий
-        public AddServisesInOrder(Guid IdOrder, object InfromationAboutServis = null)
+        public AddServisesInOrder(Guid IdOrder,ref BaseWindow baseWindow, object InfromationAboutServis = null)
         {
             InitializeComponent();
+            window = baseWindow;
             if (InfromationAboutServis != null)
             {
                 NewInfromation = false;
@@ -59,7 +61,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         private void AddServis_Click(object sender, RoutedEventArgs e)

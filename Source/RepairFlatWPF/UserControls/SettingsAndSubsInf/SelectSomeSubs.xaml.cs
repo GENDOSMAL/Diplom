@@ -11,20 +11,20 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
     {
         #region Переменные 
 
-        Model.SomeEnums.TypeOfSubs typeOfSubs;
+        SomeEnums.TypeOfSubs typeOfSubs;
         BaseWindow BaseWindow;
         #endregion
 
         #region Конструкторы
 
-        public SelectSomeSubs(Model.SomeEnums.TypeOfSubs typeOfSubs)
+        public SelectSomeSubs(SomeEnums.TypeOfSubs typeOfSubs)
         {
             InitializeComponent();
             this.typeOfSubs = typeOfSubs;
             MakeLoadFromLocalBD();
         }
 
-        public SelectSomeSubs(ref BaseWindow newWindow, Model.SomeEnums.TypeOfSubs typeOfSubs)
+        public SelectSomeSubs(ref BaseWindow newWindow, SomeEnums.TypeOfSubs typeOfSubs)
         {
             InitializeComponent();
             this.typeOfSubs = typeOfSubs;
@@ -41,15 +41,15 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void SelectBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Materials)
+            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
             {
                 //Тут про материалы
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Servises)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
             {
                 //Тут про услуги
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Post)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
             {
                 //Тут про должности
             }
@@ -58,15 +58,15 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void BtnSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Materials)
+            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
             {
                 //Тут про материалы
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Servises)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
             {
                 //Тут про услуги
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Post)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
             {
                 //Тут про должности
             }
@@ -80,15 +80,15 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void AddElement_Click(object sender, RoutedEventArgs e)
         {
-            if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Materials)
+            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
             {
                 //Тут про материалы
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Servises)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
             {
                 //Тут про услуги
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Post)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
             {
                 //Тут про должности
             }
@@ -96,15 +96,15 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void EditElement_Click(object sender, RoutedEventArgs e)
         {
-            if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Materials)
+            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
             {
                 //Тут про материалы
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Servises)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
             {
                 //Тут про услуги
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Post)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
             {
                 //Тут про должности
             }
@@ -112,15 +112,15 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void DeleteElement_Click(object sender, RoutedEventArgs e)
         {
-            if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Materials)
+            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
             {
                 //Тут про материалы
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Servises)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
             {
                 //Тут про услуги
             }
-            else if (typeOfSubs == Model.SomeEnums.TypeOfSubs.Post)
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
             {
                 //Тут про должности
             }
@@ -131,15 +131,15 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
         #region Дополнительные данные
         private void MakeLoadFromLocalBD()
         {
-            if(typeOfSubs == Model.SomeEnums.TypeOfSubs.Materials)
+            if(typeOfSubs == SomeEnums.TypeOfSubs.Materials)
             {
                 //Тут про материалы
             }
-            else if(typeOfSubs == Model.SomeEnums.TypeOfSubs.Servises)
+            else if(typeOfSubs == SomeEnums.TypeOfSubs.Servises)
             {
                 //Тут про услуги
             }
-            else if(typeOfSubs == Model.SomeEnums.TypeOfSubs.Post)
+            else if(typeOfSubs == SomeEnums.TypeOfSubs.Post)
             {
                 //Тут про должности
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepairFlatWPF.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,7 +84,8 @@ namespace RepairFlatWPF
                     case 1:
                         //Работа с клиентами
                         CloseMenu();
-                        MakeSomeHelp.DataGridMakeWork(new UserControls.ClientWork.SelectClientUserControl(Model.SomeEnums.TypeOfConrols.UserControl));
+                        BaseWindow baseWindow = new BaseWindow("sa");
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.ClientWork.SelectClientUserControl(SomeEnums.TypeOfConrols.UserControl,ref baseWindow));
                         break;
                     
                     case 2:

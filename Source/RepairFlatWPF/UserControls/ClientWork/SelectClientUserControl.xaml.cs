@@ -9,13 +9,14 @@ namespace RepairFlatWPF.UserControls.ClientWork
     /// </summary>
     public partial class SelectClientUserControl : UserControl
     {
-        Model.SomeEnums.TypeOfConrols typeOfConrols;
-
-        public SelectClientUserControl(Model.SomeEnums.TypeOfConrols typeOfConrols)
+        SomeEnums.TypeOfConrols typeOfConrols;
+        BaseWindow window;
+        public SelectClientUserControl(SomeEnums.TypeOfConrols typeOfConrols, ref BaseWindow baseWindow)
         {
             InitializeComponent();
+            window = baseWindow;
             this.typeOfConrols = typeOfConrols;
-            if (this.typeOfConrols == Model.SomeEnums.TypeOfConrols.UserControl)
+            if (this.typeOfConrols == SomeEnums.TypeOfConrols.UserControl)
             {
                 ForUserControl.Visibility = Visibility.Visible;
             }
@@ -32,34 +33,21 @@ namespace RepairFlatWPF.UserControls.ClientWork
 
         private void EditClient_Click(object sender, RoutedEventArgs e)
         {
-            object f = new object();
-            BaseWindow baseWindow = new BaseWindow(new AddUserControl(f), "Добавление данных о клиенте");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Редактирование данных о клиенте");
+            baseWindow.MakeOpen(new AddUserControl(ref baseWindow, typeOfConrols));
+            baseWindow.ShowDialog();
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new AddUserControl(), "Добавление данных о клиенте");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление данных о клиенте");
+            baseWindow.MakeOpen(new AddUserControl(ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void ReturnBTN_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         private void DeleteClient_Click(object sender, RoutedEventArgs e)
@@ -69,15 +57,9 @@ namespace RepairFlatWPF.UserControls.ClientWork
 
         private void GetLoginInformation_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new UserControls.AditinalControl.ShowDataForAuth(Guid.NewGuid()),"Информация о логине и пароле");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Информация о логине и пароле");
+            baseWindow.MakeOpen(new AditinalControl.ShowDataForAuth(Guid.NewGuid(),ref baseWindow));
+            baseWindow.ShowDialog();
         }
     }
 }

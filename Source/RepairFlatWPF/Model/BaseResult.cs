@@ -1,4 +1,4 @@
-﻿namespace RepairFlatRestApi.Models.DescriptionJSON
+﻿namespace RepairFlat.Model
 {
     public class BaseResult
     {

@@ -13,47 +13,6 @@ namespace RepairFlatRestApi.Controllers
     public  class DBController
     {
         #region Обработки при работе с данными пользователя
-        /// <summary>
-        /// Создание нового клиента
-        /// </summary>
-        internal static BaseResult CreateNewClient(PersonDesctiption.CreateNewClient descriptionUser)
-        {
-            return Run((db) =>
-            {
-                try
-                {
-                    db.User.Add(new User
-                    {
-                        idUser = descriptionUser.idUser,
-                        Name = descriptionUser.Name,
-                        LastName = descriptionUser.Lastname,
-                        Patronymic = descriptionUser.Patronymic,
-                        Pasport = descriptionUser.Pasport,
-                        Female = descriptionUser.Female,
-                        BirstDay = descriptionUser.Birstday,
-                        TypeOfUser = descriptionUser.TypeOfUser
-                    });
-                    db.ClientDetails.Add(new ClientDetails
-                    {
-                        IdClient = descriptionUser.idUser,
-                        Description = descriptionUser.Desc,
-                    });
-
-                    db.SaveChanges();
-                    return new BaseResult(){success = true};
-                }
-                catch(Exception ex)
-                {
-                    return new BaseResult()
-                    {
-                        success = true,
-                        description = ex.ToString()
-                    };
-                }
-
-            }, nameof(DBController), nameof(CreateNewClient));
-        }
-
  
 
         internal static WorkWithOrder.DataForRedact SelectAllDataAboutOrder(Guid idOrder)
@@ -85,7 +44,7 @@ namespace RepairFlatRestApi.Controllers
                 };
 
                 return dataForRedact;
-            }, nameof(DBController), nameof(CreateNewClient));
+            }, nameof(DBController), nameof(SelectAllDataAboutOrder));
         }
 
         internal static object CreateNewServis(WorkWithOrder.DataAboutServis newServisData)

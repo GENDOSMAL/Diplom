@@ -114,8 +114,11 @@
     <Compile Include="Controller\MakeWorkWirthDataBase.cs" />
     <Compile Include="Controller\MakeWorkWithWord.cs" />
     <Compile Include="Model\BaseJsonModel.cs" />
+    <Compile Include="Model\BaseResult.cs" />
+    <Compile Include="Model\ContactModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MakeSubs.cs" />
+    <Compile Include="Model\PersonDesctiption.cs" />
     <Compile Include="Model\SaveSomeData.cs" />
     <Compile Include="Model\SomeEnums.cs" />
     <Compile Include="Model\WorkWithDB.cs" />

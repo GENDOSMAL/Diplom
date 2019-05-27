@@ -29,28 +29,17 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void AddPayment_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new AddInfromationUserControl.AddPaymentInformation(idOrder), "Добавление данных о платежах");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление данных о платежах");
+            baseWindow.MakeOpen(new AddInfromationUserControl.AddPaymentInformation(idOrder,ref baseWindow));
+            baseWindow.ShowDialog();
+
         }
 
         private void EditPayment_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new AddInfromationUserControl.AddPaymentInformation(idOrder,idOrder), "Редактирование данных о платежах");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Редактирование данных о платежах");
+            baseWindow.MakeOpen(new AddInfromationUserControl.AddPaymentInformation(idOrder, ref baseWindow,idOrder));
+            baseWindow.ShowDialog();
         }
 
         private void DeletePayment_Click(object sender, RoutedEventArgs e)

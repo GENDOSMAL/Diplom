@@ -35,15 +35,9 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void AddTask_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            baseWindow1 = new BaseWindow(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder, ref baseWindow1), "Создание нового задания");
-            try
-            {
-                baseWindow1.ShowDialog();
-            }
-            catch
-            {
-                baseWindow1.Close();
-            }
+            BaseWindow redactwindow = new BaseWindow("Создание нового задания");
+            redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder, ref redactwindow));
+            redactwindow.ShowDialog();         
         }
 
         private void BtnSearch_Click(object sender, System.Windows.RoutedEventArgs e)

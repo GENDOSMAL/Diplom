@@ -29,29 +29,17 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void AddMeasurmant_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddPremises(idOrder), "Добавление данных о помещениях");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление данных о помещениях");
+            baseWindow.MakeOpen(new AddInfromationUserControl.AddPremises(idOrder, ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void EditMeasurment_Click(object sender, RoutedEventArgs e)
         {
             object f = new object();
-            BaseWindow baseWindow = new BaseWindow(new UserControls.OrderWork.AddInfromationUserControl.AddPremises(idOrder,f), "Добавление данных о помещениях");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление данных о помещениях");
+            baseWindow.MakeOpen(new AddInfromationUserControl.AddPremises(idOrder,ref baseWindow, f));
+            baseWindow.ShowDialog();
         }
 
         private void DeleteMeasurment_Click(object sender, RoutedEventArgs e)

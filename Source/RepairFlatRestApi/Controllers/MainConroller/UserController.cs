@@ -11,11 +11,6 @@ namespace RepairFlatRestApi.Controllers
     [RoutePrefix("api/User")]
     public class UserController:BaseController
     {
-        /// <summary>
-        /// Метод для создании базовой информации о пользователе в таблице User
-        /// </summary>
-        /// <param name="DescriptionPerson"></param>
-        /// <returns></returns>
         [HttpPost, Route("create")]
         public HttpResponseMessage CreateNewPerson([FromBody] PersonDesctiption.CreateNewClient DescriptionPerson)
         {

@@ -20,8 +20,10 @@ namespace RepairFlatWPF.UserControls.AditinalControl
     /// </summary>
     public partial class ShowPassword : UserControl
     {
-        public ShowPassword(string login,string password)
+        BaseWindow window;
+        public ShowPassword(string login,string password,ref BaseWindow baseWindow)
         {
+            window = baseWindow;
             InitializeComponent();
             Login.Text = login;
             Password.Text = password;
@@ -29,7 +31,7 @@ namespace RepairFlatWPF.UserControls.AditinalControl
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
     }
 }

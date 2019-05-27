@@ -13,11 +13,15 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         Guid idPremises;
         bool NewElement = true;
         double lenghtData, WidthData, heightData;
-        public AddElementOfPremises(Guid idOfPremises, object InformationAbouElement=null)
+        BaseWindow window;
+        public AddElementOfPremises(Guid idOfPremises,ref BaseWindow baseWindow, object InformationAbouElement=null)
         {
             InitializeComponent();
-            TypeOfElement.Items.Add("Окно");
-            TypeOfElement.Items.Add("Дверь");
+            foreach(string TypeOfele in SomeEnums.TypeOfElement)
+            {
+                TypeOfElement.Items.Add(TypeOfele);
+            }
+
             if (InformationAbouElement != null)
             {
                 NewElement = false;
@@ -47,7 +51,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         private bool CheckFields()

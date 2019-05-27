@@ -26,7 +26,7 @@ namespace RepairFlatWPF.UserControls
         public MainOrderUserControler()
         {
             InitializeComponent();
-            foreach(var type in Model.SomeEnums.RypeOfSearchOrder)
+            foreach(var type in SomeEnums.RypeOfSearchOrder)
             {
                 SelectedType.Items.Add(type);
             }
@@ -35,29 +35,17 @@ namespace RepairFlatWPF.UserControls
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
-            var OrderWork = new BaseWindow( new OrderWork.MakeNewOrderUserControl(),"Cоздание нового заказа");
-            try
-            {
-                OrderWork.ShowDialog();
-            }
-            catch
-            {
-                OrderWork.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Cоздание нового заказа");
+            baseWindow.MakeOpen(new OrderWork.MakeNewOrderUserControl(ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void EditOrder_Click(object sender, RoutedEventArgs e)
         {
             int NumberOfOrder = 0;
-            var OrderWork = new BaseWindow(new OrderWork.MakeNewOrderUserControl(false),$"Редактирование заказа №{NumberOfOrder}");
-            try
-            {
-                OrderWork.ShowDialog();
-            }
-            catch
-            {
-                OrderWork.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow($"Редактирование заказа №{NumberOfOrder}");
+            baseWindow.MakeOpen(new OrderWork.MakeNewOrderUserControl(ref baseWindow,false));
+            baseWindow.ShowDialog();
         }
 
 

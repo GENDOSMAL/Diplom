@@ -20,21 +20,23 @@ namespace RepairFlatWPF.UserControls.OrderWork
     /// </summary>
     public partial class MakeNewOrderUserControl : UserControl
     {
-        public bool NewOrder=true;
+        public bool NewOrder = true;
         Guid IdUser;
         Guid IdBrigade;
         Guid idAdress;
         Guid idContact;
         Guid idOrder;
-        public MakeNewOrderUserControl(bool NewOrder=true)
+        BaseWindow Window;
+        public MakeNewOrderUserControl(ref BaseWindow baseWindow, bool NewOrder = true)
         {
             InitializeComponent();
+            Window = baseWindow;
             this.NewOrder = NewOrder;
             if (!NewOrder)
             {
                 SelectClient.IsEnabled = false;
             }
-            foreach (var StatOfOrder in Model.SomeEnums.StatusOfOrder)
+            foreach (var StatOfOrder in SomeEnums.StatusOfOrder)
             {
                 StatusOfOrders.Items.Add(StatOfOrder);
             }
@@ -49,72 +51,41 @@ namespace RepairFlatWPF.UserControls.OrderWork
         private void SelectClient_Click(object sender, RoutedEventArgs e)
         {
             //TODO Выбор клиента
-                       
-            BaseWindow baseWindow = new BaseWindow( new ClientWork.SelectClientUserControl(Model.SomeEnums.TypeOfConrols.Window), "Выберите клиента");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Выберите клиента");
+            baseWindow.MakeOpen(new ClientWork.SelectClientUserControl(SomeEnums.TypeOfConrols.Window, ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void AddAdress_Click(object sender, RoutedEventArgs e)
         {
             //TODO Добавление Адреса
             this.idAdress = Guid.NewGuid();
-            UserControls.BaseWindow baseWindow = new BaseWindow(new AditinalControl.AddInformationAboutAdress(idAdress), "Укажите адресс");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
-
+            BaseWindow baseWindow = new BaseWindow("Создание адресса");
+            baseWindow.MakeOpen(new AditinalControl.AddInformationAboutAdress(idAdress, ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
-        private void SelectBrigade_Click(object sender, RoutedEventArgs e)
-        {
-            //TODO Выбор бригады
-            UserControls.BaseWindow baseWindow = new BaseWindow( new WorkerInformation.SelectBrigadeTable(Model.SomeEnums.TypeOfConrols.Window), "Выберите бригаду");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
-        }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
             //Возврат назад
-            MakeSomeHelp.CloseBaseWindow();
+            Window.Close();
         }
 
         private void AddContactData_Click(object sender, RoutedEventArgs e)
         {
             //TODO Выбор контакта
             idContact = Guid.NewGuid();
-            UserControls.BaseWindow baseWindow = new BaseWindow( new AddContactUserConrol(IdUser,idContact), "Добавление контакной информации");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление контакной информации");
+            baseWindow.MakeOpen(new AddContactUserConrol(IdUser, ref baseWindow, idContact));
+            baseWindow.ShowDialog();
         }
 
         private void ChangeClient_Click(object sender, RoutedEventArgs e)
         {
-
+            BaseWindow baseWindow = new BaseWindow("Обновление данных");
+            baseWindow.MakeOpen(new AddUserControl(ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void RedactContactData_Click(object sender, RoutedEventArgs e)

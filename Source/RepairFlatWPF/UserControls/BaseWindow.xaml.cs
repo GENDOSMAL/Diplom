@@ -26,14 +26,15 @@ namespace RepairFlatWPF.UserControls
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel(this, Title);
+            
         }
-        public BaseWindow(UserControl userControl, string Title)
-        {           
-            InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this, Title);
-            GridForContent.Children.Clear();
-            GridForContent.Children.Add(userControl);
-        }
+        //public BaseWindow(UserControl userControl, string Title)
+        //{           
+        //    InitializeComponent();
+        //    this.DataContext = new MainWindowViewModel(this, Title);
+        //    GridForContent.Children.Clear();
+        //    GridForContent.Children.Add(userControl);
+        //}
 
         public void MakeOpen(UserControl userControl)
         {

@@ -22,9 +22,11 @@ namespace RepairFlatWPF.UserControls.AditinalControl
     {
         Guid idAdress;
         bool Redact = false;
-        public AddInformationAboutAdress(Guid idAdress, bool Redact=false)
+        BaseWindow window;
+        public AddInformationAboutAdress(Guid idAdress,ref BaseWindow baseWindow, bool Redact=false)
         {
             InitializeComponent();
+            window = baseWindow;
             this.Redact = Redact;
             this.idAdress = idAdress;
             if (Redact)
@@ -47,7 +49,7 @@ namespace RepairFlatWPF.UserControls.AditinalControl
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
     }
 }

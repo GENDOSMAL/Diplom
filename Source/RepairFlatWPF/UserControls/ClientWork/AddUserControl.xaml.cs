@@ -1,5 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RepairFlat.Model;
+using RepairFlatWPF.Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static RepairFlat.Model.PersonDesctiption;
 
 namespace RepairFlatWPF.UserControls
 {
@@ -20,12 +25,37 @@ namespace RepairFlatWPF.UserControls
     /// </summary>
     public partial class AddUserControl : UserControl
     {
-        Guid idClient;
+        #region Переменные 
+        Guid idUser;
         bool NewData = true;
+        DataTable TableOfContactInformation;
+        BaseWindow window;
+        /// <summary>
+        /// 1- номер в таблице
+        /// 2- уникальный номер контакта
+        /// 3- уникальный номер типа контакта
+        /// </summary>
+        List<Tuple<int, Guid, Guid>> IdContactAndTypeInTable = new List<Tuple<int, Guid, Guid>>();
+
+        #endregion
+
         #region Констурктор и обработчик
-        public AddUserControl(object InformationAboutClient = null)
+        public AddUserControl(ref BaseWindow baseWindow, object InformationAboutClient = null)
         {
             InitializeComponent();
+            window = baseWindow;
+            foreach (string Type in SomeEnums.FemaleType)
+            {
+                Female.Items.Add(Type);
+            }
+
+            TableOfContactInformation = new DataTable();
+
+            foreach (string NameOfColumn in SomeEnums.ContactTableDesc)
+            {
+                TableOfContactInformation.Columns.Add(NameOfColumn);
+            }
+
             if (InformationAboutClient != null)
             {
                 AddBtn.Content = "Редактировать";
@@ -33,41 +63,91 @@ namespace RepairFlatWPF.UserControls
             }
             else
             {
-                idClient = Guid.NewGuid();
+                idUser = Guid.NewGuid();
             }
         }
 
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             if (CheckFields())
             {
                 if (NewData)
                 {
                     //Тут добавление
+                    List<ContactModel.InformationAboutContact> ContactInformatio = new List<ContactModel.InformationAboutContact>();
+                    if (TableOfContactInformation.Rows.Count != 0)
+                    {
+                        for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
+                        {
+                            Guid idContact = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item2).First();
+                            Guid idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item3).First();
+                            ContactModel.InformationAboutContact contact = new ContactModel.InformationAboutContact()
+                            {
+                                DateAdd = DateTime.Now,
+                                Desctription = TableOfContactInformation.Rows[i][3].ToString(),
+                                idContact = idContact,
+                                idTypeOfContact = idType,
+                                idUser = idUser,
+                                Value = TableOfContactInformation.Rows[i][2].ToString()
+                            };
+                            ContactInformatio.Add(contact);
+                        }
+                    }
+                    else
+                    {
+                        ContactInformatio = null;
+                    }
+                    CreateNewClient createNewClient = new CreateNewClient
+                    {
+                        idUser = idUser,
+                        Birstday = DateOfBirsd.SelectedDate.Value,
+                        Desc = Description.Text.Trim(),
+                        Female = Female.SelectedIndex + 1,
+                        Lastname = Famil.Text.Trim(),
+                        Name = Name.Text.Trim(),
+                        Pasport = Pasport.Text.Trim(),
+                        Patronymic = Patronymic.Text.Trim(),
+                        TypeOfUser = SomeEnums.TypeOfUser.Cl.ToString(),
+                        ListOfContact = ContactInformatio
+                    };
+                    string Json = JsonConvert.SerializeObject(createNewClient);
+                    string urlSend = "api/user/create";
+                    AddBtn.Content = "Ожидайте...";
+                    RetutnBTN.Content = "Ожидайте...";
+                    AddBtn.IsEnabled = false;
+                    RetutnBTN.IsEnabled = false;
+
+                    var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(AddBtn_Click)));
+                    var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+
+                    if (!deserializedProduct.success)
+                    {
+                        MakeSomeHelp.MSG($"Произошла ошикбка при создании пользователя {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MakeSomeHelp.MSG("Данные добавлены!", MsgBoxImage: MessageBoxImage.Information);
+                    }
+                    window.Close();
                 }
                 else
                 {
-                    //Тут редактирование
+                    //Тут обновление
                 }
             }
         }
 
         private void AddElement_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new AddContactUserConrol(idClient), "Добавление контактной информации");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Добавление контактной информации");
+            baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow));
+            baseWindow.ShowDialog();
+
         }
 
         private void RedactElement_Click(object sender, RoutedEventArgs e)
@@ -75,16 +155,9 @@ namespace RepairFlatWPF.UserControls
             int index = DataGrid.SelectedIndex;
             if (index != -1)
             {
-                object some = new object();
-                BaseWindow baseWindow = new BaseWindow(new AddContactUserConrol(idClient, some), "Редактирование контактной информации");
-                try
-                {
-                    baseWindow.ShowDialog();
-                }
-                catch
-                {
-                    baseWindow.Close();
-                }
+                BaseWindow baseWindow = new BaseWindow("Редактирование контактной информации");
+                baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow, idUser));
+                baseWindow.ShowDialog();
             }
             else
             {
@@ -98,6 +171,7 @@ namespace RepairFlatWPF.UserControls
             int index = DataGrid.SelectedIndex;
             if (index != -1)
             {
+
             }
             else
             {

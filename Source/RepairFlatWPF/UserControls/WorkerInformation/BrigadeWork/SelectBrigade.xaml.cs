@@ -20,12 +20,14 @@ namespace RepairFlatWPF.UserControls.WorkerInformation
     /// </summary>
     public partial class SelectBrigadeTable : UserControl
     {
-        Model.SomeEnums.TypeOfConrols typeOfConrols;
-        public SelectBrigadeTable(Model.SomeEnums.TypeOfConrols typeOfConrols)
+        SomeEnums.TypeOfConrols typeOfConrols;
+        BaseWindow window;
+        public SelectBrigadeTable(SomeEnums.TypeOfConrols typeOfConrols,ref BaseWindow baseWindow)
         {
             InitializeComponent();
+            window = baseWindow;
             this.typeOfConrols = typeOfConrols;
-            if (typeOfConrols == Model.SomeEnums.TypeOfConrols.Window)
+            if (typeOfConrols == SomeEnums.TypeOfConrols.Window)
             {
                 ButtonForWindow.Visibility = Visibility.Visible;
             }
@@ -52,7 +54,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         private void SelectBrigade_Click(object sender, RoutedEventArgs e)

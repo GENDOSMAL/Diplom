@@ -22,9 +22,11 @@ namespace RepairFlatWPF.UserControls.AditinalControl
     {
         Guid idUser;
         string login,password;
-        public ShowDataForAuth(Guid idUser)
+        BaseWindow window;
+        public ShowDataForAuth(Guid idUser,ref BaseWindow baseWindow)
         {
             InitializeComponent();
+            window = baseWindow;
         }
 
         private void ForWord_Click(object sender, RoutedEventArgs e)
@@ -34,20 +36,14 @@ namespace RepairFlatWPF.UserControls.AditinalControl
 
         private void OnScreen_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow(new AditinalControl.ShowPassword(login, password), "Данные о логине и пароле");
-            try
-            {
-                baseWindow.ShowDialog();
-            }
-            catch
-            {
-                baseWindow.Close();
-            }
+            BaseWindow baseWindow = new BaseWindow("Информация о логине и пароле");
+            baseWindow.MakeOpen(new ShowPassword(login, password,ref baseWindow));
+            baseWindow.ShowDialog();            
         }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
     }
 }

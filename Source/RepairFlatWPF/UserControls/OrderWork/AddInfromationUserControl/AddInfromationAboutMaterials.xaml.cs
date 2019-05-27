@@ -25,9 +25,11 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         bool NewInformation = true;
         bool InformationSelect = false;
         double Count;
-        public AddInfromationAboutMaterials(Guid IdOrder,object InfromationAboutMaterial=null)
+        BaseWindow window;
+        public AddInfromationAboutMaterials(Guid IdOrder,ref BaseWindow baseWindow,object InfromationAboutMaterial=null)
         {
             InitializeComponent();
+            window = baseWindow;
             this.idOrder = IdOrder;
             if (InfromationAboutMaterial != null)
             {
@@ -55,7 +57,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         private void AddMaterial_Click(object sender, RoutedEventArgs e)

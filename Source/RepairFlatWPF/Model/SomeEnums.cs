@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RepairFlatWPF.Model
+namespace RepairFlatWPF
 {
     public class SomeEnums
     {
@@ -14,6 +14,18 @@ namespace RepairFlatWPF.Model
         public static string[] RypeOfSearchOrder = new string[] { "Номер", "Статус", "Дата начала", "Фамилия клиента" };
 
         public static string[] TypeOfElementOfPremises= new string[] { "Оконо", "Дверь" };
+
+        public static string[] FemaleType = new string[] { "Мужчина", "Женщина" };
+
+        public static string[] TypeOfElement = new string[] { "Окно", "Дверь" };
+
+
+
+        #endregion
+
+        #region Описание DataTable
+
+        public static string[] ContactTableDesc = new string[] { "Номер", "Тип", "Значение", "Описание" };
 
 
         #endregion

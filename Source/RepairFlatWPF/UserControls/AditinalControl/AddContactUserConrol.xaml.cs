@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace RepairFlatWPF.UserControls
 {
-    /// <summary>
-    /// Interaction logic for AddContactUserConrol.xaml
-    /// </summary>
     public partial class AddContactUserConrol : UserControl
     {
         List<Guid> idContactType;
@@ -26,10 +23,11 @@ namespace RepairFlatWPF.UserControls
         Guid idUser;
         Guid idContact;
         bool NewContact = true;
-        public AddContactUserConrol(Guid idUser, object InformationAboutContact = null)
+        BaseWindow window;
+        public AddContactUserConrol(Guid idUser,ref BaseWindow baseWindow, object InformationAboutContact = null)
         {
             InitializeComponent();
-
+            window = baseWindow;
             if (InformationAboutContact == null)
             {
                 this.idContact = Guid.NewGuid();
@@ -41,7 +39,7 @@ namespace RepairFlatWPF.UserControls
             var ListOfType = MakeListOfTypeOfContact();
             if (ListOfType == null)
             {
-                //Закрыть окно
+                window.Close();
                 MakeSomeHelp.MSG("Необходимо обратиться к администратору либо перезагрузить систему", MsgBoxImage: MessageBoxImage.Error);
             }
             else
@@ -71,8 +69,7 @@ namespace RepairFlatWPF.UserControls
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Переделать
-            MakeSomeHelp.CloseBaseWindow();
+            window.Close();
         }
 
         private List<string> MakeListOfTypeOfContact()
