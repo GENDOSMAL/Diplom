@@ -111,5 +111,20 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 baseWindow.Close();
             }
         }
+
+        private void ChangeClient_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void RedactContactData_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ChangeAdress_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

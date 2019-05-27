@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
              MaxHeight="400"
-             MaxWidth="600"
+             MaxWidth="700"
              Height="auto" Width="auto">
     <Grid>
         <Grid.ColumnDefinitions>

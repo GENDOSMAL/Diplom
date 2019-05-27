@@ -18,12 +18,13 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return DBController.CreaNewAdress(NewAdress);
             }, nameof(SubStringController), nameof(CreateNewAdress));
         }
-        [HttpPost, Route("create")]
-        public HttpResponseMessage UpdateAdress([FromBody] Models.AdressDescription NewAdress)
+
+        [HttpPost, Route("update")]
+        public HttpResponseMessage UpdateAdress([FromBody] Models.AdressDescription UpdatedAdress)
         {
             return CatchError(() =>
             {
-                return DBController.UpdateDataAboutAdress(NewAdress);
+                return DBController.UpdateDataAboutAdress(UpdatedAdress);
             }, nameof(SubStringController), nameof(CreateNewAdress));
         }
     }

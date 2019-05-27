@@ -10,7 +10,7 @@ namespace RepairFlatRestApi.Controllers
     /// <summary>
     /// 
     /// </summary>
-    public class DBController
+    public  class DBController
     {
         #region Обработки при работе с данными пользователя
         /// <summary>
@@ -53,6 +53,8 @@ namespace RepairFlatRestApi.Controllers
 
             }, nameof(DBController), nameof(CreateNewClient));
         }
+
+ 
 
         internal static WorkWithOrder.DataForRedact SelectAllDataAboutOrder(Guid idOrder)
         {
@@ -1083,26 +1085,27 @@ namespace RepairFlatRestApi.Controllers
 
 
         #endregion
+
         #region Базовые вещи
         /// <summary>
         /// Базовый метод обработки запросов который также обрабатывает ошибки
         /// </summary>
         /// <param name="dbAction">Событие работы с базой данных</param>
         /// <param name="nameOfMethod">Наименование метода, необходимо для логирования</param>
-        static void Run(Action<RepairFlatDB> dbAction, string nameOfMethod)
-        {
-            using (var db = new RepairFlatDB())
-            {
-                try
-                {
-                    dbAction(db);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception($"В методе {nameof(DBController)}::{nameOfMethod} произошла ошибка: <{ex.ToString()}>");
-                }
-            }
-        }
+        //public static void Run(Action<RepairFlatDB> dbAction, string nameOfMethod)
+        //{
+        //    using (var db = new RepairFlatDB())
+        //    {
+        //        try
+        //        {
+        //            dbAction(db);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception($"В методе {nameof(DBController)}::{nameOfMethod} произошла ошибка: <{ex.ToString()}>");
+        //        }
+        //    }
+        //}
         /// <summary>
         /// Метод обработки работы с базой данных, который также может возвращать некоторые данные
         /// </summary>
@@ -1111,7 +1114,7 @@ namespace RepairFlatRestApi.Controllers
         /// <param name="NameOfClass">Наименование класса в котором происходит обработка метода, необходимо для логирования</param>
         /// <param name="nameOfMethod">Наименование метода, который вызывает данный метод, необходимо для ведения логов</param>
         /// <returns></returns>
-        static TResult Run<TResult>(Func<RepairFlatDB, TResult> dbFunction, string NameOfClass, string nameOfMethod)
+        public static TResult Run<TResult>(Func<RepairFlatDB, TResult> dbFunction, string NameOfClass, string nameOfMethod)
         {
             using (var db = new RepairFlatDB())
             {
@@ -1122,6 +1125,21 @@ namespace RepairFlatRestApi.Controllers
                 catch (Exception ex)
                 {
                     throw new Exception($"В методе {NameOfClass}::{nameOfMethod} произошла ошибка: <{ex.ToString()}>");
+                }
+            }
+        }
+
+        public static TResult Run<TResult>(Func<RepairFlatDB, TResult> dbFunction)
+        {
+            using (var db = new RepairFlatDB())
+            {
+                try
+                {
+                    return dbFunction(db);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"В методе произошла ошибка: <{ex.ToString()}>");
                 }
             }
         }

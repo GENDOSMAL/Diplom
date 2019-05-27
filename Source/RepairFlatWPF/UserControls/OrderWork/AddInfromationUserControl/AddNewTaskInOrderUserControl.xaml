@@ -101,8 +101,32 @@
                         <TextBox Name="AllSumma" Grid.Row="3" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Стоимость задания" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" IsEnabled="False" />
 
                     </Grid>
+                    <!--Для выбора помещений-->
+                    <Grid Name="ForPremises"   >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="65"/>
+                        </Grid.RowDefinitions>
+                        <Viewbox  Grid.Row="0" >
+                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите помещения для работы" FontFamily="Times New Roman" FontSize="45 "/>
+                        </Viewbox>
+                        <StackPanel Grid.Row="1" Name="AllPremises">
+                            
+                        </StackPanel>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                        </Grid>
+
+
+                    </Grid>
+                    
                     <!--Для информации об услугах-->
-                    <Grid Name="ForServises"   >
+                    <Grid Name="ForServises"  Visibility="Collapsed" >
                         <Grid.RowDefinitions>
                             <RowDefinition Height="60"/>
                             <RowDefinition Height="*"/>
