@@ -25,11 +25,14 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         bool NewData = true;
         Guid idOrder;
         Guid idPremises;
-
+        List<Guid> ListOfId;
+        List<string> ListOfTooltlip;
         DataTable DataAboutElement;
+        bool NotElement = false;
         double LenghtData, HeightData, WidthData;
 
         #endregion
+
         #region Обработка событий и конструктор
         public AddPremises(Guid idOrder, object InformatioAboutPremises = null)
         {
@@ -40,11 +43,39 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 NewData = false;
                 AddBtn.Content = "Редактировать";
             }
+            var ListOfPremisesType = MakeListOfTypeOfPremises();
+            if (ListOfPremisesType == null)
+            {
+                //Закрыть окно
+                MakeSomeHelp.MSG("Необходимо обратиться к администратору либо перезагрузить систему", MsgBoxImage: MessageBoxImage.Error);
+            }
+            else
+            {
+                if (ListOfPremisesType.Count != 0)
+                {
+                    for (int i = 0; i < ListOfPremisesType.Count; i++)
+                    {
+                        ComboBoxItem NewItem = new ComboBoxItem();
+                        NewItem.Content = ListOfPremisesType[i];
+                        NewItem.ToolTip = ListOfTooltlip[i];
+                        TypeOfPremises.Items.Add(NewItem);
+                    }
+                }
+                else
+                {
+                    ComboBoxItem NewItem = new ComboBoxItem();
+                    NewItem.Content = "Нет данных";
+                    NewItem.ToolTip = "Необходимо задать данные о типах помещений";
+                    TypeOfPremises.Items.Add(NewItem);
+                    NotElement = true;
+                }
+            }
+
         }
 
         private void AddElement_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void RedactElement_Click(object sender, RoutedEventArgs e)
@@ -101,16 +132,23 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckFields())
+            if (NotElement)
             {
-                if (NewData)
+                if (CheckFields())
                 {
-                    //Тут если данные новые
+                    if (NewData)
+                    {
+                        //Тут если данные новые
+                    }
+                    else
+                    {
+                        //Тут если данные обновляются
+                    }
                 }
-                else
-                {
-                    //Тут если данные обновляются
-                }
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Необходимо загрузить данные о типах помщений в справочную информацию",MsgBoxImage:MessageBoxImage.Error);
             }
         }
         #endregion
@@ -147,6 +185,43 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 }
             }
             return true;
+        }
+
+        private List<string> MakeListOfTypeOfPremises()
+        {
+            List<string> TypeOfContact = new List<string>();
+            ListOfId = new List<Guid>();
+            ListOfTooltlip = new List<string>();
+            string query = "Select * from PremisesType";
+            var TablesOfTypeOfContact = Controller.MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
+            if (TablesOfTypeOfContact != null)
+            {
+                DataTable ContactType = TablesOfTypeOfContact as DataTable;
+                for (int i = 0; i < ContactType.Rows.Count; i++)
+                {
+                    try
+                    {
+                        string desc = !string.IsNullOrEmpty(ContactType.Rows[i]["Descriprtion"].ToString()) ? ContactType.Rows[i]["Descriprtion"].ToString() : "Не данных";
+                        ListOfTooltlip.Add(desc);
+                        TypeOfContact.Add(ContactType.Rows[i]["NameOfPremises"].ToString());
+                        Guid id;
+                        if (Guid.TryParse(ContactType.Rows[i]["idPremises"].ToString(), out id))
+                        {
+                            ListOfId.Add(id);
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+
+                }
+            }
+            return TypeOfContact;
         }
         #endregion
     }

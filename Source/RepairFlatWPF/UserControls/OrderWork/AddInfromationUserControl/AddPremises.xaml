@@ -16,7 +16,6 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/> <!--Для типа помещения c кнопкой-->
-            <RowDefinition Height="*"/> <!--Для описания-->
             <RowDefinition Height="*"/> <!-- Для ширины длины и высоты-->
             <RowDefinition Height="*"/> <!--Для периметра-->
             <RowDefinition Height="*"/> <!--Для площади-->
@@ -25,9 +24,9 @@
             <RowDefinition Height="50"/> <!--Для кнопок работы с элементами-->
             <RowDefinition Height="65"/> <!--Для кнопок-->
         </Grid.RowDefinitions>
-        <ComboBox Name="TypeOfPremises" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="0" Margin="15,0,20,0" materialDesign:HintAssist.Hint="Тип помещения" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center" />
-        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="1" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
-        <Grid Grid.ColumnSpan="2" Grid.Row="2">
+        <ComboBox Name="TypeOfPremises" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="0" Margin="15,0,20,0" materialDesign:HintAssist.Hint="Тип помещения" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center" />
+        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="0" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
+        <Grid Grid.ColumnSpan="2" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -38,15 +37,15 @@
             <TextBox Name="Height" FontFamily="Times New Roman" FontSize="25" Grid.Column="2" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Высота" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
 
         </Grid>
-        <TextBox Name="PWalls" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P стен" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
-        <TextBox Name="PCelling" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P пола" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False"  />
-        <TextBox Name="SWalls" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="4" Margin="15,0,15,0" materialDesign:HintAssist.Hint="S cтена" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"  IsEnabled="False"/>
-        <TextBox Name="SFloor" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="4" Margin="15,0,15,0" materialDesign:HintAssist.Hint="S пола" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"  IsEnabled="False"/>
-        <Viewbox  Grid.Row="5" Grid.ColumnSpan="2"  >
+        <TextBox Name="PWalls" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P стен" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
+        <TextBox Name="PCelling" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P пола" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False"  />
+        <TextBox Name="SWalls" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="S cтена" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"  IsEnabled="False"/>
+        <TextBox Name="SFloor" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="S пола" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"  IsEnabled="False"/>
+        <Viewbox  Grid.Row="4" Grid.ColumnSpan="2"  >
             <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Элементы помещения" FontFamily="Times New Roman" FontSize="45 "/>
         </Viewbox>
-        <DataGrid Grid.Row="6" x:Name="DataGrid" Grid.ColumnSpan="2" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
-        <Grid Grid.ColumnSpan="2" Grid.Row="7">
+        <DataGrid Grid.Row="5" x:Name="DataGrid" Grid.ColumnSpan="2" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+        <Grid Grid.ColumnSpan="2" Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -54,10 +53,10 @@
             </Grid.ColumnDefinitions>
             <Button Name="addElementof" Click="AddElementof_Click" Content="Добавить" Style="{StaticResource AllButtonAction}" Grid.Column="0"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
             <Button Name="RedactElement" Click="RedactElement_Click" Content="Редактировать" FontSize="21" Style="{StaticResource AllButtonAction}" Grid.Column="1"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
-            <Button Name="DeleteElement" Click="DeleteElement_Click" Content="Удалить"  Style="{StaticResource AllButtonAction}" Grid.Column="2"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="160"/>
+            <Button Name="DeleteElement" Click="DeleteElement_Click" Content="Удалить"  Style="{StaticResource AllButtonAction}" Grid.Column="2"  Margin="15,0,18,0" VerticalAlignment="Center" Height="40" Width="160"/>
         </Grid>
-        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="8"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
-        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="8" Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="7"  Margin="0,0,0,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="7" Margin="0,0,0,0" VerticalAlignment="Center" Height="40" Width="240"/>
 
 
     </Grid>

@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
-             MaxHeight="600"
-             MaxWidth="800"
+             MaxHeight="400"
+             MaxWidth="600"
              Height="auto" Width="auto">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,10 +20,9 @@
             <RowDefinition Height="*"/>            
         </Grid.RowDefinitions>
         <ComboBox Name="TypeOFContact" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="0" Margin="15,0,15,10" materialDesign:HintAssist.Hint="Тип контактной информации" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center"  />
-        <TextBox Name="Value" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="1" Margin="15,10,15,10" materialDesign:HintAssist.Hint="Данные о контакте" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
+        <TextBox Name="Value" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="1" Margin="15,10,15,10" materialDesign:HintAssist.Hint="Значение" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" TextWrapping="WrapWithOverflow"/>
         <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="2"  Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" TextWrapping="WrapWithOverflow" MaxLength="50"/>
         <Button Name="ReturnBtn" Click="ReturnBtn_Click" Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" Height="60" Width="300" Margin="15 0 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Назад" />
-        <Button Name="CreateContact" Click="CreateContact_Click" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" Height="60" Width="305" Margin="15 0 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Добавление контакта" />
-
+        <Button Name="CreateContact" Click="CreateContact_Click" Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" Height="60" Width="305" Margin="15 0 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Добавить" />
     </Grid>
 </UserControl>

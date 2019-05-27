@@ -27,6 +27,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     
                     <Button Uid="0" Grid.Column="0"   Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
@@ -39,11 +40,18 @@
                     <Button Uid="1" Grid.Column="1" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Помещения для работы" FontFamily="Times New Roman" FontSize="45 "/>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
+                    <Button Uid="2" Grid.Column="2" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                        <Button.Content>
+                            <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация об услугах" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
                     </Button>
-                    <Button Uid="2" Grid.Column="2"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
+                    <Button Uid="3" Grid.Column="3"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация о материалах" FontFamily="Times New Roman" FontSize="45 "/>
@@ -55,6 +63,7 @@
 
                 <Grid Grid.Row="1" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -70,19 +79,19 @@
                             <!--Для даты окончания-->
                             <RowDefinition Height="*"/>
                             <!--Для даты окончания-->
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
                             <!--Для суммы данной операции-->
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <TextBox Name="Description" Grid.Row="0" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" />
-                        <DatePicker  Name="DateStart" Grid.Row="1" materialDesign:HintAssist.Hint="Дата начала выполнения"  Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,15,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                        <TextBox Name="Description" Grid.Row="2" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание (не больше 500)" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" Height="auto" TextWrapping="Wrap"/>
+                        <DatePicker  Name="DateStart" Grid.Row="0" materialDesign:HintAssist.Hint="Дата начала выполнения"  Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,15,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
                             <DatePicker.Resources>
                                 <Style TargetType="DatePickerTextBox">
                                     <Setter Property="IsReadOnly" Value="False"/>
                                 </Style>
                             </DatePicker.Resources>
                         </DatePicker>
-                        <DatePicker  Name="DateEnd" Grid.Row="2" materialDesign:HintAssist.Hint="Примерная дата окончания" Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,20,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
+                        <DatePicker  Name="DateEnd" Grid.Row="1" materialDesign:HintAssist.Hint="Примерная дата окончания" Style="{StaticResource MaterialDesignFloatingHintDatePicker }" FontFamily="Times New Roman" FontSize="23" Margin="15,10,20,10"  Grid.ColumnSpan="2" VerticalAlignment="Center" >
                             <DatePicker.Resources>
                                 <Style TargetType="DatePickerTextBox">
                                     <Setter Property="IsReadOnly" Value="False"/>
@@ -148,7 +157,7 @@
                         <!--Таблица-->
                         <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
                         <!--Кнопки-->
-                        <Grid Grid.Row="2">
+                        <Grid Grid.Row="2" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -168,10 +177,8 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button x:Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0"   VerticalAlignment="Center" Height="40" Width="240" Margin="0"/>
-                <Button x:Name="ShowPremises" Click="ShowPremises_Click"  Content="Помещения"  Style="{StaticResource AllButtonAction}" Grid.Column="1"  VerticalAlignment="Center" Height="40" Width="240"/>
                 <Button x:Name="ExtionButton" Click="ExtionButton_Click"  Content="Сохранить"  Style="{StaticResource AllButtonAction}" Grid.Column="2"  VerticalAlignment="Center" Height="40" Width="240"/>
             </Grid>
         </Grid>

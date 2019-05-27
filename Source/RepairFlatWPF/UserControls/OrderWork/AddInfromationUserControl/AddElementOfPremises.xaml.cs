@@ -16,6 +16,8 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         public AddElementOfPremises(Guid idOfPremises, object InformationAbouElement=null)
         {
             InitializeComponent();
+            TypeOfElement.Items.Add("Окно");
+            TypeOfElement.Items.Add("Дверь");
             if (InformationAbouElement != null)
             {
                 NewElement = false;

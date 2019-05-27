@@ -7,6 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
              mc:Ignorable="d" 
              MaxWidth="800"
+             MaxHeight="700"
              Height="auto" Width="auto">
     <!--Добавление элементов помещения-->
     <Grid>
@@ -18,9 +19,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/><!--Для типа элемента-->
             <RowDefinition Height="*"/><!--Для высоты длины и ширины-->
-            <RowDefinition Height="*"/><!--Для площадей-->
             <RowDefinition Height="*"/><!--Описание-->
             <RowDefinition Height="*"/><!--Кнопки-->
+            <RowDefinition Height="65"/><!--Кнопки-->
         </Grid.RowDefinitions>
         <ComboBox Name="TypeOfElement" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="0" Margin="15,0,20,0" materialDesign:HintAssist.Hint="Тип элемента" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center"  />
         <Grid Grid.ColumnSpan="2" Grid.Row="1">
@@ -29,15 +30,16 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Name="Lenght" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="2" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Длина" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
-            <TextBox Name="Width" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="2" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Ширна" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
-            <TextBox Name="Height" FontFamily="Times New Roman" FontSize="25" Grid.Column="2" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Высота" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
+            <TextBox Name="Lenght" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Длина" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
+            <TextBox Name="Width" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Ширна" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
+            <TextBox Name="Height" FontFamily="Times New Roman" FontSize="25" Grid.Column="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Высота" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
         </Grid>
-        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="4" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
-        <TextBox Name="POfElement" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P элемнта" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
-        <TextBox Name="WidOfSlope" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Ширана откоса" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"   />
-        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="4"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
-        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="4" Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        
+        <TextBox Name="WidOfSlope" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Ширина откоса" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"   />
+        <TextBox Name="POfElement" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P элемнта" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
+        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
+        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="5"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="5" Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
 
     </Grid>
 </UserControl>

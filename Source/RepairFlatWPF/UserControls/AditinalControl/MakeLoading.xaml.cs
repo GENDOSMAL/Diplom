@@ -124,7 +124,6 @@ namespace RepairFlatWPF.UserControls
             if (ContactsMake.success)
                 await Task.Run(() => ContactUpdlocToDB(ContactsMake));
             #endregion
-            Thread.Sleep(1500);
             ((Storyboard)FindResource("WaitStoryboard")).Stop();
             DescriptionOfWork.Content = "Данные обновлены";            
             MakeSomeHelp.ShowMainGrid();
