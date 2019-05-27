@@ -133,11 +133,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MainConroller\AdressController.cs" />
     <Compile Include="Controllers\MainConroller\BaseController.cs" />
+    <Compile Include="Controllers\MainConroller\ContactController.cs" />
     <Compile Include="Controllers\MainConroller\OrderController.cs" />
     <Compile Include="Controllers\MainConroller\SomeHelpController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
     <Compile Include="Controllers\MainConroller\SubStringController.cs" />
-    <Compile Include="Controllers\OtherController\DBController.cs" />
+    <Compile Include="Controllers\OtherController\DBComtroller\DBController.cs" />
+    <Compile Include="Controllers\OtherController\DBComtroller\WorkWithContactDBController.cs" />
     <Compile Include="Controllers\OtherController\HelperUS.cs" />
     <Compile Include="Controllers\OtherController\Logger.cs" />
     <Compile Include="Controllers\MainConroller\LoginController.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Models\DescriptionJSON\AuthDescription.cs" />
     <Compile Include="Models\DescriptionJSON\BaseResult.cs" />
     <Compile Include="Models\DescriptionJSON\BaseReturn.cs" />
+    <Compile Include="Models\DescriptionJSON\ContactModel.cs" />
     <Compile Include="Models\DescriptionJSON\MakeSubs.cs" />
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWithOrder.cs" />
