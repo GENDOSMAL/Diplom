@@ -19,13 +19,24 @@ namespace RepairFlat.Model
             public string Lastname;
             public string Patronymic;
             [JsonConverter(typeof(CustomDateTimeConverter))]
-            public DateTime Birstday;
+            public DateTime? Birstday;
             public string TypeOfUser;
             public string Pasport;
             public int? Female;
         }
 
-        public class CreateNewClient: DescriptionOfUser
+        public class DataAboutClient : DescriptionOfUser
+        {
+            public string Description;
+        }
+
+        public class ListOfClient : BaseResult
+        {
+            public List<DataAboutClient> listOfClient;
+        }
+
+
+        public class CreateNewClient : DescriptionOfUser
         {
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string Desc;
@@ -35,7 +46,7 @@ namespace RepairFlat.Model
         /// <summary>
         /// Описание того, что будет вернуто на запрос о создании нового пользователя
         /// </summary>
-        public class ResultDescription:BaseResult
+        public class ResultDescription : BaseResult
         {
             public Guid idUser;
         }

@@ -19,8 +19,7 @@ namespace RepairFlatRestApi.Models
         }
 
         public class ListOfContactUser: InformationAboutContact
-        {
-            
+        {            
             public string ValueTypeOfContact;
         }
 

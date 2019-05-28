@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,21 +36,87 @@ namespace RepairFlatWPF.UserControls.AditinalControl
             }
         }
 
-        private void CreateNewAdress_Click(object sender, RoutedEventArgs e)
+        private async void CreateNewAdress_Click(object sender, RoutedEventArgs e)
         {
-            if (Redact)
+            if (CheckData())
             {
+                if (Redact)
+                {
 
-            }
-            else
-            {
+                }
+                else
+                {
+                    ModelAdress.DataAboutAdress modelAdress = new ModelAdress.DataAboutAdress
+                    {
+                        AreaName = AreaName.Text.Trim(),
+                        CiryName= CiryName.Text.Trim(),
+                        Description= Description.Text.Trim(),
+                        Entrance= Entrance.Text.Trim(),
+                        House= House.Text.Trim(),
+                        idAdress= Guid.NewGuid(),
+                        MicroAreaName= MicroAreaName.Text.Trim(),
+                        NumberOfDelen= NumberOfDelen.Text.Trim(),
+                        RegionName= RegionName.Text.Trim(),
+                        Street= Street.Text.Trim()
+                    };
+                    string Json = JsonConvert.SerializeObject(modelAdress);
+                    string urlSend = "api/adress/create";
+                    CreateNewAdress.Content = "Ожидайте...";
+                    ReturnBtn.Content = "Ожидайте...";
+                    CreateNewAdress.IsEnabled = false;
+                    ReturnBtn.IsEnabled = false;
 
+                    var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(CreateNewAdress_Click)));
+                    var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+
+                    if (!deserializedProduct.success)
+                    {
+                        MakeSomeHelp.MSG($"Произошла ошикбка при создании пользователя {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        Model.SaveSomeData.MakeSomeOperation = true;
+                        Model.SaveSomeData.SomeObject = modelAdress;
+                        MakeSomeHelp.MSG("Данные добавлены!", MsgBoxImage: MessageBoxImage.Information);
+                    }
+                    window.Close();
+                }
             }
         }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
             window.Close();
+        }
+
+        private bool CheckData()
+        {
+            if (string.IsNullOrEmpty(RegionName.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Не заполнена информация о стране",MsgBoxImage:MessageBoxImage.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(AreaName.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Не заполнена информация об области",MsgBoxImage:MessageBoxImage.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(CiryName.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Не заполнена информация об городе/области",MsgBoxImage:MessageBoxImage.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(Street.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Не заполнена информация об улице",MsgBoxImage:MessageBoxImage.Error);
+                return false;
+            }
+            if (string.IsNullOrEmpty(House.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Не заполнена информация о доме",MsgBoxImage:MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
     }
 }

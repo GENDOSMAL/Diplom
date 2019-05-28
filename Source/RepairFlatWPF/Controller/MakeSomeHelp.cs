@@ -3,12 +3,14 @@ using RepairFlatWPF.Properties;
 using RepairFlatWPF.UserControls;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+
 
 namespace RepairFlatWPF
 {
@@ -74,7 +76,7 @@ namespace RepairFlatWPF
         //}
 
 
-        public static void MakeShowLoading()
+        public static void MakeShowLogining()
         {
             ((MainWindow)Application.Current.MainWindow).ForLogin.Visibility = Visibility.Visible;
             ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Clear();
@@ -117,5 +119,36 @@ namespace RepairFlatWPF
             else
                 ((MainWindow)Application.Current.MainWindow).GridMenu.Width = 0;
         }
+
+        public static int SelectMaxValueinColumn(ref DataTable dataTable,string NameOfColumn)
+        {
+            int tempVariable = 0 ;
+            int highestNumber = dataTable.AsEnumerable()
+                        .Where(x => int.TryParse(x.Field<string>(NameOfColumn), out tempVariable))
+                        .Max(m => int.Parse(m.Field<string>(NameOfColumn)));
+            return highestNumber + 1;
+        }
+
+        public static object SelectedRowsInDataGrid(ref DataGrid DataGrid,int rowsNumber,int column=0)
+        {
+            var ci = new DataGridCellInfo(DataGrid.Items[rowsNumber], DataGrid.Columns[column]);
+            var content = ci.Column.GetCellContent(ci.Item) as TextBlock;
+            if (content.Text != "")
+            {
+                if (content != null)
+                {
+                    return content.Text;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

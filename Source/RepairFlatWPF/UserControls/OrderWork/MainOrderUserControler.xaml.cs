@@ -67,7 +67,7 @@ namespace RepairFlatWPF.UserControls
 
         private void SelectOrder_Click(object sender, RoutedEventArgs e)
         {//TODO тут открытие без проверки
-            MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(Guid.NewGuid()));
+           // MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(Guid.NewGuid()));
 
             int SelectIndex = DataGrid.SelectedIndex;
             if (SelectIndex != -1)

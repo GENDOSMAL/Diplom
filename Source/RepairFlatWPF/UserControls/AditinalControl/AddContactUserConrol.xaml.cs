@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RepairFlat.Model;
+using RepairFlatWPF.Model;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -18,24 +20,20 @@ namespace RepairFlatWPF.UserControls
 {
     public partial class AddContactUserConrol : UserControl
     {
+
+        ContactModel.InformationAboutContact informationAboutContact;
         List<Guid> idContactType;
         List<string> Tooltip;
-        Guid idUser;
+        Guid? idUser;
         Guid idContact;
         bool NewContact = true;
         BaseWindow window;
-        public AddContactUserConrol(Guid idUser,ref BaseWindow baseWindow, object InformationAboutContact = null)
+        public AddContactUserConrol(Guid? idUser, ref BaseWindow baseWindow, object InformationAboutContact = null)
         {
             InitializeComponent();
             window = baseWindow;
-            if (InformationAboutContact == null)
-            {
-                this.idContact = Guid.NewGuid();
-            }
-            else
-            {
-                this.NewContact = false;
-            }
+
+            this.idUser = idUser;
             var ListOfType = MakeListOfTypeOfContact();
             if (ListOfType == null)
             {
@@ -44,31 +42,97 @@ namespace RepairFlatWPF.UserControls
             }
             else
             {
-                for(int i = 0; i < ListOfType.Count; i++)
+                for (int i = 0; i < ListOfType.Count; i++)
                 {
-                    ComboBoxItem NewItem= new ComboBoxItem();
+                    ComboBoxItem NewItem = new ComboBoxItem();
                     NewItem.Content = ListOfType[i];
                     NewItem.ToolTip = Tooltip[i];
                     TypeOFContact.Items.Add(NewItem);
                 }
             }
 
+            if (InformationAboutContact == null)
+            {
+                this.idContact = Guid.NewGuid();
+            }
+            else
+            {
+
+                this.NewContact = false;
+                this.informationAboutContact = InformationAboutContact as ContactModel.InformationAboutContact;
+                idContact = informationAboutContact.idContact;
+                Description.Text = informationAboutContact.Desctription;
+                int index = 0;
+                for (int i = 0; i < idContactType.Count; i++)
+                {
+                    if (idContactType[i] == informationAboutContact.idTypeOfContact)
+                    {
+                        index = i;
+                    }
+                }
+                TypeOFContact.SelectedIndex = index;
+                Value.Text = informationAboutContact.Value;
+            }
+
         }
 
         private void CreateContact_Click(object sender, RoutedEventArgs e)
         {
-            if (NewContact)
+            if (ResultIsHave())
             {
-                //Если новый
+                if (NewContact)
+                {
+                    ContactModel.InformationAboutContact contactModel = new ContactModel.InformationAboutContact
+                    {
+                        DateAdd = DateTime.Now,
+                        Desctription = Description.Text.Trim(),
+                        idContact = idContact,
+                        idTypeOfContact = idContactType[TypeOFContact.SelectedIndex],
+                        Value = Value.Text.Trim(),
+                        idUser = idUser,
+                        NameOfValue = TypeOFContact.Text.Trim()
+                    };
+                    SaveSomeData.SomeObject = contactModel;
+                    SaveSomeData.MakeSomeOperation = true;
+                    window.Close();
+                }
+                else
+                {
+                    ContactModel.InformationAboutContact contactModel = new ContactModel.InformationAboutContact
+                    {
+                        Desctription = Description.Text.Trim(),
+                        idContact = idContact,
+                        idTypeOfContact = idContactType[TypeOFContact.SelectedIndex],
+                        Value = Value.Text.Trim(),
+                        idUser = idUser,
+                        NameOfValue = TypeOFContact.Text.Trim(),
+                        Number= informationAboutContact.Number
+                    };
+                    SaveSomeData.SomeObject = contactModel;
+                    SaveSomeData.MakeSomeOperation = true;
+                    window.Close();
+                }
             }
-            else
+        }
+
+        private bool ResultIsHave()
+        {
+            if (TypeOFContact.SelectedIndex == -1)
             {
-                //Если редактирование
+                MakeSomeHelp.MSG("Неоходимо выбрать тип контакта", MsgBoxImage: MessageBoxImage.Error);
+                return false;
             }
+            if (string.IsNullOrEmpty(Value.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Неоходимо указать значение контакта", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+            }
+            return true;
         }
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
+            SaveSomeData.MakeSomeOperation = false;
             window.Close();
         }
 

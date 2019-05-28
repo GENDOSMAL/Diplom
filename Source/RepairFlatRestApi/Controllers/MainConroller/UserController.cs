@@ -16,9 +16,28 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.CreateNewClient(DescriptionPerson);
+                return OtherController.ClientDBWorker.CreateNewClient(DescriptionPerson);
             }, nameof(LoginController), nameof(CreateNewPerson));
         }
+        [HttpPost, Route("update")]
+        public HttpResponseMessage UpdateDataAboutClient([FromBody] PersonDesctiption.CreateNewClient DescriptionPerson)
+        {
+            return CatchError(() =>
+            {
+                return OtherController.ClientDBWorker.UpdateDataAboutClient(DescriptionPerson);
+            }, nameof(LoginController), nameof(CreateNewPerson));
+        }
+
+        [HttpGet, Route("selectallClient")]
+        public HttpResponseMessage CreateListOf()
+        {
+            return CatchError(() =>
+            {
+                return OtherController.ClientDBWorker.CreateListOfClient();
+            }, nameof(LoginController), nameof(CreateNewPerson));
+        }
+
+
 
     }
 }

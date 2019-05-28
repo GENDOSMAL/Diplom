@@ -27,6 +27,8 @@ namespace RepairFlatWPF
 
         public static string[] ContactTableDesc = new string[] { "Номер", "Тип", "Значение", "Описание" };
 
+        public static string[] ClientTables = new string[] { "Номер", "Имя", "Фамилия", "Отчество", "Пол", "Описание" };
+
 
         #endregion
 

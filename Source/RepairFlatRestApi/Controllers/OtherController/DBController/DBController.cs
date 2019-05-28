@@ -83,7 +83,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     return new BaseResult { success = false, description=ex.ToString()};
                 }
-            }, nameof(DBController), nameof(CreateNewClient));
+            }, nameof(DBController), nameof(CreaNewAdress));
         }
 
         internal static object UpdateDataAboutAdress(AdressDescription newAdress)
@@ -111,7 +111,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     return new BaseResult { success = false, description = ex.ToString() };
                 }
-            }, nameof(DBController), nameof(CreateNewClient)); 
+            }, nameof(DBController), nameof(UpdateDataAboutAdress)); 
         }
 
         #endregion

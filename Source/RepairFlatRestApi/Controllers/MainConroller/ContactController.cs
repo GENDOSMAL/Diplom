@@ -29,12 +29,12 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         }
 
         [HttpGet, Route("getusercontact")]
-        public HttpResponseMessage UpdateContact([FromUri] Guid idUser)
+        public HttpResponseMessage GetDataAboutContact([FromUri] Guid idUser)
         {
             return CatchError(() =>
             {
                 return OtherController.WorkWithContactDBController.CreateListOfContactUser(idUser);
-            }, nameof(SubStringController), nameof(UpdateContact));
+            }, nameof(SubStringController), nameof(GetDataAboutContact));
         }
         [HttpGet, Route("delete")]
         public HttpResponseMessage DeleteContact([FromUri] Guid idContact)
@@ -42,7 +42,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             return CatchError(() =>
             {
                 return OtherController.WorkWithContactDBController.DeleteContact(idContact);
-            }, nameof(SubStringController), nameof(UpdateContact));
+            }, nameof(SubStringController), nameof(GetDataAboutContact));
         }
 
         

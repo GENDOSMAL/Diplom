@@ -32,19 +32,22 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         Description = descriptionPerson.Desc,
                     });
 
-                    if (descriptionPerson.ListOfContact.Count != 0)
+                    if (descriptionPerson.ListOfContact != null)
                     {
-                        foreach (var contact in descriptionPerson.ListOfContact)
+                        if (descriptionPerson.ListOfContact.Count != 0)
                         {
-                            db.UserContact.Add(new UserContact
+                            foreach (var contact in descriptionPerson.ListOfContact)
                             {
-                                DateAdd = contact.DateAdd,
-                                Description = contact.Desctription,
-                                id = contact.idContact,
-                                idType = contact.idTypeOfContact,
-                                idUser = contact.idUser,
-                                Value = contact.Value
-                            });
+                                db.UserContact.Add(new UserContact
+                                {
+                                    DateAdd = contact.DateAdd,
+                                    Description = contact.Desctription,
+                                    id = contact.idContact,
+                                    idType = contact.idTypeOfContact,
+                                    idUser = contact.idUser,
+                                    Value = contact.Value
+                                });
+                            }
                         }
                     }
 
@@ -55,12 +58,111 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 {
                     return new BaseResult()
                     {
-                        success = true,
+                        success = false,
                         description = ex.Message
                     };
                 }
             });
         }
 
+        internal static object UpdateDataAboutClient(PersonDesctiption.CreateNewClient descriptionPerson)
+        {
+            return Run((db) =>
+            {
+                try
+                {
+                    var DataToUpdate = db.User.Where(e1 => e1.idUser == descriptionPerson.idUser).First();
+                    DataToUpdate.LastName = descriptionPerson.Lastname;
+                    DataToUpdate.Name = descriptionPerson.Name;
+                    DataToUpdate.Patronymic = descriptionPerson.Patronymic;
+                    DataToUpdate.Pasport = descriptionPerson.Pasport;
+                    DataToUpdate.ClientDetails.Description = descriptionPerson.Desc;
+                    DataToUpdate.BirstDay = descriptionPerson.Birstday;
+                    DataToUpdate.Female = descriptionPerson.Female;
+                    if (descriptionPerson.ListOfContact != null)
+                    {
+                        foreach (var contToUp in DataToUpdate.UserContact.AsEnumerable())
+                        {
+                            foreach (var updatedCont in descriptionPerson.ListOfContact)
+                            {
+                                if (contToUp.id == updatedCont.idContact)
+                                {
+                                    contToUp.idType = updatedCont.idTypeOfContact;
+                                    contToUp.Value = updatedCont.Value;
+                                    contToUp.Description = updatedCont.Desctription;
+
+                                }
+                            }
+                        }
+                    }
+                    db.SaveChanges();
+                    return new BaseResult()
+                    {
+                        success = true
+                    };
+
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult()
+                    {
+                        success = false,
+                        description = ex.Message
+                    };
+                }
+            });
+        }
+
+        internal static PersonDesctiption.ListOfClient CreateListOfClient()
+        {
+            return Run((db) =>
+            {
+                try
+                {
+                    var DataFromServer = db.User.Where(ee => ee.TypeOfUser == SomeEnums.TypeOfUser.Cl.ToString()).AsEnumerable();
+                    if (DataFromServer != null)
+                    {
+                        List<PersonDesctiption.DataAboutClient> dataAboutClient = new List<PersonDesctiption.DataAboutClient>();
+                        foreach (var clientInformation in DataFromServer)
+                        {
+                            PersonDesctiption.DataAboutClient clientInf = new PersonDesctiption.DataAboutClient
+                            {
+                                Birstday = clientInformation.BirstDay,
+                                Name = clientInformation.Name,
+                                idUser = clientInformation.idUser,
+                                Female = clientInformation.Female,
+                                Description = clientInformation.ClientDetails.Description,
+                                Lastname = clientInformation.LastName,
+                                Pasport = clientInformation.Pasport,
+                                Patronymic = clientInformation.Patronymic
+                            };
+                            dataAboutClient.Add(clientInf);
+                        }
+                        return new PersonDesctiption.ListOfClient()
+                        {
+                            success = true,
+                            description = "",
+                            listOfClient = dataAboutClient
+                        };
+                    }
+                    else
+                    {
+                        return new PersonDesctiption.ListOfClient()
+                        {
+                            success = false
+                        };
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return new PersonDesctiption.ListOfClient()
+                    {
+                        success = false,
+                        description = ex.Message
+                    };
+                }
+            });
+        }
     }
 }

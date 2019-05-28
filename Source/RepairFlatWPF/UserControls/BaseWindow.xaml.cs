@@ -19,13 +19,11 @@ namespace RepairFlatWPF.UserControls
     /// </summary>
     public partial class BaseWindow : Window
     {
-        bool NewOrder = true;
-        Guid idSelectUser;
 
         public BaseWindow(string title)
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this, Title);
+            this.DataContext = new MainWindowViewModel(this, title);
             
         }
         //public BaseWindow(UserControl userControl, string Title)

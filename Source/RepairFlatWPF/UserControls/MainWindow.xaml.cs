@@ -32,7 +32,8 @@ namespace RepairFlatWPF
             InitializeComponent();
             this.DataContext = new MainWindowViewModel(this,"");
             //TODO Для логирования убрать
-            MakeSomeHelp.MakeShowLoading();
+            //MakeSomeHelp.MakeShowLogining();
+            MakeSomeHelp.MakeLoading();
         }
 
 
@@ -141,7 +142,7 @@ namespace RepairFlatWPF
                         if (MessageBox.Show("Вы действительно хотите сменить пользователя?", "АИС Фирмы по ремонту квартир", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                         {
                             GridMenu.Width = 0;
-                            MakeSomeHelp.MakeShowLoading();
+                            MakeSomeHelp.MakeShowLogining();
                             open = false;
                         }
                         break;

@@ -17,7 +17,8 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         public AddElementOfPremises(Guid idOfPremises,ref BaseWindow baseWindow, object InformationAbouElement=null)
         {
             InitializeComponent();
-            foreach(string TypeOfele in SomeEnums.TypeOfElement)
+            window = baseWindow;
+            foreach (string TypeOfele in SomeEnums.TypeOfElement)
             {
                 TypeOfElement.Items.Add(TypeOfele);
             }

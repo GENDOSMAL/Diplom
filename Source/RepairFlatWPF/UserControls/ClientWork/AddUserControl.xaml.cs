@@ -26,7 +26,7 @@ namespace RepairFlatWPF.UserControls
     public partial class AddUserControl : UserControl
     {
         #region Переменные 
-        Guid idUser;
+        Guid? idUser;
         bool NewData = true;
         DataTable TableOfContactInformation;
         BaseWindow window;
@@ -35,14 +35,15 @@ namespace RepairFlatWPF.UserControls
         /// 2- уникальный номер контакта
         /// 3- уникальный номер типа контакта
         /// </summary>
-        List<Tuple<int, Guid, Guid>> IdContactAndTypeInTable = new List<Tuple<int, Guid, Guid>>();
+        List<Tuple<int, Guid, Guid?>> IdContactAndTypeInTable = new List<Tuple<int, Guid, Guid?>>();
 
         #endregion
 
         #region Констурктор и обработчик
-        public AddUserControl(ref BaseWindow baseWindow, object InformationAboutClient = null)
+        public AddUserControl(Guid? idUser, ref BaseWindow baseWindow, object InformationAboutClient = null)
         {
             InitializeComponent();
+            this.idUser = idUser;
             window = baseWindow;
             foreach (string Type in SomeEnums.FemaleType)
             {
@@ -55,16 +56,39 @@ namespace RepairFlatWPF.UserControls
             {
                 TableOfContactInformation.Columns.Add(NameOfColumn);
             }
+            DataGrid.ItemsSource = TableOfContactInformation.DefaultView;
 
             if (InformationAboutClient != null)
             {
                 AddBtn.Content = "Редактировать";
                 NewData = false;
+                makeloadingListOfContact();
             }
             else
             {
                 idUser = Guid.NewGuid();
             }
+        }
+
+        public async void makeloadingListOfContact()
+        {
+            var InformationFromServer = await Task.Run(() => MakeDownloadByLink($"api/contact/getusercontact?idUser={idUser}"));
+            ContactModel.ListOfUserContactInf listOfUserContactInf = JsonConvert.DeserializeObject<ContactModel.ListOfUserContactInf>(InformationFromServer.ToString());
+            if (listOfUserContactInf != null)
+            {
+                int number = 0;
+                foreach (var contact in listOfUserContactInf.listOfContact)
+                {
+                    DataRow NewContactData = TableOfContactInformation.NewRow();
+                    NewContactData[0] = number;
+                    NewContactData[1] = contact.ValueTypeOfContact;
+                    NewContactData[2] = contact.Value;
+                    NewContactData[3] = contact.Desctription;
+                    IdContactAndTypeInTable.Add(new Tuple<int, Guid, Guid?>(number, contact.idContact, contact.idTypeOfContact));
+                    number++;
+                }
+            }
+
         }
 
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
@@ -85,7 +109,7 @@ namespace RepairFlatWPF.UserControls
                         for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
                         {
                             Guid idContact = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item2).First();
-                            Guid idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item3).First();
+                            Guid? idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item3).First();
                             ContactModel.InformationAboutContact contact = new ContactModel.InformationAboutContact()
                             {
                                 DateAdd = DateTime.Now,
@@ -147,7 +171,21 @@ namespace RepairFlatWPF.UserControls
             BaseWindow baseWindow = new BaseWindow("Добавление контактной информации");
             baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow));
             baseWindow.ShowDialog();
-
+            if (SaveSomeData.MakeSomeOperation)
+            {
+                
+                var contactInformation = SaveSomeData.SomeObject as ContactModel.InformationAboutContact;
+                SaveSomeData.SomeObject = null;
+                SaveSomeData.MakeSomeOperation = false;
+                int Number = TableOfContactInformation.Rows.Count == 0 ? 1 : MakeSomeHelp.SelectMaxValueinColumn(ref TableOfContactInformation, SomeEnums.ContactTableDesc[0]);
+                DataRow newContact = TableOfContactInformation.NewRow();
+                newContact[0] = Number;
+                newContact[1] = contactInformation.NameOfValue;
+                newContact[2] = contactInformation.Value;
+                newContact[3] = contactInformation.Desctription;
+                TableOfContactInformation.Rows.Add(newContact);
+                IdContactAndTypeInTable.Add(new Tuple<int, Guid, Guid?>(Number, contactInformation.idContact, contactInformation.idTypeOfContact));
+            }
         }
 
         private void RedactElement_Click(object sender, RoutedEventArgs e)
@@ -155,9 +193,60 @@ namespace RepairFlatWPF.UserControls
             int index = DataGrid.SelectedIndex;
             if (index != -1)
             {
-                BaseWindow baseWindow = new BaseWindow("Редактирование контактной информации");
-                baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow, idUser));
-                baseWindow.ShowDialog();
+                var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index);
+                int numberOfRows = 0;
+                if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
+                {
+                    if (NewData)
+                    {
+                        ContactModel.InformationAboutContact aboutContact = new ContactModel.InformationAboutContact();
+                        for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
+                        {
+                            if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == numberOfRows)
+                            {
+                                Guid idContact = IdContactAndTypeInTable.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
+                                Guid? idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item3).First();
+
+                                aboutContact = new ContactModel.InformationAboutContact
+                                {
+                                    idContact = idContact,
+                                    idTypeOfContact = idType,
+                                    idUser = idUser,
+                                    Value = TableOfContactInformation.Rows[i][2].ToString(),
+                                    Desctription = TableOfContactInformation.Rows[i][3].ToString(),
+                                    NameOfValue = TableOfContactInformation.Rows[i][1].ToString(),
+                                    Number = numberOfRows
+                                };
+
+                            }
+                        }
+                        BaseWindow baseWindow = new BaseWindow("Редактирование контактной информации");
+                        baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow, aboutContact));
+                        baseWindow.ShowDialog();
+                        if (SaveSomeData.MakeSomeOperation)
+                        {
+                            SaveSomeData.MakeSomeOperation = false;
+                            ContactModel.InformationAboutContact dataUpdated = SaveSomeData.SomeObject as ContactModel.InformationAboutContact;
+                            SaveSomeData.SomeObject = null;
+                            for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
+                            {
+                                if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == dataUpdated.Number)
+                                {
+                                    TableOfContactInformation.Rows[i][1] = dataUpdated.NameOfValue;
+                                    TableOfContactInformation.Rows[i][2] = dataUpdated.Value;
+                                    TableOfContactInformation.Rows[i][3] = dataUpdated.Desctription;
+                                    var data = IdContactAndTypeInTable.Single(e1 => e1.Item1 == dataUpdated.Number);
+                                    IdContactAndTypeInTable.Remove(data);
+                                    IdContactAndTypeInTable.Add(new Tuple<int, Guid, Guid?>(dataUpdated.Number, dataUpdated.idContact, dataUpdated.idTypeOfContact));
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //Если обновление данных о клиенте
+                    }
+                }
             }
             else
             {
@@ -171,7 +260,27 @@ namespace RepairFlatWPF.UserControls
             int index = DataGrid.SelectedIndex;
             if (index != -1)
             {
-
+                var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index);
+                int numberOfRows = 0;
+                if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
+                {
+                    if (NewData)
+                    {
+                        for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
+                        {
+                            if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == numberOfRows)
+                            {
+                                TableOfContactInformation.Rows[i].Delete();
+                                var data = IdContactAndTypeInTable.Single(e1 => e1.Item1 == numberOfRows);
+                                IdContactAndTypeInTable.Remove(data);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //Если обновление данных о клиенте
+                    }
+                }
             }
             else
             {
@@ -220,6 +329,10 @@ namespace RepairFlatWPF.UserControls
         }
         #endregion
 
+        public object MakeDownloadByLink(string UrlOfDownload)
+        {
+            return BaseWorkWithServer.CatchErrorWithGet(UrlOfDownload, "GET", nameof(MakeLoading), nameof(MakeDownloadByLink));
+        }
 
     }
 }
