@@ -123,6 +123,7 @@
     <Compile Include="Model\SaveSomeData.cs" />
     <Compile Include="Model\SomeEnums.cs" />
     <Compile Include="Model\WorkWithDB.cs" />
+    <Compile Include="Model\WorkWithOrder.cs" />
     <Compile Include="UserControls\AditinalControl\AddInformationAboutAdress.xaml.cs">
       <DependentUpon>AddInformationAboutAdress.xaml</DependentUpon>
     </Compile>

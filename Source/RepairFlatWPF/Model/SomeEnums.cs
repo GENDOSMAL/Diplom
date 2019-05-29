@@ -32,6 +32,7 @@ namespace RepairFlatWPF
 
         #endregion
 
+
         public enum TypeOfAction
         {
             Add,

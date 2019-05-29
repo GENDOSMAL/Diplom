@@ -115,7 +115,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         {
                             DateAdd = Contact.DateAdd,
                             idUser = Contact.idUser,
-                            idContact = Contact.idUser,
+                            idContact = Contact.id,
                             Desctription = Contact.Description,
                             Value = Contact.Value,
                             idTypeOfContact = Contact.idType,

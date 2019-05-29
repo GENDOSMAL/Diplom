@@ -29,7 +29,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return DBController.MakeDataAboutAllOrder();
             }, nameof(SubStringController), nameof(SelectAllOrders));
         }
-        [HttpPost, Route("create/order")]
+        [HttpPost, Route("create")]
         public HttpResponseMessage CreateNewOrders([FromBody] WorkWithOrder.BaseOrderInformation NewOrderData)
         {
             return CatchError(() =>

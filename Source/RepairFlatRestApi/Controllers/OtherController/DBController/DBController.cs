@@ -994,11 +994,10 @@ namespace RepairFlatRestApi.Controllers
                     {
                         Status = newOrderData.Status,
                         AllSumma = newOrderData.Allsumma,
-                        IdAdress = newOrderData.idClient,
+                        IdAdress = newOrderData.idAdress,
                         idClient = newOrderData.idClient,
                         DateEnd = newOrderData.DateEnd,
                         IdColoboration = newOrderData.idColoboration,
-                        Number = newOrderData.Number,
                         MainContactID = newOrderData.MainContactID,
                         IdOrder = newOrderData.idOrder,
                         DateStart = newOrderData.DataStart,
