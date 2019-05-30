@@ -127,7 +127,7 @@ namespace RepairFlatWPF.UserControls
             ((Storyboard)FindResource("WaitStoryboard")).Stop();
             DescriptionOfWork.Content = "Данные обновлены";            
             MakeSomeHelp.ShowMainGrid();
-            //MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+            MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
         }
 
         public object MakeDownloadByLink(string UrlOfDownload)
@@ -176,7 +176,7 @@ namespace RepairFlatWPF.UserControls
                     string QueryForHistory = "Insert into DateOfLastUpdate (TypeOfSubs,DateOfUpdate) Values (@TypeOfSubs,@DateOfUpdate)";
                     SQLiteParameter[] parameters = new SQLiteParameter[2];
                     parameters[0] = new SQLiteParameter("@TypeOfSubs", SomeEnums.TypeOfSubs.Servises.ToString());
-                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationAboutServises.DateOfMakeAnswer);
+                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationAboutServises.DateOfMakeAnswer.ToString("dd.MM.yyyy HH:mm"));
                     command.Parameters.AddRange(parameters);
                     command.CommandText = QueryForHistory;
                     command.ExecuteNonQuery();
@@ -224,7 +224,7 @@ namespace RepairFlatWPF.UserControls
                     string QueryForHistory = "Insert into DateOfLastUpdate (TypeOfSubs,DateOfUpdate) Values (@TypeOfSubs,@DateOfUpdate)";
                     SQLiteParameter[] parameters = new SQLiteParameter[2];
                     parameters[0] = new SQLiteParameter("@TypeOfSubs", SomeEnums.TypeOfSubs.Materials.ToString());
-                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationMaterials.DateOfMakeAnswer);
+                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationMaterials.DateOfMakeAnswer.ToString("dd.MM.yyyy HH:mm"));
                     command.Parameters.AddRange(parameters);
                     command.CommandText = QueryForHistory;
                     command.ExecuteNonQuery();
@@ -270,7 +270,7 @@ namespace RepairFlatWPF.UserControls
                     string QueryForHistory = "Insert into DateOfLastUpdate (TypeOfSubs,DateOfUpdate) Values (@TypeOfSubs,@DateOfUpdate)";
                     SQLiteParameter[] parameters = new SQLiteParameter[2];
                     parameters[0] = new SQLiteParameter("@TypeOfSubs", SomeEnums.TypeOfSubs.Premises.ToString());
-                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationPremises.DateOfMakeAnswer);
+                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationPremises.DateOfMakeAnswer.ToString("dd.MM.yyyy HH:mm"));
                     command.Parameters.AddRange(parameters);
                     command.CommandText = QueryForHistory;
                     command.ExecuteNonQuery();
@@ -316,7 +316,7 @@ namespace RepairFlatWPF.UserControls
                     string QueryForHistory = "Insert into DateOfLastUpdate (TypeOfSubs,DateOfUpdate) Values (@TypeOfSubs,@DateOfUpdate)";
                     SQLiteParameter[] parameters = new SQLiteParameter[2];
                     parameters[0] = new SQLiteParameter("@TypeOfSubs", SomeEnums.TypeOfSubs.Contact.ToString());
-                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationContact.DateOfMakeAnswer);
+                    parameters[1] = new SQLiteParameter("@DateOfUpdate", InformationContact.DateOfMakeAnswer.ToString("dd.MM.yyyy HH:mm"));
                     command.Parameters.AddRange(parameters);
                     command.CommandText = QueryForHistory;
                     command.ExecuteNonQuery();

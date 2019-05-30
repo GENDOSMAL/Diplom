@@ -134,12 +134,14 @@
     <Compile Include="Controllers\MainConroller\AdressController.cs" />
     <Compile Include="Controllers\MainConroller\BaseController.cs" />
     <Compile Include="Controllers\MainConroller\ContactController.cs" />
+    <Compile Include="Controllers\MainConroller\MeasurmentController.cs" />
     <Compile Include="Controllers\MainConroller\OrderController.cs" />
     <Compile Include="Controllers\MainConroller\SomeHelpController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
     <Compile Include="Controllers\MainConroller\SubStringController.cs" />
     <Compile Include="Controllers\OtherController\DBController\ClientDBWorker.cs" />
     <Compile Include="Controllers\OtherController\DBController\DBController.cs" />
+    <Compile Include="Controllers\OtherController\DBController\MeasurmentDBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\OrderDBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\WorkWithContactDBController.cs" />
     <Compile Include="Controllers\OtherController\HelperUS.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="Models\DescriptionJSON\BaseResult.cs" />
     <Compile Include="Models\DescriptionJSON\ContactModel.cs" />
     <Compile Include="Models\DescriptionJSON\MakeSubs.cs" />
+    <Compile Include="Models\DescriptionJSON\MeasurmentModel.cs" />
     <Compile Include="Models\DescriptionJSON\OrderData.cs" />
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWithOrder.cs" />

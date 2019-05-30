@@ -118,6 +118,7 @@
     <Compile Include="Model\ContactModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MakeSubs.cs" />
+    <Compile Include="Model\MeasuModel.cs" />
     <Compile Include="Model\ModelAdress.cs" />
     <Compile Include="Model\OrderDesc.cs" />
     <Compile Include="Model\PersonDesctiption.cs" />
@@ -170,17 +171,14 @@
     <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddServisesInOrder.xaml.cs">
       <DependentUpon>AddServisesInOrder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderWork\InformationAboutOrder\AditionalTablesUserControl.xaml.cs">
+      <DependentUpon>AditionalTablesUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderWork\InformationAboutOrder\InformationAboutOrderPay.xaml.cs">
       <DependentUpon>InformationAboutOrderPay.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\OrderWork\InformationAboutOrder\WorkWithMeasurment.xaml.cs">
       <DependentUpon>WorkWithMeasurment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderMaterialsUserControl.xaml.cs">
-      <DependentUpon>WorkWithOrderMaterialsUserControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderServiseUserControl.xaml.cs">
-      <DependentUpon>WorkWithOrderServiseUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\OrderWork\InformationAboutOrder\WorkWithTasksUserControl.xaml.cs">
       <DependentUpon>WorkWithTasksUserControl.xaml</DependentUpon>
@@ -294,19 +292,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\OrderWork\InformationAboutOrder\AditionalTablesUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\OrderWork\InformationAboutOrder\InformationAboutOrderPay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\OrderWork\InformationAboutOrder\WorkWithMeasurment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderMaterialsUserControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\OrderWork\InformationAboutOrder\WorkWithOrderServiseUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

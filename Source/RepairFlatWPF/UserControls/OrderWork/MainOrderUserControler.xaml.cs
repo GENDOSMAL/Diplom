@@ -130,12 +130,14 @@ namespace RepairFlatWPF.UserControls
             if (SelectIndex != -1)
             {
                 var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex);
+                string fioclient = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex,3).ToString();
+                string adress = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex, 5).ToString();
+                string allsumma = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex, 6).ToString();
                 int numberOfRows = 0;
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
                     var idSelectOrder = DataAboutidOrder.Where(e1 => e1.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                    MakeSomeHelp.MSG(idSelectOrder.ToString());
-                    MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(idSelectOrder ?? default(Guid)));
+                    MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(idSelectOrder ?? default(Guid),FioClient:fioclient,Adress:adress,AllSumma:allsumma));
                 }
             }
             else

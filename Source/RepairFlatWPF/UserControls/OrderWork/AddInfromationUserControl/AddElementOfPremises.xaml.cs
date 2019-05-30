@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-
+using static RepairFlatWPF.Model.MeasuModel;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 {
@@ -11,10 +11,10 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
     public partial class AddElementOfPremises : UserControl
     {
         Guid idPremises;
-        bool NewElement = true;
-        double lenghtData, WidthData, heightData;
+        Guid idElement;
+        double lenghtData, WidthData, heightData, pofelement, withOfSlopData;
         BaseWindow window;
-        public AddElementOfPremises(Guid idOfPremises,ref BaseWindow baseWindow, object InformationAbouElement=null)
+        public AddElementOfPremises(Guid idOfPremises, ref BaseWindow baseWindow, object elementOf =null)
         {
             InitializeComponent();
             window = baseWindow;
@@ -22,34 +22,72 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             {
                 TypeOfElement.Items.Add(TypeOfele);
             }
-
-            if (InformationAbouElement != null)
+            this.idPremises = idOfPremises;
+            if (elementOf!=null)
             {
-                NewElement = false;
+                var object1 = elementOf as Model.MeasuModel.ElementOfMeasurment;
+                this.idElement = object1.idElement;
+                TypeOfElement.Text = object1.TypeOfElement;
+                Lenght.Text = object1.Lenght.ToString();
+                Width.Text = object1.Width.ToString();
+                Height.Text = object1.Height.ToString();
+                WidOfSlope.Text = object1.WidthOfSlope.ToString();
+                POfElement.Text = object1.POfElement.ToString();
+                lenghtData = object1.Lenght?? default(double);
+                WidthData = object1.Width?? default(double);
+                heightData = object1.Height?? default(double);
+                pofelement = object1.POfElement?? default(double);
+                withOfSlopData = object1.WidthOfSlope?? default(double);
+                Description.Text = object1.Description;
                 AddBtn.Content = "Редактировать";
             }
             else
             {
-                idPremises = Guid.NewGuid();
+                this.idElement = Guid.NewGuid();
             }
         }
+
 
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             if (CheckFields())
             {
-                if (NewElement)
+                Model.SaveSomeData.MakeSomeOperation = true;
+                Model.SaveSomeData.SomeObject = new ElementOfMeasurment
                 {
-                    //Добавление
-                }
-                else
-                {
-                    //Редактирование
-                }
+                    idElement = idElement,
+                    idMeasurements = idPremises,
+                    Description = Description.Text?.Trim(),
+                    Height = heightData,
+                    Lenght = lenghtData,
+                    POfElement = pofelement,
+                    Width = WidthData,
+                    TypeOfElement = TypeOfElement.Text,
+                    WidthOfSlope = withOfSlopData
+                };
+                window.Close();
+
             }
         }
 
-        
+        private void Width_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (double.TryParse(Lenght.Text.Trim(), out lenghtData) && double.TryParse(Width.Text.Trim(), out WidthData))
+            {
+                pofelement = 2 * (lenghtData + WidthData);
+                POfElement.Text = pofelement.ToString();
+            }
+        }
+
+        private void Height_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (double.TryParse(Lenght.Text.Trim(), out lenghtData) && double.TryParse(Width.Text.Trim(), out WidthData))
+            {
+                pofelement = (lenghtData * WidthData);
+                POfElement.Text = pofelement.ToString();
+            }
+        }
+
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
         {
             window.Close();
@@ -59,22 +97,27 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         {
             if (TypeOfElement.SelectedIndex == -1)
             {
-                MakeSomeHelp.MSG("Необходимо указать тип элемента",MsgBoxImage:MessageBoxImage.Error);
+                MakeSomeHelp.MSG("Необходимо указать тип элемента", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
-            if(!double.TryParse(Lenght.Text.Trim(),out lenghtData))
+            if (!double.TryParse(Lenght.Text.Trim(), out lenghtData))
             {
                 MakeSomeHelp.MSG("Необходимо указать длину", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
-            if (!double.TryParse(Height.Text.Trim(),out heightData))
+            if (!double.TryParse(Height.Text.Trim(), out heightData))
             {
                 MakeSomeHelp.MSG("Необходимо указать высоту", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
-            if (!double.TryParse(Width.Text.Trim(),out WidthData))
+            if (!double.TryParse(Width.Text.Trim(), out WidthData))
             {
                 MakeSomeHelp.MSG("Необходимо указать ширину", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+            }
+            if (!double.TryParse(WidOfSlope.Text.Trim(), out withOfSlopData))
+            {
+                MakeSomeHelp.MSG("Необходимо указать ширину откоса", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
             return true;

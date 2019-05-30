@@ -61,8 +61,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
                     <Button Uid="0" Grid.Column="0"  Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
@@ -78,29 +76,15 @@
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Задания" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
-                    </Button>
-                    <Button Uid="2" Grid.Column="2"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
-                        <Button.Content>
-                            <Viewbox  >
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Услуги" FontFamily="Times New Roman" FontSize="45 "/>
-                            </Viewbox>
-                        </Button.Content>
-                    </Button>
-                    <Button Uid="3" Grid.Column="3"   Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
-                        <Button.Content>
-                            <Viewbox  >
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Материалы" FontFamily="Times New Roman" FontSize="45 "/>
-                            </Viewbox>
-                        </Button.Content>
-                    </Button>
-                    <Button Uid="4" Grid.Column="4"  Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                    </Button>                   
+                    <Button Uid="2" Grid.Column="2"  Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Оплата" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
                     </Button>
-                    <Button Uid="5" Grid.Column="5" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                    <Button Uid="3" Grid.Column="3" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Итого" FontFamily="Times New Roman" FontSize="45 "/>
@@ -113,9 +97,6 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-
                         </Grid.ColumnDefinitions>
                         <Rectangle Name="GridCursor" Grid.Column="0" Fill="#673ab7" />
                     </Grid>
@@ -124,8 +105,6 @@
                 <Grid x:Name="GridForContent" Grid.Row="2" >
                     <Grid Name="ForPermisent" />
                     <Grid Name="ForTasks" Visibility="Collapsed" />
-                    <Grid Name="ForServises" Visibility="Collapsed" />
-                    <Grid Name="ForMaterials" Visibility="Collapsed"/>
                     <Grid Name="ForPayment" Visibility="Collapsed" />
                     <Grid Name="ForPrint" Visibility="Collapsed" />
                 </Grid>
@@ -133,6 +112,6 @@
         </Border>
 
 
-        <Button Name="ReturnBtn" Click="ReturnBtn_Click" Grid.ColumnSpan="2" Grid.Row="3"  Height="60" Width="220" Margin="15 5 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Назад" />
+        <Button Name="ReturnBtn" Click="ReturnBtn_Click" Grid.ColumnSpan="2" Grid.Row="3"  Height="60" Width="300" Margin="15 5 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Назад" />
     </Grid>
 </UserControl>

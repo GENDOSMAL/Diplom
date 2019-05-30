@@ -11,22 +11,14 @@
     <materialDesign:TransitioningContent>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="60"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="85"/>
             </Grid.RowDefinitions>
-            <!--Область поиска-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedType" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchText" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
-                <Button Name="BtnSearch" Click="BtnSearch_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
-            </Grid>
+            <!--Область для заголовка-->
+            <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
+                <TextBlock Name="NumberOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Работа над заданиями в заказе" FontFamily="Times New Roman" FontSize="45 "/>
+            </Viewbox>
             <!--Таблица-->
             <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
             <!--Кнопки-->

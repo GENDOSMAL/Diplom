@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using RepairFlatRestApi.Models;
@@ -81,19 +82,19 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     DataToUpdate.Female = descriptionPerson.Female;
                     if (descriptionPerson.ListOfContact != null)
                     {
-                        foreach (var contToUp in DataToUpdate.UserContact.AsEnumerable())
+                        foreach (var contact in descriptionPerson.ListOfContact)
                         {
-                            foreach (var updatedCont in descriptionPerson.ListOfContact)
+                            db.UserContact.AddOrUpdate(new UserContact
                             {
-                                if (contToUp.id == updatedCont.idContact)
-                                {
-                                    contToUp.idType = updatedCont.idTypeOfContact;
-                                    contToUp.Value = updatedCont.Value;
-                                    contToUp.Description = updatedCont.Desctription;
-
-                                }
-                            }
+                                DateAdd = contact.DateAdd,
+                                Description = contact.Desctription,
+                                id = contact.idContact,
+                                idType = contact.idTypeOfContact,
+                                idUser = contact.idUser,
+                                Value = contact.Value
+                            });
                         }
+
                     }
                     db.SaveChanges();
                     return new BaseResult()

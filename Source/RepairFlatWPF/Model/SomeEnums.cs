@@ -31,6 +31,10 @@ namespace RepairFlatWPF
 
         public static string[] OrderMainTable = new string[] { "Номер", "Дата начала", "Статус","ФИО Клиента", "Контакная информация", "Данные об адресе","Сумма", "Описание" };
 
+        public static string[] MeasurmentMainTable = new string[] { "Номер", "Наименование", "Описание","Длина", "Ширина", "Высота","P стен", "P пола", "S стен", "S пола" };
+
+        public static string[] DataAboutElement = new string[] { "Номер", "Тип элемента", "Длина","Ширина", "Высота","Ширина откоса","S элемента", "Описание" };
+
 
         #endregion
 

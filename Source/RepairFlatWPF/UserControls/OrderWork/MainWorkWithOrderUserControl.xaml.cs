@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,10 +22,15 @@ namespace RepairFlatWPF.UserControls.OrderWork
     public partial class MainWorkWithOrderUserControl : UserControl
     {
         Guid idOrder;
-        public MainWorkWithOrderUserControl(Guid idOrder, object AllDataAboutOrder=null)
+        
+        public MainWorkWithOrderUserControl(Guid idOrder, object AllDataAboutOrder=null,string FioClient="",string Adress="",string AllSumma="")
         {
             InitializeComponent();
             this.idOrder = idOrder;
+            FIOClient.Text += FioClient;
+            this.Adress.Text += Adress;
+            SummaOfOrder.Text += AllSumma;
+
             #region Загружаем данные обо всем заказе на соответсвующие элементы управления
             //Данные о помещениях
             ForPermisent.Children.Clear();
@@ -32,17 +38,13 @@ namespace RepairFlatWPF.UserControls.OrderWork
             //данные о заданиях
             ForTasks.Children.Clear();
             ForTasks.Children.Add(new WorkWithTasksUserControl(idOrder));                      
-            //данные об услугах
-            ForServises.Children.Clear();
-            ForServises.Children.Add(new WorkWithOrderServiseUserControl(idOrder));
-            //Данные о материалах
-            ForMaterials.Children.Clear();
-            ForMaterials.Children.Add(new WorkWithOrderMaterialsUserControl(idOrder));
             //Данные об оплате 
             ForPayment.Children.Clear();
             ForPayment.Children.Add(new InformationAboutOrderPay(idOrder));
             #endregion
             //При загрузке полностью данные о заказе
+            ForPrint.Children.Clear();
+            ForPrint.Children.Add(new AditionalTablesUserControl(idOrder));
 
 
 
@@ -68,17 +70,9 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     break;
                 case 2:
                     GridCursor.SetValue(Grid.ColumnProperty, index);
-                    ShowInformationAboutServises();
-                    break;
-                case 3:
-                    GridCursor.SetValue(Grid.ColumnProperty, index);
-                    ShowInformationAboutMaterials();
-                    break;
-                case 4:
-                    GridCursor.SetValue(Grid.ColumnProperty, index);
                     ShowInformationAboutPayment();
                     break;
-                case 5:
+                case 3:
                     GridCursor.SetValue(Grid.ColumnProperty, index);
                     ShowInformationAboutPrint();
                     break;
@@ -89,36 +83,15 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
             ForTasks.Visibility = Visibility.Collapsed;
             ForPermisent.Visibility = Visibility.Visible;
-            ForServises.Visibility = Visibility.Collapsed;
-            ForMaterials.Visibility = Visibility.Collapsed;
             ForPayment.Visibility = Visibility.Collapsed;
             ForPrint.Visibility = Visibility.Collapsed;
         }
-        private void ShowInformationAboutServises()
-        {
-            ForTasks.Visibility = Visibility.Collapsed;
-            ForServises.Visibility = Visibility.Visible;
-            ForPermisent.Visibility = Visibility.Collapsed;
-            ForMaterials.Visibility = Visibility.Collapsed;
-            ForPayment.Visibility = Visibility.Collapsed;
-            ForPrint.Visibility = Visibility.Collapsed;
-        }
-        private void ShowInformationAboutMaterials()
-        {
-            ForTasks.Visibility = Visibility.Collapsed;
-            ForMaterials.Visibility = Visibility.Visible;
-            ForServises.Visibility = Visibility.Collapsed;
-            ForPermisent.Visibility = Visibility.Collapsed;
-            ForPayment.Visibility = Visibility.Collapsed;
-            ForPrint.Visibility = Visibility.Collapsed;
-        }
+
         private void ShowInformationAboutPayment()
         {
             ForTasks.Visibility = Visibility.Collapsed;
             ForPayment.Visibility = Visibility.Visible;
-            ForServises.Visibility = Visibility.Collapsed;
             ForPermisent.Visibility = Visibility.Collapsed;
-            ForMaterials.Visibility = Visibility.Collapsed;
             ForPrint.Visibility = Visibility.Collapsed;
         }
 
@@ -126,18 +99,14 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
             ForTasks.Visibility = Visibility.Collapsed;
             ForPrint.Visibility = Visibility.Visible;
-            ForServises.Visibility = Visibility.Collapsed;
             ForPermisent.Visibility = Visibility.Collapsed;
-            ForMaterials.Visibility = Visibility.Collapsed;
             ForPayment.Visibility = Visibility.Collapsed;
         }
         private void ShowInformationAboutTask()
         {
             ForTasks.Visibility = Visibility.Visible;
             ForPrint.Visibility = Visibility.Collapsed;
-            ForServises.Visibility = Visibility.Collapsed;
             ForPermisent.Visibility = Visibility.Collapsed;
-            ForMaterials.Visibility = Visibility.Collapsed;
             ForPayment.Visibility = Visibility.Collapsed;
         }
         #endregion
