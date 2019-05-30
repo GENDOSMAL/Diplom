@@ -8,18 +8,18 @@ namespace RepairFlatWPF
 {
     class ModelAdress
     {
-        public class DataAboutAdress
+        public class DataAboutAdress:BaseResult
         {
-            public System.Guid idAdress;
+            public Guid idAdress;
             public string RegionName;
-            public string AreaName;
-            public string CiryName;
+            public string CityName;
             public string MicroAreaName;
             public string Street;
             public string House;
             public string Entrance;
             public string NumberOfDelen;
-            public string Description;
+            public string AreaName;
+            public string Desc;
         }
     }
 }

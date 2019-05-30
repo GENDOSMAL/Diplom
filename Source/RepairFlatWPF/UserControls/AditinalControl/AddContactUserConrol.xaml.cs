@@ -57,7 +57,7 @@ namespace RepairFlatWPF.UserControls
             }
             else
             {
-
+                CreateContact.Content = "Редактировать";
                 this.NewContact = false;
                 this.informationAboutContact = InformationAboutContact as ContactModel.InformationAboutContact;
                 idContact = informationAboutContact.idContact;

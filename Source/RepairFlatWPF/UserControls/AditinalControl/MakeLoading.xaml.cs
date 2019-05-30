@@ -127,7 +127,7 @@ namespace RepairFlatWPF.UserControls
             ((Storyboard)FindResource("WaitStoryboard")).Stop();
             DescriptionOfWork.Content = "Данные обновлены";            
             MakeSomeHelp.ShowMainGrid();
-            MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+            //MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
         }
 
         public object MakeDownloadByLink(string UrlOfDownload)

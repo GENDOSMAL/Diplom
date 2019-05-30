@@ -11,7 +11,7 @@ namespace RepairFlatWPF
 
         public static string[] StatusOfOrder = new string[] { "Принят", "В исполнении", "Выполнен", "Отмен" };
 
-        public static string[] RypeOfSearchOrder = new string[] { "Номер", "Статус", "Дата начала", "Фамилия клиента" };
+        public static string[] RypeOfSearchOrder = new string[] {"Все данные", "Статус", "Дата начала", "Фамилия клиента" };
 
         public static string[] TypeOfElementOfPremises= new string[] { "Оконо", "Дверь" };
 
@@ -28,6 +28,8 @@ namespace RepairFlatWPF
         public static string[] ContactTableDesc = new string[] { "Номер", "Тип", "Значение", "Описание" };
 
         public static string[] ClientTables = new string[] { "Номер", "Имя", "Фамилия", "Отчество", "Пол", "Описание" };
+
+        public static string[] OrderMainTable = new string[] { "Номер", "Дата начала", "Статус","ФИО Клиента", "Контакная информация", "Данные об адресе","Сумма", "Описание" };
 
 
         #endregion

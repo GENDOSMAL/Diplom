@@ -140,6 +140,7 @@
     <Compile Include="Controllers\MainConroller\SubStringController.cs" />
     <Compile Include="Controllers\OtherController\DBController\ClientDBWorker.cs" />
     <Compile Include="Controllers\OtherController\DBController\DBController.cs" />
+    <Compile Include="Controllers\OtherController\DBController\OrderDBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\WorkWithContactDBController.cs" />
     <Compile Include="Controllers\OtherController\HelperUS.cs" />
     <Compile Include="Controllers\OtherController\Logger.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="Models\DescriptionJSON\BaseResult.cs" />
     <Compile Include="Models\DescriptionJSON\ContactModel.cs" />
     <Compile Include="Models\DescriptionJSON\MakeSubs.cs" />
+    <Compile Include="Models\DescriptionJSON\OrderData.cs" />
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWithOrder.cs" />
     <Compile Include="Models\DialogMessage.cs">

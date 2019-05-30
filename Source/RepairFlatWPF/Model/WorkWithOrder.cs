@@ -44,16 +44,14 @@ namespace RepairFlatWPF
         public class BaseOrderInformation : BaseResult
         {
             public Guid idOrder;
-            public Guid idAdress;
+            public Guid? idAdress;
             public Guid? idWorkerMake;
             public Guid? idClient;
-            public Guid MainContactID;
+            public Guid? MainContactID;
             public Guid? idColoboration;
-            [JsonConverter(typeof(CustomDateTimeConverter))]
+            //[JsonConverter(typeof(CustomDateTimeConverter))]
             public DateTime? DataStart;
-            [JsonConverter(typeof(CustomDateTimeConverter))]
-            public DateTime? DateEnd;
-            public int Status;
+            public int? Status;
             public int? Number;
             public decimal? Allsumma;
             public string Desc;

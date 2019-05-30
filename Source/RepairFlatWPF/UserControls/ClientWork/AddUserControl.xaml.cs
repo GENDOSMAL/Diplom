@@ -220,6 +220,7 @@ namespace RepairFlatWPF.UserControls
 
                             }
                         }
+
                         BaseWindow baseWindow = new BaseWindow("Редактирование контактной информации");
                         baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow, aboutContact));
                         baseWindow.ShowDialog();

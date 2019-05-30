@@ -119,6 +119,7 @@
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MakeSubs.cs" />
     <Compile Include="Model\ModelAdress.cs" />
+    <Compile Include="Model\OrderDesc.cs" />
     <Compile Include="Model\PersonDesctiption.cs" />
     <Compile Include="Model\SaveSomeData.cs" />
     <Compile Include="Model\SomeEnums.cs" />

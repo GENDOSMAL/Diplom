@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <!--Заголовок-->
         <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
-            <TextBlock Name="NumberOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Работа над заказом: " FontFamily="Times New Roman" FontSize="45 "/>
+            <TextBlock Name="NumberOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Работа над заказом" FontFamily="Times New Roman" FontSize="45 "/>
         </Viewbox>
 
         <!--Текстик: адресс, заказчик, сумма-->

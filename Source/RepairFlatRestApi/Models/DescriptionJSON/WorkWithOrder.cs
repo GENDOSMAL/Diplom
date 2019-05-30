@@ -46,10 +46,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Guid? idClient;
             public Guid? MainContactID;
             public Guid? idColoboration;
-            [JsonConverter(typeof(CustomDateTimeConverter))]
+            //[JsonConverter(typeof(CustomDateTimeConverter))]
             public DateTime? DataStart;
-            [JsonConverter(typeof(CustomDateTimeConverter))]
-            public DateTime? DateEnd;
             public int? Status;
             public int? Number;
             public decimal? Allsumma;

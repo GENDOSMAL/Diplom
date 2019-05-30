@@ -4,20 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using static RepairFlatRestApi.Models.AdressModel;
 
 namespace RepairFlatRestApi.Controllers
 {
     /// <summary>
     /// 
     /// </summary>
-    public  class DBController
+    public class DBController
     {
         #region Обработки при работе с данными пользователя
- 
+
 
         internal static WorkWithOrder.DataForRedact SelectAllDataAboutOrder(Guid idOrder)
         {
-            return Run((db) => 
+            return Run((db) =>
             {
                 var informationAbOrder = db.OrderInformation.Where(e => e.IdOrder == idOrder).First();
                 var selectuser = db.User.Where(e => e.idUser == informationAbOrder.idClient).FirstOrDefault();
@@ -25,26 +26,51 @@ namespace RepairFlatRestApi.Controllers
                 var adressDesc = db.AdressDescription.Where(e => e.idAdress == informationAbOrder.IdAdress).First();
 
                 WorkWithOrder.DataForRedact dataForRedact = new WorkWithOrder.DataForRedact();
-                dataForRedact.FioClient =$"{selectuser.LastName} {selectuser.Name.Substring(0,1)}.{selectuser.Patronymic.Substring(0, 1)}.";
+                dataForRedact.FioClient = $"{selectuser.LastName} {selectuser.Name.Substring(0, 1)}.{selectuser.Patronymic.Substring(0, 1)}.";
                 dataForRedact.MainSS = $"{selectContact.TypeOfContact.Value} : {selectContact.Value}";
                 dataForRedact.DescAboutAdress = $"{adressDesc.RegionName} {adressDesc.CiryName} {adressDesc.MicroAreaName} {adressDesc.Street} {adressDesc.House} {adressDesc.Entrance} {adressDesc.NumberOfDelen}";
                 dataForRedact.IformationAboutOrder = new WorkWithOrder.BaseOrderInformation
                 {
                     idAdress = informationAbOrder.IdAdress,
                     Allsumma = informationAbOrder.AllSumma,
-                    DataStart= informationAbOrder.DateStart,
-                    DateEnd= informationAbOrder.DateEnd,
-                    Desc= informationAbOrder.Description,
-                    idClient= informationAbOrder.idClient,
-                    idColoboration= informationAbOrder.IdColoboration,
-                    idOrder= informationAbOrder.IdOrder,
-                    idWorkerMake= informationAbOrder.IdWorkerMake,
-                    MainContactID= informationAbOrder.MainContactID,
-                    Status= informationAbOrder.Status
+                    DataStart = informationAbOrder.DateStart,
+                    Desc = informationAbOrder.Description,
+                    idClient = informationAbOrder.idClient,
+                    idColoboration = informationAbOrder.IdColoboration,
+                    idOrder = informationAbOrder.IdOrder,
+                    idWorkerMake = informationAbOrder.IdWorkerMake,
+                    MainContactID = informationAbOrder.MainContactID,
+                    Status = informationAbOrder.Status
                 };
 
                 return dataForRedact;
             }, nameof(DBController), nameof(SelectAllDataAboutOrder));
+        }
+
+
+
+        internal static object GetDataAboutContact(Guid idAdress)
+        {
+            return Run((db) =>
+            {
+                var select = db.AdressDescription.Where(ee => ee.idAdress == idAdress).FirstOrDefault();
+                return new AdressDesc
+                {
+                    AreaName= select.AreaName,
+                    Desc= select.Description,
+                    CityName = select.CiryName,
+                    description = select.Description,
+                    Entrance = select.Entrance,
+                    House = select.House,
+                    idAdress = select.idAdress,
+                    MicroAreaName = select.MicroAreaName,
+                    NumberOfDelen = select.NumberOfDelen,
+                    RegionName = select.RegionName,
+                    Street = select.Street,
+                    success = true
+                };
+
+            });
         }
 
         internal static object CreateNewServis(WorkWithOrder.DataAboutServis newServisData)
@@ -57,45 +83,46 @@ namespace RepairFlatRestApi.Controllers
         #endregion
 
         #region Работа с адресом
-        internal static object CreaNewAdress(AdressDescription newAdress)
+        internal static object CreaNewAdress(AdressModel.AdressDesc newAdress)
         {
-            return Run((db) => 
+            return Run((db) =>
             {
                 try
                 {
                     db.AdressDescription.Add(new AdressDescription
                     {
-                        AreaName=newAdress.AreaName,
-                        CiryName=newAdress.CiryName,
-                        Description=newAdress.Description,
-                        Entrance=newAdress.Entrance,
-                        House=newAdress.House,
-                        idAdress=newAdress.idAdress,
-                        MicroAreaName=newAdress.MicroAreaName,
-                        NumberOfDelen=newAdress.NumberOfDelen,
-                        RegionName=newAdress.RegionName,
-                        Street=newAdress.Street
+                        AreaName = newAdress.AreaName,
+                        CiryName = newAdress.CityName,
+                        Description = newAdress.description,
+                        Entrance = newAdress.Entrance,
+                        House = newAdress.House,
+                        idAdress = newAdress.idAdress,
+                        MicroAreaName = newAdress.MicroAreaName,
+                        NumberOfDelen = newAdress.NumberOfDelen,
+                        RegionName = newAdress.RegionName,
+                        Street = newAdress.Street                       
+                        
                     });
                     db.SaveChanges();
-                    return new BaseResult { success = true};
+                    return new BaseResult { success = true };
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    return new BaseResult { success = false, description=ex.ToString()};
+                    return new BaseResult { success = false, description = ex.ToString() };
                 }
             }, nameof(DBController), nameof(CreaNewAdress));
         }
 
-        internal static object UpdateDataAboutAdress(AdressDescription newAdress)
+        internal static object UpdateDataAboutAdress(AdressModel.AdressDesc newAdress)
         {
-            return Run((db) => 
+            return Run((db) =>
             {
                 try
                 {
                     var UpdatedAdress = db.AdressDescription.Where(e => e.idAdress == newAdress.idAdress).FirstOrDefault();
-                    UpdatedAdress.AreaName = newAdress.AreaName;
-                    UpdatedAdress.CiryName = newAdress.CiryName;
-                    UpdatedAdress.Description = newAdress.Description;
+                    
+                    UpdatedAdress.CiryName = newAdress.CityName;
+                    UpdatedAdress.Description = newAdress.Desc;
                     UpdatedAdress.Entrance = newAdress.Entrance;
                     UpdatedAdress.House = newAdress.House;
                     UpdatedAdress.idAdress = newAdress.idAdress;
@@ -103,15 +130,16 @@ namespace RepairFlatRestApi.Controllers
                     UpdatedAdress.NumberOfDelen = newAdress.NumberOfDelen;
                     UpdatedAdress.RegionName = newAdress.RegionName;
                     UpdatedAdress.Street = newAdress.Street;
+                    UpdatedAdress.AreaName = newAdress.AreaName;
 
                     db.SaveChanges();
-                    return new BaseResult { success = true};
+                    return new BaseResult { success = true };
                 }
                 catch (Exception ex)
                 {
                     return new BaseResult { success = false, description = ex.ToString() };
                 }
-            }, nameof(DBController), nameof(UpdateDataAboutAdress)); 
+            }, nameof(DBController), nameof(UpdateDataAboutAdress));
         }
 
         #endregion
@@ -532,7 +560,7 @@ namespace RepairFlatRestApi.Controllers
                     DateTime DateOfLastUpdate = new DateTime();
                     if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastUpdate))
                     {//Если дату удалось распознать вернуть в соответствии с датой
-                        var QueryWithOutDelete = db.PremisesType.Where((e) => e.PremisesUpdate.FirstOrDefault().DateOfUpdate > DateOfLastUpdate );
+                        var QueryWithOutDelete = db.PremisesType.Where((e) => e.PremisesUpdate.FirstOrDefault().DateOfUpdate > DateOfLastUpdate);
                         var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfPremisesUpd
                         {
                             idPremises = e.idPremises,
@@ -683,7 +711,7 @@ namespace RepairFlatRestApi.Controllers
 
                     if (ListOfMaterials.ListOfDeleteMaterials != null)
                     {
-                        foreach(var DelMaterila in ListOfMaterials.ListOfDeleteMaterials)
+                        foreach (var DelMaterila in ListOfMaterials.ListOfDeleteMaterials)
                         {
                             var DeleteThing = db.OurMaterials.Where(e => e.idMaterials == DelMaterila.idGuid).FirstOrDefault();
                             if (DeleteThing != null)
@@ -811,7 +839,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     if (ListOfContacts.ListOfContactsInsert != null)
                     {
-                        foreach(var ListOfInsContacts in ListOfContacts.ListOfContactsInsert)
+                        foreach (var ListOfInsContacts in ListOfContacts.ListOfContactsInsert)
                         {
                             var NTContact = new TypeOfContact
                             {
@@ -835,7 +863,7 @@ namespace RepairFlatRestApi.Controllers
 
                     if (ListOfContacts.listOfContactsUpdate != null)
                     {
-                        foreach(var ContactUpdate in ListOfContacts.listOfContactsUpdate)
+                        foreach (var ContactUpdate in ListOfContacts.listOfContactsUpdate)
                         {
                             var UpdatedContact = db.TypeOfContact.Where(e => e.idContact == ContactUpdate.idContact).FirstOrDefault();
                             if (UpdatedContact != null)
@@ -859,7 +887,7 @@ namespace RepairFlatRestApi.Controllers
 
                     if (ListOfContacts.ListOfDeleteContacts != null)
                     {
-                        foreach(var DeleteContact in ListOfContacts.ListOfDeleteContacts)
+                        foreach (var DeleteContact in ListOfContacts.ListOfDeleteContacts)
                         {
                             var Query = db.TypeOfContact.Where(e => e.idContact == DeleteContact.idGuid).FirstOrDefault();
                             if (Query != null)
@@ -910,9 +938,9 @@ namespace RepairFlatRestApi.Controllers
                         var QueryWithOutDelete = db.ContactUpdate.Where((e) => e.DataOfUpdate > DateOfLastAction);
                         var ListPremises = QueryWithOutDelete.Select(e => new MakeSubs.ListOfContactsUpd
                         {
-                            Description=e.TypeOfContact.Description,
-                            idContact=e.idContact,
-                            Value=e.TypeOfContact.Value,
+                            Description = e.TypeOfContact.Description,
+                            idContact = e.idContact,
+                            Value = e.TypeOfContact.Value,
                             TypeOfUpdate = e.TypeOfUpdate
                         }).ToArray();
 
@@ -958,12 +986,12 @@ namespace RepairFlatRestApi.Controllers
                     string I = db.User.Where(e => e.idUser == order.idClient).Select(e => e.Name.Substring(0, 1)).FirstOrDefault();
                     string O = db.User.Where(e => e.idUser == order.idClient).Select(e => e.Patronymic.Substring(0, 1)).FirstOrDefault();
                     string NameOfCleint = $"{F} {I}.{O}.";
-                    string TypeOfContact = db.TypeOfContact.Where((e) => e.UserContact.First().id== order.MainContactID).Select(e => e.Value).FirstOrDefault();
+                    string TypeOfContact = db.TypeOfContact.Where((e) => e.UserContact.First().id == order.MainContactID).Select(e => e.Value).FirstOrDefault();
                     string ValuesOfContact = db.UserContact.Where(e => e.id == order.MainContactID).Select(e => e.Value).First();
                     string ContactInformatiom = $"{TypeOfContact} : {ValuesOfContact}";
                     string NameOfBrigade = db.ColoborationOfBrigade.Where(e => e.IdColoboration == order.IdColoboration).Select(e => e.Name).First();
 
-                    var informationAboutAdress = db.AdressDescription.Where(e => e.idAdress == order.IdAdress).Select(e => new AdressDescription { idAdress = e.idAdress, AreaName = e.AreaName, Entrance = e.Entrance, CiryName = e.CiryName, Description = e.Description, House = e.House, MicroAreaName = e.MicroAreaName, NumberOfDelen = e.NumberOfDelen, RegionName = e.RegionName, Street = e.Street}).First();
+                    var informationAboutAdress = db.AdressDescription.Where(e => e.idAdress == order.IdAdress).Select(e => new AdressDescription { idAdress = e.idAdress, AreaName = e.AreaName, Entrance = e.Entrance, CiryName = e.CiryName, Description = e.Description, House = e.House, MicroAreaName = e.MicroAreaName, NumberOfDelen = e.NumberOfDelen, RegionName = e.RegionName, Street = e.Street }).First();
 
                     string Adressinformation = $"{informationAboutAdress.RegionName} {informationAboutAdress.CiryName} {informationAboutAdress.MicroAreaName} {informationAboutAdress.Street} {informationAboutAdress.House} {informationAboutAdress.Entrance} {informationAboutAdress.NumberOfDelen}";
                     orders.Add(new WorkWithOrder.OrderInTable
@@ -980,7 +1008,7 @@ namespace RepairFlatRestApi.Controllers
                     });
 
                 }
-                return new WorkWithOrder.DataAboutAllOrder() { success = true,orders=orders,Count=orders.Count };
+                return new WorkWithOrder.DataAboutAllOrder() { success = true, orders = orders, Count = orders.Count };
             }, nameof(DBController), nameof(MakeDataAboutAllOrder));
         }
 
@@ -996,7 +1024,6 @@ namespace RepairFlatRestApi.Controllers
                         AllSumma = newOrderData.Allsumma,
                         IdAdress = newOrderData.idAdress,
                         idClient = newOrderData.idClient,
-                        DateEnd = newOrderData.DateEnd,
                         IdColoboration = newOrderData.idColoboration,
                         MainContactID = newOrderData.MainContactID,
                         IdOrder = newOrderData.idOrder,
@@ -1005,12 +1032,12 @@ namespace RepairFlatRestApi.Controllers
                         Description = newOrderData.Desc,
                     });
                     db.SaveChanges();
-                    return new BaseResult { success = true};
+                    return new BaseResult { success = true };
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    return new BaseResult { success=false, description=ex.Message};
-                }                
+                    return new BaseResult { success = false, description = ex.Message };
+                }
             }, nameof(DBController), nameof(CreateNewOrder));
         }
         internal static object UpdateDataAboutOrder(WorkWithOrder.BaseOrderInformation updateDataAbOrder)
@@ -1019,20 +1046,24 @@ namespace RepairFlatRestApi.Controllers
             {
                 try
                 {
-                    var selectWorkersOrder = db.OrderInformation.Where(e => e.IdOrder == updateDataAbOrder.idOrder).FirstOrDefault();
-                    selectWorkersOrder.Status = updateDataAbOrder.Status;
-                    selectWorkersOrder.AllSumma = updateDataAbOrder.Allsumma;
-                    selectWorkersOrder.IdAdress = updateDataAbOrder.idClient;
-                    selectWorkersOrder.idClient = updateDataAbOrder.idClient;
-                    selectWorkersOrder.DateEnd = updateDataAbOrder.DateEnd;
-                    selectWorkersOrder.IdColoboration = updateDataAbOrder.idColoboration;
-                    selectWorkersOrder.Number = updateDataAbOrder.Number;
-                    selectWorkersOrder.MainContactID = updateDataAbOrder.MainContactID;
-                    selectWorkersOrder.DateStart = updateDataAbOrder.DataStart;
-                    selectWorkersOrder.IdWorkerMake = updateDataAbOrder.idWorkerMake;
-                    selectWorkersOrder.Description = updateDataAbOrder.Desc;
-                    db.SaveChanges();
-                    return new BaseResult { success = true };
+                    var selectWorkersOrder = db.OrderInformation.Where(e1 => e1.IdOrder == updateDataAbOrder.idOrder).First();
+                    if (selectWorkersOrder != null)
+                    {
+                        
+                        selectWorkersOrder.AllSumma = updateDataAbOrder.Allsumma;
+                        selectWorkersOrder.IdAdress = updateDataAbOrder.idAdress;
+                        selectWorkersOrder.idClient = updateDataAbOrder.idClient;
+                        selectWorkersOrder.IdColoboration = updateDataAbOrder.idColoboration;
+                        selectWorkersOrder.MainContactID = updateDataAbOrder.MainContactID;
+                        selectWorkersOrder.Description = updateDataAbOrder.Desc;
+                        selectWorkersOrder.Status = updateDataAbOrder.Status;
+                        db.SaveChanges();
+                        return new BaseResult { success = true };
+                    }
+                    else
+                    {
+                        return new BaseResult { success = false, description = "Заказ не найден"};
+                    }
                 }
                 catch (Exception ex)
                 {

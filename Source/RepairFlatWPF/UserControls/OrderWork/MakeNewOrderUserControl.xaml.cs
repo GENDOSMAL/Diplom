@@ -27,36 +27,25 @@ namespace RepairFlatWPF.UserControls.OrderWork
         Guid? IdUser;
         Guid idAdress;
         Guid idContact;
+        Guid TempidContact;
         Guid idOrder;
-        List<Guid> ContactId = new List<Guid>();
+
+        List<Tuple<int,Guid>> ContactId = new List<Tuple<int, Guid>>();
         BaseWindow Window;
-        public MakeNewOrderUserControl(ref BaseWindow baseWindow, bool NewOrder = true)
+        public MakeNewOrderUserControl(ref BaseWindow baseWindow, bool NewOrder = true,Guid idOrder=new Guid())
         {
             InitializeComponent();
             DateOfOrder.SelectedDate = DateTime.Now;
             Window = baseWindow;
             this.NewOrder = NewOrder;
-            
+
             if (!NewOrder)
             {
-                if (SaveSomeData.MakeSomeOperation)
-                {
-                    SaveSomeData.MakeSomeOperation = false;
-                    var DataAboutOrder = SaveSomeData.SomeObject as BaseOrderInformation;
-                    SaveSomeData.SomeObject = false;
-                    if (DataAboutOrder != null)
-                    {
-                        IdUser = DataAboutOrder.idClient;
-                        idAdress = DataAboutOrder.idAdress;
-                        idOrder = DataAboutOrder.idOrder;
-                        idContact = DataAboutOrder.MainContactID;
-                        AllSumma.Text = DataAboutOrder.Allsumma.ToString();
-                        StatusOfOrders.SelectedIndex = DataAboutOrder.Status;
-                        Description.Text = DataAboutOrder.description;
-                    }
-                }
                 SelectClient.IsEnabled = false;
                 CreateNewOrder.Content = "Редактировать данные о заказе";
+                LoadingDataAboutContact(idOrder);
+                this.idOrder = idOrder;
+
             }
             else
             {
@@ -65,18 +54,35 @@ namespace RepairFlatWPF.UserControls.OrderWork
             foreach (var StatOfOrder in SomeEnums.StatusOfOrder)
             {
                 StatusOfOrders.Items.Add(StatOfOrder);
-                
+
             }
+        }
+
+        private async void LoadingDataAboutContact(Guid idOrder)
+        {
+            var InformationFromServer = await Task.Run(() => MakeDownloadByLink($"api/order/dataforupdate?idOrder={idOrder}"));
+            OrderDesc.DataForUpdate DataAboutOrder = JsonConvert.DeserializeObject<OrderDesc.DataForUpdate>(InformationFromServer.ToString());
+            IdUser= DataAboutOrder.idUser;
+            idAdress= DataAboutOrder.idAdress ?? default(Guid);
+            TempidContact= DataAboutOrder.idContact ?? default(Guid);
+            idContact= DataAboutOrder.idContact ?? default(Guid);
+            DateOfOrder.SelectedDate = DataAboutOrder.DataStart;
+            StatusOfOrders.SelectedIndex = DataAboutOrder.Status ?? default(int);
+            AllSumma.Text = DataAboutOrder.AllSumma.ToString();
+            Description.Text = DataAboutOrder.Desc;
+            FullAdress.Text = DataAboutOrder.DataAboutAdress;
+            ClientFIO.Text = DataAboutOrder.FIOClient;
+            makeloadingListOfContact(IdUser, TempidContact);
         }
 
         private async void CreateNewOrder_Click(object sender, RoutedEventArgs e)
         {
-            idOrder = Guid.NewGuid();
+            
             if (CheckField())
             {
                 if (NewOrder)
                 {
-                    //Тут добавление
+                    idOrder = Guid.NewGuid();
                     BaseOrderInformation infOrder = new BaseOrderInformation
                     {
                         idAdress = idAdress,
@@ -92,8 +98,10 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     };
                     string Json = JsonConvert.SerializeObject(infOrder);
                     string urlSend = "api/order/create";
-                    CreateNewOrder.Content= "Ожидайте...";
-                    ReturnBtn.Content= "Ожидайте...";
+                    CreateNewOrder.Content = "Ожидайте...";
+                    ReturnBtn.Content = "Ожидайте...";
+                    ReturnBtn.IsEnabled = false;
+                    CreateNewOrder.IsEnabled = false;
                     var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(CreateNewOrder_Click)));
                     var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
 
@@ -106,7 +114,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                         MakeSomeHelp.MSG("Данные добавлены!", MsgBoxImage: MessageBoxImage.Information);
                     }
                     Window.Close();
-                  
+
                 }
                 else
                 {
@@ -114,7 +122,6 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     {
                         idAdress = idAdress,
                         Allsumma = 0,
-                        DataStart = DateTime.Now,
                         Desc = Description.Text.Trim(),
                         idClient = IdUser,
                         idOrder = idOrder,
@@ -136,7 +143,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     }
                     else
                     {
-                        MakeSomeHelp.MSG("Данные добавлены!", MsgBoxImage: MessageBoxImage.Information);
+                        MakeSomeHelp.MSG("Данные отредактированы!", MsgBoxImage: MessageBoxImage.Information);
                     }
                     Window.Close();
                 }
@@ -190,30 +197,39 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     SaveSomeData.SomeObject = null;
                     IdUser = DataAboutUser.idUser;
                     string female = DataAboutUser.Female == 1 ? "МУЖ" : "Жен";
-                    ClientFIO.Text = $"{DataAboutUser.Lastname.Trim()} {DataAboutUser.Name.Substring(0, 1).ToUpper()}.{DataAboutUser.Patronymic.Substring(0, 1).ToUpper()}. {DataAboutUser.Birstday.Value.ToString("dd.MM.yyyy") } {female}";
+                    ClientFIO.Text = $"{DataAboutUser.Lastname?.Trim()} {DataAboutUser.Name?.Substring(0, 1).ToUpper()}.{DataAboutUser.Patronymic?.Substring(0, 1).ToUpper()}. {DataAboutUser.Birstday.Value.ToString("dd.MM.yyyy") } {female}";
+                    List<Guid> ContactId = new List<Guid>();
+                    ConctactType.Items.Clear();
                     makeloadingListOfContact(IdUser);
                 }
             }
         }
 
-        public async void makeloadingListOfContact(Guid? idUser)
+        public async void makeloadingListOfContact(Guid? idUser,Guid idTempContact=new Guid())
         {
+
             try
             {
                 var InformationFromServer = await Task.Run(() => MakeDownloadByLink($"api/contact/getusercontact?idUser={idUser}"));
                 ContactModel.ListOfUserContactInf listOfUserContactInf = JsonConvert.DeserializeObject<ContactModel.ListOfUserContactInf>(InformationFromServer.ToString());
                 if (listOfUserContactInf.listOfContact != null)
                 {
+                    int num = 0;
                     foreach (var contact in listOfUserContactInf.listOfContact)
                     {
                         ComboBoxItem NewItem = new ComboBoxItem();
-                        NewItem.Content = $"{contact.ValueTypeOfContact.Trim()} : {contact.Value.Trim()}:{contact.idContact.ToString()}";
+                        NewItem.Content = $"{contact.ValueTypeOfContact.Trim()} : {contact.Value.Trim()}";
                         NewItem.ToolTip = contact.Desctription;
                         ConctactType.Items.Add(NewItem);
-                        ContactId.Add(contact.idContact);
+                        ContactId.Add(Tuple.Create(num,contact.idContact));
+                        num++;
+                    }
+                    if (idTempContact != null)
+                    {
+                        ConctactType.SelectedIndex= ContactId.Where(ee => ee.Item2 == idTempContact).Select(ee => ee.Item1).FirstOrDefault();
                     }
                 }
-                else
+                if (ConctactType.Items.Count == 0)
                 {
                     ComboBoxItem NewItem = new ComboBoxItem();
                     NewItem.Content = $"Необходимо добавить данные о контатах";
@@ -224,7 +240,6 @@ namespace RepairFlatWPF.UserControls.OrderWork
             {
                 MakeSomeHelp.MSG(ex.ToString());
             }
-
         }
 
         public object MakeDownloadByLink(string UrlOfDownload)
@@ -234,7 +249,6 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void AddAdress_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Добавление Адреса
             this.idAdress = Guid.NewGuid();
             BaseWindow baseWindow = new BaseWindow("Создание адресса");
             baseWindow.MakeOpen(new AditinalControl.AddInformationAboutAdress(idAdress, ref baseWindow));
@@ -243,10 +257,11 @@ namespace RepairFlatWPF.UserControls.OrderWork
             {
                 SaveSomeData.MakeSomeOperation = false;
                 var dataAboutAdress = SaveSomeData.SomeObject as ModelAdress.DataAboutAdress;
+                SaveSomeData.SomeObject = null;
                 if (dataAboutAdress != null)
                 {
                     idAdress = dataAboutAdress.idAdress;
-                    FullAdress.Text = $"{dataAboutAdress.CiryName} {dataAboutAdress.Street} {dataAboutAdress.House} {dataAboutAdress.Entrance} {dataAboutAdress.NumberOfDelen}";
+                    FullAdress.Text = $"{dataAboutAdress.CityName} {dataAboutAdress.Street} {dataAboutAdress.House} {dataAboutAdress.Entrance} {dataAboutAdress.NumberOfDelen}";
                 }
             }
         }
@@ -254,45 +269,133 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            //Возврат назад
             Window.Close();
         }
 
 
-        private void ChangeClient_Click(object sender, RoutedEventArgs e)
-        {
-            //BaseWindow baseWindow = new BaseWindow("Обновление данных");
-            //baseWindow.MakeOpen(new AddUserControl(IdUser, ref baseWindow));
-            //baseWindow.ShowDialog();
-            MakeSomeHelp.MSG("Не реализовано!", MsgBoxImage: MessageBoxImage.Error);
-
-        }
-
         private void ChangeAdress_Click(object sender, RoutedEventArgs e)
         {
+            BaseWindow baseWindow = new BaseWindow("Обновление адресса");
+            baseWindow.MakeOpen(new AditinalControl.AddInformationAboutAdress(idAdress, ref baseWindow,Redact:true));
+            baseWindow.ShowDialog();
 
-            MakeSomeHelp.MSG("Не реализовано!", MsgBoxImage: MessageBoxImage.Error);
+            if (SaveSomeData.MakeSomeOperation)
+            {
+                SaveSomeData.MakeSomeOperation = false;
+                var dataAboutAdress = SaveSomeData.SomeObject as ModelAdress.DataAboutAdress;
+                SaveSomeData.SomeObject = null;
+                if (dataAboutAdress != null)
+                {
+                    FullAdress.Text = $"{dataAboutAdress.CityName} {dataAboutAdress.Street} {dataAboutAdress.House} {dataAboutAdress.Entrance} {dataAboutAdress.NumberOfDelen}";
+                }
+            }
         }
 
         private void ConctactType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             int ind = ConctactType.SelectedIndex;
             if (ind != -1)
-            {
-                idContact = ContactId[ind];
-                MessageBox.Show(ContactId[ind].ToString());
+            {;
+                idContact = ContactId.Where(ww=>ww.Item1==ind).Select(ee=>ee.Item2).FirstOrDefault();
             }
-           
         }
 
-        private void AddContactData_Click(object sender, RoutedEventArgs e)
+        private async void AddContactData_Click(object sender, RoutedEventArgs e)
         {
-
+            if (IdUser != null)
+            {
+                BaseWindow baseWindow = new BaseWindow("Добавление контактной информации");
+                baseWindow.MakeOpen(new AddContactUserConrol(IdUser, ref baseWindow));
+                baseWindow.ShowDialog();
+                if (SaveSomeData.MakeSomeOperation)
+                {
+                    SaveSomeData.MakeSomeOperation = false;
+                    var dataAboutNewContact = SaveSomeData.SomeObject as ContactModel.InformationAboutContact;
+                    SaveSomeData.SomeObject = null;
+                    string Json = JsonConvert.SerializeObject(dataAboutNewContact);
+                    string urlSend = "api/contact/create";
+                    var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(CreateNewOrder_Click)));
+                    var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+                    ContactId.Clear();
+                    ConctactType.Items.Clear();
+                    if (!deserializedProduct.success)
+                    {
+                        MakeSomeHelp.MSG($"Произошла ошибка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MakeSomeHelp.MSG("Данные о контакте добавлены!", MsgBoxImage: MessageBoxImage.Information);
+                    }
+                    makeloadingListOfContact(IdUser);
+                }
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Необходимо выбрать клиента для добавления данных о контакте!", MsgBoxImage: MessageBoxImage.Error);
+            }
         }
 
-        private void RedactContactData_Click(object sender, RoutedEventArgs e)
+        private async void RedactContactData_Click(object sender, RoutedEventArgs e)
         {
+            if (IdUser != null)
+            {
+                if (ConctactType.SelectedIndex != -1)
+                {
+                    var InformationFromServer = await Task.Run(() => MakeDownloadByLink($"api/contact/getusercontact?idUser={IdUser}"));
+                    ContactModel.ListOfUserContactInf listOfUserContactInf = JsonConvert.DeserializeObject<ContactModel.ListOfUserContactInf>(InformationFromServer.ToString());
+                    ContactModel.InformationAboutContact aboutContact = new ContactModel.InformationAboutContact();
 
+                    if (listOfUserContactInf.listOfContact != null)
+                    {
+                        foreach (var contact in listOfUserContactInf.listOfContact)
+                        {
+                            if (contact.idContact == idContact)
+                            {
+                                aboutContact.idContact = contact.idContact;
+                                aboutContact.idTypeOfContact = contact.idTypeOfContact;
+                                aboutContact.idUser = contact.idUser;
+                                aboutContact.Value = contact.Value.Trim();
+                                aboutContact.Desctription = contact.Desctription.Trim();
+                            }
+                        }
+                    }
+                    BaseWindow baseWindow = new BaseWindow("Редактирование контактной информации");
+                    baseWindow.MakeOpen(new AddContactUserConrol(IdUser, ref baseWindow, aboutContact));
+                    baseWindow.ShowDialog();
+                    if (SaveSomeData.MakeSomeOperation)
+                    {
+                        SaveSomeData.MakeSomeOperation = false;
+                        var dataAboutNewContact = SaveSomeData.SomeObject as ContactModel.InformationAboutContact;
+                        SaveSomeData.SomeObject = null;
+                        string Json = JsonConvert.SerializeObject(dataAboutNewContact);
+                        string urlSend = "api/contact/update";
+                        var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(CreateNewOrder_Click)));
+                        var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+
+                        ContactId.Clear();
+                        ConctactType.Items.Clear();
+                        if (!deserializedProduct.success)
+                        {
+                            MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                        }
+                        else
+                        {
+
+                            MakeSomeHelp.MSG("Данные о контакте обновлены!", MsgBoxImage: MessageBoxImage.Information);
+                        }
+
+                        makeloadingListOfContact(IdUser);
+                    }
+                }
+                else
+                {
+                    MakeSomeHelp.MSG("Необходимо выбрать контакт для редактирования!", MsgBoxImage: MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Необходимо выбрать клиента для редактирования данных о номере контакте!", MsgBoxImage: MessageBoxImage.Error);
+            }
         }
     }
 }

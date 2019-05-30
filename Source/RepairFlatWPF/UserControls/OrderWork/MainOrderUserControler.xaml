@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedType" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
+                <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SertedType" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
                 <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchText" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
                 <Button Name="Search" Click="Search_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
             </Grid>
@@ -39,10 +39,12 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление " Name="AddOrder" Click="AddOrder_Click" />
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактирование" Name="EditOrder" Click="EditOrder_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 15 15" Width="220" Height="60" Content="Выбор" Name="SelectOrder" Click="SelectOrder_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 15 15" Width="220" Height="60" Content="Удалить" Name="DeleteOrder" Click="DeleteOrder_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="3" Margin="7.5 10 15 15" Width="220" Height="60" Content="Выбор" Name="SelectOrder" Click="SelectOrder_Click" />
             </Grid>
         </Grid>
     </materialDesign:TransitioningContent>

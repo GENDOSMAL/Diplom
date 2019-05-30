@@ -10,20 +10,10 @@ using System.Threading.Tasks;
 
 namespace RepairFlatWPF
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     public static class BaseWorkWithServer
     {
-        /// <summary>
-        /// Метод выполняет запрос на получение данных после чего считывает их и возвращает данные в качестве объекта.
-        /// </summary>
-        /// <param name="PosfixUrl"></param>
-        /// <param name="typeOfMessage"></param>
-        /// <param name="WhatSend"></param>
-        /// <param name="NameOfClass"></param>
-        /// <param name="nameOfMethod"></param>
-        /// <returns></returns>
+
         public static object CatchErrorWithPost(string PosfixUrl, string typeOfMessage, string WhatSend, string NameOfClass, string nameOfMethod)
         {
             try
@@ -46,9 +36,9 @@ namespace RepairFlatWPF
             }
             catch (Exception ex)
             {
-                //Скопировать класс с сервера Logger.WriteToLog(Logger.TypeOfRecord.Exception, NameOfClass, nameOfMethod, ex.ToString().Replace(Environment.NewLine, ""));
-                // Что-то сделать с этим
-                throw new Exception("Произошла ошибка!" + ex.ToString());
+
+                MakeSomeHelp.MSG($"Произошла ошибка при работе с сервером {ex.Message}");
+                return null;
             }
         }
 
@@ -69,19 +59,11 @@ namespace RepairFlatWPF
             }
             catch (Exception ex)
             {
-                //Скопировать класс с сервера Logger.WriteToLog(Logger.TypeOfRecord.Exception, NameOfClass, nameOfMethod, ex.ToString().Replace(Environment.NewLine, ""));
-                // Что-то сделать с этим
-
-                throw new Exception("Произошла ошибка! " + ex.ToString());
+                MakeSomeHelp.MSG($"Произошла ошибка при работе с сервером {ex.Message}");
+                return null;
             }
         }
 
-
-        /// <summary>
-        /// Создание итоговой ссылки для работы из базового адреса сервера и постфикса для необхожимой операции
-        /// </summary>
-        /// <param name="urlSecondPart">Постфикс необходимой операции</param>
-        /// <returns></returns>
         private static string UrlSendMake(string urlSecondPart)
         {
             string baseAdress = Settings.Default.BaseAdress;

@@ -12,38 +12,47 @@ namespace RepairFlatRestApi.Controllers.MainConroller
     public class OrderController:BaseController
     {
         #region Контроллеры самого заказа
-        [HttpGet, Route("allorders")]
-        public HttpResponseMessage SelectOrderByID([FromUri] Guid idOrder)
+        [HttpGet, Route("alldata")]
+        public HttpResponseMessage SelectDataAbOrderByID([FromUri] Guid idOrder)
         {
             return CatchError(() =>
             {
                 return DBController.SelectAllDataAboutOrder(idOrder);
-            }, nameof(SubStringController), nameof(SelectOrderByID));
+            }, nameof(SubStringController), nameof(SelectDataAbOrderByID));
         }
 
         [HttpGet, Route("allorders")]
-        public HttpResponseMessage SelectAllOrders()
+        public HttpResponseMessage SelectAllOrder()
         {
             return CatchError(() =>
             {
-                return DBController.MakeDataAboutAllOrder();
-            }, nameof(SubStringController), nameof(SelectAllOrders));
+                return OtherController.OrderDBController.SelectDataAboutAllOrder();
+            }, nameof(SubStringController), nameof(SelectAllOrder));
         }
+        [HttpGet, Route("dataforupdate")]
+        public HttpResponseMessage GetDataAboutOrderToUpdate([FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OtherController.OrderDBController.SelectDataForUpdate(idOrder);
+            }, nameof(SubStringController), nameof(GetDataAboutOrderToUpdate));
+        }
+
         [HttpPost, Route("create")]
         public HttpResponseMessage CreateNewOrders([FromBody] WorkWithOrder.BaseOrderInformation NewOrderData)
         {
             return CatchError(() =>
             {
                 return DBController.CreateNewOrder(NewOrderData);
-            }, nameof(SubStringController), nameof(SelectAllOrders));
+            }, nameof(SubStringController), nameof(CreateNewOrders));
         }
-        [HttpPost, Route("update/order")]
+        [HttpPost, Route("update")]
         public HttpResponseMessage UpdateOrderInformation([FromBody] WorkWithOrder.BaseOrderInformation UpdateDataAbOrder)
         {
             return CatchError(() =>
             {
                 return DBController.UpdateDataAboutOrder(UpdateDataAbOrder);
-            }, nameof(SubStringController), nameof(SelectAllOrders));
+            }, nameof(SubStringController), nameof(UpdateOrderInformation));
         }
         #endregion
 
@@ -54,7 +63,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             return CatchError(() =>
             {
                 return DBController.CreateNewServis(NewServisData);
-            }, nameof(SubStringController), nameof(SelectAllOrders));
+            }, nameof(SubStringController), nameof(SelectAllOrder));
         }
         #endregion 
     }
