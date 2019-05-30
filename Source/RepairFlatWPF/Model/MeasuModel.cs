@@ -45,6 +45,7 @@ namespace RepairFlatWPF.Model
             public double? Swalls;
             public double? Sfloor;
             public List<ElementOfMeasurment> elementOfMeasurments;
+            public List<Guid> DeletedElement;
         }
 
         public class ElementOfMeasurment
@@ -59,5 +60,7 @@ namespace RepairFlatWPF.Model
             public string Description;
             public double? Height;
         }
+
+
     }
 }

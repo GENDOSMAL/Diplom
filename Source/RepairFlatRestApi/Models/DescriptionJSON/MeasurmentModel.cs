@@ -46,6 +46,7 @@ namespace RepairFlatRestApi.Models
             public double? Swalls;
             public double? Sfloor;
             public List<ElementOfMeasurment> elementOfMeasurments;
+            public List<Guid> DeletedElement;
         }
 
 

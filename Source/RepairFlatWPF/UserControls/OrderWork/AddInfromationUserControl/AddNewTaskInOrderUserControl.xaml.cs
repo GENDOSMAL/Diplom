@@ -27,9 +27,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         #region Конструктор
         public AddNewTaskInOrderUserControl(Guid idOrder, ref BaseWindow baseWindow, object DataAboutUpdateTask = null)
         {
-            InitializeComponent();
-            List<string> vs = new List<string>() { "Помещение 1", "Помещение 2", "Помещение 3", "Помещение 4" };
-            MakeListOfPremises(vs);
+            InitializeComponent();           
             this.idOrder = idOrder;
             ShowFirstPage();
             Window = baseWindow;
@@ -63,10 +61,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 case 2:
                     GridCursor.SetValue(Grid.ColumnProperty, index);
                     ShowThirdPage();
-                    break;
-                case 3:
-                    GridCursor.SetValue(Grid.ColumnProperty, index);
-                    ShowForthPage();
                     break;
             }
         }
@@ -139,7 +133,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void ShowFirstPage()
         {
-            ForPremises.Visibility = Visibility.Collapsed;
             ForMainData.Visibility = Visibility.Visible;
             ForServises.Visibility = Visibility.Collapsed;
             ForMaterials.Visibility = Visibility.Collapsed;
@@ -147,23 +140,13 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void ShowSecondPage()
         {
-            ForPremises.Visibility = Visibility.Visible;
-            ForServises.Visibility = Visibility.Collapsed;
+            ForServises.Visibility = Visibility.Visible;
             ForMainData.Visibility = Visibility.Collapsed;
             ForMaterials.Visibility = Visibility.Collapsed;
         }
 
         private void ShowThirdPage()
         {
-            ForPremises.Visibility = Visibility.Collapsed;
-            ForServises.Visibility = Visibility.Visible;
-            ForMainData.Visibility = Visibility.Collapsed;
-            ForMaterials.Visibility = Visibility.Collapsed;
-        }
-
-        private void ShowForthPage()
-        {
-            ForPremises.Visibility = Visibility.Collapsed;
             ForMaterials.Visibility = Visibility.Visible;
             ForMainData.Visibility = Visibility.Collapsed;
             ForServises.Visibility = Visibility.Collapsed;
@@ -171,34 +154,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         #endregion
 
-        #region Работа с помещениями
-        private void MakeListOfPremises(List<string> ListOfContent)
-        {
-            Style style = Application.Current.FindResource("ForPremises") as Style;
-            for (int i = 0; i < ListOfContent.Count; i++)
-            {
-                CheckBox ChildrenCheckBox = new CheckBox { Content = $"{i + 1} {ListOfContent[i]}", MinHeight = 20, Style = style };
-                ChildrenCheckBox.Checked += checkBox_Checked;
-                ChildrenCheckBox.Unchecked += checkBox_Unchecked;
-                AllPremises.Children.Add(ChildrenCheckBox);
-            }
-        }
 
-        private void checkBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox chBox = (CheckBox)sender;
-            int id = Convert.ToInt32(chBox.Content.ToString().Substring(0, 1)) - 1;
-            idOfPremisesSelected.Remove(id);
-
-        }
-        private void checkBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox chBox = (CheckBox)sender;
-            int id = Convert.ToInt32(chBox.Content.ToString().Substring(0, 1)) - 1;
-            idOfPremisesSelected.Add(id);
-
-        }
-        #endregion
 
         #endregion
 

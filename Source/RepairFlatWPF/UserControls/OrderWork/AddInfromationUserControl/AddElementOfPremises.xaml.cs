@@ -27,7 +27,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             {
                 var object1 = elementOf as Model.MeasuModel.ElementOfMeasurment;
                 this.idElement = object1.idElement;
-                TypeOfElement.Text = object1.TypeOfElement;
+                TypeOfElement.SelectedValue = object1.TypeOfElement.Trim();
                 Lenght.Text = object1.Lenght.ToString();
                 Width.Text = object1.Width.ToString();
                 Height.Text = object1.Height.ToString();

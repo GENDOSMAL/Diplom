@@ -21,7 +21,7 @@
             <RowDefinition Height="*"/><!--Для высоты длины и ширины-->
             <RowDefinition Height="*"/><!--Описание-->
             <RowDefinition Height="*"/><!--Кнопки-->
-            <RowDefinition Height="65"/><!--Кнопки-->
+            <RowDefinition Height="75"/><!--Кнопки-->
         </Grid.RowDefinitions>
         <ComboBox Name="TypeOfElement" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="0" Margin="15,0,20,0" materialDesign:HintAssist.Hint="Тип элемента" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center"  />
         <Grid Grid.ColumnSpan="2" Grid.Row="1">
@@ -38,8 +38,8 @@
         <TextBox Name="WidOfSlope" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Ширина откоса" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"   />
         <TextBox Name="POfElement" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P элемента" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
         <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
-        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="5"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
-        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="5" Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="5"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="50" Width="240"/>
+        <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="5" Margin="15,0,7.5,0" VerticalAlignment="Center" Height="50" Width="240"/>
 
     </Grid>
 </UserControl>

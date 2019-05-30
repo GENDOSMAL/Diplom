@@ -16,7 +16,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
     {
         Guid idOrder;
         DataTable AllDataAboutMeasurment;
-        List<Tuple<int, Guid?>> DataAboutMeasurment=new List<Tuple<int, Guid?>>();
+        List<Tuple<int, Guid?>> DataAboutMeasurment = new List<Tuple<int, Guid?>>();
         public WorkWithMeasurment(Guid IdOrder)
         {
             InitializeComponent();
@@ -36,32 +36,27 @@ namespace RepairFlatWPF.UserControls.OrderWork
             DataAboutMeasurment = new List<Tuple<int, Guid?>>();
             var InformFromserver = await Task.Run(() => MakeDownloadByLink($"api/measurment/allmeastbl?idOrder={idOrder}"));
             var ListofOrders = JsonConvert.DeserializeObject<Model.MeasuModel.AllDataAbMeas>(InformFromserver.ToString());
-
-            if (ListofOrders.success)
+            if (ListofOrders.listofmeas != null)
             {
-                if (ListofOrders.listofmeas != null)
+                int number = 1;
+                foreach (var MeasInf in ListofOrders.listofmeas)
                 {
-                    int number = 1;
-                    foreach (var MeasInf in ListofOrders.listofmeas)
-                    {
-                        DataRow newMesRow = AllDataAboutMeasurment.NewRow();
-                        newMesRow[0] = number;
-                        newMesRow[1] = MeasInf.NameOfPremises;
-                        newMesRow[2] = MeasInf.Description;
-                        newMesRow[3] = MeasInf.Height;
-                        newMesRow[4] = MeasInf.Width;
-                        newMesRow[5] = MeasInf.Lenght;
-                        newMesRow[6] = MeasInf.Pwalls;
-                        newMesRow[7] = MeasInf.PCelling;
-                        newMesRow[8] = MeasInf.Swalls;
-                        newMesRow[9] = MeasInf.Sfloor;
+                    DataRow newMesRow = AllDataAboutMeasurment.NewRow();
+                    newMesRow[0] = number;
+                    newMesRow[1] = MeasInf.NameOfPremises?.Trim();
+                    newMesRow[2] = MeasInf.Description?.Trim();
+                    newMesRow[3] = MeasInf.Height;
+                    newMesRow[4] = MeasInf.Width;
+                    newMesRow[5] = MeasInf.Lenght;
+                    newMesRow[6] = MeasInf.Pwalls;
+                    newMesRow[7] = MeasInf.PCelling;
+                    newMesRow[8] = MeasInf.Swalls;
+                    newMesRow[9] = MeasInf.Sfloor;
 
-                        AllDataAboutMeasurment.Rows.Add(newMesRow);
-                        DataAboutMeasurment.Add(new Tuple<int, Guid?>(number, MeasInf.idMeasurment));
-                        number++;
-                    }
+                    AllDataAboutMeasurment.Rows.Add(newMesRow);
+                    DataAboutMeasurment.Add(new Tuple<int, Guid?>(number, MeasInf.idMeasurment));
+                    number++;
                 }
-
             }
 
         }

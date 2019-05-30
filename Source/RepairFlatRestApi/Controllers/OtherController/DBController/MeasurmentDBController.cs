@@ -17,8 +17,10 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 var LstOfMeas = db.OrderMeasurements.Where(ee => ee.IdOrder == idOrder).AsEnumerable();
 
                 AllDataAbMeas allMeas = new AllDataAbMeas();
+                allMeas.listofmeas = new List<DataAboutMeasForTable>();
                 foreach (var mesa in LstOfMeas)
                 {
+
                     DataAboutMeasForTable data = new DataAboutMeasForTable
                     {
                         Description = mesa.Description,
@@ -59,7 +61,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         Sfloor = newMeas.Sfloor,
                         Swalls = newMeas.Swalls,
                         Width = newMeas.Width,
-                        
+
                     };
                     db.OrderMeasurements.Add(measurements);
                     if (newMeas.elementOfMeasurments != null)
@@ -113,7 +115,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
 
                         if (selectMeas.OrderElementOfMeasurments != null)
                         {
-                            foreach(var element in updatedMeas.elementOfMeasurments)
+                            foreach (var element in updatedMeas.elementOfMeasurments)
                             {
                                 OrderElementOfMeasurments elementOfMeasurment = new OrderElementOfMeasurments
                                 {
@@ -130,8 +132,16 @@ namespace RepairFlatRestApi.Controllers.OtherController
                                 db.OrderElementOfMeasurments.AddOrUpdate(elementOfMeasurment);
                             }
                         }
+                        if (updatedMeas.DeletedElement != null)
+                        {
+                            foreach (Guid delete in updatedMeas.DeletedElement)
+                            {
+
+                                db.OrderElementOfMeasurments.Remove(db.OrderElementOfMeasurments.Where(ee => ee.idElement == delete).First());
+                            }
+                        }
                         db.SaveChanges();
-                        return new BaseResult { success = true};
+                        return new BaseResult { success = true };
 
                     }
                     else

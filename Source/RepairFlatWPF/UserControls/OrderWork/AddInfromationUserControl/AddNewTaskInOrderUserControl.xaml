@@ -37,21 +37,15 @@
                             </Viewbox>
                         </Button.Content>
                     </Button>
-                    <Button Uid="1" Grid.Column="1" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
-                        <Button.Content>
-                            <Viewbox  >
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Помещения для работы" FontFamily="Times New Roman" FontSize="45 "/>
-                            </Viewbox>
-                        </Button.Content>
-                    </Button>
-                    <Button Uid="2" Grid.Column="2" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                  
+                    <Button Uid="1" Grid.Column="2" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация об услугах" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
                     </Button>
-                    <Button Uid="3" Grid.Column="3"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
+                    <Button Uid="2" Grid.Column="3"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация о материалах" FontFamily="Times New Roman" FontSize="45 "/>
@@ -63,7 +57,6 @@
 
                 <Grid Grid.Row="1" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -81,6 +74,8 @@
                             <!--Для даты окончания-->
                             <RowDefinition Height="auto"/>
                             <!--Для суммы данной операции-->
+                            <RowDefinition Height="*"/>
+                            
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBox Name="Description" Grid.Row="2" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание (не больше 500)" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" Height="auto" TextWrapping="Wrap"/>
@@ -101,30 +96,7 @@
                         <TextBox Name="AllSumma" Grid.Row="3" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Стоимость задания" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" IsEnabled="False" />
 
                     </Grid>
-                    <!--Для выбора помещений-->
-                    <Grid Name="ForPremises"   >
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="65"/>
-                        </Grid.RowDefinitions>
-                        <Viewbox  Grid.Row="0" >
-                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите помещения для работы" FontFamily="Times New Roman" FontSize="45 "/>
-                        </Viewbox>
-                        <StackPanel Grid.Row="1" Name="AllPremises">
-                            
-                        </StackPanel>
-                        <Grid Grid.Row="2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                        </Grid>
 
-
-                    </Grid>
-                    
                     <!--Для информации об услугах-->
                     <Grid Name="ForServises"  Visibility="Collapsed" >
                         <Grid.RowDefinitions>
