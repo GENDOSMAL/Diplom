@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using RepairFlatWPF.Model;
 using System.Threading;
+using RepairFlat.Model;
 
 namespace RepairFlatWPF.UserControls
 {

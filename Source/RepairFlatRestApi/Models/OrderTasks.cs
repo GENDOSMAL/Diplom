@@ -19,7 +19,6 @@ namespace RepairFlatRestApi.Models
         {
             this.OrderTasksState = new HashSet<OrderTasksState>();
             this.TaskMaterials = new HashSet<TaskMaterials>();
-            this.TaskMeasurment = new HashSet<TaskMeasurment>();
             this.TaskServis = new HashSet<TaskServis>();
         }
     
@@ -37,8 +36,6 @@ namespace RepairFlatRestApi.Models
         public virtual BrigateSeparation BrigateSeparation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskMaterials> TaskMaterials { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaskMeasurment> TaskMeasurment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskServis> TaskServis { get; set; }
     }

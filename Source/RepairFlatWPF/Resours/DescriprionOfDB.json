@@ -64,6 +64,11 @@
           "IsPk": false
         },
         {
+          "NameOfCol": "TypeOfMaterial",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
           "NameOfCol": "Descriprtion",
           "TypeOfCol": "Text",
           "IsPk": false

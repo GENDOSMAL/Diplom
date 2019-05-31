@@ -58,7 +58,6 @@ namespace RepairFlatRestApi.Models
         public virtual DbSet<TypeOfContact> TypeOfContact { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserContact> UserContact { get; set; }
-        public virtual DbSet<WorkerCanditate> WorkerCanditate { get; set; }
         public virtual DbSet<WorkerDetails> WorkerDetails { get; set; }
         public virtual DbSet<WorkerOrderInformation> WorkerOrderInformation { get; set; }
         public virtual DbSet<WorkerPosts> WorkerPosts { get; set; }

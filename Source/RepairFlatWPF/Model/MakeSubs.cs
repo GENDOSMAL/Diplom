@@ -5,14 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace RepairFlatWPF
+namespace RepairFlat.Model
 {
-    public class BaseResult
-    {
-        public bool success;
-        public string description;
-    }
-
     public class MakeSubs : BaseResult
     {
         #region Make work with servises
@@ -34,7 +28,7 @@ namespace RepairFlatWPF
         /// <summary>
         /// Список обновленных/добавленных сервисов. Необходимо для отправки на клиент
         /// </summary>
-        public class ListOfUpdatedServises: ListOfServises
+        public class ListOfUpdatedServises : ListOfServises
         {
             public string TypeOfUpdate;
         }
@@ -57,9 +51,8 @@ namespace RepairFlatWPF
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfServises[] listOfServisesUpdate;
-            public ListOfServises[] ListOfServisesInsert;
-            public ListOfGuid[] ListOfDeleteServises;
+            public List<ListOfServises> ListOfServises;
+            public List<ListOfGuid> ListOfDeleteServises;
         }
 
         public class ListOfGuid
@@ -87,18 +80,17 @@ namespace RepairFlatWPF
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfPremises[] listOfPremisesUpdate;
-            public ListOfPremises[] ListOfPremisesInsert;
-            public ListOfGuid[] ListOfDeletePremises;
+            public List<ListOfPremises> ListOfPremises;
+            public List<ListOfGuid> ListOfDeletePremises;
         }
 
         public class ListOfPremises
         {
-            public Guid? idPremises;
+            public Guid idPremises;
             public string Name;
             public string Description;
         }
-        public class ListOfPremisesUpd: ListOfPremises
+        public class ListOfPremisesUpd : ListOfPremises
         {
             public string TypeOfUpdate;
         }
@@ -123,21 +115,20 @@ namespace RepairFlatWPF
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfMaterials[] listOfMaterialsUpdate;
-            public ListOfMaterials[] ListOfMaterialsInsert;
-            public ListOfGuid[] ListOfDeletePremises;
+            public List<ListOfMaterials> ListOfMaterials;
+            public List<ListOfGuid> ListOfDeleteMaterials;
         }
 
         public class ListOfMaterials
         {
-            public Guid? idMaterials;
+            public Guid idMaterials;
             public string NameOfMaterial;
             public string Description;
             public string UnitOfMeasue;
             public Nullable<decimal> Cost;
             public string TypeOfMaterial;
         }
-        public class ListOfMaterialsUpd: ListOfMaterials
+        public class ListOfMaterialsUpd : ListOfMaterials
         {
             public string TypeOfUpdate;
         }
@@ -152,18 +143,17 @@ namespace RepairFlatWPF
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int kol;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfContactsUpd[] listOfContacts;
+            public List<ListOfContactsUpd> listOfContacts;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfGuid[] ListOfDeleteContacts;
+            public List<ListOfGuid> ListOfDeleteContacts;
         }
 
         public class MakeUpdOrInsContacts
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfContacts[] listOfContactsUpdate;
-            public ListOfContacts[] ListOfContactsInsert;
-            public ListOfGuid[] ListOfDeleteContacts;
+            public List<ListOfContacts> ListOfContacts;
+            public List<ListOfGuid> ListOfDeleteContacts;
         }
 
         public class ListOfContacts
@@ -178,6 +168,45 @@ namespace RepairFlatWPF
             public string TypeOfUpdate;
         }
         #endregion
+        #region Данные о должностях
+
+        public class PostMake : BaseResult
+        {
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(CustomDateTimeConverter))]
+            public DateTime DateOfMakeAnswer;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int kol;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public List<ListOfPostUpd> listOfPost;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public List<ListOfGuid> ListOfDeletePost;
+        }
+
+        public class MakeUpdOrInsPost
+        {
+            public string DateOfMake;
+            public Guid idUser;
+            public List<ListOfPost> listOfPostUpdate;
+            public List<ListOfPost> ListOfPostInsert;
+            public List<ListOfGuid> ListOfDeletePost;
+        }
+
+        public class ListOfPost
+        {
+            public Guid idPost;
+            public string NameOfPost;
+            public Decimal? BaseWage;
+        }
+
+        public class ListOfPostUpd : ListOfPost
+        {
+            public string TypeOfUpdate;
+        }
+        #endregion
+
+
+
 
 
         class CustomDateTimeConverter : IsoDateTimeConverter

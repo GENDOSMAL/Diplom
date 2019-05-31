@@ -37,14 +37,12 @@
         <EntityTypeShape EntityType="RepairFlatDBModel.TypeOfContact" Width="1.5" PointX="6.75" PointY="46" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.User" Width="1.5" PointX="0.75" PointY="27.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.UserContact" Width="1.5" PointX="9" PointY="32.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.WorkerCanditate" Width="1.5" PointX="11.25" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.WorkerDetails" Width="1.5" PointX="6" PointY="21.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.WorkerOrderInformation" Width="1.5" PointX="8.25" PointY="22.5" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.WorkerPosts" Width="1.5" PointX="9" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.WorkersOperats" Width="1.5" PointX="13.5" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.WorkersOperats" PointX="13.5" PointY="19.125" Width="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.WorkersPayGive" Width="1.5" PointX="8.25" PointY="37" IsExpanded="true" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderInformation_AdressDescription" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_WorkerCanditate_AdressDescription" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_WorkerDetails_AdressDescription" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_BrigateContent_WorkerDetails" ManuallyRouted="false" />
@@ -62,7 +60,7 @@
         <AssociationConnector Association="RepairFlatDBModel.FK_DialogUser_User" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_EstabilismentPost_WorkerDetails" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_EstabilismentPost_WorkerPosts" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_WorkersOperats_EstabilismentPost" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="RepairFlatDBModel.FK_WorkersOperats_EstabilismentPost" />
         <AssociationConnector Association="RepairFlatDBModel.FK_LoginInformation_User" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_MaterialsUpdate_OurMaterials" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_MaterialsUpdate_User" ManuallyRouted="false" />
@@ -87,9 +85,8 @@
         <AssociationConnector Association="RepairFlatDBModel.FK_UserContact_TypeOfContact" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_UserContact_User" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_WorkerDetails_User" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_WorkerCanditate_WorkerPosts" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_WorkerOrderInformation_WorkerDetails" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_WorkersOperats_WorkerDetails" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="RepairFlatDBModel.FK_WorkersOperats_WorkerDetails" />
         <AssociationConnector Association="RepairFlatDBModel.FK_WorkersPayGive_WorkerDetails" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_WorkersPayGive_WorkerDetails1" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_ContactUpdate_User" />
@@ -100,7 +97,6 @@
         <EntityTypeShape EntityType="RepairFlatDBModel.InformatioForPayment" Width="1.5" PointX="8.25" PointY="7.5" />
         <EntityTypeShape EntityType="RepairFlatDBModel.PostsUpdate" Width="1.5" PointX="16.25" PointY="23.25" />
         <EntityTypeShape EntityType="RepairFlatDBModel.TaskMaterials" Width="1.5" PointX="14.75" PointY="36.625" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.TaskMeasurment" Width="1.5" PointX="13.75" PointY="39.375" />
         <EntityTypeShape EntityType="RepairFlatDBModel.TaskServis" Width="1.5" PointX="16.75" PointY="33.125" />
         <AssociationConnector Association="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation1" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderTasks_BrigateSeparation" />
@@ -110,10 +106,8 @@
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderPayment_DocPayment" />
         <AssociationConnector Association="RepairFlatDBModel.FK_InformatioForPayment_WorkerDetails" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskMaterials_OrderMaterial" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_TaskMeasurment_OrderMeasurements" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskServis_OrderServises" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskMaterials_OrderTasks" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_TaskMeasurment_OrderTasks" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskServis_OrderTasks" />
         <AssociationConnector Association="RepairFlatDBModel.FK_PostsUpdate_User" />
         <AssociationConnector Association="RepairFlatDBModel.FK_PostsUpdate_WorkerPosts" />

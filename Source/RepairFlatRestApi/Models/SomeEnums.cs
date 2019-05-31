@@ -9,7 +9,7 @@ namespace RepairFlatRestApi.Models
     {
         public enum TypeOfAction
         {
-            Add,
+            AddOrUpdate,
             Update,
             Delete
         }

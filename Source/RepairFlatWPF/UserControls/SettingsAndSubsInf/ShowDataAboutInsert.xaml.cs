@@ -1,4 +1,7 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using RepairFlat.Model;
+using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static RepairFlat.Model.MakeSubs;
 
 namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 {
@@ -79,7 +83,101 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void SaveDataBTN_Click(object sender, RoutedEventArgs e)
         {
+            if (MakeSomeHelp.MSG("Вы согласны с данными таблицах приведенных на экране?", MsgBoxImage: MessageBoxImage.Question, MsgBoxButton: MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            {
+                if (ListOfSelectSheet.Contains(1))
+                {
+                    DataTable Data = AllSheet.Tables["1"];
+                    MakeUpdOrInsPremises insPremises = new MakeUpdOrInsPremises();
+                    List<ListOfPremises> ListOfPremise = new List<ListOfPremises>(); 
+                    for (int i=0;i< Data.Rows.Count; i++)
+                    {
+                        ListOfPremises premisesUpd = new ListOfPremises
+                        {
+                            Description = Data.Rows[i][2].ToString(),
+                            idPremises = Guid.Parse(Data.Rows[i][0].ToString()),
+                            Name = Data.Rows[i][1].ToString()
+                        };
+                        ListOfPremise.Add(premisesUpd);
+                    }
+                    insPremises.idUser = SaveSomeData.IdUser?? default(Guid);
+                    insPremises.ListOfPremises = ListOfPremise;
+                    insPremises.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+                    MakeSendDataToserver("api/substring/premises/update", insPremises);
+                }
+                if (ListOfSelectSheet.Contains(2))
+                {
+                    DataTable Data = AllSheet.Tables["2"];
+                    MakeUpdOrInsMaterials InsMaterial = new MakeUpdOrInsMaterials();
+                    List<ListOfMaterials> ListOfMaterials = new List<ListOfMaterials>();
+                    for (int i = 0; i < Data.Rows.Count; i++)
+                    {
+                        ListOfMaterials premisesUpd = new ListOfMaterials
+                        {
+                            idMaterials = Guid.Parse(Data.Rows[i][0].ToString()),
+                            NameOfMaterial = Data.Rows[i][1].ToString(),
+                            UnitOfMeasue = Data.Rows[i][2].ToString(),
+                            TypeOfMaterial = Data.Rows[i][3].ToString(),
+                            Cost =Convert.ToDecimal(Data.Rows[i][4].ToString()),                          
+                            Description = Data.Rows[i][5].ToString(),
+                        };
+                        ListOfMaterials.Add(premisesUpd);
+                    }
+                    InsMaterial.idUser = SaveSomeData.IdUser ?? default(Guid);
+                    InsMaterial.ListOfMaterials = ListOfMaterials;
+                    InsMaterial.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+                    MakeSendDataToserver("api/substring/material/update", InsMaterial);
+                }
+                if (ListOfSelectSheet.Contains(3))
+                {
+                    DataTable Data = AllSheet.Tables["3"];
+                    MakeUpdOrInsServises InsServises = new MakeUpdOrInsServises();
+                    List<ListOfServises> ListOfServises = new List<ListOfServises>();
+                    for (int i = 0; i < Data.Rows.Count; i++)
+                    {
+                        ListOfServises ServisesUpdate = new ListOfServises
+                        {
+                            idServises = Guid.Parse(Data.Rows[i][0].ToString()),
+                            Nomination = Data.Rows[i][1].ToString(),
+                            TypeOfServises= Data.Rows[i][2].ToString(),
+                            UnitOfMeasue = Data.Rows[i][3].ToString(),
+                            Cost = Convert.ToDecimal(Data.Rows[i][4].ToString()),
+                            Description = Data.Rows[i][5].ToString(),
+                        };
+                        ListOfServises.Add(ServisesUpdate);
+                    }
+                    InsServises.idUser = SaveSomeData.IdUser ?? default(Guid);
+                    InsServises.ListOfServises = ListOfServises;
+                    InsServises.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+                    MakeSendDataToserver("api/substring/servises/update", InsServises);
+                }
+                if (ListOfSelectSheet.Contains(4))
+                {
+                    DataTable Data = AllSheet.Tables["4"];
+                    MakeUpdOrInsPost InsPost = new MakeUpdOrInsPost();
+                    List<ListOfPost> ListOfPost = new List<ListOfPost>();
+                    for (int i = 0; i < Data.Rows.Count; i++)
+                    {
+                        ListOfPost ServisesUpdate = new ListOfPost
+                        {
 
+                            idPost = Guid.Parse(Data.Rows[i][0].ToString()),
+                            NameOfPost = Data.Rows[i][1].ToString(),
+                            BaseWage = Convert.ToDecimal(Data.Rows[i][2].ToString()),
+                        };
+                        ListOfPost.Add(ServisesUpdate);
+                    }
+                    InsPost.idUser = SaveSomeData.IdUser ?? default(Guid);
+                    InsPost.listOfPostUpdate = ListOfPost;
+                    InsPost.ListOfPostInsert = ListOfPost;
+                    InsPost.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
+                    MakeSendDataToserver("api/substring/post/update", InsPost);
+                }
+            }
+            else
+            {
+                MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.WorkWithSubInfromation());
+            }
         }
 
         private void SelectTabsClick(object sender, RoutedEventArgs e)
@@ -106,6 +204,27 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             }
         }
 
+
+        private async void MakeSendDataToserver(string urlSend,object json)
+        {
+            string Json = JsonConvert.SerializeObject(json);
+            SaveDataBTN.Content = "Ожидайте...";
+            RetutnBTN.Content = "Ожидайте...";
+            SaveDataBTN.IsEnabled = false;
+            RetutnBTN.IsEnabled = false;
+
+            var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeSendDataToserver)));
+            var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+
+            if (!deserializedProduct.success)
+            {
+                MakeSomeHelp.MSG($"Произошла ошибка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Данные добавлены!", MsgBoxImage: MessageBoxImage.Information);
+            }
+        }
 
         private void ShowNeeded( Grid grid)
         {

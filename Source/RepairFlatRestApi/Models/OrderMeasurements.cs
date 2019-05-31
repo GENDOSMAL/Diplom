@@ -18,7 +18,6 @@ namespace RepairFlatRestApi.Models
         public OrderMeasurements()
         {
             this.OrderElementOfMeasurments = new HashSet<OrderElementOfMeasurments>();
-            this.TaskMeasurment = new HashSet<TaskMeasurment>();
         }
     
         public System.Guid idMeasurements { get; set; }
@@ -37,7 +36,5 @@ namespace RepairFlatRestApi.Models
         public virtual ICollection<OrderElementOfMeasurments> OrderElementOfMeasurments { get; set; }
         public virtual OrderInformation OrderInformation { get; set; }
         public virtual PremisesType PremisesType { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TaskMeasurment> TaskMeasurment { get; set; }
     }
 }

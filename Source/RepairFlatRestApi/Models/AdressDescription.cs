@@ -18,7 +18,6 @@ namespace RepairFlatRestApi.Models
         public AdressDescription()
         {
             this.OrderInformation = new HashSet<OrderInformation>();
-            this.WorkerCanditate = new HashSet<WorkerCanditate>();
             this.WorkerDetails = new HashSet<WorkerDetails>();
         }
     
@@ -35,8 +34,6 @@ namespace RepairFlatRestApi.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderInformation> OrderInformation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkerCanditate> WorkerCanditate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkerDetails> WorkerDetails { get; set; }
     }

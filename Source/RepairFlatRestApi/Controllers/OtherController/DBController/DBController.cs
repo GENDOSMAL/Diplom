@@ -175,7 +175,7 @@ namespace RepairFlatRestApi.Controllers
                                 idPost= WhatInsert.idPost,
                                 IdUpdateUser= listOfPost.idUser,
                                 DateUpdate= DateOfInsert,
-                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString()
+                                TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString()
                             };
                             db.WorkerPosts.Add(NewPost).PostsUpdate.Add(InformationAboutIsert);
                         }
@@ -264,18 +264,18 @@ namespace RepairFlatRestApi.Controllers
                             NameOfPost=e.NameOfPost,
                             TypeOfUpdate=e.PostsUpdate.FirstOrDefault().TypeOfUpdate
 
-                        }).ToArray();
+                        }).ToList();
 
                         var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastUpdate && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Post.ToString());
                         var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
                         {
                             idGuid = e.idThingsDelete
-                        }).ToArray();
+                        }).ToList();
 
                         return new MakeSubs.PostMake
                         {
                             success = true,
-                            kol = ListOfPost.Length + ListOfDelete.Length,
+                            kol = ListOfPost.Count + ListOfDelete.Count,
                             DateOfMakeAnswer = DateTime.Now,                            
                             listOfPost = ListOfPost,
                             ListOfDeletePost = ListOfDelete
@@ -302,11 +302,11 @@ namespace RepairFlatRestApi.Controllers
                     idPost=e.idPost,
                     BaseWage=e.BaseWage,
                     NameOfPost=e.NameOfPost
-                }).ToArray();
+                }).ToList();
                 return new MakeSubs.PostMake
                 {
                     success = true,
-                    kol = listOfPost.Length,
+                    kol = listOfPost.Count,
                     listOfPost=listOfPost,
                     DateOfMakeAnswer = DateTime.Now
                 };
@@ -493,9 +493,9 @@ namespace RepairFlatRestApi.Controllers
                         };
 
 
-                    if (makeUpdateOrInserNew.ListOfServisesInsert != null)
+                    if (makeUpdateOrInserNew.ListOfServises != null)
                     {
-                        foreach (var WhatInsert in makeUpdateOrInserNew.ListOfServisesInsert)
+                        foreach (var WhatInsert in makeUpdateOrInserNew.ListOfServises)
                         {
                             var NewServises = new OurServices
                             {
@@ -513,39 +513,13 @@ namespace RepairFlatRestApi.Controllers
                                 IdUser = makeUpdateOrInserNew.idUser,
                                 IdServices = WhatInsert.idServises,
                                 DateOfUpdate = DateOfInsert,
-                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString()
+                                TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString()
                             };
 
-                            db.OurServices.Add(NewServises);
-                            db.ServicesUpdate.AddOrUpdate(InformationAboutIsert);
+                            db.OurServices.AddOrUpdate(NewServises);
+                            db.ServicesUpdate.Add(InformationAboutIsert);
                         }
-                    }
-
-                    if (makeUpdateOrInserNew.listOfServisesUpdate != null)
-                    {
-                        foreach (var WhatUpdate in makeUpdateOrInserNew.listOfServisesUpdate)
-                        {
-                            var UpdatedServis = db.OurServices.Where(e => e.idServis == WhatUpdate.idServises).FirstOrDefault();
-                            if (UpdatedServis != null)
-                            {
-                                UpdatedServis.Nomination = WhatUpdate.Nomination;
-                                UpdatedServis.TypeOfServices = WhatUpdate.TypeOfServises;
-                                UpdatedServis.Description = WhatUpdate.Description;
-                                UpdatedServis.Cost = WhatUpdate.Cost;
-                                UpdatedServis.UnitOfMeasue = WhatUpdate.UnitOfMeasue;
-
-                                var InformationAboutIsert = new ServicesUpdate
-                                {
-                                    idServUpdate = Guid.NewGuid(),
-                                    IdUser = makeUpdateOrInserNew.idUser,
-                                    IdServices = WhatUpdate.idServises,
-                                    DateOfUpdate = DateOfInsert,
-                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString()
-                                };
-                                db.ServicesUpdate.Add(InformationAboutIsert);
-                            }
-                        }
-                    }
+                    }                   
 
                     if (makeUpdateOrInserNew.ListOfDeleteServises != null)
                     {
@@ -628,10 +602,10 @@ namespace RepairFlatRestApi.Controllers
 
                 try
                 {
-                    if (ListOfNewPremises.ListOfPremisesInsert != null)
+                    if (ListOfNewPremises.ListOfPremises != null)
                     {
 
-                        foreach (var InsertThing in ListOfNewPremises.ListOfPremisesInsert)
+                        foreach (var InsertThing in ListOfNewPremises.ListOfPremises)
                         {
 
                             var newPremise = new PremisesType
@@ -640,40 +614,17 @@ namespace RepairFlatRestApi.Controllers
                                 idPremises = InsertThing.idPremises,
                                 NameOfPremises = InsertThing.Name
                             };
-                            db.PremisesType.Add(newPremise);
+                            db.PremisesType.AddOrUpdate(newPremise);
 
                             var NewPremisesHistory = new PremisesUpdate
                             {
                                 DateOfUpdate = DateOfAction,
-                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString(),
+                                TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString(),
                                 IdUser = ListOfNewPremises.idUser,
                                 idPremises = InsertThing.idPremises,
                                 idPremisesUpdate = Guid.NewGuid()
                             };
-                            db.PremisesUpdate.Add(NewPremisesHistory);
-                        }
-                    }
-
-                    if (ListOfNewPremises.listOfPremisesUpdate != null)
-                    {
-                        foreach (var whatUpdate in ListOfNewPremises.listOfPremisesUpdate)
-                        {
-                            var updatePremises = db.PremisesType.Where(e => e.idPremises == whatUpdate.idPremises).FirstOrDefault();
-                            if (updatePremises != null)
-                            {
-                                updatePremises.NameOfPremises = whatUpdate.Name;
-                                updatePremises.Descriprtion = whatUpdate.Description;
-
-                                var NewPremisesHistory = new PremisesUpdate
-                                {
-                                    DateOfUpdate = DateOfAction,
-                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString(),
-                                    IdUser = ListOfNewPremises.idUser,
-                                    idPremises = whatUpdate.idPremises,
-                                    idPremisesUpdate = Guid.NewGuid()
-                                };
-                                db.PremisesUpdate.Add(NewPremisesHistory);
-                            }
+                            db.PremisesUpdate.AddOrUpdate(NewPremisesHistory);
                         }
                     }
 
@@ -826,9 +777,9 @@ namespace RepairFlatRestApi.Controllers
 
                 try
                 {
-                    if (ListOfMaterials.ListOfMaterialsInsert != null)
+                    if (ListOfMaterials.ListOfMaterials != null)
                     {
-                        foreach (var NewMaterial in ListOfMaterials.ListOfMaterialsInsert)
+                        foreach (var NewMaterial in ListOfMaterials.ListOfMaterials)
                         {
                             var NMat = new OurMaterials
                             {
@@ -844,38 +795,12 @@ namespace RepairFlatRestApi.Controllers
                             {
                                 DateOfUpdate = DateOfAction,
                                 IdUser = ListOfMaterials.idUser,
-                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString(),
+                                TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString(),
                                 idMaterials = NewMaterial.idMaterials,
                                 idMaterialUpdate = Guid.NewGuid()
                             };
-                            db.OurMaterials.Add(NMat);
-                            db.MaterialsUpdate.Add(NMatHistory);
-                        }
-                    }
-
-                    if (ListOfMaterials.listOfMaterialsUpdate != null)
-                    {
-                        foreach (var MatUpdate in ListOfMaterials.listOfMaterialsUpdate)
-                        {
-                            var MaterialUpdate = db.OurMaterials.Where(e => e.idMaterials == MatUpdate.idMaterials).FirstOrDefault();
-                            if (MaterialUpdate != null)
-                            {
-                                MaterialUpdate.NameOfMaterial = MatUpdate.NameOfMaterial;
-                                MaterialUpdate.UnitOfMeasue = MatUpdate.UnitOfMeasue;
-                                MaterialUpdate.Cost = MatUpdate.Cost;
-                                MaterialUpdate.Description = MatUpdate.Description;
-                                MaterialUpdate.TypeOfMaterial = MatUpdate.TypeOfMaterial;
-
-                                var HistOfMatUpd = new MaterialsUpdate
-                                {
-                                    DateOfUpdate = DateOfAction,
-                                    idMaterials = MatUpdate.idMaterials,
-                                    idMaterialUpdate = Guid.NewGuid(),
-                                    IdUser = ListOfMaterials.idUser,
-                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString()
-                                };
-                                db.MaterialsUpdate.Add(HistOfMatUpd);
-                            }
+                            db.OurMaterials.AddOrUpdate(NMat);
+                            db.MaterialsUpdate.AddOrUpdate(NMatHistory);
                         }
                     }
 
@@ -981,12 +906,12 @@ namespace RepairFlatRestApi.Controllers
                     Description = e.Description,
                     Value = e.Value,
                     idContact = e.idContact
-                }).ToArray();
+                }).ToList();
 
                 return new MakeSubs.ContactsMake
                 {
                     success = true,
-                    kol = ListOfContacts.Length,
+                    kol = ListOfContacts.Count,
                     listOfContacts = ListOfContacts,
                     DateOfMakeAnswer = DateTime.Now
                 };
@@ -1007,9 +932,9 @@ namespace RepairFlatRestApi.Controllers
                     };
                 try
                 {
-                    if (ListOfContacts.ListOfContactsInsert != null)
+                    if (ListOfContacts.ListOfContacts != null)
                     {
-                        foreach (var ListOfInsContacts in ListOfContacts.ListOfContactsInsert)
+                        foreach (var ListOfInsContacts in ListOfContacts.ListOfContacts)
                         {
                             var NTContact = new TypeOfContact
                             {
@@ -1024,34 +949,10 @@ namespace RepairFlatRestApi.Controllers
                                 idContact = ListOfInsContacts.idContact,
                                 DataOfUpdate = DateOfAction,
                                 idContactUpdate = Guid.NewGuid(),
-                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString()
+                                TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString()
                             };
-                            db.TypeOfContact.Add(NTContact);
-                            db.ContactUpdate.Add(HistOfInsContact);
-                        }
-                    }
-
-                    if (ListOfContacts.listOfContactsUpdate != null)
-                    {
-                        foreach (var ContactUpdate in ListOfContacts.listOfContactsUpdate)
-                        {
-                            var UpdatedContact = db.TypeOfContact.Where(e => e.idContact == ContactUpdate.idContact).FirstOrDefault();
-                            if (UpdatedContact != null)
-                            {
-                                UpdatedContact.Value = ContactUpdate.Value;
-                                UpdatedContact.Description = ContactUpdate.Description;
-
-                                var HistOfUpdate = new ContactUpdate
-                                {
-                                    DataOfUpdate = DateOfAction,
-                                    idContact = ContactUpdate.idContact,
-                                    idUser = ListOfContacts.idUser,
-                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString(),
-                                    idContactUpdate = Guid.NewGuid()
-
-                                };
-                                db.ContactUpdate.Add(HistOfUpdate);
-                            }
+                            db.TypeOfContact.AddOrUpdate(NTContact);
+                            db.ContactUpdate.AddOrUpdate(HistOfInsContact);
                         }
                     }
 
@@ -1112,18 +1013,18 @@ namespace RepairFlatRestApi.Controllers
                             idContact = e.idContact,
                             Value = e.TypeOfContact.Value,
                             TypeOfUpdate = e.TypeOfUpdate
-                        }).ToArray();
+                        }).ToList();
 
                         var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastAction && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Contact.ToString());
                         var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
                         {
                             idGuid = e.idThingsDelete
-                        }).ToArray();
+                        }).ToList();
 
                         return new MakeSubs.ContactsMake
                         {
                             success = true,
-                            kol = ListPremises.Length + ListOfDelete.Length,
+                            kol = ListPremises.Count + ListOfDelete.Count,
                             DateOfMakeAnswer = DateTime.Now,
                             listOfContacts = ListPremises,
                             ListOfDeleteContacts = ListOfDelete

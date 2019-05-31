@@ -284,9 +284,6 @@
     <Compile Include="Models\TaskMaterials.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TaskMeasurment.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TaskServis.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
@@ -297,9 +294,6 @@
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserContact.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WorkerCanditate.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkerDetails.cs">

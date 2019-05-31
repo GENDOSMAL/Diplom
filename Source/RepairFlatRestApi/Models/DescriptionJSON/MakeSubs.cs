@@ -51,9 +51,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfServises[] listOfServisesUpdate;
-            public ListOfServises[] ListOfServisesInsert;
-            public ListOfGuid[] ListOfDeleteServises;
+            public List<ListOfServises> ListOfServises;
+            public List<ListOfGuid> ListOfDeleteServises;
         }
 
         public class ListOfGuid
@@ -81,9 +80,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfPremises[] listOfPremisesUpdate;
-            public ListOfPremises[] ListOfPremisesInsert;
-            public ListOfGuid[] ListOfDeletePremises;
+            public List<ListOfPremises> ListOfPremises;
+            public List<ListOfGuid> ListOfDeletePremises;
         }
 
         public class ListOfPremises
@@ -117,9 +115,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfMaterials[] listOfMaterialsUpdate;
-            public ListOfMaterials[] ListOfMaterialsInsert;
-            public ListOfGuid[] ListOfDeleteMaterials;
+            public List<ListOfMaterials> ListOfMaterials;
+            public List<ListOfGuid> ListOfDeleteMaterials;
         }
 
         public class ListOfMaterials
@@ -146,18 +143,17 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int kol;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfContactsUpd[] listOfContacts;
+            public List<ListOfContactsUpd> listOfContacts;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfGuid[] ListOfDeleteContacts;
+            public List<ListOfGuid> ListOfDeleteContacts;
         }
 
         public class MakeUpdOrInsContacts
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfContacts[] listOfContactsUpdate;
-            public ListOfContacts[] ListOfContactsInsert;
-            public ListOfGuid[] ListOfDeleteContacts;
+            public List<ListOfContacts> ListOfContacts;
+            public List<ListOfGuid> ListOfDeleteContacts;
         }
 
         public class ListOfContacts
@@ -182,18 +178,18 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int kol;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfPostUpd[] listOfPost;
+            public List<ListOfPostUpd> listOfPost;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public ListOfGuid[] ListOfDeletePost;
+            public List<ListOfGuid> ListOfDeletePost;
         }
 
         public class MakeUpdOrInsPost
         {
             public string DateOfMake;
             public Guid idUser;
-            public ListOfPost[] listOfPostUpdate;
-            public ListOfPost[] ListOfPostInsert;
-            public ListOfGuid[] ListOfDeletePost;
+            public List<ListOfPost> listOfPostUpdate;
+            public List<ListOfPost> ListOfPostInsert;
+            public List<ListOfGuid> ListOfDeletePost;
         }
 
         public class ListOfPost

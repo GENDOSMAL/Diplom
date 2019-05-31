@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RepairFlat.Model;
 using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
@@ -436,7 +437,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
                     if (!deserializedProduct.success)
                     {
-                        MakeSomeHelp.MSG($"Произошла ошикбка при обновлении данных о помщениях {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                        MakeSomeHelp.MSG($"Произошла ошибка при обновлении данных о помщениях {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
                     }
                     else
                     {

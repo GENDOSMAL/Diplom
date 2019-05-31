@@ -359,14 +359,6 @@
           <Property Name="idTask" Type="uniqueidentifier" />
           <Property Name="idMaterials" Type="uniqueidentifier" />
         </EntityType>
-        <EntityType Name="TaskMeasurment">
-          <Key>
-            <PropertyRef Name="idOfCompare" />
-          </Key>
-          <Property Name="idOfCompare" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="idMeasurment" Type="uniqueidentifier" />
-          <Property Name="idOrderTask" Type="uniqueidentifier" />
-        </EntityType>
         <EntityType Name="TaskServis">
           <Key>
             <PropertyRef Name="idOfCompare" />
@@ -406,23 +398,6 @@
           <Property Name="Value" Type="nchar" MaxLength="30" />
           <Property Name="Description" Type="nchar" MaxLength="50" />
           <Property Name="DateAdd" Type="datetime2" Precision="7" />
-        </EntityType>
-        <EntityType Name="WorkerCanditate">
-          <Key>
-            <PropertyRef Name="idCandidate" />
-          </Key>
-          <Property Name="idCandidate" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="50" />
-          <Property Name="LastName" Type="nchar" MaxLength="50" />
-          <Property Name="Patronymic" Type="nchar" MaxLength="50" />
-          <Property Name="BirstDay" Type="date" />
-          <Property Name="Female" Type="int" />
-          <Property Name="Pasport" Type="nchar" MaxLength="12" />
-          <Property Name="Telephone" Type="nchar" MaxLength="20" />
-          <Property Name="Mail" Type="nchar" MaxLength="30" />
-          <Property Name="IdPost" Type="uniqueidentifier" />
-          <Property Name="PlanSalary" Type="money" />
-          <Property Name="IdAdress" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="WorkerDetails">
           <Key>
@@ -1078,30 +1053,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TaskMeasurment_OrderMeasurements">
-          <End Role="OrderMeasurements" Type="Self.OrderMeasurements" Multiplicity="0..1" />
-          <End Role="TaskMeasurment" Type="Self.TaskMeasurment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderMeasurements">
-              <PropertyRef Name="idMeasurements" />
-            </Principal>
-            <Dependent Role="TaskMeasurment">
-              <PropertyRef Name="idMeasurment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TaskMeasurment_OrderTasks">
-          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
-          <End Role="TaskMeasurment" Type="Self.TaskMeasurment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderTasks">
-              <PropertyRef Name="IdTask" />
-            </Principal>
-            <Dependent Role="TaskMeasurment">
-              <PropertyRef Name="idOrderTask" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TaskServis_OrderServises">
           <End Role="OrderServises" Type="Self.OrderServises" Multiplicity="0..1" />
           <End Role="TaskServis" Type="Self.TaskServis" Multiplicity="*" />
@@ -1147,30 +1098,6 @@
             </Principal>
             <Dependent Role="UserContact">
               <PropertyRef Name="idUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkerCanditate_AdressDescription">
-          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
-          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdressDescription">
-              <PropertyRef Name="idAdress" />
-            </Principal>
-            <Dependent Role="WorkerCanditate">
-              <PropertyRef Name="IdAdress" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkerCanditate_WorkerPosts">
-          <End Role="WorkerPosts" Type="Self.WorkerPosts" Multiplicity="0..1" />
-          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerPosts">
-              <PropertyRef Name="idPost" />
-            </Principal>
-            <Dependent Role="WorkerCanditate">
-              <PropertyRef Name="IdPost" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1324,12 +1251,10 @@
           <EntitySet Name="ServicesUpdate" EntityType="Self.ServicesUpdate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskMaterials" EntityType="Self.TaskMaterials" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TaskMeasurment" EntityType="Self.TaskMeasurment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TaskServis" EntityType="Self.TaskServis" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TypeOfContact" EntityType="Self.TypeOfContact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContact" EntityType="Self.UserContact" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WorkerCanditate" EntityType="Self.WorkerCanditate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkerDetails" EntityType="Self.WorkerDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkerOrderInformation" EntityType="Self.WorkerOrderInformation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkerPosts" EntityType="Self.WorkerPosts" Schema="dbo" store:Type="Tables" />
@@ -1539,14 +1464,6 @@
             <End Role="OrderTasks" EntitySet="OrderTasks" />
             <End Role="TaskMaterials" EntitySet="TaskMaterials" />
           </AssociationSet>
-          <AssociationSet Name="FK_TaskMeasurment_OrderMeasurements" Association="Self.FK_TaskMeasurment_OrderMeasurements">
-            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
-            <End Role="TaskMeasurment" EntitySet="TaskMeasurment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TaskMeasurment_OrderTasks" Association="Self.FK_TaskMeasurment_OrderTasks">
-            <End Role="OrderTasks" EntitySet="OrderTasks" />
-            <End Role="TaskMeasurment" EntitySet="TaskMeasurment" />
-          </AssociationSet>
           <AssociationSet Name="FK_TaskServis_OrderServises" Association="Self.FK_TaskServis_OrderServises">
             <End Role="OrderServises" EntitySet="OrderServises" />
             <End Role="TaskServis" EntitySet="TaskServis" />
@@ -1562,14 +1479,6 @@
           <AssociationSet Name="FK_UserContact_User" Association="Self.FK_UserContact_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserContact" EntitySet="UserContact" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkerCanditate_AdressDescription" Association="Self.FK_WorkerCanditate_AdressDescription">
-            <End Role="AdressDescription" EntitySet="AdressDescription" />
-            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkerCanditate_WorkerPosts" Association="Self.FK_WorkerCanditate_WorkerPosts">
-            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
-            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkerDetails_AdressDescription" Association="Self.FK_WorkerDetails_AdressDescription">
             <End Role="AdressDescription" EntitySet="AdressDescription" />
@@ -1625,7 +1534,6 @@
           <Property Name="NumberOfDelen" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_AdressDescription" FromRole="AdressDescription" ToRole="OrderInformation" />
-          <NavigationProperty Name="WorkerCanditate" Relationship="Self.FK_WorkerCanditate_AdressDescription" FromRole="AdressDescription" ToRole="WorkerCanditate" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkerDetails_AdressDescription" FromRole="AdressDescription" ToRole="WorkerDetails" />
         </EntityType>
         <EntityType Name="BrigateContent">
@@ -1850,7 +1758,6 @@
           <NavigationProperty Name="OrderElementOfMeasurments" Relationship="Self.FK_OrderElementOfMeasurments_OrderMeasurements" FromRole="OrderMeasurements" ToRole="OrderElementOfMeasurments" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderMeasurements_OrderInformation" FromRole="OrderMeasurements" ToRole="OrderInformation" />
           <NavigationProperty Name="PremisesType" Relationship="Self.FK_OrderMeasurements_PremisesType" FromRole="OrderMeasurements" ToRole="PremisesType" />
-          <NavigationProperty Name="TaskMeasurment" Relationship="RepairFlatDBModel.FK_TaskMeasurment_OrderMeasurements" FromRole="OrderMeasurements" ToRole="TaskMeasurment" />
         </EntityType>
         <EntityType Name="OrderPayment">
           <Key>
@@ -1895,7 +1802,6 @@
           <Property Name="idBrigade" Type="Guid" />
           <NavigationProperty Name="BrigateSeparation" Relationship="RepairFlatDBModel.FK_OrderTasks_BrigateSeparation" FromRole="OrderTasks" ToRole="BrigateSeparation" />
           <NavigationProperty Name="TaskMaterials" Relationship="RepairFlatDBModel.FK_TaskMaterials_OrderTasks" FromRole="OrderTasks" ToRole="TaskMaterials" />
-          <NavigationProperty Name="TaskMeasurment" Relationship="RepairFlatDBModel.FK_TaskMeasurment_OrderTasks" FromRole="OrderTasks" ToRole="TaskMeasurment" />
           <NavigationProperty Name="TaskServis" Relationship="RepairFlatDBModel.FK_TaskServis_OrderTasks" FromRole="OrderTasks" ToRole="TaskServis" />
         </EntityType>
         <EntityType Name="OrderTasksState">
@@ -2031,25 +1937,6 @@
           <NavigationProperty Name="User" Relationship="Self.FK_UserContact_User" FromRole="UserContact" ToRole="User" />
           <NavigationProperty Name="OrderInformation" Relationship="RepairFlatDBModel.FK_OrderInformation_UserContact" FromRole="UserContact" ToRole="OrderInformation" />
         </EntityType>
-        <EntityType Name="WorkerCanditate">
-          <Key>
-            <PropertyRef Name="idCandidate" />
-          </Key>
-          <Property Name="idCandidate" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="BirstDay" Type="DateTime" Precision="0" />
-          <Property Name="Female" Type="Int32" />
-          <Property Name="Pasport" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
-          <Property Name="Telephone" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="Mail" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="IdPost" Type="Guid" />
-          <Property Name="PlanSalary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="IdAdress" Type="Guid" />
-          <NavigationProperty Name="AdressDescription" Relationship="Self.FK_WorkerCanditate_AdressDescription" FromRole="WorkerCanditate" ToRole="AdressDescription" />
-          <NavigationProperty Name="WorkerPosts" Relationship="Self.FK_WorkerCanditate_WorkerPosts" FromRole="WorkerCanditate" ToRole="WorkerPosts" />
-        </EntityType>
         <EntityType Name="WorkerDetails">
           <Key>
             <PropertyRef Name="IdWorker" />
@@ -2087,14 +1974,13 @@
           <Property Name="NameOfPost" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="BaseWage" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_EstabilismentPost_WorkerPosts" FromRole="WorkerPosts" ToRole="EstabilismentPost" />
-          <NavigationProperty Name="WorkerCanditate" Relationship="Self.FK_WorkerCanditate_WorkerPosts" FromRole="WorkerPosts" ToRole="WorkerCanditate" />
           <NavigationProperty Name="PostsUpdate" Relationship="RepairFlatDBModel.FK_PostsUpdate_WorkerPosts" FromRole="WorkerPosts" ToRole="PostsUpdate" />
         </EntityType>
         <EntityType Name="WorkersOperats">
           <Key>
             <PropertyRef Name="idOperate" />
           </Key>
-          <Property Name="idOperate" Type="Guid" Nullable="false" />
+          <Property Name="idOperate" Nullable="false" Type="Guid" />
           <Property Name="idWorker" Type="Guid" />
           <Property Name="idEstabilisment" Type="Guid" />
           <Property Name="TypeOfOperate" Type="Int32" />
@@ -2122,18 +2008,6 @@
               <PropertyRef Name="idAdress" />
             </Principal>
             <Dependent Role="OrderInformation">
-              <PropertyRef Name="IdAdress" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WorkerCanditate_AdressDescription">
-          <End Role="AdressDescription" Type="Self.AdressDescription" Multiplicity="0..1" />
-          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdressDescription">
-              <PropertyRef Name="idAdress" />
-            </Principal>
-            <Dependent Role="WorkerCanditate">
               <PropertyRef Name="IdAdress" />
             </Dependent>
           </ReferentialConstraint>
@@ -2343,8 +2217,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkersOperats_EstabilismentPost">
-          <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="0..1" />
-          <End Role="WorkersOperats" Type="Self.WorkersOperats" Multiplicity="*" />
+          <End Type="Self.EstabilismentPost" Multiplicity="0..1" Role="EstabilismentPost" />
+          <End Type="Self.WorkersOperats" Multiplicity="*" Role="WorkersOperats" />
           <ReferentialConstraint>
             <Principal Role="EstabilismentPost">
               <PropertyRef Name="idEstabilisment" />
@@ -2642,18 +2516,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WorkerCanditate_WorkerPosts">
-          <End Role="WorkerPosts" Type="Self.WorkerPosts" Multiplicity="0..1" />
-          <End Role="WorkerCanditate" Type="Self.WorkerCanditate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerPosts">
-              <PropertyRef Name="idPost" />
-            </Principal>
-            <Dependent Role="WorkerCanditate">
-              <PropertyRef Name="IdPost" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_WorkerOrderInformation_WorkerDetails">
           <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
           <End Role="WorkerOrderInformation" Type="Self.WorkerOrderInformation" Multiplicity="*" />
@@ -2667,8 +2529,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_WorkersOperats_WorkerDetails">
-          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
-          <End Role="WorkersOperats" Type="Self.WorkersOperats" Multiplicity="*" />
+          <End Type="Self.WorkerDetails" Multiplicity="0..1" Role="WorkerDetails" />
+          <End Type="Self.WorkersOperats" Multiplicity="*" Role="WorkersOperats" />
           <ReferentialConstraint>
             <Principal Role="WorkerDetails">
               <PropertyRef Name="IdWorker" />
@@ -2735,7 +2597,6 @@
           <EntitySet Name="TypeOfContact" EntityType="Self.TypeOfContact" />
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="UserContact" EntityType="Self.UserContact" />
-          <EntitySet Name="WorkerCanditate" EntityType="Self.WorkerCanditate" />
           <EntitySet Name="WorkerDetails" EntityType="Self.WorkerDetails" />
           <EntitySet Name="WorkerOrderInformation" EntityType="Self.WorkerOrderInformation" />
           <EntitySet Name="WorkerPosts" EntityType="Self.WorkerPosts" />
@@ -2744,10 +2605,6 @@
           <AssociationSet Name="FK_OrderInformation_AdressDescription" Association="Self.FK_OrderInformation_AdressDescription">
             <End Role="AdressDescription" EntitySet="AdressDescription" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkerCanditate_AdressDescription" Association="Self.FK_WorkerCanditate_AdressDescription">
-            <End Role="AdressDescription" EntitySet="AdressDescription" />
-            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkerDetails_AdressDescription" Association="Self.FK_WorkerDetails_AdressDescription">
             <End Role="AdressDescription" EntitySet="AdressDescription" />
@@ -2818,8 +2675,8 @@
             <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkersOperats_EstabilismentPost" Association="Self.FK_WorkersOperats_EstabilismentPost">
-            <End Role="EstabilismentPost" EntitySet="EstabilismentPost" />
-            <End Role="WorkersOperats" EntitySet="WorkersOperats" />
+            <End EntitySet="EstabilismentPost" Role="EstabilismentPost" />
+            <End EntitySet="WorkersOperats" Role="WorkersOperats" />
           </AssociationSet>
           <AssociationSet Name="FK_LoginInformation_User" Association="Self.FK_LoginInformation_User">
             <End Role="User" EntitySet="User" />
@@ -2917,17 +2774,13 @@
             <End Role="User" EntitySet="User" />
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_WorkerCanditate_WorkerPosts" Association="Self.FK_WorkerCanditate_WorkerPosts">
-            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
-            <End Role="WorkerCanditate" EntitySet="WorkerCanditate" />
-          </AssociationSet>
           <AssociationSet Name="FK_WorkerOrderInformation_WorkerDetails" Association="Self.FK_WorkerOrderInformation_WorkerDetails">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="WorkerOrderInformation" EntitySet="WorkerOrderInformation" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkersOperats_WorkerDetails" Association="Self.FK_WorkersOperats_WorkerDetails">
-            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
-            <End Role="WorkersOperats" EntitySet="WorkersOperats" />
+            <End EntitySet="WorkerDetails" Role="WorkerDetails" />
+            <End EntitySet="WorkersOperats" Role="WorkersOperats" />
           </AssociationSet>
           <AssociationSet Name="FK_WorkersPayGive_WorkerDetails" Association="Self.FK_WorkersPayGive_WorkerDetails">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
@@ -2984,7 +2837,6 @@
           <EntitySet Name="InformatioForPayment" EntityType="RepairFlatDBModel.InformatioForPayment" />
           <EntitySet Name="PostsUpdate" EntityType="RepairFlatDBModel.PostsUpdate" />
           <EntitySet Name="TaskMaterials" EntityType="RepairFlatDBModel.TaskMaterials" />
-          <EntitySet Name="TaskMeasurment" EntityType="RepairFlatDBModel.TaskMeasurment" />
           <EntitySet Name="TaskServis" EntityType="RepairFlatDBModel.TaskServis" />
           <AssociationSet Name="FK_BrigateContent_BrigateSeparation1" Association="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation1">
             <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
@@ -3018,10 +2870,6 @@
             <End Role="OrderMaterial" EntitySet="OrderMaterial" />
             <End Role="TaskMaterials" EntitySet="TaskMaterials" />
           </AssociationSet>
-          <AssociationSet Name="FK_TaskMeasurment_OrderMeasurements" Association="RepairFlatDBModel.FK_TaskMeasurment_OrderMeasurements">
-            <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
-            <End Role="TaskMeasurment" EntitySet="TaskMeasurment" />
-          </AssociationSet>
           <AssociationSet Name="FK_TaskServis_OrderServises" Association="RepairFlatDBModel.FK_TaskServis_OrderServises">
             <End Role="OrderServises" EntitySet="OrderServises" />
             <End Role="TaskServis" EntitySet="TaskServis" />
@@ -3029,10 +2877,6 @@
           <AssociationSet Name="FK_TaskMaterials_OrderTasks" Association="RepairFlatDBModel.FK_TaskMaterials_OrderTasks">
             <End Role="OrderTasks" EntitySet="OrderTasks" />
             <End Role="TaskMaterials" EntitySet="TaskMaterials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TaskMeasurment_OrderTasks" Association="RepairFlatDBModel.FK_TaskMeasurment_OrderTasks">
-            <End Role="OrderTasks" EntitySet="OrderTasks" />
-            <End Role="TaskMeasurment" EntitySet="TaskMeasurment" />
           </AssociationSet>
           <AssociationSet Name="FK_TaskServis_OrderTasks" Association="RepairFlatDBModel.FK_TaskServis_OrderTasks">
             <End Role="OrderTasks" EntitySet="OrderTasks" />
@@ -3159,16 +3003,6 @@
           <NavigationProperty Name="OrderMaterial" Relationship="RepairFlatDBModel.FK_TaskMaterials_OrderMaterial" FromRole="TaskMaterials" ToRole="OrderMaterial" />
           <NavigationProperty Name="OrderTasks" Relationship="RepairFlatDBModel.FK_TaskMaterials_OrderTasks" FromRole="TaskMaterials" ToRole="OrderTasks" />
         </EntityType>
-        <EntityType Name="TaskMeasurment">
-          <Key>
-            <PropertyRef Name="idOfCompare" />
-          </Key>
-          <Property Name="idOfCompare" Type="Guid" Nullable="false" />
-          <Property Name="idMeasurment" Type="Guid" />
-          <Property Name="idOrderTask" Type="Guid" />
-          <NavigationProperty Name="OrderMeasurements" Relationship="RepairFlatDBModel.FK_TaskMeasurment_OrderMeasurements" FromRole="TaskMeasurment" ToRole="OrderMeasurements" />
-          <NavigationProperty Name="OrderTasks" Relationship="RepairFlatDBModel.FK_TaskMeasurment_OrderTasks" FromRole="TaskMeasurment" ToRole="OrderTasks" />
-        </EntityType>
         <EntityType Name="TaskServis">
           <Key>
             <PropertyRef Name="idOfCompare" />
@@ -3275,18 +3109,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TaskMeasurment_OrderMeasurements">
-          <End Type="RepairFlatDBModel.OrderMeasurements" Role="OrderMeasurements" Multiplicity="0..1" />
-          <End Type="RepairFlatDBModel.TaskMeasurment" Role="TaskMeasurment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderMeasurements">
-              <PropertyRef Name="idMeasurements" />
-            </Principal>
-            <Dependent Role="TaskMeasurment">
-              <PropertyRef Name="idMeasurment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TaskServis_OrderServises">
           <End Type="RepairFlatDBModel.OrderServises" Role="OrderServises" Multiplicity="0..1" />
           <End Type="RepairFlatDBModel.TaskServis" Role="TaskServis" Multiplicity="*" />
@@ -3308,18 +3130,6 @@
             </Principal>
             <Dependent Role="TaskMaterials">
               <PropertyRef Name="idTask" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TaskMeasurment_OrderTasks">
-          <End Type="RepairFlatDBModel.OrderTasks" Role="OrderTasks" Multiplicity="0..1" />
-          <End Type="RepairFlatDBModel.TaskMeasurment" Role="TaskMeasurment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderTasks">
-              <PropertyRef Name="IdTask" />
-            </Principal>
-            <Dependent Role="TaskMeasurment">
-              <PropertyRef Name="idOrderTask" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3729,24 +3539,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WorkerCanditate">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.WorkerCanditate">
-              <MappingFragment StoreEntitySet="WorkerCanditate">
-                <ScalarProperty Name="idCandidate" ColumnName="idCandidate" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
-                <ScalarProperty Name="BirstDay" ColumnName="BirstDay" />
-                <ScalarProperty Name="Female" ColumnName="Female" />
-                <ScalarProperty Name="Pasport" ColumnName="Pasport" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="Mail" ColumnName="Mail" />
-                <ScalarProperty Name="IdPost" ColumnName="IdPost" />
-                <ScalarProperty Name="PlanSalary" ColumnName="PlanSalary" />
-                <ScalarProperty Name="IdAdress" ColumnName="IdAdress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="WorkerDetails">
             <EntityTypeMapping TypeName="RepairFlatDBModel.WorkerDetails">
               <MappingFragment StoreEntitySet="WorkerDetails">
@@ -3873,15 +3665,6 @@
               <MappingFragment StoreEntitySet="TaskMaterials">
                 <ScalarProperty Name="idMaterials" ColumnName="idMaterials" />
                 <ScalarProperty Name="idTask" ColumnName="idTask" />
-                <ScalarProperty Name="idOfCompare" ColumnName="idOfCompare" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TaskMeasurment">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.TaskMeasurment">
-              <MappingFragment StoreEntitySet="TaskMeasurment">
-                <ScalarProperty Name="idOrderTask" ColumnName="idOrderTask" />
-                <ScalarProperty Name="idMeasurment" ColumnName="idMeasurment" />
                 <ScalarProperty Name="idOfCompare" ColumnName="idOfCompare" />
               </MappingFragment>
             </EntityTypeMapping>
