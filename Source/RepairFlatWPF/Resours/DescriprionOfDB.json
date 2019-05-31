@@ -124,6 +124,26 @@
           "IsPk": false
         }
       ]
+    },
+    {
+      "NameOfTable": "PostData",
+      "ColumnOfTable": [
+        {
+          "NameOfCol": "  ",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "NameOfPost",
+          "TypeOfCol": "Text",
+          "IsPk": false
+        },
+        {
+          "NameOfCol": "BaseWage",
+          "TypeOfCol": "Real",
+          "IsPk": false
+        }
+      ]
     }
   ]
 }

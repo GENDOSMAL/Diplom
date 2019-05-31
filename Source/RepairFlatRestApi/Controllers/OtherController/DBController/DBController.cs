@@ -2,6 +2,7 @@
 using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Globalization;
 using System.Linq;
 using static RepairFlatRestApi.Models.AdressModel;
@@ -140,6 +141,176 @@ namespace RepairFlatRestApi.Controllers
                     return new BaseResult { success = false, description = ex.ToString() };
                 }
             }, nameof(DBController), nameof(UpdateDataAboutAdress));
+        }
+
+        internal static object MakeUpdatePost(MakeSubs.MakeUpdOrInsPost listOfPost)
+        {
+            return Run((db) =>
+            {
+                try
+                {
+                    List<Guid?> ListOfDeleteCodes = new List<Guid?>();
+                    DateTime DateOfInsert = new DateTime();
+                    if (!DateTime.TryParseExact(listOfPost.DateOfMake, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfInsert))
+                        return new MakeSubs.ServisesMake
+                        {
+                            success = false,
+                            description = "Ошибка при преобразовании данных о дате"
+                        };
+
+
+                    if (listOfPost.ListOfPostInsert != null)
+                    {
+                        foreach (var WhatInsert in listOfPost.ListOfPostInsert)
+                        {
+                            var NewPost = new WorkerPosts
+                            {
+                                BaseWage= WhatInsert.BaseWage,
+                                NameOfPost= WhatInsert.NameOfPost,
+                                idPost= WhatInsert.idPost                               
+                            };
+
+                            var InformationAboutIsert = new PostsUpdate
+                            {
+                                idPost= WhatInsert.idPost,
+                                IdUpdateUser= listOfPost.idUser,
+                                DateUpdate= DateOfInsert,
+                                TypeOfUpdate = SomeEnums.TypeOfAction.Add.ToString()
+                            };
+                            db.WorkerPosts.Add(NewPost).PostsUpdate.Add(InformationAboutIsert);
+                        }
+                    }
+
+                    if (listOfPost.listOfPostUpdate != null)
+                    {
+                        foreach (var WhatUpdate in listOfPost.listOfPostUpdate)
+                        {
+                            var UpdatedServis = db.WorkerPosts.Where(e => e.idPost == WhatUpdate.idPost).FirstOrDefault();
+                            if (UpdatedServis != null)
+                            {
+                                UpdatedServis.NameOfPost = WhatUpdate.NameOfPost;
+                                UpdatedServis.BaseWage = WhatUpdate.BaseWage;
+
+                                var InformationAboutUpdate = new PostsUpdate
+                                {
+                                    idPost = WhatUpdate.idPost,
+                                    IdUpdateUser = listOfPost.idUser,
+                                    DateUpdate = DateOfInsert,
+                                    TypeOfUpdate = SomeEnums.TypeOfAction.Update.ToString()
+                                };
+                                UpdatedServis.PostsUpdate.Add(InformationAboutUpdate);
+                            }
+                        }
+                    }
+
+                    if (listOfPost.ListOfDeletePost != null)
+                    {
+                        foreach (var WhatDelete in listOfPost.ListOfDeletePost)
+                        {
+                            var DeleteThings = db.WorkerPosts.Where(e => e.idPost == WhatDelete.idGuid).FirstOrDefault();
+                            if (DeleteThings != null)
+                            {
+                                db.Entry(DeleteThings).Collection(c => c.PostsUpdate).Load();
+                                db.WorkerPosts.Remove(DeleteThings);
+                                foreach(var delThink in DeleteThings.PostsUpdate)
+                                {
+                                    DeleteThings.PostsUpdate.Remove(delThink);
+                                }
+                                ListOfDeleteCodes.Add(WhatDelete.idGuid);
+                            }
+                        }
+                    }
+                    db.SaveChanges();
+                    if (ListOfDeleteCodes.Count != 0)
+                    {
+                        db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfInsert, listOfPost.idUser, SomeEnums.TypeOfSubs.Servises));
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new BaseResult
+                    {
+                        success = false,
+                        description = $"Ошибка при работе с данными {ex.ToString()}!"
+                    };
+                }
+                return new BaseResult
+                {
+                    success = true,
+                    description = "Операции над данными были произведены!"
+                };
+            }, nameof(DBController), nameof(MakeInserAndUpdateServises));
+        }
+
+        internal static MakeSubs.PostMake MakeDataAboutPost(string dateofclientlastupdate)
+        {
+            return Run((db) =>
+            {
+                if (string.IsNullOrEmpty(dateofclientlastupdate))
+                {//Если строка пустая возвращаем все
+                    return AllPostHave();
+                }
+                else
+                {
+                    DateTime DateOfLastUpdate = new DateTime();
+                    if (DateTime.TryParseExact(dateofclientlastupdate, "dd.MM.yyyy HH:mm", CultureInfo.GetCultureInfo("ru-RU"), DateTimeStyles.None, out DateOfLastUpdate))
+                    {//Если дату удалось распознать вернуть в соответствии с датой
+                        var QueryWithOutDelete = db.WorkerPosts.Where((e) => e.PostsUpdate.FirstOrDefault().DateUpdate > DateOfLastUpdate);
+                        var ListOfPost = QueryWithOutDelete.Select(e => new MakeSubs.ListOfPostUpd
+                        {
+                            idPost=e.idPost,
+                            BaseWage=e.BaseWage,
+                            NameOfPost=e.NameOfPost,
+                            TypeOfUpdate=e.PostsUpdate.FirstOrDefault().TypeOfUpdate
+
+                        }).ToArray();
+
+                        var QueryForDelete = db.DeletedSubStr.Where(e => e.DateOfDelete > DateOfLastUpdate && e.TypeOfDeleted == SomeEnums.TypeOfSubs.Post.ToString());
+                        var ListOfDelete = QueryForDelete.Select(e => new MakeSubs.ListOfGuid
+                        {
+                            idGuid = e.idThingsDelete
+                        }).ToArray();
+
+                        return new MakeSubs.PostMake
+                        {
+                            success = true,
+                            kol = ListOfPost.Length + ListOfDelete.Length,
+                            DateOfMakeAnswer = DateTime.Now,                            
+                            listOfPost = ListOfPost,
+                            ListOfDeletePost = ListOfDelete
+                        };
+                    }
+                    else
+                    {//Если дату не удалось распознать
+                        return new MakeSubs.PostMake
+                        {
+                            success = false,
+                            description = "Ошибка при преобразовании данных о дате"
+                        };
+                    }
+                }
+            }, nameof(DBController), nameof(UpdateDataAboutAdress));
+        }
+
+        private static MakeSubs.PostMake AllPostHave()
+        {
+            return Run((db) =>
+            {
+                var listOfPost = db.WorkerPosts.Select(e => new MakeSubs.ListOfPostUpd
+                {
+                    idPost=e.idPost,
+                    BaseWage=e.BaseWage,
+                    NameOfPost=e.NameOfPost
+                }).ToArray();
+                return new MakeSubs.PostMake
+                {
+                    success = true,
+                    kol = listOfPost.Length,
+                    listOfPost=listOfPost,
+                    DateOfMakeAnswer = DateTime.Now
+                };
+            });
         }
 
         #endregion
@@ -346,7 +517,7 @@ namespace RepairFlatRestApi.Controllers
                             };
 
                             db.OurServices.Add(NewServises);
-                            db.ServicesUpdate.Add(InformationAboutIsert);
+                            db.ServicesUpdate.AddOrUpdate(InformationAboutIsert);
                         }
                     }
 
@@ -414,7 +585,6 @@ namespace RepairFlatRestApi.Controllers
                     description = "Операции над данными были произведены!"
                 };
             }, nameof(DBController), nameof(MakeInserAndUpdateServises));
-            throw new NotImplementedException();
         }
 
         internal static MakeSubs.ServisesMake AllServisesHave()

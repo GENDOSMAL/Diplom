@@ -51,7 +51,8 @@ namespace RepairFlatRestApi.Models
             Servises,
             Premises,
             Materials,
-            Contact
+            Contact,
+            Post
         }
 
     }

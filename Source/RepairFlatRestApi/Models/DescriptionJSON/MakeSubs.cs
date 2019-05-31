@@ -172,6 +172,45 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string TypeOfUpdate;
         }
         #endregion
+        #region Данные о должностях
+
+        public class PostMake : BaseResult
+        {
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            [JsonConverter(typeof(CustomDateTimeConverter))]
+            public DateTime DateOfMakeAnswer;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int kol;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfPostUpd[] listOfPost;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public ListOfGuid[] ListOfDeletePost;
+        }
+
+        public class MakeUpdOrInsPost
+        {
+            public string DateOfMake;
+            public Guid idUser;
+            public ListOfPost[] listOfPostUpdate;
+            public ListOfPost[] ListOfPostInsert;
+            public ListOfGuid[] ListOfDeletePost;
+        }
+
+        public class ListOfPost
+        {
+            public Guid idPost;
+            public string NameOfPost;
+            public Decimal? BaseWage;
+        }
+
+        public class ListOfPostUpd : ListOfPost
+        {
+            public string TypeOfUpdate;
+        }
+        #endregion
+
+
+
 
 
         class CustomDateTimeConverter : IsoDateTimeConverter

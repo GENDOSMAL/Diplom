@@ -128,6 +128,28 @@ namespace RepairFlatRestApi.Controllers
                 return DBController.MakeListOfContacts(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdateContacts));
         }
+        [HttpPost, Route("post/update")]
+        public HttpResponseMessage UpdatePost(MakeSubs.MakeUpdOrInsPost ListOfPost)
+        {
+            return CatchError(() =>
+            {
+                return DBController.MakeUpdatePost(ListOfPost);
+            }, nameof(SubStringController), nameof(UpdateContacts));
+        }
+
+        /// <summary>
+        /// Отсылание данных о контактах, которые были обновлены после указанной клиентом даты
+        /// </summary>
+        /// <param name="dateofclientlastupdate"></param>
+        ///// <returns></returns>
+        [HttpGet, Route("post/get")]
+        public HttpResponseMessage SendAllUpdatePost([FromUri] string dateofclientlastupdate = null)
+        {
+            return CatchError(() =>
+            {
+                return DBController.MakeDataAboutPost(dateofclientlastupdate);
+            }, nameof(LoginController), nameof(SendAllUpdateContacts));
+        }
         #endregion
 
     }

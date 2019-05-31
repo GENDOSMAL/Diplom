@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,12 +32,20 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         }
 
-        private void WorkWithMaterial_Click(object sender, RoutedEventArgs e)
+
+        private void LoadAllDataFromExcel_Click(object sender, RoutedEventArgs e)
         {
+
+            MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.SelectTypeForUpdateAndFile());
+
+
+            
+
+
 
         }
 
-        private void WorkWithServises_Click(object sender, RoutedEventArgs e)
+        private void WorkWithData_Click(object sender, RoutedEventArgs e)
         {
 
         }

@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="RepairFlatWPF.UserControls.SettingsAndSubsInf.SelectTypeForUpdateAndFile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
+             MaxHeight="500"
+             Height="auto" Width="auto">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/> 
+            <RowDefinition Height="*"/> 
+            <RowDefinition Height="*"/> 
+            <RowDefinition Height="*"/> 
+            <RowDefinition Height="*"/> 
+            <RowDefinition Height="75"/> 
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
+            <TextBlock Name="NumberOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите данные для работы" FontFamily="Times New Roman" FontSize="45 "/>
+        </Viewbox>
+        <CheckBox Uid="1" Name="FirstSheet" Unchecked="Checbox_Unchecked"  Grid.ColumnSpan="2" Grid.Row="1" Content="Данные об элементах помещения" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0" />
+        <CheckBox Uid="2" Name="SecondSheet" Unchecked="Checbox_Unchecked"  Grid.ColumnSpan="2" Grid.Row="2" Content="Данные о материалах" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0"/>
+        <CheckBox Uid="3" Unchecked="Checbox_Unchecked"  Name="ServiseSheet" Grid.ColumnSpan="2" Grid.Row="3" Content="Данные об услугах" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0" />
+        <CheckBox Uid="4" Unchecked="Checbox_Unchecked" Name="PostSheet" Grid.ColumnSpan="2" Grid.Row="4" Content="Данные о должностях" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0" />
+        <Button Name="Return" Click="Return_Click" Grid.Column="0" Grid.Row="5" VerticalAlignment="Bottom" Height="60" Width="305" Margin="15 0 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Возврат" />
+        <Button Name="ReadData" Click="ReadData_Click" Grid.Column="1" Grid.Row="5" VerticalAlignment="Bottom" Height="60" Width="305" Margin="15 0 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Выбрать файл"/>
+        
+
+    </Grid>
+</UserControl>

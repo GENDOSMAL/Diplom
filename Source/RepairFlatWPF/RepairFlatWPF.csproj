@@ -65,6 +65,10 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Windows.Shell.3.0.1.0\lib\net40\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
@@ -195,8 +199,14 @@
     <Compile Include="UserControls\SettingsAndSubsInf\SelectSomeSubs.xaml.cs">
       <DependentUpon>SelectSomeSubs.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\SelectTypeForUpdateAndFile.xaml.cs">
+      <DependentUpon>SelectTypeForUpdateAndFile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SettingsAndSubsInf\SettingsUserControls.xaml.cs">
       <DependentUpon>SettingsUserControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\ShowDataAboutInsert.xaml.cs">
+      <DependentUpon>ShowDataAboutInsert.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\WorkerInformation\BrigadeWork\BragadeContent.xaml.cs">
       <DependentUpon>BragadeContent.xaml</DependentUpon>
@@ -324,7 +334,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\SelectTypeForUpdateAndFile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\SettingsAndSubsInf\SettingsUserControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\ShowDataAboutInsert.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
