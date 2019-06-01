@@ -24,6 +24,7 @@ namespace RepairFlatRestApi.Models
         public System.Guid idPost { get; set; }
         public string NameOfPost { get; set; }
         public Nullable<decimal> BaseWage { get; set; }
+        public Nullable<bool> MakeWork { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EstabilismentPost> EstabilismentPost { get; set; }

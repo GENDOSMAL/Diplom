@@ -393,6 +393,7 @@
           <Property Name="idPost" Type="uniqueidentifier" Nullable="false" />
           <Property Name="NameOfPost" Type="nchar" MaxLength="100" />
           <Property Name="BaseWage" Type="money" />
+          <Property Name="MakeWork" Type="bit" />
         </EntityType>
         <EntityType Name="WorkersOperats">
           <Key>
@@ -1817,6 +1818,7 @@
           <Property Name="BaseWage" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_EstabilismentPost_WorkerPosts" FromRole="WorkerPosts" ToRole="EstabilismentPost" />
           <NavigationProperty Name="PostsUpdate" Relationship="RepairFlatDBModel.FK_PostsUpdate_WorkerPosts" FromRole="WorkerPosts" ToRole="PostsUpdate" />
+          <Property Name="MakeWork" Type="Boolean" />
         </EntityType>
         <EntityType Name="WorkersOperats">
           <Key>
@@ -3271,6 +3273,7 @@
           <EntitySetMapping Name="WorkerPosts">
             <EntityTypeMapping TypeName="RepairFlatDBModel.WorkerPosts">
               <MappingFragment StoreEntitySet="WorkerPosts">
+                <ScalarProperty Name="MakeWork" ColumnName="MakeWork" />
                 <ScalarProperty Name="idPost" ColumnName="idPost" />
                 <ScalarProperty Name="NameOfPost" ColumnName="NameOfPost" />
                 <ScalarProperty Name="BaseWage" ColumnName="BaseWage" />
