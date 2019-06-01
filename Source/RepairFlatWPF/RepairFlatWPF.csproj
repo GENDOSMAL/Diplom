@@ -208,12 +208,6 @@
     <Compile Include="UserControls\SettingsAndSubsInf\ShowDataAboutInsert.xaml.cs">
       <DependentUpon>ShowDataAboutInsert.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\WorkerInformation\BrigadeWork\BragadeContent.xaml.cs">
-      <DependentUpon>BragadeContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\WorkerInformation\BrigadeWork\MakeNewBrigade.xaml.cs">
-      <DependentUpon>MakeNewBrigade.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\CreateNewWorker.xaml.cs">
       <DependentUpon>CreateNewWorker.xaml</DependentUpon>
     </Compile>
@@ -240,9 +234,6 @@
     </Compile>
     <Compile Include="UserControls\SettingsAndSubsInf\WorkWithSubInfromation.xaml.cs">
       <DependentUpon>WorkWithSubInfromation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\WorkerInformation\BrigadeWork\SelectBrigade.xaml.cs">
-      <DependentUpon>SelectBrigade.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\SelectWorkerPost.xaml.cs">
       <DependentUpon>SelectWorkerPost.xaml</DependentUpon>
@@ -343,14 +334,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\WorkerInformation\BrigadeWork\BragadeContent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\WorkerInformation\BrigadeWork\MakeNewBrigade.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\WorkerInformation\KadrWork\CreateNewWorker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -424,10 +407,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\SettingsAndSubsInf\WorkWithSubInfromation.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\WorkerInformation\BrigadeWork\SelectBrigade.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

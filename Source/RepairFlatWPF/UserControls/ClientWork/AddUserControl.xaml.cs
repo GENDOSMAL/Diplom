@@ -285,7 +285,7 @@ namespace RepairFlatWPF.UserControls
             }
             else
             {
-                MakeSomeHelp.MSG("Необходимо выбрать строку для редактирования", MsgBoxImage: MessageBoxImage.Error);
+                MakeSomeHelp.MSG("Необходимо выбрать строку для удаления", MsgBoxImage: MessageBoxImage.Error);
             }
 
         }

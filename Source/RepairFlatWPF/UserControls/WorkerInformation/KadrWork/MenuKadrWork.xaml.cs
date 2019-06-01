@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepairFlatWPF.UserControls.WorkerInformation.KadrWork;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,8 @@ namespace RepairFlatWPF.UserControls.KadrWork
 
         private void WorkWithNewWorker_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.DataGridMakeWork(new ShowAllWorkers());
+            
         }
     }
 }

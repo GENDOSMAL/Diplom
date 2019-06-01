@@ -168,6 +168,7 @@ namespace RepairFlat.Model
             public string TypeOfUpdate;
         }
         #endregion
+
         #region Данные о должностях
 
         public class PostMake : BaseResult
@@ -197,6 +198,7 @@ namespace RepairFlat.Model
             public Guid idPost;
             public string NameOfPost;
             public Decimal? BaseWage;
+            public Nullable<bool> MakeWork;
         }
 
         public class ListOfPostUpd : ListOfPost

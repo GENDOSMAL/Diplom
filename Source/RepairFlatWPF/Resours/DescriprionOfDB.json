@@ -147,6 +147,11 @@
           "NameOfCol": "BaseWage",
           "TypeOfCol": "Real",
           "IsPk": false
+        },
+        {
+          "NameOfCol": "MakeWork",
+          "TypeOfCol": "INTEGER",
+          "IsPk": false
         }
       ]
     }

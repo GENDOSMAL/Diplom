@@ -165,6 +165,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                             idPost = Guid.Parse(Data.Rows[i][0].ToString()),
                             NameOfPost = Data.Rows[i][1].ToString(),
                             BaseWage = Convert.ToDecimal(Data.Rows[i][2].ToString()),
+                            MakeWork=Convert.ToBoolean(Data.Rows[i][3].ToString())
                         };
                         ListOfPost.Add(ServisesUpdate);
                     }

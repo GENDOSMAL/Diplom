@@ -127,7 +127,7 @@ namespace RepairFlatWPF.UserControls
 
         private void PostUpdlocToDB(MakeSubs.PostMake postMake)
         {
-            string MakeQuery = "Insert into PostData (idPost,NameOfPost,BaseWage) Values (@idPost,@NameOfPost,@BaseWage) On CONFLICT(idPost) DO UPDATE SET  idPost=@idPost,NameOfPost=@NameOfPost,BaseWage=@BaseWage;";
+            string MakeQuery = "Insert into PostData (idPost,NameOfPost,BaseWage,MakeWork) Values (@idPost,@NameOfPost,@BaseWage,@MakeWork) On CONFLICT(idPost) DO UPDATE SET  idPost=@idPost,NameOfPost=@NameOfPost,BaseWage=@BaseWage,MakeWork=@MakeWork;";
             MakeWorkWirthDataBase.Run((command) =>
             {
                 try
@@ -139,10 +139,11 @@ namespace RepairFlatWPF.UserControls
                         MakeSmF = true;
                         foreach (var PostUpdate in postMake.listOfPost)
                         {
-                            SQLiteParameter[] parameters = new SQLiteParameter[3];
+                            SQLiteParameter[] parameters = new SQLiteParameter[4];
                             parameters[0] = new SQLiteParameter("@idPost", PostUpdate.idPost.ToString());
                             parameters[1] = new SQLiteParameter("@NameOfPost", PostUpdate.NameOfPost);
                             parameters[2] = new SQLiteParameter("@BaseWage", PostUpdate.BaseWage);
+                            parameters[3] = new SQLiteParameter("@MakeWork", Convert.ToInt32(PostUpdate.MakeWork));
                             command.Parameters.AddRange(parameters);
                             command.CommandText = MakeQuery;
                             command.ExecuteNonQuery();

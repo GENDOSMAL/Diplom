@@ -11,42 +11,28 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="45"/>
-                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="85"/>
             </Grid.RowDefinitions>
-            <Viewbox Margin="0,5,60,5" Grid.Row="0" >
+            <Viewbox Grid.Row="0" >
                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите клиента" FontFamily="Times New Roman" FontSize="45 "/>
             </Viewbox>
-            <!--Область поиска-->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
 
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedType" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchText" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
-                <Button Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
-            </Grid>
             <!--Таблица-->
-            <DataGrid Grid.Row="2" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+            <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
             <!--Кнопки-->
-            <Grid Grid.Row="3" Name="ForWindow" Visibility="Collapsed">
+            <Grid Grid.Row="2" Name="ForWindow" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource AllButtonAction}" FontSize="24" Grid.Column="0" Margin="15 10 7.5 15" Width="180" Height="60" Content="Назад" Name="ReturnBTN" Click="ReturnBTN_Click" />
-                <Button Style="{StaticResource AllButtonAction}" FontSize="24" Grid.Column="1" Margin="7.5 10 7.5 15" Width="180" Height="60" Content="Добавление" Name="AddClientUserControl" Click="Add_Click" />
-                <Button Style="{StaticResource AllButtonAction}" FontSize="22" Grid.Column="2" Margin="7.5 10 7.5 15" Width="180" Height="60" Content="Редактирование" Name="EditClientUserControl" Click="EditClient_Click" />
-                <Button Style="{StaticResource AllButtonAction}" FontSize="24" Grid.Column="3" Margin="7.5 10 15 15" Width="180" Height="60" Content="Выбор" Name="SelectClientUser" Click="SelectClient_Click" />
+                <Button Style="{StaticResource AllButtonAction}"  Grid.Column="0" Margin="15 10 7.5 15" Width="180" Height="60" Content="Назад" Name="ReturnBTN" Click="ReturnBTN_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="180" Height="60" Content="Добавление" Name="AddClientUserControl" Click="Add_Click" />
+                <Button Style="{StaticResource AllButtonAction}"  Grid.Column="2" Margin="7.5 10 15 15" Width="180" Height="60" Content="Выбор" Name="SelectClientUser" Click="SelectClient_Click" />
             </Grid>
 
-            <Grid Grid.Row="3" Name="ForUserControl" Visibility="Collapsed">
+            <Grid Grid.Row="2" Name="ForUserControl" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

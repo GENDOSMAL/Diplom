@@ -197,6 +197,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Guid idPost;
             public string NameOfPost;
             public Decimal? BaseWage;
+            public Nullable<bool> MakeWork;
         }
 
         public class ListOfPostUpd : ListOfPost

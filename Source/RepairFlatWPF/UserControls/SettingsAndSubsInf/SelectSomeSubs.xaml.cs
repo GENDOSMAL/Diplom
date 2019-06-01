@@ -65,9 +65,6 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             }
         }
 
-        #region Для выбора данных
-
-        #endregion
 
         #region Дополнительные данные
         private void MakeLoadFromLocalBD()

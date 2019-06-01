@@ -168,7 +168,8 @@ namespace RepairFlatRestApi.Controllers
                                 {
                                     BaseWage = WhatInsert.BaseWage,
                                     NameOfPost = WhatInsert.NameOfPost,
-                                    idPost = WhatInsert.idPost
+                                    idPost = WhatInsert.idPost,
+                                    MakeWork= WhatInsert.MakeWork
                                 };
 
                                 var InformationAboutIsert = new PostsUpdate
@@ -266,7 +267,8 @@ namespace RepairFlatRestApi.Controllers
                             idPost=e.idPost,
                             BaseWage=e.BaseWage,
                             NameOfPost=e.NameOfPost,
-                            TypeOfUpdate=e.PostsUpdate.FirstOrDefault().TypeOfUpdate
+                            TypeOfUpdate=e.PostsUpdate.FirstOrDefault().TypeOfUpdate,
+                            MakeWork=e.MakeWork
 
                         }).ToList();
 
@@ -305,7 +307,8 @@ namespace RepairFlatRestApi.Controllers
                 {
                     idPost=e.idPost,
                     BaseWage=e.BaseWage,
-                    NameOfPost=e.NameOfPost
+                    NameOfPost=e.NameOfPost,
+                    MakeWork=e.MakeWork
                 }).ToList();
                 return new MakeSubs.PostMake
                 {
