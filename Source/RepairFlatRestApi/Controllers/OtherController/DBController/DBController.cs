@@ -37,7 +37,6 @@ namespace RepairFlatRestApi.Controllers
                     DataStart = informationAbOrder.DateStart,
                     Desc = informationAbOrder.Description,
                     idClient = informationAbOrder.idClient,
-                    idColoboration = informationAbOrder.IdColoboration,
                     idOrder = informationAbOrder.IdOrder,
                     idWorkerMake = informationAbOrder.IdWorkerMake,
                     MainContactID = informationAbOrder.MainContactID,
@@ -163,21 +162,25 @@ namespace RepairFlatRestApi.Controllers
                     {
                         foreach (var WhatInsert in listOfPost.ListOfPostInsert)
                         {
-                            var NewPost = new WorkerPosts
+                            if(db.WorkerPosts.Where(ee=>ee.idPost== WhatInsert.idPost).FirstOrDefault()==null)
                             {
-                                BaseWage= WhatInsert.BaseWage,
-                                NameOfPost= WhatInsert.NameOfPost,
-                                idPost= WhatInsert.idPost                               
-                            };
+                                var NewPost = new WorkerPosts
+                                {
+                                    BaseWage = WhatInsert.BaseWage,
+                                    NameOfPost = WhatInsert.NameOfPost,
+                                    idPost = WhatInsert.idPost
+                                };
 
-                            var InformationAboutIsert = new PostsUpdate
-                            {
-                                idPost= WhatInsert.idPost,
-                                IdUpdateUser= listOfPost.idUser,
-                                DateUpdate= DateOfInsert,
-                                TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString()
-                            };
-                            db.WorkerPosts.Add(NewPost).PostsUpdate.Add(InformationAboutIsert);
+                                var InformationAboutIsert = new PostsUpdate
+                                {
+                                    idUpdatePos = Guid.NewGuid(),
+                                    idPost = WhatInsert.idPost,
+                                    IdUpdateUser = listOfPost.idUser,
+                                    DateUpdate = DateOfInsert,
+                                    TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString()
+                                };
+                                db.WorkerPosts.Add(NewPost).PostsUpdate.Add(InformationAboutIsert);
+                            }
                         }
                     }
 
@@ -193,6 +196,7 @@ namespace RepairFlatRestApi.Controllers
 
                                 var InformationAboutUpdate = new PostsUpdate
                                 {
+                                    idUpdatePos = Guid.NewGuid(),
                                     idPost = WhatUpdate.idPost,
                                     IdUpdateUser = listOfPost.idUser,
                                     DateUpdate = DateOfInsert,
@@ -330,19 +334,21 @@ namespace RepairFlatRestApi.Controllers
                 {
                     return new AuthDescription.ResultOfInformation
                     {
-                        sucess = false,
+                        success = false,
                         description = "Не корректный логин и пароль"
                     };
                 }
                 else
                 {
-                    return InfrormationAboutLogin.Select(e1 => new AuthDescription.ResultOfInformation
+                    var data = InfrormationAboutLogin.FirstOrDefault();
+                    string dd = $"{data.User.LastName} {data.User.Name.Substring(0, 1).ToUpper()}.{data.User.Patronymic.Substring(0, 1)}.";
+                    return new AuthDescription.ResultOfInformation
                     {
-                        sucess = true,
-                        idUser = e1.IdLog,
-                        typeofpolz = e1.User.TypeOfUser,
-                        LastNameAndIni = $"{e1.User.LastName} {e1.User.Name.Substring(0, 1).ToUpper()}.{e1.User.Patronymic.Substring(0, 1)}."
-                    }).FirstOrDefault();
+                        success = true,
+                        idUser = data.IdLog,
+                        typeofpolz = data.User.TypeOfUser,
+                        LastNameAndIni = dd
+                    };
                 }
             }, nameof(DBController), nameof(Logining));
         }
@@ -938,7 +944,7 @@ namespace RepairFlatRestApi.Controllers
                         {
                             var NTContact = new TypeOfContact
                             {
-                                idContact = ListOfInsContacts.idContact,
+                                idContact = ListOfInsContacts.idContact ?? default(Guid),
                                 Description = ListOfInsContacts.Description,
                                 Value = ListOfInsContacts.Value
                             };
@@ -1060,14 +1066,12 @@ namespace RepairFlatRestApi.Controllers
                     string TypeOfContact = db.TypeOfContact.Where((e) => e.UserContact.First().id == order.MainContactID).Select(e => e.Value).FirstOrDefault();
                     string ValuesOfContact = db.UserContact.Where(e => e.id == order.MainContactID).Select(e => e.Value).First();
                     string ContactInformatiom = $"{TypeOfContact} : {ValuesOfContact}";
-                    string NameOfBrigade = db.ColoborationOfBrigade.Where(e => e.IdColoboration == order.IdColoboration).Select(e => e.Name).First();
 
                     var informationAboutAdress = db.AdressDescription.Where(e => e.idAdress == order.IdAdress).Select(e => new AdressDescription { idAdress = e.idAdress, AreaName = e.AreaName, Entrance = e.Entrance, CiryName = e.CiryName, Description = e.Description, House = e.House, MicroAreaName = e.MicroAreaName, NumberOfDelen = e.NumberOfDelen, RegionName = e.RegionName, Street = e.Street }).First();
 
                     string Adressinformation = $"{informationAboutAdress.RegionName} {informationAboutAdress.CiryName} {informationAboutAdress.MicroAreaName} {informationAboutAdress.Street} {informationAboutAdress.House} {informationAboutAdress.Entrance} {informationAboutAdress.NumberOfDelen}";
                     orders.Add(new WorkWithOrder.OrderInTable
                     {
-                        BrigadeInformation = NameOfBrigade,
                         DataAboutContact = ContactInformatiom,
                         DataStart = order.DateStart,
                         FIOCLient = NameOfCleint,
@@ -1095,7 +1099,6 @@ namespace RepairFlatRestApi.Controllers
                         AllSumma = newOrderData.Allsumma,
                         IdAdress = newOrderData.idAdress,
                         idClient = newOrderData.idClient,
-                        IdColoboration = newOrderData.idColoboration,
                         MainContactID = newOrderData.MainContactID,
                         IdOrder = newOrderData.idOrder,
                         DateStart = newOrderData.DataStart,
@@ -1124,7 +1127,6 @@ namespace RepairFlatRestApi.Controllers
                         selectWorkersOrder.AllSumma = updateDataAbOrder.Allsumma;
                         selectWorkersOrder.IdAdress = updateDataAbOrder.idAdress;
                         selectWorkersOrder.idClient = updateDataAbOrder.idClient;
-                        selectWorkersOrder.IdColoboration = updateDataAbOrder.idColoboration;
                         selectWorkersOrder.MainContactID = updateDataAbOrder.MainContactID;
                         selectWorkersOrder.Description = updateDataAbOrder.Desc;
                         selectWorkersOrder.Status = updateDataAbOrder.Status;

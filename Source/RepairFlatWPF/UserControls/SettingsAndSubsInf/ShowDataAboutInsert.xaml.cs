@@ -158,6 +158,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                     List<ListOfPost> ListOfPost = new List<ListOfPost>();
                     for (int i = 0; i < Data.Rows.Count; i++)
                     {
+
                         ListOfPost ServisesUpdate = new ListOfPost
                         {
 
@@ -173,6 +174,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                     InsPost.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
                     MakeSendDataToserver("api/substring/post/update", InsPost);
                 }
+                MakeSomeHelp.MakeLoading(false);
+                MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.WorkWithSubInfromation());
             }
             else
             {
@@ -220,10 +223,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             {
                 MakeSomeHelp.MSG($"Произошла ошибка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
             }
-            else
-            {
-                MakeSomeHelp.MSG("Данные добавлены!", MsgBoxImage: MessageBoxImage.Information);
-            }
+
         }
 
         private void ShowNeeded( Grid grid)

@@ -27,11 +27,7 @@ namespace RepairFlatRestApi.Models
     
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<AdressDescription> AdressDescription { get; set; }
-        public virtual DbSet<BrigateContent> BrigateContent { get; set; }
-        public virtual DbSet<BrigateSeparation> BrigateSeparation { get; set; }
         public virtual DbSet<ClientDetails> ClientDetails { get; set; }
-        public virtual DbSet<ColoborationOfBrigade> ColoborationOfBrigade { get; set; }
-        public virtual DbSet<ColoborationOfBrigateSoComp> ColoborationOfBrigateSoComp { get; set; }
         public virtual DbSet<ContactUpdate> ContactUpdate { get; set; }
         public virtual DbSet<DeletedSubStr> DeletedSubStr { get; set; }
         public virtual DbSet<DeleteMessage> DeleteMessage { get; set; }

@@ -17,13 +17,6 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         #region Конструкторы
 
-        public SelectSomeSubs(SomeEnums.TypeOfSubs typeOfSubs)
-        {
-            InitializeComponent();
-            this.typeOfSubs = typeOfSubs;
-            MakeLoadFromLocalBD();
-        }
-
         public SelectSomeSubs(ref BaseWindow newWindow, SomeEnums.TypeOfSubs typeOfSubs)
         {
             InitializeComponent();
@@ -72,59 +65,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             }
         }
 
-        #region Для добавления данных
-        private void RetunBtnFromAddNew(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void AddElement_Click(object sender, RoutedEventArgs e)
-        {
-            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
-            {
-                //Тут про материалы
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
-            {
-                //Тут про услуги
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
-            {
-                //Тут про должности
-            }
-        }
-
-        private void EditElement_Click(object sender, RoutedEventArgs e)
-        {
-            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
-            {
-                //Тут про материалы
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
-            {
-                //Тут про услуги
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
-            {
-                //Тут про должности
-            }
-        }
-
-        private void DeleteElement_Click(object sender, RoutedEventArgs e)
-        {
-            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
-            {
-                //Тут про материалы
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
-            {
-                //Тут про услуги
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
-            {
-                //Тут про должности
-            }
-        }
+        #region Для выбора данных
 
         #endregion
 

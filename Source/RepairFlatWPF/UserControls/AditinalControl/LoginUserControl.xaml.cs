@@ -52,10 +52,10 @@ namespace RepairFlatWPF
             var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeAuth)));
             var deserializedProduct = JsonConvert.DeserializeObject<WhatReturn>(task.ToString());
             // TODO ПОТОМ ПОМЕНЯТЬ
-            if (deserializedProduct.success)
+            if (!deserializedProduct.success)
             {
                 if(MakeSomeHelp.MSG(deserializedProduct.description,MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
-                {
+                 {
                     Result.Content = "";
                     CheckLogin.Content = "Авторизация";
                     CheckLogin.IsEnabled = true;

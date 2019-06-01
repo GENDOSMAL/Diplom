@@ -23,7 +23,7 @@ namespace RepairFlatWPF.Controller
             {
                 SQLiteConnection.CreateFile(PathToDataBase);
             }
-            PathToDB = $"Data Source= {PathToDataBase}";
+            PathToDB = $"Data Source = {PathToDataBase}";
             CheckAndMakeTableInDB();
         }
 
@@ -62,7 +62,6 @@ namespace RepairFlatWPF.Controller
                 string EndOfCreate = !string.IsNullOrEmpty(NameOfPK) ? $", PRIMARY KEY(`{NameOfPK}`));" : $");";
 
                 CreateTableQuery.Append(EndOfCreate);
-                MessageBox.Show(CreateTableQuery.ToString());
                 MakeSomeQueryWork(CreateTableQuery.ToString());
             }
         }
@@ -178,6 +177,7 @@ namespace RepairFlatWPF.Controller
         {
             try
             {
+
                 using (SQLiteConnection connection = new SQLiteConnection(PathToDB))
                 {
                     connection.Open();

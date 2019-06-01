@@ -21,7 +21,7 @@ namespace RepairFlatRestApi.Models
             this.UserContact = new HashSet<UserContact>();
         }
     
-        public System.Guid? idContact { get; set; }
+        public System.Guid idContact { get; set; }
         public string Value { get; set; }
         public string Description { get; set; }
     

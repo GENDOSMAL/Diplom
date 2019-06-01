@@ -12,13 +12,12 @@ namespace RepairFlatRestApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ColoborationOfBrigateSoComp
+    public partial class OrderWorker
     {
-        public System.Guid Id { get; set; }
-        public Nullable<System.Guid> IdBrigate { get; set; }
-        public Nullable<System.Guid> IdColoboration { get; set; }
+        public System.Guid idCmbination { get; set; }
+        public Nullable<System.Guid> idTask { get; set; }
+        public Nullable<System.Guid> idWorker { get; set; }
     
-        public virtual BrigateSeparation BrigateSeparation { get; set; }
-        public virtual ColoborationOfBrigade ColoborationOfBrigade { get; set; }
+        public virtual OrderTasks OrderTasks { get; set; }
     }
 }

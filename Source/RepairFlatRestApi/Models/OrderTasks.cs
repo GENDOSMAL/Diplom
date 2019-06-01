@@ -20,6 +20,7 @@ namespace RepairFlatRestApi.Models
             this.OrderTasksState = new HashSet<OrderTasksState>();
             this.TaskMaterials = new HashSet<TaskMaterials>();
             this.TaskServis = new HashSet<TaskServis>();
+            this.OrderWorker = new HashSet<OrderWorker>();
         }
     
         public System.Guid IdTask { get; set; }
@@ -33,10 +34,11 @@ namespace RepairFlatRestApi.Models
         public virtual OrderInformation OrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderTasksState> OrderTasksState { get; set; }
-        public virtual BrigateSeparation BrigateSeparation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskMaterials> TaskMaterials { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskServis> TaskServis { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderWorker> OrderWorker { get; set; }
     }
 }

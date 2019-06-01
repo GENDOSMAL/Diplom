@@ -14,7 +14,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         /// </summary>
         public class DescriptionOfUser
         {
-            public Guid? idUser;
+            public Guid idUser;
             public string Name;
             public string Lastname;
             public string Patronymic;

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using RepairFlat.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

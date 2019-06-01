@@ -29,7 +29,7 @@ namespace RepairFlatRestApi.Models
             this.PostsUpdate = new HashSet<PostsUpdate>();
         }
     
-        public System.Guid? idUser { get; set; }
+        public System.Guid idUser { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Patronymic { get; set; }

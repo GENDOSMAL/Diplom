@@ -4,14 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="37241f70dec94c64acf9c141a767feb5" Name="Diagram1" ZoomLevel="147">
+      <Diagram DiagramId="37241f70dec94c64acf9c141a767feb5" Name="Diagram1" ZoomLevel="103">
         <EntityTypeShape EntityType="RepairFlatDBModel.C__RefactorLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.AdressDescription" Width="1.5" PointX="3.75" PointY="20.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.BrigateContent" Width="1.5" PointX="8.25" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.BrigateSeparation" Width="1.5" PointX="6" PointY="17.875" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.ClientDetails" Width="1.5" PointX="3" PointY="27.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.ColoborationOfBrigade" Width="1.5" PointX="3" PointY="16.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.ColoborationOfBrigateSoComp" Width="1.5" PointX="11.25" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.ContactUpdate" Width="1.5" PointX="9" PointY="49" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.DeleteMessage" Width="1.5" PointX="3" PointY="31" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.DialogMessage" Width="1.5" PointX="6" PointY="32.625" IsExpanded="true" />
@@ -44,13 +40,8 @@
         <EntityTypeShape EntityType="RepairFlatDBModel.WorkersPayGive" Width="1.5" PointX="8.25" PointY="37" IsExpanded="true" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderInformation_AdressDescription" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_WorkerDetails_AdressDescription" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_BrigateContent_WorkerDetails" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_ColoborationOfBrigateSoComp_BrigateSeparation" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_ClientDetails_User" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderInformation_ClientDetails" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_OrderInformation_ColoborationOfBrigade" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_ContactUpdate_TypeOfContact" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_DeleteMessage_DialogMessage" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_DeleteMessage_User" ManuallyRouted="false" />
@@ -98,8 +89,6 @@
         <EntityTypeShape EntityType="RepairFlatDBModel.PostsUpdate" Width="1.5" PointX="16.25" PointY="23.25" />
         <EntityTypeShape EntityType="RepairFlatDBModel.TaskMaterials" Width="1.5" PointX="14.75" PointY="36.625" />
         <EntityTypeShape EntityType="RepairFlatDBModel.TaskServis" Width="1.5" PointX="16.75" PointY="33.125" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation1" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_OrderTasks_BrigateSeparation" />
         <AssociationConnector Association="RepairFlatDBModel.FK_DocPayment_ClientDetails" />
         <AssociationConnector Association="RepairFlatDBModel.FK_DocPayment_InformatioForPayment" />
         <AssociationConnector Association="RepairFlatDBModel.FK_DocPayment_WorkerDetails" />
@@ -111,6 +100,8 @@
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskServis_OrderTasks" />
         <AssociationConnector Association="RepairFlatDBModel.FK_PostsUpdate_User" />
         <AssociationConnector Association="RepairFlatDBModel.FK_PostsUpdate_WorkerPosts" />
+        <EntityTypeShape EntityType="RepairFlatDBModel.OrderWorker" Width="1.5" PointX="9.75" PointY="43.125" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_OrderWorker_OrderTasks" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

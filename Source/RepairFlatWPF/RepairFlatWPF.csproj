@@ -214,9 +214,6 @@
     <Compile Include="UserControls\WorkerInformation\BrigadeWork\MakeNewBrigade.xaml.cs">
       <DependentUpon>MakeNewBrigade.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\WorkerInformation\KadrWork\AllDataAboutWorkesPost.xaml.cs">
-      <DependentUpon>AllDataAboutWorkesPost.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\CreateNewWorker.xaml.cs">
       <DependentUpon>CreateNewWorker.xaml</DependentUpon>
     </Compile>
@@ -351,10 +348,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\WorkerInformation\BrigadeWork\MakeNewBrigade.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\WorkerInformation\KadrWork\AllDataAboutWorkesPost.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

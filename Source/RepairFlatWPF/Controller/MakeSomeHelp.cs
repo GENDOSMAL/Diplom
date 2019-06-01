@@ -84,11 +84,14 @@ namespace RepairFlatWPF
             ((MainWindow)Application.Current.MainWindow).ForLogin.Background = (System.Windows.Media.Brush)Application.Current.Resources["BackLogAndLoadColor"];
         }
 
-        public static void MakeLoading()
+        public static void MakeLoading(bool forWindow=true)
         {
             ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Clear();
-            ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Add(new MakeLoading());
-            ((MainWindow)Application.Current.MainWindow).ForLogin.Background = (System.Windows.Media.Brush)Application.Current.Resources["GradientForLoading"];
+            ((MainWindow)Application.Current.MainWindow).ForLogin.Children.Add(new MakeLoading(forWindow));
+            if (!forWindow)
+                ((MainWindow)Application.Current.MainWindow).ForLogin.Visibility = Visibility.Visible;
+            if (forWindow)
+                ((MainWindow)Application.Current.MainWindow).ForLogin.Background = (System.Windows.Media.Brush)Application.Current.Resources["GradientForLoading"];
         }
 
         public static void ShowMainGrid()

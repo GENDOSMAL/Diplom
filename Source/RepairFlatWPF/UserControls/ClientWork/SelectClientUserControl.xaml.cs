@@ -130,11 +130,11 @@ namespace RepairFlatWPF.UserControls.ClientWork
             MakeSomeHelp.MSG("Не реализовано");
         }
 
-        private void GetLoginInformation_Click(object sender, RoutedEventArgs e)
-        {
-            BaseWindow baseWindow = new BaseWindow("Информация о логине и пароле");
-            baseWindow.MakeOpen(new AditinalControl.ShowDataForAuth(Guid.NewGuid(), ref baseWindow));
-            baseWindow.ShowDialog();
-        }
+        //private void GetLoginInformation_Click(object sender, RoutedEventArgs e)
+        //{
+        //    BaseWindow baseWindow = new BaseWindow("Информация о логине и пароле");
+        //    baseWindow.MakeOpen(new AditinalControl.ShowDataForAuth(Guid.NewGuid(), ref baseWindow));
+        //    baseWindow.ShowDialog();
+        //}
     }
 }

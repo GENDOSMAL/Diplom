@@ -32,14 +32,12 @@ namespace RepairFlatRestApi.Models
         public Nullable<int> Status { get; set; }
         public Nullable<decimal> AllSumma { get; set; }
         public string Description { get; set; }
-        public Nullable<System.Guid> IdColoboration { get; set; }
         public Nullable<int> Number { get; set; }
         public Nullable<System.Guid> MainContactID { get; set; }
         public Nullable<System.DateTime> DateEnd { get; set; }
     
         public virtual AdressDescription AdressDescription { get; set; }
         public virtual ClientDetails ClientDetails { get; set; }
-        public virtual ColoborationOfBrigade ColoborationOfBrigade { get; set; }
         public virtual WorkerDetails WorkerDetails { get; set; }
         public virtual WorkerOrderInformation WorkerOrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

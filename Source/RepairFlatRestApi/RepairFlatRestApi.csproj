@@ -154,19 +154,7 @@
     <Compile Include="Models\AdressDescription.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BrigateContent.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\BrigateSeparation.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ClientDetails.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ColoborationOfBrigade.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ColoborationOfBrigateSoComp.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContactUpdate.cs">
@@ -236,6 +224,9 @@
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderTasksState.cs">
+      <DependentUpon>RepFlatDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderWorker.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OurMaterials.cs">

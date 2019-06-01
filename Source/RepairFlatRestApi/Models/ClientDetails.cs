@@ -21,7 +21,7 @@ namespace RepairFlatRestApi.Models
             this.DocPayment = new HashSet<DocPayment>();
         }
     
-        public System.Guid? IdClient { get; set; }
+        public System.Guid IdClient { get; set; }
         public string Description { get; set; }
     
         public virtual User User { get; set; }

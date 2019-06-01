@@ -26,46 +26,12 @@
           <Property Name="NumberOfDelen" Type="nchar" MaxLength="10" />
           <Property Name="Description" Type="nchar" MaxLength="100" />
         </EntityType>
-        <EntityType Name="BrigateContent">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="idWorker" Type="uniqueidentifier" />
-          <Property Name="WorkerRole" Type="nchar" MaxLength="100" />
-          <Property Name="idColoboration" Type="uniqueidentifier" />
-        </EntityType>
-        <EntityType Name="BrigateSeparation">
-          <Key>
-            <PropertyRef Name="IdBrigate" />
-          </Key>
-          <Property Name="IdBrigate" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="30" />
-          <Property Name="Description" Type="nchar" MaxLength="100" />
-          <Property Name="DateStart" Type="date" />
-        </EntityType>
         <EntityType Name="ClientDetails">
           <Key>
             <PropertyRef Name="IdClient" />
           </Key>
           <Property Name="IdClient" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Description" Type="nchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="ColoborationOfBrigade">
-          <Key>
-            <PropertyRef Name="IdColoboration" />
-          </Key>
-          <Property Name="IdColoboration" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="30" />
-          <Property Name="Description" Type="nchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="ColoborationOfBrigateSoComp">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="IdBrigate" Type="uniqueidentifier" />
-          <Property Name="IdColoboration" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="ContactUpdate">
           <Key>
@@ -204,7 +170,6 @@
           <Property Name="Status" Type="int" />
           <Property Name="AllSumma" Type="money" />
           <Property Name="Description" Type="nchar" MaxLength="50" />
-          <Property Name="IdColoboration" Type="uniqueidentifier" />
           <Property Name="Number" Type="int" />
           <Property Name="MainContactID" Type="uniqueidentifier" />
           <Property Name="DateEnd" Type="datetime2" Precision="7" />
@@ -280,6 +245,14 @@
           <Property Name="State" Type="nchar" MaxLength="20" />
           <Property Name="IdWorker" Type="uniqueidentifier" />
           <Property Name="Description" Type="nchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OrderWorker">
+          <Key>
+            <PropertyRef Name="idCmbination" />
+          </Key>
+          <Property Name="idCmbination" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="idTask" Type="uniqueidentifier" />
+          <Property Name="idWorker" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="OurMaterials">
           <Key>
@@ -441,30 +414,6 @@
           <Property Name="Data" Type="datetime2" Precision="7" />
           <Property Name="Descriptiom" Type="nchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK_BrigateContent_BrigateSeparation">
-          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="0..1" />
-          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BrigateSeparation">
-              <PropertyRef Name="IdBrigate" />
-            </Principal>
-            <Dependent Role="BrigateContent">
-              <PropertyRef Name="idColoboration" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BrigateContent_WorkerDetails">
-          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
-          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerDetails">
-              <PropertyRef Name="IdWorker" />
-            </Principal>
-            <Dependent Role="BrigateContent">
-              <PropertyRef Name="idWorker" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClientDetails_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
@@ -474,30 +423,6 @@
             </Principal>
             <Dependent Role="ClientDetails">
               <PropertyRef Name="IdClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation">
-          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="0..1" />
-          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BrigateSeparation">
-              <PropertyRef Name="IdBrigate" />
-            </Principal>
-            <Dependent Role="ColoborationOfBrigateSoComp">
-              <PropertyRef Name="IdBrigate" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
-          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
-          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ColoborationOfBrigade">
-              <PropertyRef Name="IdColoboration" />
-            </Principal>
-            <Dependent Role="ColoborationOfBrigateSoComp">
-              <PropertyRef Name="IdColoboration" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -753,18 +678,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderInformation_ColoborationOfBrigade">
-          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
-          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ColoborationOfBrigade">
-              <PropertyRef Name="IdColoboration" />
-            </Principal>
-            <Dependent Role="OrderInformation">
-              <PropertyRef Name="IdColoboration" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderInformation_UserContact">
           <End Role="UserContact" Type="Self.UserContact" Multiplicity="0..1" />
           <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
@@ -909,18 +822,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderTasks_BrigateSeparation">
-          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="0..1" />
-          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BrigateSeparation">
-              <PropertyRef Name="IdBrigate" />
-            </Principal>
-            <Dependent Role="OrderTasks">
-              <PropertyRef Name="idBrigade" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderTasks_OrderInformation1">
           <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="0..1" />
           <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="*" />
@@ -954,6 +855,18 @@
             </Principal>
             <Dependent Role="OrderTasksState">
               <PropertyRef Name="IdWorker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderWorker_OrderTasks">
+          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
+          <End Role="OrderWorker" Type="Self.OrderWorker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTasks">
+              <PropertyRef Name="IdTask" />
+            </Principal>
+            <Dependent Role="OrderWorker">
+              <PropertyRef Name="idTask" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1219,11 +1132,7 @@
         <EntityContainer Name="RepairFlatDBModelStoreContainer">
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdressDescription" EntityType="Self.AdressDescription" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BrigateContent" EntityType="Self.BrigateContent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BrigateSeparation" EntityType="Self.BrigateSeparation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientDetails" EntityType="Self.ClientDetails" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ColoborationOfBrigade" EntityType="Self.ColoborationOfBrigade" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ColoborationOfBrigateSoComp" EntityType="Self.ColoborationOfBrigateSoComp" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ContactUpdate" EntityType="Self.ContactUpdate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeletedSubStr" EntityType="Self.DeletedSubStr" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeleteMessage" EntityType="Self.DeleteMessage" Schema="dbo" store:Type="Tables" />
@@ -1243,6 +1152,7 @@
           <EntitySet Name="OrderServises" EntityType="Self.OrderServises" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTasks" EntityType="Self.OrderTasks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTasksState" EntityType="Self.OrderTasksState" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderWorker" EntityType="Self.OrderWorker" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OurMaterials" EntityType="Self.OurMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OurServices" EntityType="Self.OurServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PostsUpdate" EntityType="Self.PostsUpdate" Schema="dbo" store:Type="Tables" />
@@ -1260,25 +1170,9 @@
           <EntitySet Name="WorkerPosts" EntityType="Self.WorkerPosts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkersOperats" EntityType="Self.WorkersOperats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkersPayGive" EntityType="Self.WorkersPayGive" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_BrigateContent_BrigateSeparation" Association="Self.FK_BrigateContent_BrigateSeparation">
-            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
-            <End Role="BrigateContent" EntitySet="BrigateContent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BrigateContent_WorkerDetails" Association="Self.FK_BrigateContent_WorkerDetails">
-            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
-            <End Role="BrigateContent" EntitySet="BrigateContent" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClientDetails_User" Association="Self.FK_ClientDetails_User">
             <End Role="User" EntitySet="User" />
             <End Role="ClientDetails" EntitySet="ClientDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation" Association="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation">
-            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
-            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" Association="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
-            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
-            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactUpdate_TypeOfContact" Association="Self.FK_ContactUpdate_TypeOfContact">
             <End Role="TypeOfContact" EntitySet="TypeOfContact" />
@@ -1364,10 +1258,6 @@
             <End Role="ClientDetails" EntitySet="ClientDetails" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderInformation_ColoborationOfBrigade" Association="Self.FK_OrderInformation_ColoborationOfBrigade">
-            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
-            <End Role="OrderInformation" EntitySet="OrderInformation" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderInformation_UserContact" Association="Self.FK_OrderInformation_UserContact">
             <End Role="UserContact" EntitySet="UserContact" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
@@ -1416,10 +1306,6 @@
             <End Role="OurServices" EntitySet="OurServices" />
             <End Role="OrderServises" EntitySet="OrderServises" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderTasks_BrigateSeparation" Association="Self.FK_OrderTasks_BrigateSeparation">
-            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
-            <End Role="OrderTasks" EntitySet="OrderTasks" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderTasks_OrderInformation1" Association="Self.FK_OrderTasks_OrderInformation1">
             <End Role="OrderInformation" EntitySet="OrderInformation" />
             <End Role="OrderTasks" EntitySet="OrderTasks" />
@@ -1431,6 +1317,10 @@
           <AssociationSet Name="FK_OrderTasksState_WorkerDetails" Association="Self.FK_OrderTasksState_WorkerDetails">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="OrderTasksState" EntitySet="OrderTasksState" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderWorker_OrderTasks" Association="Self.FK_OrderWorker_OrderTasks">
+            <End Role="OrderTasks" EntitySet="OrderTasks" />
+            <End Role="OrderWorker" EntitySet="OrderWorker" />
           </AssociationSet>
           <AssociationSet Name="FK_PostsUpdate_User" Association="Self.FK_PostsUpdate_User">
             <End Role="User" EntitySet="User" />
@@ -1536,31 +1426,6 @@
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_AdressDescription" FromRole="AdressDescription" ToRole="OrderInformation" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkerDetails_AdressDescription" FromRole="AdressDescription" ToRole="WorkerDetails" />
         </EntityType>
-        <EntityType Name="BrigateContent">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="idWorker" Type="Guid" />
-          <Property Name="WorkerRole" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="BrigateSeparation" Relationship="Self.FK_BrigateContent_BrigateSeparation" FromRole="BrigateContent" ToRole="BrigateSeparation" />
-          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_BrigateContent_WorkerDetails" FromRole="BrigateContent" ToRole="WorkerDetails" />
-          <Property Name="idColoboration" Type="Guid" />
-          <NavigationProperty Name="BrigateSeparation1" Relationship="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation1" FromRole="BrigateContent" ToRole="BrigateSeparation" />
-        </EntityType>
-        <EntityType Name="BrigateSeparation">
-          <Key>
-            <PropertyRef Name="IdBrigate" />
-          </Key>
-          <Property Name="IdBrigate" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <Property Name="DateStart" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="BrigateContent" Relationship="Self.FK_BrigateContent_BrigateSeparation" FromRole="BrigateSeparation" ToRole="BrigateContent" />
-          <NavigationProperty Name="ColoborationOfBrigateSoComp" Relationship="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation" FromRole="BrigateSeparation" ToRole="ColoborationOfBrigateSoComp" />
-          <NavigationProperty Name="BrigateContent1" Relationship="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation1" FromRole="BrigateSeparation" ToRole="BrigateContent" />
-          <NavigationProperty Name="OrderTasks" Relationship="RepairFlatDBModel.FK_OrderTasks_BrigateSeparation" FromRole="BrigateSeparation" ToRole="OrderTasks" />
-        </EntityType>
         <EntityType Name="ClientDetails">
           <Key>
             <PropertyRef Name="IdClient" />
@@ -1570,26 +1435,6 @@
           <NavigationProperty Name="User" Relationship="Self.FK_ClientDetails_User" FromRole="ClientDetails" ToRole="User" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_ClientDetails" FromRole="ClientDetails" ToRole="OrderInformation" />
           <NavigationProperty Name="DocPayment" Relationship="RepairFlatDBModel.FK_DocPayment_ClientDetails" FromRole="ClientDetails" ToRole="DocPayment" />
-        </EntityType>
-        <EntityType Name="ColoborationOfBrigade">
-          <Key>
-            <PropertyRef Name="IdColoboration" />
-          </Key>
-          <Property Name="IdColoboration" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="ColoborationOfBrigateSoComp" Relationship="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" FromRole="ColoborationOfBrigade" ToRole="ColoborationOfBrigateSoComp" />
-          <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_ColoborationOfBrigade" FromRole="ColoborationOfBrigade" ToRole="OrderInformation" />
-        </EntityType>
-        <EntityType Name="ColoborationOfBrigateSoComp">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="IdBrigate" Type="Guid" />
-          <Property Name="IdColoboration" Type="Guid" />
-          <NavigationProperty Name="BrigateSeparation" Relationship="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation" FromRole="ColoborationOfBrigateSoComp" ToRole="BrigateSeparation" />
-          <NavigationProperty Name="ColoborationOfBrigade" Relationship="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" FromRole="ColoborationOfBrigateSoComp" ToRole="ColoborationOfBrigade" />
         </EntityType>
         <EntityType Name="ContactUpdate">
           <Key>
@@ -1710,11 +1555,9 @@
           <Property Name="Status" Type="Int32" />
           <Property Name="AllSumma" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="IdColoboration" Type="Guid" />
           <Property Name="Number" Type="Int32" />
           <NavigationProperty Name="AdressDescription" Relationship="Self.FK_OrderInformation_AdressDescription" FromRole="OrderInformation" ToRole="AdressDescription" />
           <NavigationProperty Name="ClientDetails" Relationship="Self.FK_OrderInformation_ClientDetails" FromRole="OrderInformation" ToRole="ClientDetails" />
-          <NavigationProperty Name="ColoborationOfBrigade" Relationship="Self.FK_OrderInformation_ColoborationOfBrigade" FromRole="OrderInformation" ToRole="ColoborationOfBrigade" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_OrderInformation_WorkerDetails" FromRole="OrderInformation" ToRole="WorkerDetails" />
           <NavigationProperty Name="WorkerOrderInformation" Relationship="Self.FK_OrderInformation_WorkerOrderInformation" FromRole="OrderInformation" ToRole="WorkerOrderInformation" />
           <NavigationProperty Name="OrderMaterial" Relationship="Self.FK_OrderMaterial_OrderInformation" FromRole="OrderInformation" ToRole="OrderMaterial" />
@@ -1800,9 +1643,9 @@
           <Property Name="DeadEnd" Type="DateTime" Precision="7" />
           <Property Name="SummaAboutTask" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="idBrigade" Type="Guid" />
-          <NavigationProperty Name="BrigateSeparation" Relationship="RepairFlatDBModel.FK_OrderTasks_BrigateSeparation" FromRole="OrderTasks" ToRole="BrigateSeparation" />
           <NavigationProperty Name="TaskMaterials" Relationship="RepairFlatDBModel.FK_TaskMaterials_OrderTasks" FromRole="OrderTasks" ToRole="TaskMaterials" />
           <NavigationProperty Name="TaskServis" Relationship="RepairFlatDBModel.FK_TaskServis_OrderTasks" FromRole="OrderTasks" ToRole="TaskServis" />
+          <NavigationProperty Name="OrderWorker" Relationship="RepairFlatDBModel.FK_OrderWorker_OrderTasks" FromRole="OrderTasks" ToRole="OrderWorker" />
         </EntityType>
         <EntityType Name="OrderTasksState">
           <Key>
@@ -1944,7 +1787,6 @@
           <Property Name="IdWorker" Type="Guid" Nullable="false" />
           <Property Name="idAdress" Type="Guid" />
           <NavigationProperty Name="AdressDescription" Relationship="Self.FK_WorkerDetails_AdressDescription" FromRole="WorkerDetails" ToRole="AdressDescription" />
-          <NavigationProperty Name="BrigateContent" Relationship="Self.FK_BrigateContent_WorkerDetails" FromRole="WorkerDetails" ToRole="BrigateContent" />
           <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_EstabilismentPost_WorkerDetails" FromRole="WorkerDetails" ToRole="EstabilismentPost" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderInformation" />
           <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderPayment" />
@@ -2024,42 +1866,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_BrigateContent_BrigateSeparation">
-          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="1" />
-          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="BrigateSeparation">
-              <PropertyRef Name="IdBrigate" />
-            </Principal>
-            <Dependent Role="BrigateContent">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_BrigateContent_WorkerDetails">
-          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
-          <End Role="BrigateContent" Type="Self.BrigateContent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerDetails">
-              <PropertyRef Name="IdWorker" />
-            </Principal>
-            <Dependent Role="BrigateContent">
-              <PropertyRef Name="idWorker" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation">
-          <End Role="BrigateSeparation" Type="Self.BrigateSeparation" Multiplicity="0..1" />
-          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BrigateSeparation">
-              <PropertyRef Name="IdBrigate" />
-            </Principal>
-            <Dependent Role="ColoborationOfBrigateSoComp">
-              <PropertyRef Name="IdBrigate" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClientDetails_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
@@ -2081,30 +1887,6 @@
             </Principal>
             <Dependent Role="OrderInformation">
               <PropertyRef Name="idClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
-          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
-          <End Role="ColoborationOfBrigateSoComp" Type="Self.ColoborationOfBrigateSoComp" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ColoborationOfBrigade">
-              <PropertyRef Name="IdColoboration" />
-            </Principal>
-            <Dependent Role="ColoborationOfBrigateSoComp">
-              <PropertyRef Name="IdColoboration" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderInformation_ColoborationOfBrigade">
-          <End Role="ColoborationOfBrigade" Type="Self.ColoborationOfBrigade" Multiplicity="0..1" />
-          <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ColoborationOfBrigade">
-              <PropertyRef Name="IdColoboration" />
-            </Principal>
-            <Dependent Role="OrderInformation">
-              <PropertyRef Name="IdColoboration" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2567,11 +2349,7 @@
         <EntityContainer Name="RepairFlatDB" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="AdressDescription" EntityType="Self.AdressDescription" />
-          <EntitySet Name="BrigateContent" EntityType="Self.BrigateContent" />
-          <EntitySet Name="BrigateSeparation" EntityType="Self.BrigateSeparation" />
           <EntitySet Name="ClientDetails" EntityType="Self.ClientDetails" />
-          <EntitySet Name="ColoborationOfBrigade" EntityType="Self.ColoborationOfBrigade" />
-          <EntitySet Name="ColoborationOfBrigateSoComp" EntityType="Self.ColoborationOfBrigateSoComp" />
           <EntitySet Name="ContactUpdate" EntityType="Self.ContactUpdate" />
           <EntitySet Name="DeleteMessage" EntityType="Self.DeleteMessage" />
           <EntitySet Name="DialogMessage" EntityType="Self.DialogMessage" />
@@ -2610,32 +2388,12 @@
             <End Role="AdressDescription" EntitySet="AdressDescription" />
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_BrigateContent_BrigateSeparation" Association="Self.FK_BrigateContent_BrigateSeparation">
-            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
-            <End Role="BrigateContent" EntitySet="BrigateContent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_BrigateContent_WorkerDetails" Association="Self.FK_BrigateContent_WorkerDetails">
-            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
-            <End Role="BrigateContent" EntitySet="BrigateContent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_BrigateSeparation" Association="Self.FK_ColoborationOfBrigateSoComp_BrigateSeparation">
-            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
-            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
-          </AssociationSet>
           <AssociationSet Name="FK_ClientDetails_User" Association="Self.FK_ClientDetails_User">
             <End Role="User" EntitySet="User" />
             <End Role="ClientDetails" EntitySet="ClientDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderInformation_ClientDetails" Association="Self.FK_OrderInformation_ClientDetails">
             <End Role="ClientDetails" EntitySet="ClientDetails" />
-            <End Role="OrderInformation" EntitySet="OrderInformation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade" Association="Self.FK_ColoborationOfBrigateSoComp_ColoborationOfBrigade">
-            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
-            <End Role="ColoborationOfBrigateSoComp" EntitySet="ColoborationOfBrigateSoComp" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderInformation_ColoborationOfBrigade" Association="Self.FK_OrderInformation_ColoborationOfBrigade">
-            <End Role="ColoborationOfBrigade" EntitySet="ColoborationOfBrigade" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
           </AssociationSet>
           <AssociationSet Name="FK_ContactUpdate_TypeOfContact" Association="Self.FK_ContactUpdate_TypeOfContact">
@@ -2838,14 +2596,6 @@
           <EntitySet Name="PostsUpdate" EntityType="RepairFlatDBModel.PostsUpdate" />
           <EntitySet Name="TaskMaterials" EntityType="RepairFlatDBModel.TaskMaterials" />
           <EntitySet Name="TaskServis" EntityType="RepairFlatDBModel.TaskServis" />
-          <AssociationSet Name="FK_BrigateContent_BrigateSeparation1" Association="RepairFlatDBModel.FK_BrigateContent_BrigateSeparation1">
-            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
-            <End Role="BrigateContent" EntitySet="BrigateContent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderTasks_BrigateSeparation" Association="RepairFlatDBModel.FK_OrderTasks_BrigateSeparation">
-            <End Role="BrigateSeparation" EntitySet="BrigateSeparation" />
-            <End Role="OrderTasks" EntitySet="OrderTasks" />
-          </AssociationSet>
           <AssociationSet Name="FK_DocPayment_ClientDetails" Association="RepairFlatDBModel.FK_DocPayment_ClientDetails">
             <End Role="ClientDetails" EntitySet="ClientDetails" />
             <End Role="DocPayment" EntitySet="DocPayment" />
@@ -2889,6 +2639,11 @@
           <AssociationSet Name="FK_PostsUpdate_WorkerPosts" Association="RepairFlatDBModel.FK_PostsUpdate_WorkerPosts">
             <End Role="WorkerPosts" EntitySet="WorkerPosts" />
             <End Role="PostsUpdate" EntitySet="PostsUpdate" />
+          </AssociationSet>
+          <EntitySet Name="OrderWorker" EntityType="RepairFlatDBModel.OrderWorker" />
+          <AssociationSet Name="FK_OrderWorker_OrderTasks" Association="RepairFlatDBModel.FK_OrderWorker_OrderTasks">
+            <End Role="OrderTasks" EntitySet="OrderTasks" />
+            <End Role="OrderWorker" EntitySet="OrderWorker" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_ContactUpdate_User">
@@ -3013,30 +2768,6 @@
           <NavigationProperty Name="OrderServises" Relationship="RepairFlatDBModel.FK_TaskServis_OrderServises" FromRole="TaskServis" ToRole="OrderServises" />
           <NavigationProperty Name="OrderTasks" Relationship="RepairFlatDBModel.FK_TaskServis_OrderTasks" FromRole="TaskServis" ToRole="OrderTasks" />
         </EntityType>
-        <Association Name="FK_BrigateContent_BrigateSeparation1">
-          <End Type="RepairFlatDBModel.BrigateSeparation" Role="BrigateSeparation" Multiplicity="0..1" />
-          <End Type="RepairFlatDBModel.BrigateContent" Role="BrigateContent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BrigateSeparation">
-              <PropertyRef Name="IdBrigate" />
-            </Principal>
-            <Dependent Role="BrigateContent">
-              <PropertyRef Name="idColoboration" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderTasks_BrigateSeparation">
-          <End Type="RepairFlatDBModel.BrigateSeparation" Role="BrigateSeparation" Multiplicity="0..1" />
-          <End Type="RepairFlatDBModel.OrderTasks" Role="OrderTasks" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="BrigateSeparation">
-              <PropertyRef Name="IdBrigate" />
-            </Principal>
-            <Dependent Role="OrderTasks">
-              <PropertyRef Name="idBrigade" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DocPayment_ClientDetails">
           <End Type="RepairFlatDBModel.ClientDetails" Role="ClientDetails" Multiplicity="0..1" />
           <End Type="RepairFlatDBModel.DocPayment" Role="DocPayment" Multiplicity="*" />
@@ -3169,6 +2900,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OrderWorker">
+          <Key>
+            <PropertyRef Name="idCmbination" />
+          </Key>
+          <Property Name="idCmbination" Type="Guid" Nullable="false" />
+          <Property Name="idTask" Type="Guid" />
+          <Property Name="idWorker" Type="Guid" />
+          <NavigationProperty Name="OrderTasks" Relationship="RepairFlatDBModel.FK_OrderWorker_OrderTasks" FromRole="OrderWorker" ToRole="OrderTasks" />
+        </EntityType>
+        <Association Name="FK_OrderWorker_OrderTasks">
+          <End Type="RepairFlatDBModel.OrderTasks" Role="OrderTasks" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.OrderWorker" Role="OrderWorker" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderTasks">
+              <PropertyRef Name="IdTask" />
+            </Principal>
+            <Dependent Role="OrderWorker">
+              <PropertyRef Name="idTask" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3198,49 +2950,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BrigateContent">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.BrigateContent">
-              <MappingFragment StoreEntitySet="BrigateContent">
-                <ScalarProperty Name="idColoboration" ColumnName="idColoboration" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="idWorker" ColumnName="idWorker" />
-                <ScalarProperty Name="WorkerRole" ColumnName="WorkerRole" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BrigateSeparation">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.BrigateSeparation">
-              <MappingFragment StoreEntitySet="BrigateSeparation">
-                <ScalarProperty Name="IdBrigate" ColumnName="IdBrigate" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ClientDetails">
             <EntityTypeMapping TypeName="RepairFlatDBModel.ClientDetails">
               <MappingFragment StoreEntitySet="ClientDetails">
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ColoborationOfBrigade">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.ColoborationOfBrigade">
-              <MappingFragment StoreEntitySet="ColoborationOfBrigade">
-                <ScalarProperty Name="IdColoboration" ColumnName="IdColoboration" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ColoborationOfBrigateSoComp">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.ColoborationOfBrigateSoComp">
-              <MappingFragment StoreEntitySet="ColoborationOfBrigateSoComp">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdBrigate" ColumnName="IdBrigate" />
-                <ScalarProperty Name="IdColoboration" ColumnName="IdColoboration" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3355,7 +3069,6 @@
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="AllSumma" ColumnName="AllSumma" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="IdColoboration" ColumnName="IdColoboration" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3675,6 +3388,15 @@
                 <ScalarProperty Name="idOrderServis" ColumnName="idOrderServis" />
                 <ScalarProperty Name="idTask" ColumnName="idTask" />
                 <ScalarProperty Name="idOfCompare" ColumnName="idOfCompare" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderWorker">
+            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderWorker">
+              <MappingFragment StoreEntitySet="OrderWorker">
+                <ScalarProperty Name="idWorker" ColumnName="idWorker" />
+                <ScalarProperty Name="idTask" ColumnName="idTask" />
+                <ScalarProperty Name="idCmbination" ColumnName="idCmbination" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

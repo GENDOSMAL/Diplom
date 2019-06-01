@@ -16,7 +16,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class ResultOfInformation
         {
-            public bool sucess;
+            public bool success;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public Guid? idUser;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

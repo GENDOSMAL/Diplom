@@ -134,9 +134,9 @@
       "NameOfTable": "PostData",
       "ColumnOfTable": [
         {
-          "NameOfCol": "  ",
+          "NameOfCol": "idPost",
           "TypeOfCol": "Text",
-          "IsPk": false
+          "IsPk": true
         },
         {
           "NameOfCol": "NameOfPost",
