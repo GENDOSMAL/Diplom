@@ -26,7 +26,7 @@ namespace RepairFlatWPF.UserControls.KadrWork
             InitializeComponent();
         }
 
-        private void WorkWithOldWorker_Click(object sender, RoutedEventArgs e)
+        private void KadrPermises_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -36,7 +36,7 @@ namespace RepairFlatWPF.UserControls.KadrWork
 
         }
 
-        private void WorkWithNewWorker_Click(object sender, RoutedEventArgs e)
+        private void WorkWithWorker_Click(object sender, RoutedEventArgs e)
         {
             MakeSomeHelp.DataGridMakeWork(new ShowAllWorkers());
             

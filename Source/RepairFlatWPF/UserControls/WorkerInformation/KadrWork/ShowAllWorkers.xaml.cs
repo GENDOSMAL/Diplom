@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RepairFlatWPF.UserControls.KadrWork;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -62,11 +63,6 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
         }
 
-        private void DeleteWorker_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void SelectWorker_Click(object sender, RoutedEventArgs e)
         {
 
@@ -74,7 +70,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
         private void ReturnBTN_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.DataGridMakeWork(new MenuKadrWork());
         }
 
     }

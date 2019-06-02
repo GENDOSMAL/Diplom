@@ -55,5 +55,12 @@ namespace RepairFlatRestApi.Models
             Post
         }
 
+        public enum TypeOfOperate
+        {
+            Adoption,
+            Permutation,
+            Firing
+        }
+
     }
 }
