@@ -20,10 +20,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[ServicesUpdate]  WITH CHECK ADD  CONSTRAINT [FK_ServicesUpdate_User] FOREIGN KEY([IdUser])
 REFERENCES [dbo].[User] ([idUser])
 GO
 
 ALTER TABLE [dbo].[ServicesUpdate] CHECK CONSTRAINT [FK_ServicesUpdate_User]
+GO
+
+
 GO
 

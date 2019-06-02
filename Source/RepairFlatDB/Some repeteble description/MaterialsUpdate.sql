@@ -20,10 +20,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[MaterialsUpdate]  WITH CHECK ADD  CONSTRAINT [FK_MaterialsUpdate_User] FOREIGN KEY([IdUser])
 REFERENCES [dbo].[User] ([idUser])
 GO
 
 ALTER TABLE [dbo].[MaterialsUpdate] CHECK CONSTRAINT [FK_MaterialsUpdate_User]
+GO
+
+
 GO
 

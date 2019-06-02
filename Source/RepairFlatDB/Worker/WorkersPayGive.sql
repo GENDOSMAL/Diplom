@@ -21,10 +21,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[WorkersPayGive]  WITH CHECK ADD  CONSTRAINT [FK_WorkersPayGive_WorkerDetails1] FOREIGN KEY([idWorkerMake])
 REFERENCES [dbo].[WorkerDetails] ([IdWorker])
 GO
 
 ALTER TABLE [dbo].[WorkersPayGive] CHECK CONSTRAINT [FK_WorkersPayGive_WorkerDetails1]
+GO
+
+
 GO
 

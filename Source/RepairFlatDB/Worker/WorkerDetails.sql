@@ -17,10 +17,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[WorkerDetails]  WITH CHECK ADD  CONSTRAINT [FK_WorkerDetails_User] FOREIGN KEY([IdWorker])
 REFERENCES [dbo].[User] ([idUser])
 GO
 
 ALTER TABLE [dbo].[WorkerDetails] CHECK CONSTRAINT [FK_WorkerDetails_User]
+GO
+
+
 GO
 

@@ -2,11 +2,14 @@
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
-    internal class WorkerConroller
+    internal class WorkerConroller:DBController
     {
         internal static object CreateListWorkerWork()
         {
-            throw new NotImplementedException();
+            //return Run((db) =>
+            //{
+                throw new NotImplementedException();
+            //});
         }
     }
 }

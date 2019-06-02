@@ -134,6 +134,8 @@ namespace RepairFlatWPF
                     case 0:
                         //Переход на отображение настроек
                         CloseMenu();
+                        BaseWindow baseWindow = new BaseWindow("Заголовок");
+                        baseWindow.ShowDialog();
                         break;
                     case 1:
                         //Смена профиля

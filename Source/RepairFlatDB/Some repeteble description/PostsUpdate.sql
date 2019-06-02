@@ -16,8 +16,13 @@ GO
 
 ALTER TABLE [dbo].[PostsUpdate] CHECK CONSTRAINT [FK_PostsUpdate_User]
 GO
+
+
+GO
 ALTER TABLE [dbo].[PostsUpdate]  WITH CHECK ADD  CONSTRAINT [FK_PostsUpdate_WorkerPosts] FOREIGN KEY([idPost])
 REFERENCES [dbo].[WorkerPosts] ([idPost])
 GO
 
 ALTER TABLE [dbo].[PostsUpdate] CHECK CONSTRAINT [FK_PostsUpdate_WorkerPosts]
+GO
+

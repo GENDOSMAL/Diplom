@@ -17,14 +17,22 @@ GO
 
 ALTER TABLE [dbo].[DocPayment] CHECK CONSTRAINT [FK_DocPayment_ClientDetails]
 GO
+
+
+GO
 ALTER TABLE [dbo].[DocPayment]  WITH CHECK ADD  CONSTRAINT [FK_DocPayment_InformatioForPayment] FOREIGN KEY([idInformatioAboutPayment])
 REFERENCES [dbo].[InformatioForPayment] ([idInfPayment])
 GO
 
 ALTER TABLE [dbo].[DocPayment] CHECK CONSTRAINT [FK_DocPayment_InformatioForPayment]
 GO
+
+
+GO
 ALTER TABLE [dbo].[DocPayment]  WITH CHECK ADD  CONSTRAINT [FK_DocPayment_WorkerDetails] FOREIGN KEY([idWorker])
 REFERENCES [dbo].[WorkerDetails] ([IdWorker])
 GO
 
 ALTER TABLE [dbo].[DocPayment] CHECK CONSTRAINT [FK_DocPayment_WorkerDetails]
+GO
+

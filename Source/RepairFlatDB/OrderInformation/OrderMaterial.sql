@@ -21,10 +21,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderMaterial]  WITH CHECK ADD  CONSTRAINT [FK_OrderMaterial_OurMaterials] FOREIGN KEY([idMaterial])
 REFERENCES [dbo].[OurMaterials] ([idMaterials])
 GO
 
 ALTER TABLE [dbo].[OrderMaterial] CHECK CONSTRAINT [FK_OrderMaterial_OurMaterials]
+GO
+
+
 GO
 

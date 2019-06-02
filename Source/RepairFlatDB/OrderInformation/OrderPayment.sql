@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[OrderPayment](
+﻿CREATE TABLE [dbo].[OrderPayment](
 	[IdPayment] [uniqueidentifier] NOT NULL,
 	[IdOrder] [uniqueidentifier] NULL,
 	[IdWorkerMake] [uniqueidentifier] NULL,
@@ -20,14 +20,22 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderPayment]  WITH CHECK ADD  CONSTRAINT [FK_OrderPayment_WorkerDetails] FOREIGN KEY([IdWorkerMake])
 REFERENCES [dbo].[WorkerDetails] ([IdWorker])
 GO
 
 ALTER TABLE [dbo].[OrderPayment] CHECK CONSTRAINT [FK_OrderPayment_WorkerDetails]
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderPayment]  WITH CHECK ADD  CONSTRAINT [FK_OrderPayment_DocPayment] FOREIGN KEY([idDocPayment])
 REFERENCES [dbo].[DocPayment] ([idDocPayment])
 GO
 
 ALTER TABLE [dbo].[OrderPayment] CHECK CONSTRAINT [FK_OrderPayment_DocPayment]
+GO
+

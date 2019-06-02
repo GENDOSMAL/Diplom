@@ -14,8 +14,13 @@ GO
 
 ALTER TABLE [dbo].[TaskMaterials] CHECK CONSTRAINT [FK_TaskMaterials_OrderMaterial]
 GO
+
+
+GO
 ALTER TABLE [dbo].[TaskMaterials]  WITH CHECK ADD  CONSTRAINT [FK_TaskMaterials_OrderTasks] FOREIGN KEY([idTask])
 REFERENCES [dbo].[OrderTasks] ([IdTask])
 GO
 
 ALTER TABLE [dbo].[TaskMaterials] CHECK CONSTRAINT [FK_TaskMaterials_OrderTasks]
+GO
+

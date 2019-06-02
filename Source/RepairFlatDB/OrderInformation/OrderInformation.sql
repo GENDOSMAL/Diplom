@@ -7,7 +7,6 @@
 	[Status] [int] NULL,
 	[AllSumma] [money] NULL,
 	[Description] [nchar](50) NULL,
-	[IdColoboration] [uniqueidentifier] NULL,
 	[Number] [int] NULL,
 	[MainContactID] [uniqueidentifier] NULL,
 	[DateEnd] [datetime2](7) NULL,
@@ -27,11 +26,17 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderInformation]  WITH CHECK ADD  CONSTRAINT [FK_OrderInformation_ClientDetails] FOREIGN KEY([idClient])
 REFERENCES [dbo].[ClientDetails] ([IdClient])
 GO
 
 ALTER TABLE [dbo].[OrderInformation] CHECK CONSTRAINT [FK_OrderInformation_ClientDetails]
+GO
+
+
 GO
 
 
@@ -54,11 +59,17 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderInformation]  WITH CHECK ADD  CONSTRAINT [FK_OrderInformation_WorkerDetails] FOREIGN KEY([IdWorkerMake])
 REFERENCES [dbo].[WorkerDetails] ([IdWorker])
 GO
 
 ALTER TABLE [dbo].[OrderInformation] CHECK CONSTRAINT [FK_OrderInformation_WorkerDetails]
+GO
+
+
 GO
 
 

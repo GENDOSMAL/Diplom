@@ -139,6 +139,7 @@
     <Compile Include="Controllers\MainConroller\SomeHelpController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
     <Compile Include="Controllers\MainConroller\SubStringController.cs" />
+    <Compile Include="Controllers\MainConroller\WorkerController.cs" />
     <Compile Include="Controllers\OtherController\DBController\ClientDBWorker.cs" />
     <Compile Include="Controllers\OtherController\DBController\DBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\MeasurmentDBController.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Controllers\OtherController\HelperUS.cs" />
     <Compile Include="Controllers\OtherController\Logger.cs" />
     <Compile Include="Controllers\MainConroller\LoginController.cs" />
+    <Compile Include="Controllers\OtherController\DBController\WorkerConroller.cs" />
     <Compile Include="Controllers\ReturnMessageBilder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

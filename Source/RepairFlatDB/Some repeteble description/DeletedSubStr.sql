@@ -17,3 +17,6 @@ GO
 ALTER TABLE [dbo].[DeletedSubStr] CHECK CONSTRAINT [FK_DeletedSubStr_User]
 GO
 
+
+GO
+

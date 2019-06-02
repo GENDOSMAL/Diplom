@@ -1,4 +1,4 @@
-CREATE TABLE [dbo].[OrderTasks](
+﻿CREATE TABLE [dbo].[OrderTasks](
 	[IdTask] [uniqueidentifier] NOT NULL,
 	[IdOrder] [uniqueidentifier] NULL,
 	[Description] [nchar](200) NULL,
@@ -18,6 +18,9 @@ REFERENCES [dbo].[OrderInformation] ([IdOrder])
 GO
 
 ALTER TABLE [dbo].[OrderTasks] CHECK CONSTRAINT [FK_OrderTasks_OrderInformation1]
+GO
+
+
 GO
 ALTER TABLE [dbo].[OrderTasks]  WITH CHECK ADD  CONSTRAINT [FK_OrderTasks_BrigateSeparation] FOREIGN KEY([idBrigade])
 REFERENCES [dbo].[BrigateSeparation] ([IdBrigate])

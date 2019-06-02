@@ -87,7 +87,7 @@
                     <Button Uid="3" Grid.Column="3" Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Итого" FontFamily="Times New Roman" FontSize="45 "/>
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
                     </Button>

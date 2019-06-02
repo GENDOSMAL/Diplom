@@ -20,3 +20,5 @@ REFERENCES [dbo].[WorkerDetails] ([IdWorker])
 GO
 
 ALTER TABLE [dbo].[InformatioForPayment] CHECK CONSTRAINT [FK_InformatioForPayment_WorkerDetails]
+GO
+

@@ -15,3 +15,6 @@ GO
 ALTER TABLE [dbo].[ClientDetails] CHECK CONSTRAINT [FK_ClientDetails_User]
 GO
 
+
+GO
+

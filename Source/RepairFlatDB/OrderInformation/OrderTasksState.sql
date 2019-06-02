@@ -21,10 +21,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderTasksState]  WITH CHECK ADD  CONSTRAINT [FK_OrderTasksState_WorkerDetails] FOREIGN KEY([IdWorker])
 REFERENCES [dbo].[WorkerDetails] ([IdWorker])
 GO
 
 ALTER TABLE [dbo].[OrderTasksState] CHECK CONSTRAINT [FK_OrderTasksState_WorkerDetails]
+GO
+
+
 GO
 

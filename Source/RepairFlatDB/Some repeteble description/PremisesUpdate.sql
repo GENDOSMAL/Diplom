@@ -20,10 +20,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[PremisesUpdate]  WITH CHECK ADD  CONSTRAINT [FK_PremisesUpdate_User] FOREIGN KEY([IdUser])
 REFERENCES [dbo].[User] ([idUser])
 GO
 
 ALTER TABLE [dbo].[PremisesUpdate] CHECK CONSTRAINT [FK_PremisesUpdate_User]
+GO
+
+
 GO
 

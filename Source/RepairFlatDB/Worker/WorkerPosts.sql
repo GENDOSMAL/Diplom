@@ -2,6 +2,7 @@
 	[idPost] [uniqueidentifier] NOT NULL,
 	[NameOfPost] [nchar](100) NULL,
 	[BaseWage] [money] NULL,
+	[MakeWork] [bit] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[idPost] ASC

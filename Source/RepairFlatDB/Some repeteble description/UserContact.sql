@@ -21,10 +21,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[UserContact]  WITH CHECK ADD  CONSTRAINT [FK_UserContact_User] FOREIGN KEY([idUser])
 REFERENCES [dbo].[User] ([idUser])
 GO
 
 ALTER TABLE [dbo].[UserContact] CHECK CONSTRAINT [FK_UserContact_User]
+GO
+
+
 GO
 

@@ -20,10 +20,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[EstabilismentPost]  WITH CHECK ADD  CONSTRAINT [FK_EstabilismentPost_WorkerPosts] FOREIGN KEY([idPost])
 REFERENCES [dbo].[WorkerPosts] ([idPost])
 GO
 
 ALTER TABLE [dbo].[EstabilismentPost] CHECK CONSTRAINT [FK_EstabilismentPost_WorkerPosts]
+GO
+
+
 GO
 

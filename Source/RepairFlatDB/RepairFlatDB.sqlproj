@@ -59,9 +59,7 @@
     <Folder Include="Some repeteble description" />
     <Folder Include="Worker" />
     <Folder Include="OrderInformation" />
-    <Folder Include="BrigadeDescription" />
     <Folder Include="ClientInformation" />
-    <Folder Include="Dialog" />
     <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
@@ -84,31 +82,22 @@
     <Build Include="OrderInformation\OrderTasks.sql" />
     <Build Include="OrderInformation\OrderTasksState.sql" />
     <Build Include="OrderInformation\OrderElementOfMeasurments.sql" />
-    <Build Include="BrigadeDescription\BrigateContent.sql" />
-    <Build Include="BrigadeDescription\BrigateSeparation.sql" />
-    <Build Include="BrigadeDescription\ColoborationOfBrigade.sql" />
-    <Build Include="BrigadeDescription\ColoborationOfBrigateSoComp.sql" />
     <Build Include="Worker\WorkerPosts.sql" />
-    <Build Include="Worker\WorkerCanditate.sql" />
     <Build Include="Worker\WorkersOperats.sql" />
     <Build Include="Some repeteble description\TypeOfContact.sql" />
     <Build Include="Worker\EstabilismentPost.sql" />
     <Build Include="Some repeteble description\ContactUpdate.sql" />
     <Build Include="Worker\WorkersPayGive.sql" />
-    <Build Include="Dialog\DeleteMessage.sql" />
-    <Build Include="Dialog\DialogMessage.sql" />
-    <Build Include="Dialog\Dialogs.sql" />
-    <Build Include="Dialog\DialogUser.sql" />
     <Build Include="Worker\WorkerDetails.sql" />
     <Build Include="Some repeteble description\WorkerOrderInformation.sql" />
     <None Include="Scripts\ScriptsIgnoredOnImport.sql" />
     <Build Include="OrderInformation\TaskServis.sql" />
-    <Build Include="OrderInformation\TaskMeasurment.sql" />
     <Build Include="OrderInformation\TaskMaterials.sql" />
     <Build Include="Some repeteble description\PostsUpdate.sql" />
     <Build Include="OrderInformation\InformatioForPayment.sql" />
     <Build Include="Some repeteble description\DeletedSubStr.sql" />
     <Build Include="OrderInformation\DocPayment.sql" />
+    <Build Include="OrderInformation\OrderWorker.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="RepairFlatDB.refactorlog" />

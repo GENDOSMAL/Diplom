@@ -16,3 +16,6 @@ GO
 ALTER TABLE [dbo].[LoginInformation] CHECK CONSTRAINT [FK_LoginInformation_User]
 GO
 
+
+GO
+

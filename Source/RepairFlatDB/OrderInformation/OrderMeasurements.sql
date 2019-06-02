@@ -26,10 +26,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderMeasurements]  WITH CHECK ADD  CONSTRAINT [FK_OrderMeasurements_PremisesType] FOREIGN KEY([idPremisesType])
 REFERENCES [dbo].[PremisesType] ([idPremises])
 GO
 
 ALTER TABLE [dbo].[OrderMeasurements] CHECK CONSTRAINT [FK_OrderMeasurements_PremisesType]
+GO
+
+
 GO
 

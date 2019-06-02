@@ -14,8 +14,13 @@ GO
 
 ALTER TABLE [dbo].[TaskServis] CHECK CONSTRAINT [FK_TaskServis_OrderServises]
 GO
+
+
+GO
 ALTER TABLE [dbo].[TaskServis]  WITH CHECK ADD  CONSTRAINT [FK_TaskServis_OrderTasks] FOREIGN KEY([idTask])
 REFERENCES [dbo].[OrderTasks] ([IdTask])
 GO
 
 ALTER TABLE [dbo].[TaskServis] CHECK CONSTRAINT [FK_TaskServis_OrderTasks]
+GO
+

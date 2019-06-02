@@ -22,10 +22,16 @@ GO
 
 
 GO
+
+
+GO
 ALTER TABLE [dbo].[OrderServises]  WITH CHECK ADD  CONSTRAINT [FK_OrderServises_OurServices] FOREIGN KEY([idServis])
 REFERENCES [dbo].[OurServices] ([idServis])
 GO
 
 ALTER TABLE [dbo].[OrderServises] CHECK CONSTRAINT [FK_OrderServises_OurServices]
+GO
+
+
 GO
 
