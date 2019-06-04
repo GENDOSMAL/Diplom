@@ -72,7 +72,6 @@
           <Property Name="idWorker" Type="uniqueidentifier" />
           <Property Name="idPost" Type="uniqueidentifier" />
           <Property Name="Salary" Type="money" />
-          <Property Name="DateOfOperate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="InformatioForPayment">
           <Key>
@@ -358,7 +357,8 @@
           <Property Name="idOperate" Type="uniqueidentifier" Nullable="false" />
           <Property Name="idWorker" Type="uniqueidentifier" />
           <Property Name="idEstabilisment" Type="uniqueidentifier" />
-          <Property Name="TypeOfOperate" Type="int" />
+          <Property Name="TypeOfOperate" Type="varchar" MaxLength="50" />
+          <Property Name="DateOfOperate" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="WorkersPayGive">
           <Key>
@@ -1296,7 +1296,6 @@
           <Property Name="idWorker" Type="Guid" />
           <Property Name="idPost" Type="Guid" />
           <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="DateOfOperate" Type="DateTime" Precision="7" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_EstabilismentPost_WorkerDetails" FromRole="EstabilismentPost" ToRole="WorkerDetails" />
           <NavigationProperty Name="WorkerPosts" Relationship="Self.FK_EstabilismentPost_WorkerPosts" FromRole="EstabilismentPost" ToRole="WorkerPosts" />
           <NavigationProperty Name="WorkersOperats" Relationship="Self.FK_WorkersOperats_EstabilismentPost" FromRole="EstabilismentPost" ToRole="WorkersOperats" />
@@ -1607,9 +1606,10 @@
           <Property Name="idOperate" Nullable="false" Type="Guid" />
           <Property Name="idWorker" Type="Guid" />
           <Property Name="idEstabilisment" Type="Guid" />
-          <Property Name="TypeOfOperate" Type="Int32" />
+          <Property Name="TypeOfOperate" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_WorkersOperats_EstabilismentPost" FromRole="WorkersOperats" ToRole="EstabilismentPost" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_WorkersOperats_WorkerDetails" FromRole="WorkersOperats" ToRole="WorkerDetails" />
+          <Property Name="DateOfOperate" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityType Name="WorkersPayGive">
           <Key>
@@ -2642,7 +2642,6 @@
                 <ScalarProperty Name="idWorker" ColumnName="idWorker" />
                 <ScalarProperty Name="idPost" ColumnName="idPost" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
-                <ScalarProperty Name="DateOfOperate" ColumnName="DateOfOperate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2898,6 +2897,7 @@
           <EntitySetMapping Name="WorkersOperats">
             <EntityTypeMapping TypeName="RepairFlatDBModel.WorkersOperats">
               <MappingFragment StoreEntitySet="WorkersOperats">
+                <ScalarProperty Name="DateOfOperate" ColumnName="DateOfOperate" />
                 <ScalarProperty Name="idOperate" ColumnName="idOperate" />
                 <ScalarProperty Name="idWorker" ColumnName="idWorker" />
                 <ScalarProperty Name="idEstabilisment" ColumnName="idEstabilisment" />

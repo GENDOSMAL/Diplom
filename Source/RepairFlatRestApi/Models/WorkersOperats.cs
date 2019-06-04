@@ -17,7 +17,8 @@ namespace RepairFlatRestApi.Models
         public System.Guid idOperate { get; set; }
         public Nullable<System.Guid> idWorker { get; set; }
         public Nullable<System.Guid> idEstabilisment { get; set; }
-        public Nullable<int> TypeOfOperate { get; set; }
+        public string TypeOfOperate { get; set; }
+        public Nullable<System.DateTime> DateOfOperate { get; set; }
     
         public virtual EstabilismentPost EstabilismentPost { get; set; }
         public virtual WorkerDetails WorkerDetails { get; set; }

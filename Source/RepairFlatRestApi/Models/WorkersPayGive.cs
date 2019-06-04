@@ -22,6 +22,5 @@ namespace RepairFlatRestApi.Models
         public string Descriptiom { get; set; }
     
         public virtual WorkerDetails WorkerDetails { get; set; }
-        public virtual WorkerDetails WorkerDetails1 { get; set; }
     }
 }

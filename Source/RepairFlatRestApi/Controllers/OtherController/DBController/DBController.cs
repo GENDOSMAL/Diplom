@@ -655,8 +655,6 @@ namespace RepairFlatRestApi.Controllers
                     db.SaveChanges();
                     if (ListOfDeleteCodes.Count != 0)
                     {
-                        //TODO Проверить необходимость и если надо добавить
-                        //db.PremisesUpdate.RemoveRange(db.PremisesUpdate.Where(e => e.idPremises == null).ToArray());
                         db.DeletedSubStr.AddRange(MakeListAboutDelete(ListOfDeleteCodes, DateOfAction, ListOfNewPremises.idUser, SomeEnums.TypeOfSubs.Premises));
                         db.SaveChanges();
                     }

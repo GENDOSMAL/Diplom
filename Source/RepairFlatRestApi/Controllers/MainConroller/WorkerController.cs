@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using static RepairFlatRestApi.Models.WorkWitthWorker;
 
 namespace RepairFlatRestApi.Controllers.MainConroller
 {
@@ -11,14 +12,65 @@ namespace RepairFlatRestApi.Controllers.MainConroller
     public class WorkerController:BaseController
     {
 
-        [HttpGet, Route("allworkerWork")]
-        public HttpResponseMessage GetDataAboutContact()
+        [HttpGet, Route("allworker")]
+        public HttpResponseMessage GetDataAboutWorker()
         {
             return CatchError(() =>
             {
-                return OtherController.WorkerConroller.CreateListWorkerWork();
-            }, nameof(SubStringController), nameof(GetDataAboutContact));
+                return OtherController.WorkerDBConroller.CreateListAllWorker();
+            }, nameof(SubStringController), nameof(GetDataAboutWorker));
         }
+        [HttpGet, Route("allworkerfororder")]
+        public HttpResponseMessage GetDataAboutWorkerThatWork()
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.CreateListWorkerForMakeNewWorkOrUpdate(true);
+            }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        }
+
+        [HttpGet, Route("allworkerforredact")]
+        public HttpResponseMessage GetDataAboutWorkerForRedact()
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.CreateListWorkerForMakeNewWorkOrUpdate();
+            }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        }
+        [HttpGet, Route("allworkercanditate")]
+        public HttpResponseMessage GetDataAboutWorkerCandidate()
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.CreateListAllWorker(true);
+            }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        }
+
+        [HttpPost, Route("createorupdate/workerDet")]
+        public HttpResponseMessage CreateNewCandidate(MakeNewWorker dataAboutNewWorker)
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.CreateOrUpdateNewCanditate(dataAboutNewWorker);
+            }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        }
+        [HttpPost, Route("createorupdate/postData")]
+        public HttpResponseMessage CreateNewDataAboutPost(DataAboutPost DataAboutPost)
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.CreateNewPostData(DataAboutPost);
+            }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        }
+        [HttpPost, Route("createorupdate/postData")]
+        public HttpResponseMessage GiveMoneyToWorker(PayWagesM DataAboutGiveMoney)
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.CreateDataAboutPayWages(DataAboutGiveMoney);
+            }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        }
+
 
     }
 }

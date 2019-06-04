@@ -33,11 +33,11 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         Description = descriptionPerson.Desc,
                     });
 
-                    if (descriptionPerson.ListOfContact != null)
+                    if (descriptionPerson.DataAboutContact.ListOfContact != null)
                     {
-                        if (descriptionPerson.ListOfContact.Count != 0)
+                        if (descriptionPerson.DataAboutContact.ListOfContact.Count != 0)
                         {
-                            foreach (var contact in descriptionPerson.ListOfContact)
+                            foreach (var contact in descriptionPerson.DataAboutContact.ListOfContact)
                             {
                                 db.UserContact.Add(new UserContact
                                 {
@@ -51,6 +51,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                             }
                         }
                     }
+
 
                     db.SaveChanges();
                     return new BaseResult() { success = true };
@@ -80,9 +81,9 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     DataToUpdate.ClientDetails.Description = descriptionPerson.Desc;
                     DataToUpdate.BirstDay = descriptionPerson.Birstday;
                     DataToUpdate.Female = descriptionPerson.Female;
-                    if (descriptionPerson.ListOfContact != null)
+                    if (descriptionPerson.DataAboutContact.ListOfContact != null)
                     {
-                        foreach (var contact in descriptionPerson.ListOfContact)
+                        foreach (var contact in descriptionPerson.DataAboutContact.ListOfContact)
                         {
                             db.UserContact.AddOrUpdate(new UserContact
                             {

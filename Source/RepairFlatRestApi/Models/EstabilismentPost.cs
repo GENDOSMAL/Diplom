@@ -24,7 +24,6 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.Guid> idWorker { get; set; }
         public Nullable<System.Guid> idPost { get; set; }
         public Nullable<decimal> Salary { get; set; }
-        public Nullable<System.DateTime> DateOfOperate { get; set; }
     
         public virtual WorkerDetails WorkerDetails { get; set; }
         public virtual WorkerPosts WorkerPosts { get; set; }

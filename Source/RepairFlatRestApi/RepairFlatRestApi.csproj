@@ -148,7 +148,7 @@
     <Compile Include="Controllers\OtherController\HelperUS.cs" />
     <Compile Include="Controllers\OtherController\Logger.cs" />
     <Compile Include="Controllers\MainConroller\LoginController.cs" />
-    <Compile Include="Controllers\OtherController\DBController\WorkerConroller.cs" />
+    <Compile Include="Controllers\OtherController\DBController\WorkerDBConroller.cs" />
     <Compile Include="Controllers\ReturnMessageBilder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -177,6 +177,7 @@
     <Compile Include="Models\DescriptionJSON\OrderData.cs" />
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWithOrder.cs" />
+    <Compile Include="Models\DescriptionJSON\WorkWitthWorker.cs" />
     <Compile Include="Models\DocPayment.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
