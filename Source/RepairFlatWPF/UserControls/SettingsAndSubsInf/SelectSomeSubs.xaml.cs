@@ -1,4 +1,10 @@
-﻿using System.Windows;
+﻿using RepairFlatWPF.Controller;
+using RepairFlatWPF.Model;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 
@@ -13,6 +19,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         SomeEnums.TypeOfSubs typeOfSubs;
         BaseWindow BaseWindow;
+        DataTable DataAboutSomeSubInf;
+        List<Tuple<int, Guid>> ListofId;
         #endregion
 
         #region Конструкторы
@@ -22,7 +30,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             InitializeComponent();
             this.typeOfSubs = typeOfSubs;
             this.BaseWindow = newWindow;
-            MakeLoadFromLocalBD();
+            MakeDataFromDB();
+
         }
         #endregion
 
@@ -34,56 +43,47 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void SelectBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
+            int index = DataGrid.SelectedIndex;
+            if (index != -1)
             {
-                //Тут про материалы
+                var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index);
+                int numberOfRows = 0;
+                if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
+                {
+                    for (int i = 0; i < DataAboutSomeSubInf.Rows.Count; i++)
+                    {
+                        if (Convert.ToInt32(DataAboutSomeSubInf.Rows[i][0].ToString()) == numberOfRows)
+                        {
+                            Guid idSubs = ListofId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
+                            SaveSomeData.MakeSomeOperation = true;
+                            SaveSomeData.SomeObject = idSubs;
+                            BaseWindow.Close();
+                        }
+                    }                    
+                }
             }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
+            else
             {
-                //Тут про услуги
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
-            {
-                //Тут про должности
+                MakeSomeHelp.MSG("Необходимо выбрать данные для работы!", MsgBoxImage: MessageBoxImage.Hand);
             }
         }
         #endregion
 
-        private void BtnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
-            {
-                //Тут про материалы
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
-            {
-                //Тут про услуги
-            }
-            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
-            {
-                //Тут про должности
-            }
-        }
-
 
         #region Дополнительные данные
-        private void MakeLoadFromLocalBD()
+        private void MakePreparateData()
         {
-            if(typeOfSubs == SomeEnums.TypeOfSubs.Materials)
-            {
-                //Тут про материалы
-            }
-            else if(typeOfSubs == SomeEnums.TypeOfSubs.Servises)
-            {
-                //Тут про услуги
-            }
-            else if(typeOfSubs == SomeEnums.TypeOfSubs.Post)
-            {
-                //Тут про должности
-            }
-
+            DataAboutSomeSubInf = new DataTable();
+            ListofId = new List<Tuple<int, Guid>>();
         }
 
+        private void MakeDataFromDB()
+        {
+            MakePreparateData();
+            DataAboutSomeSubInf = MakeSomeHelp.DataTableFromDataBase(typeOfSubs);
+            ListofId = MakeSomeHelp.ListofId;
+            DataGrid.ItemsSource = DataAboutSomeSubInf.DefaultView;
+        }
         #endregion
     }
 }

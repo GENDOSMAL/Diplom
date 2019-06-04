@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using RepairFlat.Model;
+using RepairFlatWPF.Controller;
 using RepairFlatWPF.Properties;
 using RepairFlatWPF.UserControls;
 using System;
@@ -153,5 +155,171 @@ namespace RepairFlatWPF
             }
         }
 
+        public async static void UpdloadDataToServer(string Url,string Json)
+        {
+            var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(Url, "POST", Json, nameof(BaseWorkWithServer), nameof(UpdloadDataToServer)));
+            var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+            if (!deserializedProduct.success)
+            {
+                MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Операции над данными были произведены!", MsgBoxImage: MessageBoxImage.Information);
+            }
+        }
+
+        public static List<Tuple<int, Guid>> ListofId;
+
+
+
+        public static DataTable DataTableFromDataBase(SomeEnums.TypeOfSubs typeOfSubs)
+        {
+            DataTable DataAboutSomeSubInf = new DataTable() ;
+            ListofId = new List<Tuple<int, Guid>>();
+            if (typeOfSubs == SomeEnums.TypeOfSubs.Materials)
+            {//Материалы
+                foreach (string NameOfColumn in SomeEnums.MaterialSubs)
+                {
+                    DataAboutSomeSubInf.Columns.Add(NameOfColumn);
+                }
+                string query = "select * from OurMaterials";
+                var datafr = MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
+                if (datafr != null)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable = datafr as DataTable;
+
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        DataRow rowsForInsert = DataAboutSomeSubInf.NewRow();
+                        rowsForInsert[0] = i + 1;
+                        rowsForInsert[1] = dataTable.Rows[i][1].ToString();
+                        rowsForInsert[2] = dataTable.Rows[i][2].ToString();
+                        rowsForInsert[3] = dataTable.Rows[i][4].ToString();
+                        rowsForInsert[4] = dataTable.Rows[i][3].ToString();
+                        rowsForInsert[5] = dataTable.Rows[i][5].ToString();
+                        DataAboutSomeSubInf.Rows.Add(rowsForInsert);
+                        ListofId.Add(new Tuple<int, Guid>(i + 1, Guid.Parse(dataTable.Rows[i][0].ToString())));
+                    }
+                }
+
+            }
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Post)
+            {//Дожности
+                foreach (string NameOfColumn in SomeEnums.PostSubs)
+                {
+                    DataAboutSomeSubInf.Columns.Add(NameOfColumn);
+                }
+
+                string query = "select * from PostData";
+                var datafr = MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
+                if (datafr != null)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable = datafr as DataTable;
+
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        DataRow rowsForInsert = DataAboutSomeSubInf.NewRow();
+                        string MakeWork = "";
+                        if (!string.IsNullOrEmpty(dataTable.Rows[i][3].ToString()))
+                        {
+                            MakeWork = Convert.ToInt32(dataTable.Rows[i][3].ToString()) == 1 ? "Да" : "Нет";
+                        }
+                        else
+                        {
+                            MakeWork = "Нет данных";
+                        }
+                        rowsForInsert[0] = i + 1;
+                        rowsForInsert[1] = dataTable.Rows[i][1].ToString();
+                        rowsForInsert[2] = dataTable.Rows[i][2].ToString();
+                        rowsForInsert[3] = MakeWork;
+                        DataAboutSomeSubInf.Rows.Add(rowsForInsert);
+                        ListofId.Add(new Tuple<int, Guid>(i + 1, Guid.Parse(dataTable.Rows[i][0].ToString())));
+                    }
+                }
+            }
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Servises)
+            {//Услуги
+                foreach (string NameOfColumn in SomeEnums.ServisesSubs)
+                {
+                    DataAboutSomeSubInf.Columns.Add(NameOfColumn);
+                }
+
+                string query = "select * from OurServices";
+                var datafr = MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
+                if (datafr != null)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable = datafr as DataTable;
+
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        DataRow rowsForInsert = DataAboutSomeSubInf.NewRow();
+                        rowsForInsert[0] = i + 1;
+                        rowsForInsert[1] = dataTable.Rows[i][1].ToString();
+                        rowsForInsert[2] = dataTable.Rows[i][2].ToString();
+                        rowsForInsert[3] = dataTable.Rows[i][3].ToString();
+                        rowsForInsert[4] = dataTable.Rows[i][4].ToString();
+                        DataAboutSomeSubInf.Rows.Add(rowsForInsert);
+                        ListofId.Add(new Tuple<int, Guid>(i + 1, Guid.Parse(dataTable.Rows[i][0].ToString())));
+                    }
+                }
+            }
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Premises)
+            {//Помещения
+                foreach (string NameOfColumn in SomeEnums.PremisesSubs)
+                {
+                    DataAboutSomeSubInf.Columns.Add(NameOfColumn);
+                }
+
+                string query = "select * from OurServices";
+                var datafr = MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
+                if (datafr != null)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable = datafr as DataTable;
+
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        DataRow rowsForInsert = DataAboutSomeSubInf.NewRow();
+                        rowsForInsert[0] = i + 1;
+                        rowsForInsert[1] = dataTable.Rows[i][1].ToString();
+                        rowsForInsert[2] = dataTable.Rows[i][2].ToString();
+                        DataAboutSomeSubInf.Rows.Add(rowsForInsert);
+                        ListofId.Add(new Tuple<int, Guid>(i + 1, Guid.Parse(dataTable.Rows[i][0].ToString())));
+                    }
+                }
+            }
+            else if (typeOfSubs == SomeEnums.TypeOfSubs.Contact)
+            {//Типы контактов
+                foreach (string NameOfColumn in SomeEnums.ContactSubs)
+                {
+                    DataAboutSomeSubInf.Columns.Add(NameOfColumn);
+                }
+
+                string query = "select * from ContactType";
+                var datafr = MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
+                if (datafr != null)
+                {
+                    DataTable dataTable = new DataTable();
+                    dataTable = datafr as DataTable;
+
+                    for (int i = 0; i < dataTable.Rows.Count; i++)
+                    {
+                        DataRow rowsForInsert = DataAboutSomeSubInf.NewRow();
+                        rowsForInsert[0] = i + 1;
+                        rowsForInsert[1] = dataTable.Rows[i][1].ToString();
+                        rowsForInsert[2] = dataTable.Rows[i][2].ToString();
+                        DataAboutSomeSubInf.Rows.Add(rowsForInsert);
+                        ListofId.Add(new Tuple<int, Guid>(i + 1, Guid.Parse(dataTable.Rows[i][0].ToString())));
+                    }
+                }
+            }
+
+
+            return DataAboutSomeSubInf;
+        }
     }
 }

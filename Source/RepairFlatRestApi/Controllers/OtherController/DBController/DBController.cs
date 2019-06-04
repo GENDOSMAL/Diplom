@@ -194,6 +194,7 @@ namespace RepairFlatRestApi.Controllers
                             {
                                 UpdatedServis.NameOfPost = WhatUpdate.NameOfPost;
                                 UpdatedServis.BaseWage = WhatUpdate.BaseWage;
+                                UpdatedServis.MakeWork = WhatUpdate.MakeWork;
 
                                 var InformationAboutUpdate = new PostsUpdate
                                 {

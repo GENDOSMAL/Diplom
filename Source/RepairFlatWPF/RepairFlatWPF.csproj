@@ -190,11 +190,26 @@
     <Compile Include="UserControls\OrderWork\MainWorkWithOrderUserControl.xaml.cs">
       <DependentUpon>MainWorkWithOrderUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\ControlForRedact\ContactTypeRedactUC.xaml.cs">
+      <DependentUpon>ContactTypeRedactUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\ControlForRedact\MaterialsRedactUC.xaml.cs">
+      <DependentUpon>MaterialsRedactUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\ControlForRedact\PostRedactUC.xaml.cs">
+      <DependentUpon>PostRedactUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\ControlForRedact\PremisesRedactUC.xaml.cs">
+      <DependentUpon>PremisesRedactUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SettingsAndSubsInf\ControlForRedact\ServisesRedactUC.xaml.cs">
+      <DependentUpon>ServisesRedactUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SettingsAndSubsInf\RedactSomeSubs.xaml.cs">
       <DependentUpon>RedactSomeSubs.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SettingsAndSubsInf\RedactSubInformation.xaml.cs">
-      <DependentUpon>RedactSubInformation.xaml</DependentUpon>
+    <Compile Include="UserControls\SettingsAndSubsInf\SelectDataForRedactUC.xaml.cs">
+      <DependentUpon>SelectDataForRedactUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SettingsAndSubsInf\SelectSomeSubs.xaml.cs">
       <DependentUpon>SelectSomeSubs.xaml</DependentUpon>
@@ -307,11 +322,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\ControlForRedact\ContactTypeRedactUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\ControlForRedact\MaterialsRedactUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\ControlForRedact\PostRedactUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\ControlForRedact\PremisesRedactUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SettingsAndSubsInf\ControlForRedact\ServisesRedactUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\SettingsAndSubsInf\RedactSomeSubs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\SettingsAndSubsInf\RedactSubInformation.xaml">
+    <Page Include="UserControls\SettingsAndSubsInf\SelectDataForRedactUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

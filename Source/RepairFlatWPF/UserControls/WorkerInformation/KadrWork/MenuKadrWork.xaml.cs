@@ -33,7 +33,7 @@ namespace RepairFlatWPF.UserControls.KadrWork
 
         private void WorkWithPost_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.RedactSomeSubs(SomeEnums.TypeOfSubs.Post));
         }
 
         private void WorkWithWorker_Click(object sender, RoutedEventArgs e)

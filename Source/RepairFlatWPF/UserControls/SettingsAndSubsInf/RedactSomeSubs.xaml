@@ -15,18 +15,10 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="85"/>
             </Grid.RowDefinitions>
-            <!--Область поиска-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
 
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedType" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
-                <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchText" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
-                <Button Name="BtnSearch" Click="BtnSearch_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
-            </Grid>
+            <Viewbox  Grid.Row="0" Grid.ColumnSpan="2">
+                <TextBlock Name="TypeOfWork" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Работа над информации о:" FontFamily="Times New Roman" FontSize="40 "/>
+            </Viewbox>
             <!--Таблица-->
             <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
             <!--Кнопки-->
@@ -35,12 +27,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Назад" Name="RetunBtn" Click="RetunBtn_Click" />
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddElement" Click="AddElement_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditElement" Click="EditElement_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="3" Margin="7.5 10 15 15" Width="220" Height="60" Content="Удаление" Name="DeleteElement" Click="DeleteElement_Click" />
+                <Button Style="{StaticResource AllButtonAction}" FontSize="27" Grid.Column="2" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактирование" Name="EditElement" Click="EditElement_Click" />
             </Grid>
         </Grid>
     </materialDesign:TransitioningContent>

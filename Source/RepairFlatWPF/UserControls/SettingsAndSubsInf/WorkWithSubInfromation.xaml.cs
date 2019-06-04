@@ -37,17 +37,11 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
         {
 
             MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.SelectTypeForUpdateAndFile());
-
-
-            
-
-
-
         }
 
         private void WorkWithData_Click(object sender, RoutedEventArgs e)
         {
-
+            MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.SelectDataForRedactUC());
         }
     }
 }
