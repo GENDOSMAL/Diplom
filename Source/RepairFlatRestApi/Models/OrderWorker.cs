@@ -19,5 +19,6 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.Guid> idWorker { get; set; }
     
         public virtual OrderTasks OrderTasks { get; set; }
+        public virtual User User { get; set; }
     }
 }

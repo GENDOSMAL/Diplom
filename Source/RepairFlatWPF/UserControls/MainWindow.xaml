@@ -142,13 +142,13 @@
                     </Grid>
                     <!--Верхняя часть меню-->
                     <ListView  x:Name="ListViewMenu" ScrollViewer.HorizontalScrollBarVisibility="Disabled" PreviewMouseLeftButtonUp="ListViewMenu_PreviewMouseLeftButtonUp"  >
-                        <ListViewItem Height="80" >
+                        <ListViewItem Height="80" Name="WorkWithOrder" Visibility="Collapsed"  >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0" >
                                 <materialDesign:PackIcon Kind="Human" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Работа с заказами" Style="{StaticResource LeftMenu}" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="80" Name="ClientWork">
+                        <ListViewItem Height="80" Name="ClientWork" Visibility="Collapsed" >
                             <ListViewItem.Content>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
                                     <materialDesign:PackIcon Kind="Person" Style="{StaticResource IconFofMenu}"/>
@@ -156,19 +156,19 @@
                                 </StackPanel>
                             </ListViewItem.Content>                            
                         </ListViewItem>
-                        <ListViewItem Height="80" Name="Spravoch">
+                        <ListViewItem Height="80" Name="Spravoch" Visibility="Collapsed" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="Details" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Справочные данные" Style="{StaticResource LeftMenu}"   />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="80" Name="KadrWork">
+                        <ListViewItem Height="80" Name="KadrWork" Visibility="Collapsed" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="NaturePeople" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Работа с кадрами" Style="{StaticResource LeftMenu}"   />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem Height="80" Name="Finans" >
+                        <ListViewItem Height="80" Name="Finans" Visibility="Collapsed"  >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                 <materialDesign:PackIcon Kind="CodeArray" Style="{StaticResource IconFofMenu}"/>
                                 <TextBlock Text="Работа с финансами" Style="{StaticResource LeftMenu}"  />
@@ -178,7 +178,7 @@
                 </StackPanel>
                 <!--Нижнее меню-->
                 <ListView VerticalAlignment="Bottom" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="BottomListView" PreviewMouseLeftButtonUp="BottomListView_PreviewMouseLeftButtonUp"  >
-                    <ListViewItem Height="50">
+                    <ListViewItem Height="50" Name="Settings" Visibility="Collapsed">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Name="settings">
                             <materialDesign:PackIcon Kind="Settings"  Width="35" Height="35" Margin="8,0,0,0" HorizontalContentAlignment="Center" HorizontalAlignment="Left"  />
                             <TextBlock Text="Настройки" Margin="14 0 0 0"  Style="{StaticResource LeftMenu}"   />

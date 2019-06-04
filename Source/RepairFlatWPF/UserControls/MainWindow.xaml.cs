@@ -1,4 +1,8 @@
-﻿using RepairFlatWPF.UserControls;
+﻿using RepairFlatWPF.Model;
+using RepairFlatWPF.UserControls;
+using RepairFlatWPF.UserControls.KadrWork;
+using RepairFlatWPF.UserControls.MoneyInformation;
+using RepairFlatWPF.UserControls.SettingsAndSubsInf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,31 +21,57 @@ using System.Windows.Shapes;
 
 namespace RepairFlatWPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         bool open = true;
 
-        /// <summary>
-        /// Конструктор главного окна, которы при открытии приложения процесс логирования
-        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel(this,"");
-            //TODO Для логирования убрать
+            this.DataContext = new MainWindowViewModel(this, "");
             MakeSomeHelp.MakeShowLogining();
-            //MakeSomeHelp.MakeLoading();
         }
 
+        public void Makecheck()
+        {
+            NameOfPolz.Text = SaveSomeData.LastNameAndIni;
+            if (SaveSomeData.TypeOfUser == SomeEnums.TypeOfUser.AD.ToString())
+            {//Администратор
+                Settings.Visibility = Visibility.Visible;
+                Spravoch.Visibility = Visibility.Visible;
+                MakeSomeHelp.DataGridMakeWork(new SettingsUserControls());
+            }
+            else if (SaveSomeData.TypeOfUser == SomeEnums.TypeOfUser.BW.ToString())
+            {//Работник бухгалтерии
+                Finans.Visibility = Visibility.Visible;
+                Spravoch.Visibility = Visibility.Visible;
+                MakeSomeHelp.DataGridMakeWork(new FinansInformation());
+            }
+            else if (SaveSomeData.TypeOfUser == SomeEnums.TypeOfUser.KW.ToString())
+            {//Работник отдела кадров
+                KadrWork.Visibility = Visibility.Visible;
+                MakeSomeHelp.DataGridMakeWork(new MenuKadrWork());
+            }
+            else if (SaveSomeData.TypeOfUser == SomeEnums.TypeOfUser.MG.ToString())
+            {//Менеджер
+                WorkWithOrder.Visibility = Visibility.Visible;
+                ClientWork.Visibility = Visibility.Visible;
+                Spravoch.Visibility = Visibility.Visible;
+                MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+            }
+            else if (SaveSomeData.TypeOfUser == SomeEnums.TypeOfUser.BB.ToString())
+            {//Босс
+                WorkWithOrder.Visibility = Visibility.Visible;
+                ClientWork.Visibility = Visibility.Visible;
+                Spravoch.Visibility = Visibility.Visible;
+                KadrWork.Visibility = Visibility.Visible;
+                Finans.Visibility = Visibility.Visible;
+                Settings.Visibility = Visibility.Visible;
+                MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+            }
+        }
 
-        /// <summary>
-        /// Событие открытие бокового меню
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonOpenMenu.Visibility = Visibility.Visible;
@@ -49,11 +79,7 @@ namespace RepairFlatWPF
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             Bluring.Visibility = Visibility.Visible;
         }
-        /// <summary>
-        /// Событие закрытие бокового меню
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void ButtonMenuClose_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
@@ -63,32 +89,28 @@ namespace RepairFlatWPF
         }
 
 
-        /// <summary>
-        /// Отлавливание события перехода по определенным пунктам верхнего меню 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void ListViewMenu_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (open)
             {
-                
+
                 int index = ListViewMenu.SelectedIndex;
                 switch (index)
                 {
                     case 0:
                         //Работа с заказами
-                        CloseMenu();       
-                        
+                        CloseMenu();
+
                         MakeSomeHelp.DataGridMakeWork(new UserControls.MainOrderUserControler());
                         break;
                     case 1:
                         //Работа с клиентами
                         CloseMenu();
                         BaseWindow baseWindow = new BaseWindow("sa");
-                        MakeSomeHelp.DataGridMakeWork(new UserControls.ClientWork.SelectClientUserControl(SomeEnums.TypeOfConrols.UserControl,ref baseWindow));
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.ClientWork.SelectClientUserControl(SomeEnums.TypeOfConrols.UserControl, ref baseWindow));
                         break;
-                    
+
                     case 2:
                         //Справочные данные
                         CloseMenu();
@@ -118,11 +140,7 @@ namespace RepairFlatWPF
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
             Bluring.Visibility = Visibility.Collapsed;
         }
-        /// <summary>
-        /// Отлавливание событий выбора нижней части меню 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         private void BottomListView_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             //Проверка на то, что окно открыто или нет, сделано, для того, что бы не работа при закрытом
@@ -134,8 +152,7 @@ namespace RepairFlatWPF
                     case 0:
                         //Переход на отображение настроек
                         CloseMenu();
-                        BaseWindow baseWindow = new BaseWindow("Заголовок");
-                        baseWindow.ShowDialog();
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.SettingsUserControls());
                         break;
                     case 1:
                         //Смена профиля
@@ -145,13 +162,15 @@ namespace RepairFlatWPF
                         {
                             GridMenu.Width = 0;
                             MakeSomeHelp.MakeShowLogining();
+                            SaveSomeData.LastNameAndIni = "";
+                            SaveSomeData.IdUser = new Guid();
+                            SaveSomeData.TypeOfUser = "";
                             open = false;
                         }
                         break;
-                        
+
                     case 2:
                         //Выход из приложения
-                        //bright.Visibility = Visibility.Collapsed;
                         if (MessageBox.Show("Вы действительно хотите выйти из программы?", "АИС Ремонт квартир", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                         {
                             Application.Current.Shutdown();

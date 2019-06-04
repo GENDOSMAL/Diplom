@@ -30,10 +30,6 @@ namespace RepairFlatRestApi.Models
         public virtual DbSet<ClientDetails> ClientDetails { get; set; }
         public virtual DbSet<ContactUpdate> ContactUpdate { get; set; }
         public virtual DbSet<DeletedSubStr> DeletedSubStr { get; set; }
-        public virtual DbSet<DeleteMessage> DeleteMessage { get; set; }
-        public virtual DbSet<DialogMessage> DialogMessage { get; set; }
-        public virtual DbSet<Dialogs> Dialogs { get; set; }
-        public virtual DbSet<DialogUser> DialogUser { get; set; }
         public virtual DbSet<EstabilismentPost> EstabilismentPost { get; set; }
         public virtual DbSet<LoginInformation> LoginInformation { get; set; }
         public virtual DbSet<MaterialsUpdate> MaterialsUpdate { get; set; }
@@ -55,7 +51,6 @@ namespace RepairFlatRestApi.Models
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserContact> UserContact { get; set; }
         public virtual DbSet<WorkerDetails> WorkerDetails { get; set; }
-        public virtual DbSet<WorkerOrderInformation> WorkerOrderInformation { get; set; }
         public virtual DbSet<WorkerPosts> WorkerPosts { get; set; }
         public virtual DbSet<WorkersOperats> WorkersOperats { get; set; }
         public virtual DbSet<WorkersPayGive> WorkersPayGive { get; set; }

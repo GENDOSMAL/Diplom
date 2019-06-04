@@ -37,17 +37,6 @@ ALTER TABLE [dbo].[OrderInformation] CHECK CONSTRAINT [FK_OrderInformation_Clien
 GO
 
 
-GO
-
-
-GO
-ALTER TABLE [dbo].[OrderInformation]  WITH CHECK ADD  CONSTRAINT [FK_OrderInformation_ColoborationOfBrigade] FOREIGN KEY([IdColoboration])
-REFERENCES [dbo].[ColoborationOfBrigade] ([IdColoboration])
-GO
-
-ALTER TABLE [dbo].[OrderInformation] CHECK CONSTRAINT [FK_OrderInformation_ColoborationOfBrigade]
-GO
-
 
 GO
 ALTER TABLE [dbo].[OrderInformation]  WITH CHECK ADD  CONSTRAINT [FK_OrderInformation_UserContact] FOREIGN KEY([MainContactID])

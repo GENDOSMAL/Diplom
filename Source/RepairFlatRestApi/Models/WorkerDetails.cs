@@ -21,7 +21,6 @@ namespace RepairFlatRestApi.Models
             this.OrderInformation = new HashSet<OrderInformation>();
             this.OrderPayment = new HashSet<OrderPayment>();
             this.OrderTasksState = new HashSet<OrderTasksState>();
-            this.WorkerOrderInformation = new HashSet<WorkerOrderInformation>();
             this.WorkersOperats = new HashSet<WorkersOperats>();
             this.WorkersPayGive = new HashSet<WorkersPayGive>();
             this.WorkersPayGive1 = new HashSet<WorkersPayGive>();
@@ -42,8 +41,6 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderTasksState> OrderTasksState { get; set; }
         public virtual User User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkerOrderInformation> WorkerOrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkersOperats> WorkersOperats { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

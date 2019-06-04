@@ -60,7 +60,9 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
         private void EditWorker_Click(object sender, RoutedEventArgs e)
         {
-
+            BaseWindow baseWindow = new BaseWindow("Создание нового кандидата");
+            baseWindow.MakeOpen(new CreateNewWorker(ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void SelectWorker_Click(object sender, RoutedEventArgs e)

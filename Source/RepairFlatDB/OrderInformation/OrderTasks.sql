@@ -19,11 +19,3 @@ GO
 
 ALTER TABLE [dbo].[OrderTasks] CHECK CONSTRAINT [FK_OrderTasks_OrderInformation1]
 GO
-
-
-GO
-ALTER TABLE [dbo].[OrderTasks]  WITH CHECK ADD  CONSTRAINT [FK_OrderTasks_BrigateSeparation] FOREIGN KEY([idBrigade])
-REFERENCES [dbo].[BrigateSeparation] ([IdBrigate])
-GO
-
-ALTER TABLE [dbo].[OrderTasks] CHECK CONSTRAINT [FK_OrderTasks_BrigateSeparation]

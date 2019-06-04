@@ -168,9 +168,6 @@
     <Compile Include="Models\DeletedSubStr.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DeleteMessage.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DescriptionJSON\AdressModel.cs" />
     <Compile Include="Models\DescriptionJSON\AuthDescription.cs" />
     <Compile Include="Models\DescriptionJSON\BaseResult.cs" />
@@ -180,15 +177,6 @@
     <Compile Include="Models\DescriptionJSON\OrderData.cs" />
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWithOrder.cs" />
-    <Compile Include="Models\DialogMessage.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Dialogs.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DialogUser.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DocPayment.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
@@ -290,9 +278,6 @@
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkerDetails.cs">
-      <DependentUpon>RepFlatDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\WorkerOrderInformation.cs">
       <DependentUpon>RepFlatDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkerPosts.cs">

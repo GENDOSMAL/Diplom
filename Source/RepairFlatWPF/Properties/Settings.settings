@@ -11,5 +11,8 @@
     <Setting Name="DefaultHeaderOfMessageBox" Type="System.String" Scope="User">
       <Value Profile="(Default)">АИС Фирмы по ремонту квартир</Value>
     </Setting>
+    <Setting Name="NameOfColorBtn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Black</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

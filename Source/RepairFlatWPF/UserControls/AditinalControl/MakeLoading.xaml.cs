@@ -121,8 +121,7 @@ namespace RepairFlatWPF.UserControls
             ((Storyboard)FindResource("WaitStoryboard")).Stop();
             DescriptionOfWork.Content = "Данные обновлены";
             MakeSomeHelp.ShowMainGrid();
-            if(forAll)
-                MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+                
         }
 
         private void PostUpdlocToDB(MakeSubs.PostMake postMake)

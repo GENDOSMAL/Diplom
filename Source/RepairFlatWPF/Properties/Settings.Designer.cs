@@ -58,5 +58,17 @@ namespace RepairFlatWPF.Properties {
                 this["DefaultHeaderOfMessageBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public string NameOfColorBtn {
+            get {
+                return ((string)(this["NameOfColorBtn"]));
+            }
+            set {
+                this["NameOfColorBtn"] = value;
+            }
+        }
     }
 }

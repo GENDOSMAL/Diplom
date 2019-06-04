@@ -28,7 +28,7 @@ namespace RepairFlatWPF.UserControls.KadrWork
 
         private void KadrPermises_Click(object sender, RoutedEventArgs e)
         {
-
+           
         }
 
         private void WorkWithPost_Click(object sender, RoutedEventArgs e)

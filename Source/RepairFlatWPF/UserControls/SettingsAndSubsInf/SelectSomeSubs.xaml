@@ -35,7 +35,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Вернуться" Name="ReturnBtn" Click="ReturnBtn_Click" />
+                <Button Style="{DynamicResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Вернуться" Name="ReturnBtn" Click="ReturnBtn_Click" />
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Выбрать" Name="SelectBtn" Click="SelectBtn_Click" />
             </Grid>
             <!--<Grid Grid.Row="2" Name="ForAddNew" Visibility="Collapsed"  >

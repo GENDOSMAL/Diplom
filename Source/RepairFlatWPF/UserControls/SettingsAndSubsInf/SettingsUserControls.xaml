@@ -3,10 +3,48 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RepairFlatWPF.UserControls.SettingsAndSubsInf"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             xmlns:local="clr-namespace:RepairFlatWPF.UserControls.SettingsAndSubsInf"    
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Width="auto" Height="auto">
+
+    <Grid VerticalAlignment="Center">
+
+        <Grid.RowDefinitions >
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="350"/>
+        </Grid.RowDefinitions>
+        <Viewbox  Grid.Row="0" >
+            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Настройки программы" FontFamily="Times New Roman" FontSize="45 "/>
+        </Viewbox>
+        <Grid Name="ForAllPerson" Grid.Row="1" Margin="15 0 15 0" >
+            <GroupBox  BorderThickness="0.5" Header="Настройки для  работы" FontSize = "16" Height="auto" FontFamily="Times New Roman" Background = "LightGray">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="79"/>
+                        
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="270"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Name="AdressOfServer" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="0" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Адресс сервера" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="50"/>
+                        <Button Style="{StaticResource AllButtonAction}" Grid.Row="2" Width="250" Grid.Column="1" Height="60"  Content="Проверить работу" x:Name="CheckServer" Click="CheckServer_Click" Margin="10"/>
+
+                    </Grid>
+
+                    <Label Name="Result" FontFamily="Times New Roman" FontSize="20"  Grid.Row="1" Foreground="#595c5e" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <TextBox Name="HederOfMSG" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Заголовок MessageBox" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" TextWrapping="Wrap" MaxLength="50"/>
+                    <Button Style="{StaticResource AllButtonAction}" Grid.Row="3" Width="300" Height="60" Content="Установить настройки" x:Name="SetSetings" Click="SetSetings_Click" Margin="10"/>
+
+                </Grid>
+   
+            </GroupBox>
+
+        </Grid>
+        
     </Grid>
 </UserControl>

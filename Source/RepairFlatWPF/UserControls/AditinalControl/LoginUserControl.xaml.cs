@@ -51,7 +51,6 @@ namespace RepairFlatWPF
 
             var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeAuth)));
             var deserializedProduct = JsonConvert.DeserializeObject<WhatReturn>(task.ToString());
-            // TODO ПОТОМ ПОМЕНЯТЬ
             if (!deserializedProduct.success)
             {
                 if(MakeSomeHelp.MSG(deserializedProduct.description,MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
@@ -66,6 +65,7 @@ namespace RepairFlatWPF
                 Model.SaveSomeData.IdUser = deserializedProduct.idUser;
                 Model.SaveSomeData.TypeOfUser = deserializedProduct.typeofpolz;
                 Model.SaveSomeData.LastNameAndIni = deserializedProduct.LastNameAndIni;
+                ((MainWindow)Application.Current.MainWindow).Makecheck();
                 MakeSomeHelp.MakeLoading();
             }
         }
