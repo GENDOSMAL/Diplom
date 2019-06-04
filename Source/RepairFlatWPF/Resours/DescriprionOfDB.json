@@ -94,11 +94,6 @@
           "IsPk": false
         },
         {
-          "NameOfCol": "UnitOfMeasue",
-          "TypeOfCol": "Text",
-          "IsPk": false
-        },
-        {
           "NameOfCol": "Cost",
           "TypeOfCol": "REAL",
           "IsPk": false

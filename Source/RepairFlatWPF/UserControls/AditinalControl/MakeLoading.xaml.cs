@@ -187,7 +187,7 @@ namespace RepairFlatWPF.UserControls
 
         public void ServisesUpdlocToDB(MakeSubs.ServisesMake InformationAboutServises)
         {
-            string MakeQuery = "Insert into OurServices (idServis,Nomination,TypeOfServices,UnitOfMeasue,Cost,Descriprtion) Values (@idServis,@Nomination,@TypeOfServices,@UnitOfMeasue,@Cost,@Descriprtion) On CONFLICT(idServis) DO UPDATE SET  Nomination=@Nomination,TypeOfServices=@TypeOfServices,UnitOfMeasue=@UnitOfMeasue,Cost=@Cost,Descriprtion=@Descriprtion;";
+            string MakeQuery = "Insert into OurServices (idServis,Nomination,TypeOfServices,Cost,Descriprtion) Values (@idServis,@Nomination,@TypeOfServices,@Cost,@Descriprtion) On CONFLICT(idServis) DO UPDATE SET  Nomination=@Nomination,TypeOfServices=@TypeOfServices,Cost=@Cost,Descriprtion=@Descriprtion;";
             MakeWorkWirthDataBase.Run((command) =>
             {
 
@@ -203,7 +203,6 @@ namespace RepairFlatWPF.UserControls
                             parameters[0] = new SQLiteParameter("@idServis", ServisUpdate.idServises.ToString());
                             parameters[1] = new SQLiteParameter("@Nomination", ServisUpdate.Nomination);
                             parameters[2] = new SQLiteParameter("@TypeOfServices", ServisUpdate.TypeOfServises);
-                            parameters[3] = new SQLiteParameter("@UnitOfMeasue", ServisUpdate.UnitOfMeasue);
                             parameters[4] = new SQLiteParameter("@Cost", ServisUpdate.Cost);
                             parameters[5] = new SQLiteParameter("@Descriprtion", ServisUpdate.Description);
                             command.Parameters.AddRange(parameters);

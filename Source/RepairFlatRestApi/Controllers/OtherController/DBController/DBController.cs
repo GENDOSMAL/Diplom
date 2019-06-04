@@ -449,7 +449,6 @@ namespace RepairFlatRestApi.Controllers
                         var ListOfServises = QueryWithOutUpdate.Select(e => new MakeSubs.ListOfUpdatedServises
                         {
                             idServises = e.idServis,
-                            UnitOfMeasue = e.UnitOfMeasue,
                             Nomination = e.Nomination,
                             TypeOfServises = e.TypeOfServices,
                             Description = e.Description,
@@ -513,7 +512,6 @@ namespace RepairFlatRestApi.Controllers
                                 idServis = WhatInsert.idServises,
                                 Nomination = WhatInsert.Nomination,
                                 TypeOfServices = WhatInsert.TypeOfServises,
-                                UnitOfMeasue = WhatInsert.UnitOfMeasue
                             };
 
                             var InformationAboutIsert = new ServicesUpdate
@@ -577,7 +575,6 @@ namespace RepairFlatRestApi.Controllers
                 var listOfServise = db.OurServices.Select(e => new MakeSubs.ListOfUpdatedServises
                 {
                     idServises = e.idServis,
-                    UnitOfMeasue = e.UnitOfMeasue,
                     Nomination = e.Nomination,
                     TypeOfServises = e.TypeOfServices,
                     Description = e.Description,

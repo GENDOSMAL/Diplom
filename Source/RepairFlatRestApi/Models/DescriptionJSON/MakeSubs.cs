@@ -40,7 +40,6 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Guid idServises;
             public string Nomination;
             public string TypeOfServises;
-            public string UnitOfMeasue;
             public Nullable<decimal> Cost;
             public string Description;
         }

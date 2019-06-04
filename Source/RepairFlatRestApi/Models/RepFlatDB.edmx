@@ -234,7 +234,6 @@
           <Property Name="idServis" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Nomination" Type="nchar" MaxLength="50" />
           <Property Name="TypeOfServices" Type="nchar" MaxLength="10" />
-          <Property Name="UnitOfMeasue" Type="nchar" MaxLength="20" />
           <Property Name="Cost" Type="money" />
           <Property Name="Description" Type="nchar" MaxLength="100" />
         </EntityType>
@@ -1472,7 +1471,6 @@
           <Property Name="idServis" Type="Guid" Nullable="false" />
           <Property Name="Nomination" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="TypeOfServices" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="UnitOfMeasue" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="OrderServises" Relationship="Self.FK_OrderServises_OurServices" FromRole="OurServices" ToRole="OrderServises" />
@@ -2793,7 +2791,6 @@
                 <ScalarProperty Name="idServis" ColumnName="idServis" />
                 <ScalarProperty Name="Nomination" ColumnName="Nomination" />
                 <ScalarProperty Name="TypeOfServices" ColumnName="TypeOfServices" />
-                <ScalarProperty Name="UnitOfMeasue" ColumnName="UnitOfMeasue" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>

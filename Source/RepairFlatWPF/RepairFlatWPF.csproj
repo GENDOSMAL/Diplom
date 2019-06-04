@@ -190,8 +190,8 @@
     <Compile Include="UserControls\OrderWork\MainWorkWithOrderUserControl.xaml.cs">
       <DependentUpon>MainWorkWithOrderUserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SettingsAndSubsInf\MakeUploadUserControl.xaml.cs">
-      <DependentUpon>MakeUploadUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\SettingsAndSubsInf\RedactSomeSubs.xaml.cs">
+      <DependentUpon>RedactSomeSubs.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SettingsAndSubsInf\RedactSubInformation.xaml.cs">
       <DependentUpon>RedactSubInformation.xaml</DependentUpon>
@@ -234,9 +234,6 @@
     </Compile>
     <Compile Include="UserControls\SettingsAndSubsInf\WorkWithSubInfromation.xaml.cs">
       <DependentUpon>WorkWithSubInfromation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\WorkerInformation\KadrWork\SelectWorkerPost.xaml.cs">
-      <DependentUpon>SelectWorkerPost.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\ShowAllWorkers.xaml.cs">
       <DependentUpon>ShowAllWorkers.xaml</DependentUpon>
@@ -310,7 +307,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\SettingsAndSubsInf\MakeUploadUserControl.xaml">
+    <Page Include="UserControls\SettingsAndSubsInf\RedactSomeSubs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -410,10 +407,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\WorkerInformation\KadrWork\SelectWorkerPost.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\WorkerInformation\KadrWork\ShowAllWorkers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -459,7 +452,7 @@
     <Resource Include="IoC.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resours\Docyments\" />
+    <Folder Include="Resours\Documents\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.5.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.5.0.0\build\Fody.targets')" />

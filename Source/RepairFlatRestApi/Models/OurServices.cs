@@ -24,7 +24,6 @@ namespace RepairFlatRestApi.Models
         public System.Guid idServis { get; set; }
         public string Nomination { get; set; }
         public string TypeOfServices { get; set; }
-        public string UnitOfMeasue { get; set; }
         public Nullable<decimal> Cost { get; set; }
         public string Description { get; set; }
     
