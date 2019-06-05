@@ -36,5 +36,10 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
 
         }
+
+        private void MakeSpavk_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,521 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RepairFlatRestApi.BundleConfig" Collapsed="true">
+    <Position X="27" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\BundleConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.FilterConfig" Collapsed="true">
+    <Position X="27" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\FilterConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.RouteConfig" Collapsed="true">
+    <Position X="28.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\RouteConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.WebApiConfig" Collapsed="true">
+    <Position X="23.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Start\WebApiConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.WebApiApplication" Collapsed="true">
+    <Position X="21.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Global.asax.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.MainConroller.AdressController" Collapsed="true">
+    <Position X="10.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAACAAAAAAAIAA=</HashCode>
+      <FileName>Controllers\MainConroller\AdressController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.MainConroller.ContactController" Collapsed="true">
+    <Position X="14.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEACAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\MainConroller\ContactController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.MainConroller.MeasurmentController" Collapsed="true">
+    <Position X="17" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAiAA=</HashCode>
+      <FileName>Controllers\MainConroller\MeasurmentController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.MainConroller.OrderController" Collapsed="true">
+    <Position X="19.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQAAAAAAACAAAAAAAAAACAAAAAAAAAAAAAAAAAgCA=</HashCode>
+      <FileName>Controllers\MainConroller\OrderController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.MainConroller.SomeHelpController" Collapsed="true">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\MainConroller\SomeHelpController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.MainConroller.WorkerController" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAIAAAAAAAAAAAAIAAAAAgAAACAAQAAAIAAAAAAAA=</HashCode>
+      <FileName>Controllers\MainConroller\WorkerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.BaseController" Collapsed="true">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Controllers\MainConroller\BaseController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.LoginController" Collapsed="true">
+    <Position X="5.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAQAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\MainConroller\LoginController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.SubStringController" Collapsed="true">
+    <Position X="8" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAEAIABAAACAAAAAAAAAAAAQAAAIAAEAgAAQAA=</HashCode>
+      <FileName>Controllers\MainConroller\SubStringController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.UserController" Collapsed="true">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAEAAAAE=</HashCode>
+      <FileName>Controllers\MainConroller\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.DBController" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BJAAAAEgAAAnCAhAAAAEACIAAwAAAAXgGAAAAAAEBAI=</HashCode>
+      <FileName>Controllers\OtherController\DBController\DBController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.HelperUS" Collapsed="true">
+    <Position X="28.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\OtherController\HelperUS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.Logger" Collapsed="true">
+    <Position X="32.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Controllers\OtherController\Logger.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.ReturnMessageBilder" Collapsed="true">
+    <Position X="27" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Controllers\ReturnMessageBilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.OtherController.ClientDBWorker" Collapsed="true">
+    <Position X="0.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAAgAAAAAAAA=</HashCode>
+      <FileName>Controllers\OtherController\DBController\ClientDBWorker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.OtherController.MeasurmentDBController" Collapsed="true">
+    <Position X="3" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEEAAAAAAgAAAAAAAAAIAAAAAAAAA=</HashCode>
+      <FileName>Controllers\OtherController\DBController\MeasurmentDBController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.OtherController.OrderDBController" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Controllers\OtherController\DBController\OrderDBController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.OtherController.WorkerDBConroller" Collapsed="true">
+    <Position X="7.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAIAAAAIAAAAAAEAAAAAAAhAAA=</HashCode>
+      <FileName>Controllers\OtherController\DBController\WorkerDBConroller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Controllers.OtherController.WorkWithContactDBController" Collapsed="true">
+    <Position X="9.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAASAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Controllers\OtherController\DBController\WorkWithContactDBController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.AdressModel" Collapsed="true">
+    <Position X="23.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\AdressModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.ContactModel" Collapsed="true">
+    <Position X="32.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\ContactModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.MeasurmentModel" Collapsed="true">
+    <Position X="23.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\MeasurmentModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderData" Collapsed="true">
+    <Position X="25.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\OrderData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.WorkWitthWorker" Collapsed="true">
+    <Position X="34" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\WorkWitthWorker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.RepairFlatDB" Collapsed="true">
+    <Position X="25.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAFhAQBAAAAAAQAAARAQQACAEAAACAARRFggETAACAA=</HashCode>
+      <FileName>Models\RepFlatDB.Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.AdressDescription" Collapsed="true">
+    <Position X="21.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAIAhgEAAAAAAAQAAAEAAAAAAAAAIACAAAABA=</HashCode>
+      <FileName>Models\AdressDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.C__RefactorLog" Collapsed="true">
+    <Position X="28.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\C__RefactorLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.ClientDetails" Collapsed="true">
+    <Position X="30.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAgAAAAAAAEAAAAEAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Models\ClientDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.ContactUpdate" Collapsed="true">
+    <Position X="34" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAAIAhABAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ContactUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.DeletedSubStr" Collapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABAIAAAAAAAAAIABAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DeletedSubStr.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.DocPayment" Collapsed="true">
+    <Position X="23.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAQABAAAARQAAAAAAAAAEEABAAACAAAAA=</HashCode>
+      <FileName>Models\DocPayment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.EstabilismentPost" Collapsed="true">
+    <Position X="25.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAACAAIAAAAAAAAQAAQAAAAAAABAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EstabilismentPost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.InformatioForPayment" Collapsed="true">
+    <Position X="30.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAEAAAAAAAABAABEQIAAAAAAAAEAAAAAAAABACg=</HashCode>
+      <FileName>Models\InformatioForPayment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.LoginInformation" Collapsed="true">
+    <Position X="34" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAQAAIAAAA=</HashCode>
+      <FileName>Models\LoginInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.MaterialsUpdate" Collapsed="true">
+    <Position X="21.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAACAAAIAAEAAAAAAAAAAgAAAAAAEAAAAAAAEA=</HashCode>
+      <FileName>Models\MaterialsUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderElementOfMeasurments" Collapsed="true">
+    <Position X="27" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAABAAgAAAAAAAAAEAAAACAAEAAQAEAAAACBAA=</HashCode>
+      <FileName>Models\OrderElementOfMeasurments.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderInformation" Collapsed="true">
+    <Position X="28.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAACAAEAAAgAAAAAFAQQAAAAACAAAAVQEggCSAAAAg=</HashCode>
+      <FileName>Models\OrderInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderMaterial" Collapsed="true">
+    <Position X="30.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAgAAAAAAAAQBQAEAAAAAAAAkAACAAAAAA=</HashCode>
+      <FileName>Models\OrderMaterial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderMeasurements" Collapsed="true">
+    <Position X="32.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAABAAgAQQAAAAAAUAAEQCAgEAAAAAgCAAAAAA=</HashCode>
+      <FileName>Models\OrderMeasurements.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderPayment" Collapsed="true">
+    <Position X="34" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAgAAAAAAAFQAAAEACAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\OrderPayment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderServises" Collapsed="true">
+    <Position X="21.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgIAAAQQAAABQAEAABCAAAAAAACAAAAAA=</HashCode>
+      <FileName>Models\OrderServises.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderTasks" Collapsed="true">
+    <Position X="23.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgAAEAAAAAgAAAAAQAAAACAEECAAAAoAAAACAAAAAA=</HashCode>
+      <FileName>Models\OrderTasks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderTasksState" Collapsed="true">
+    <Position X="25.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAgAAAAAAAgAAAAAAAAQAAAAACAAAAAAAAgBAAAAAA=</HashCode>
+      <FileName>Models\OrderTasksState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OrderWorker" Collapsed="true">
+    <Position X="27" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAIAAAAAAAAAAAAAAAAACAAAAAgAAgAAAAAAA=</HashCode>
+      <FileName>Models\OrderWorker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OurMaterials" Collapsed="true">
+    <Position X="28.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAkAAACAAAAABAAIAAAAAABAAAAAAAAAEA=</HashCode>
+      <FileName>Models\OurMaterials.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.OurServices" Collapsed="true">
+    <Position X="30.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAgAAACAAAAABAAAQABAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Models\OurServices.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.PostsUpdate" Collapsed="true">
+    <Position X="34" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABAAAAEAAAIAAAAAAgAAAAAAAAAAAgQAAAAAAAAAA=</HashCode>
+      <FileName>Models\PostsUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.PremisesType" Collapsed="true">
+    <Position X="21.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAQAAAAAAAAAAAAAAAAAAAAAQAgAAAAAgAA=</HashCode>
+      <FileName>Models\PremisesType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.PremisesUpdate" Collapsed="true">
+    <Position X="23.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAACAAAIBAAAAAAAAAAAAgAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>Models\PremisesUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.ServicesUpdate" Collapsed="true">
+    <Position X="30.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAACAAAIAAAAAABAAAAAAgACAAAAAAAAAAAACA=</HashCode>
+      <FileName>Models\ServicesUpdate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.sp_helpdiagramdefinition_Result" Collapsed="true">
+    <Position X="21.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\sp_helpdiagramdefinition_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.sp_helpdiagrams_Result" Collapsed="true">
+    <Position X="23.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAEAAiAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\sp_helpdiagrams_Result.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.sysdiagrams" Collapsed="true">
+    <Position X="25.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAIAAAAAAAAAAAAAAAQAAAFAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\sysdiagrams.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.TaskMaterials" Collapsed="true">
+    <Position X="27" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAEgAAAAAEA=</HashCode>
+      <FileName>Models\TaskMaterials.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.TaskServis" Collapsed="true">
+    <Position X="28.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAQgAEgAAAAAAA=</HashCode>
+      <FileName>Models\TaskServis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.TypeOfContact" Collapsed="true">
+    <Position X="30.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAABAAAAAAAAAAAAAAABAAgAQAAAAA=</HashCode>
+      <FileName>Models\TypeOfContact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.User" Collapsed="true">
+    <Position X="32.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAASBAAAAIAAgAAAAQQAQAAEAAAAgABBgAARABAAw=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.UserContact" Collapsed="true">
+    <Position X="34" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAAAgAAgAAAQAAgAAEAAAAAAAAAAgAAAAAgA=</HashCode>
+      <FileName>Models\UserContact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.WorkerDetails" Collapsed="true">
+    <Position X="25.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABhAAAAAAAAQAAAARAEAACAEAAAAAAAAAAACCAACAA=</HashCode>
+      <FileName>Models\WorkerDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.WorkerPosts" Collapsed="true">
+    <Position X="27" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAgACCAAAAACAA=</HashCode>
+      <FileName>Models\WorkerPosts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.WorkersOperats" Collapsed="true">
+    <Position X="28.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAIEAABAAAAAAAQAAAAAAABAAAAAAAAAAACAA=</HashCode>
+      <FileName>Models\WorkersOperats.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.WorkersPayGive" Collapsed="true">
+    <Position X="30.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAgIAAAAAAQIAQAAAAABABAAAAAAAAAAA=</HashCode>
+      <FileName>Models\WorkersPayGive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.SomeEnums" Collapsed="true">
+    <Position X="34" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\SomeEnums.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.DescriptionJSON.AuthDescription" Collapsed="true">
+    <Position X="25.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\AuthDescription.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.DescriptionJSON.BaseResult" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAIAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\BaseResult.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.DescriptionJSON.MakeSubs" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\MakeSubs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.DescriptionJSON.PersonDesctiption" Collapsed="true">
+    <Position X="32.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\PersonDesctiption.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Models.DescriptionJSON.WorkWithOrder" Collapsed="true">
+    <Position X="32.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\DescriptionJSON\WorkWithOrder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RepairFlatRestApi.Properties.Settings" Collapsed="true">
+    <Position X="32.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAABAAAAAAAAAAIAAEAAAJAAAAACAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
