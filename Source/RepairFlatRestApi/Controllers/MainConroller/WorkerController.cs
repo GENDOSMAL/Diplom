@@ -11,7 +11,14 @@ namespace RepairFlatRestApi.Controllers.MainConroller
     [RoutePrefix("api/Worker")]
     public class WorkerController:BaseController
     {
-
+        [HttpGet, Route("getData")]
+        public HttpResponseMessage GetDataForRedact([FromUri] Guid idWorker)
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.SelectDataAboutClient(idWorker);
+            }, nameof(SubStringController), nameof(GetDataAboutWorker));
+        }
         [HttpGet, Route("allworker")]
         public HttpResponseMessage GetDataAboutWorker()
         {
@@ -46,7 +53,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
         }
 
-        [HttpPost, Route("createorupdate/workerDet")]
+        [HttpPost, Route("createorupdate/worker")]
         public HttpResponseMessage CreateNewCandidate(MakeNewWorker dataAboutNewWorker)
         {
             return CatchError(() =>

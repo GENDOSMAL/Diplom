@@ -48,6 +48,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         {
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public List<ContactModel.InformationAboutContact> ListOfContact;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public List<Guid?> ListForDelete;
         }
 

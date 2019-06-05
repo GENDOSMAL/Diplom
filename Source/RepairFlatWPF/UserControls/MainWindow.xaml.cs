@@ -87,9 +87,6 @@ namespace RepairFlatWPF
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
             Bluring.Visibility = Visibility.Collapsed;
         }
-
-
-
         private void ListViewMenu_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (open)

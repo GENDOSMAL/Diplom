@@ -3,6 +3,7 @@ using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Linq;
 using static RepairFlatRestApi.Models.WorkWitthWorker;
 
@@ -53,6 +54,32 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     return new ListOfAllWorkers { success = false };
                 }
             });
+        }
+
+        internal static object SelectDataAboutClient(Guid idWorker)
+        {
+            return Run((db) =>
+            {
+                var user = db.User.Where(ee => ee.idUser == idWorker).FirstOrDefault();
+                var worker = new MakeNewWorker();
+
+
+                worker.idUser = user.idUser;
+                worker.Birstday = user.BirstDay;
+                if (user.WorkerDetails != null)
+                {
+                    worker.DescOfAdress = $"{user.WorkerDetails.AdressDescription.CiryName?.Trim()} {user.WorkerDetails.AdressDescription.Street?.Trim()} {user.WorkerDetails.AdressDescription.House?.Trim()} {user.WorkerDetails.AdressDescription.Entrance?.Trim()} {user.WorkerDetails.AdressDescription.NumberOfDelen?.Trim()}";
+                    worker.idAdress = user.WorkerDetails.idAdress ?? default;
+                }
+                worker.Female = user.Female;
+                worker.Lastname = user.LastName?.Trim();
+                worker.Name = user.Name?.Trim();
+                worker.Pasport = user.Pasport?.Trim();
+                worker.Patronymic = user.Patronymic?.Trim();
+                worker.TypeOfUser = user.TypeOfUser?.Trim();
+                return worker;
+            });
+
         }
 
         internal static object CreateListWorkerForMakeNewWorkOrUpdate(bool wokerMakeWork = false)
@@ -135,23 +162,25 @@ namespace RepairFlatRestApi.Controllers.OtherController
                             IdWorker = makeNewWorker.idUser
                         };
                         db.WorkerDetails.AddOrUpdate(workDet);
-                        if (makeNewWorker.InformatioAboutContact.ListOfContact.Count != 0)
+                        if (makeNewWorker.InformatioAboutContact.ListOfContact != null)
                         {
                             foreach (var Contact in makeNewWorker.InformatioAboutContact.ListOfContact)
                             {
-                                var cont = new UserContact
-                                {
-                                    DateAdd = Contact.DateAdd,
-                                    Description = Contact.Desctription,
-                                    id = Contact.idContact,
-                                    idType = Contact.idTypeOfContact,
-                                    idUser = Contact.idUser,
-                                    Value = Contact.Value
-                                };
-                                db.UserContact.AddOrUpdate(cont);
+                                var dd = db.UserContact.Where(ee => ee.id == Contact.idContact);
+                                UserContact contact = new UserContact();
+                                contact.id = Contact.idContact;
+                                contact.Description = Contact.Desctription;
+                                contact.idType = Contact.idTypeOfContact;
+                                contact.Value = Contact.Value;
+                                contact.idUser = Contact.idUser;
+
+                                if (dd == null)
+                                    contact.DateAdd = Contact.DateAdd;
+
+                                db.UserContact.AddOrUpdate(contact);
                             }
                         }
-                        if (makeNewWorker.InformatioAboutContact.ListForDelete.Count != 0)
+                        if (makeNewWorker.InformatioAboutContact.ListForDelete != null)
                         {
                             foreach (var idDelete in makeNewWorker.InformatioAboutContact.ListForDelete)
                             {
@@ -169,7 +198,9 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 }
                 catch (Exception ex)
                 {
+
                     return new BaseResult { success = false, description = $"Ошибка при работе с данными {ex.ToString()}" };
+
                 }
 
             });
@@ -231,12 +262,12 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 {
                     db.WorkersPayGive.Add(new WorkersPayGive
                     {
-                        Data= dataAboutGiveMoney.Data,
-                        Descriptiom= dataAboutGiveMoney.Descriptiom,
-                        idGive= dataAboutGiveMoney.idGive,
-                        idWorkerAdresat= dataAboutGiveMoney.idAdressat,
-                        idWorkerMake= dataAboutGiveMoney.idMakeWorker,
-                        Size= dataAboutGiveMoney.SizeOfData,                        
+                        Data = dataAboutGiveMoney.Data,
+                        Descriptiom = dataAboutGiveMoney.Descriptiom,
+                        idGive = dataAboutGiveMoney.idGive,
+                        idWorkerAdresat = dataAboutGiveMoney.idAdressat,
+                        idWorkerMake = dataAboutGiveMoney.idMakeWorker,
+                        Size = dataAboutGiveMoney.SizeOfData,
                     });
                     db.SaveChanges();
                     return new BaseResult { success = true };

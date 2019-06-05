@@ -5,28 +5,23 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using static RepairFlatWPF.Model.WorkerDescriptiom;
 
 namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 {
     public partial class CreateNewWorker : UserControl
     {
+        string TypeOfUser;
         BaseWindow window;
         bool NewWorker = true;
         Guid idUser = Guid.NewGuid();
         Guid idAdress;
         DataTable DataAboutContact = new DataTable("ContactTable");
         List<Tuple<int, Guid, Guid>> ContactDataGuidByNamber;
+        List<Guid?> idOfDelete = new List<Guid?>();
 
         public CreateNewWorker(ref BaseWindow baseWindow, Guid idUser = new Guid())
         {
@@ -44,9 +39,13 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                 AddBtn.Content = "Редактировать";
                 this.idUser = idUser;
                 makeloadingListOfContact();
-                AddAdress.IsEnabled = false;
+                
+                WorkWithAdress.Content = "Редактировать";
+                makeotherSelectDataAsync();
             }
         }
+
+
 
         private void MakeAllPreparationWithData()
         {
@@ -56,6 +55,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             {
                 DataAboutContact.Columns.Add(NameOfColumn);
             }
+            
             ContactDataGuidByNamber = new List<Tuple<int, Guid, Guid>>();
         }
 
@@ -166,7 +166,16 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                     }
                     else
                     {
-                        //Если обновление данных о клиенте
+                        for (int i = 0; i < DataAboutContact.Rows.Count; i++)
+                        {
+                            if (Convert.ToInt32(DataAboutContact.Rows[i][0].ToString()) == numberOfRows)
+                            {
+                                DataAboutContact.Rows[i].Delete();
+                                var data = ContactDataGuidByNamber.Single(e1 => e1.Item1 == numberOfRows);
+                                idOfDelete.Add(data.Item2);
+                                ContactDataGuidByNamber.Remove(data);
+                            }
+                        }
                     }
                 }
             }
@@ -174,6 +183,25 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             {
                 MakeSomeHelp.MSG("Необходимо выбрать строку для удаления", MsgBoxImage: MessageBoxImage.Error);
             }
+        }
+
+        private async void makeotherSelectDataAsync()
+        {
+            var InformationFromServer = await Task.Run(() => MakeDownloadByLink($"api/worker/getData?idWorker={idUser}"));
+            var dataAbWorker= JsonConvert.DeserializeObject<MakeNewWorker>(InformationFromServer.ToString());
+            if (dataAbWorker != null)
+            {
+                Name.Text = dataAbWorker.Name;
+                Famil.Text = dataAbWorker.Lastname;
+                Patronymic.Text = dataAbWorker.Patronymic;
+                Pasport.Text = dataAbWorker.Pasport;
+                Female.SelectedItem = SomeEnums.FemaleType[dataAbWorker.Female?? default];
+                DateOfBirsd.SelectedDate = dataAbWorker.Birstday;
+                Adress.Text = dataAbWorker.DescOfAdress;
+                idAdress = dataAbWorker.idAdress;
+                TypeOfUser = dataAbWorker.TypeOfUser;
+            }
+
         }
 
         //Загрузка данных о контактах
@@ -184,19 +212,21 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             ContactModel.ListOfUserContactInf listOfUserContactInf = JsonConvert.DeserializeObject<ContactModel.ListOfUserContactInf>(InformationFromServer.ToString());
             if (listOfUserContactInf != null)
             {
-                int number = 0;
+                int number = 1;
                 foreach (var contact in listOfUserContactInf.listOfContact)
                 {
                     DataRow NewContactData = DataAboutContact.NewRow();
                     NewContactData[0] = number;
-                    NewContactData[1] = contact.ValueTypeOfContact;
-                    NewContactData[2] = contact.Value;
-                    NewContactData[3] = contact.Desctription;
+                    NewContactData[1] = contact.ValueTypeOfContact?.Trim();
+                    NewContactData[2] = contact.Value?.Trim();
+                    NewContactData[3] = contact.Desctription?.Trim();
+                    DataAboutContact.Rows.Add(NewContactData);
                     ContactDataGuidByNamber.Add(new Tuple<int, Guid, Guid>(number, contact.idContact, contact.idTypeOfContact ?? default(Guid)));
                     number++;
                 }
-            }
 
+            }
+            DataGrid.ItemsSource = DataAboutContact.DefaultView;
         }
 
         #endregion
@@ -204,14 +234,78 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         //Добавление работника
         private void AddBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (NewWorker)
-            {//Если добавление
+            if (CheckData())
+            {
+                if (NewWorker)
+                {//Если добавление
+                    MakeNewWorker newWorker = new MakeNewWorker();
+                    newWorker.InformatioAboutContact = new PersonDesctiption.InformationAboutContact();
+                    newWorker.InformatioAboutContact.ListOfContact = new List<ContactModel.InformationAboutContact>();
+                    for (int i = 0; i < DataAboutContact.Rows.Count; i++)
+                    {
+                        var idOfCont = ContactDataGuidByNamber.Where(ee => ee.Item1 == Convert.ToInt32(DataAboutContact.Rows[i][0].ToString()));
+                        ContactModel.InformationAboutContact contact = new ContactModel.InformationAboutContact();
+                        contact.Desctription = DataAboutContact.Rows[i][3].ToString()?.Trim();
+                        contact.Value = DataAboutContact.Rows[i][2].ToString()?.Trim();
+                        contact.idUser = idUser;
+                        contact.idTypeOfContact = idOfCont.First().Item3;
+                        contact.idContact = idOfCont.First().Item2;
+                        contact.DateAdd = DateTime.Now;
+                        newWorker.InformatioAboutContact.ListOfContact.Add(contact);
+                    }
+                    newWorker.Birstday = DateOfBirsd.SelectedDate.Value;
+                    newWorker.Female = Female.SelectedIndex;
+                    newWorker.idAdress = idAdress;
+                    newWorker.idUser = idUser;
+                    newWorker.Lastname = Famil.Text?.Trim();
+                    newWorker.Name = Name.Text?.Trim();
+                    newWorker.Patronymic = Patronymic.Text?.Trim();
+                    newWorker.Pasport = Pasport.Text?.Trim();
+                    newWorker.TypeOfUser = SomeEnums.TypeOfUser.KD.ToString();
+                    string Json = JsonConvert.SerializeObject(newWorker);
+                    string urlSend = "api/worker/createorupdate/worker";
+                    MakeSomeHelp.UpdloadDataToServer(urlSend, Json);
+                    window.Close();
+                }
+                else
+                {//Если редактирование
+                    MakeNewWorker newWorker = new MakeNewWorker();
+                    newWorker.InformatioAboutContact = new PersonDesctiption.InformationAboutContact();
+                    newWorker.InformatioAboutContact.ListOfContact = new List<ContactModel.InformationAboutContact>();
+                    for (int i = 0; i < DataAboutContact.Rows.Count; i++)
+                    {
+                        var idOfCont = ContactDataGuidByNamber.Where(ee => ee.Item1 == Convert.ToInt32(DataAboutContact.Rows[i][0].ToString()));
+                        ContactModel.InformationAboutContact contact = new ContactModel.InformationAboutContact();
+                        contact.Desctription = DataAboutContact.Rows[i][3].ToString()?.Trim();
+                        contact.Value = DataAboutContact.Rows[i][2].ToString()?.Trim();
+                        contact.idUser = idUser;
+                        contact.idTypeOfContact = idOfCont.First().Item3;
+                        contact.idContact = idOfCont.First().Item2;
+                        contact.DateAdd = DateTime.Now;
+                        newWorker.InformatioAboutContact.ListOfContact.Add(contact);
+                    }
+                    newWorker.Birstday = DateOfBirsd.SelectedDate.Value;
+                    newWorker.Female = Female.SelectedIndex;
+                    newWorker.idAdress = idAdress;
+                    newWorker.idUser = idUser;
+                    newWorker.Lastname = Famil.Text?.Trim();
+                    newWorker.Name = Name.Text?.Trim();
+                    newWorker.Patronymic = Patronymic.Text?.Trim();
+                    newWorker.Pasport = Pasport.Text?.Trim();
+                    newWorker.TypeOfUser = TypeOfUser;
+                    if (idOfDelete.Count != 0)
+                    {
+                        newWorker.InformatioAboutContact.ListForDelete = new List<Guid?>();
+                        newWorker.InformatioAboutContact.ListForDelete = idOfDelete;
+                    }
 
+                    string Json = JsonConvert.SerializeObject(newWorker);
+                    string urlSend = "api/worker/createorupdate/worker";
+                    MakeSomeHelp.UpdloadDataToServer(urlSend, Json);
+                    window.Close();
+                }
             }
-            else
-            {//Если редактирование
-
-            }
+           
         }
 
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)
@@ -221,39 +315,41 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
 
         #region Работа с адресом
-        private void RedactAdress_Click(object sender, RoutedEventArgs e)
+        private void WorkWithAdress_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow("Обновление адресса");
-            baseWindow.MakeOpen(new AditinalControl.AddInformationAboutAdress(idAdress, ref baseWindow, Redact: true));
-            baseWindow.ShowDialog();
-
-            if (SaveSomeData.MakeSomeOperation)
+            if (NewWorker)
             {
-                SaveSomeData.MakeSomeOperation = false;
-                var dataAboutAdress = SaveSomeData.SomeObject as ModelAdress.DataAboutAdress;
-                SaveSomeData.SomeObject = null;
-                if (dataAboutAdress != null)
+                this.idAdress = Guid.NewGuid();
+                BaseWindow baseWindow = new BaseWindow("Создание адресса");
+                baseWindow.MakeOpen(new AditinalControl.AddInformationAboutAdress(idAdress, ref baseWindow));
+                baseWindow.ShowDialog();
+                if (SaveSomeData.MakeSomeOperation)
                 {
-                    Adress.Text = $"{dataAboutAdress.CityName} {dataAboutAdress.Street} {dataAboutAdress.House} {dataAboutAdress.Entrance} {dataAboutAdress.NumberOfDelen}";
+                    SaveSomeData.MakeSomeOperation = false;
+                    var dataAboutAdress = SaveSomeData.SomeObject as ModelAdress.DataAboutAdress;
+                    SaveSomeData.SomeObject = null;
+                    if (dataAboutAdress != null)
+                    {
+                        idAdress = dataAboutAdress.idAdress;
+                        Adress.Text = $"{dataAboutAdress.CityName} {dataAboutAdress.Street} {dataAboutAdress.House} {dataAboutAdress.Entrance} {dataAboutAdress.NumberOfDelen}";
+                    }
                 }
             }
-        }
-
-        private void AddAdress_Click(object sender, RoutedEventArgs e)
-        {
-            this.idAdress = Guid.NewGuid();
-            BaseWindow baseWindow = new BaseWindow("Создание адресса");
-            baseWindow.MakeOpen(new AditinalControl.AddInformationAboutAdress(idAdress, ref baseWindow));
-            baseWindow.ShowDialog();
-            if (SaveSomeData.MakeSomeOperation)
+            else
             {
-                SaveSomeData.MakeSomeOperation = false;
-                var dataAboutAdress = SaveSomeData.SomeObject as ModelAdress.DataAboutAdress;
-                SaveSomeData.SomeObject = null;
-                if (dataAboutAdress != null)
+                BaseWindow baseWindow = new BaseWindow("Обновление адресса");
+                baseWindow.MakeOpen(new AditinalControl.AddInformationAboutAdress(idAdress, ref baseWindow, Redact: true));
+                baseWindow.ShowDialog();
+
+                if (SaveSomeData.MakeSomeOperation)
                 {
-                    idAdress = dataAboutAdress.idAdress;
-                    Adress.Text = $"{dataAboutAdress.CityName} {dataAboutAdress.Street} {dataAboutAdress.House} {dataAboutAdress.Entrance} {dataAboutAdress.NumberOfDelen}";
+                    SaveSomeData.MakeSomeOperation = false;
+                    var dataAboutAdress = SaveSomeData.SomeObject as ModelAdress.DataAboutAdress;
+                    SaveSomeData.SomeObject = null;
+                    if (dataAboutAdress != null)
+                    {
+                        Adress.Text = $"{dataAboutAdress.CityName} {dataAboutAdress.Street} {dataAboutAdress.House} {dataAboutAdress.Entrance} {dataAboutAdress.NumberOfDelen}";
+                    }
                 }
             }
         }
@@ -264,5 +360,59 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         {
             return BaseWorkWithServer.CatchErrorWithGet(UrlOfDownload, "GET", nameof(MakeLoading), nameof(MakeDownloadByLink));
         }
+
+        bool CheckData()
+        {
+            if (string.IsNullOrEmpty(Name.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Необходимо указать значение имени", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(Famil.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Необходимо указать значение фамилии", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (string.IsNullOrEmpty(Patronymic.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Необходимо указать значение отчества", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (string.IsNullOrEmpty(Pasport.Text.Trim()))
+            {
+                MakeSomeHelp.MSG("Необходимо указать значение паспорта", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (Female.SelectedIndex==-1)
+            {
+                MakeSomeHelp.MSG("Необходимо указать значение пола работника", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (DateOfBirsd.SelectedDate == null) 
+            {
+                MakeSomeHelp.MSG("Необходимо указать дату рождения", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (idAdress == new Guid())
+            {
+                MakeSomeHelp.MSG("Необходимо место проживания", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (DataAboutContact.Rows.Count==0)
+            {
+                if (MakeSomeHelp.MSG("Не указана контакная информация для работника. Вы действительно не хотите ее указывать?", MsgBoxImage: MessageBoxImage.Question,MsgBoxButton:MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+            return true;
+        }
+
     }
 }

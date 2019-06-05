@@ -121,4 +121,7 @@
   <data name="DescriprionOfDB" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resours\DescriprionOfDB.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="WorkerData" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resours\documents\workerdata.dotx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

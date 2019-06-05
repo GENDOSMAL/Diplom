@@ -1,14 +1,16 @@
 ﻿using Newtonsoft.Json;
-using RepairFlatRestApi.Models.DescriptionJSON;
+using RepairFlat.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using static RepairFlatRestApi.Models.DescriptionJSON.PersonDesctiption;
+using System.Text;
+using System.Threading.Tasks;
+using static RepairFlat.Model.ContactModel;
+using static RepairFlat.Model.PersonDesctiption;
 
-namespace RepairFlatRestApi.Models
+namespace RepairFlatWPF.Model
 {
-    public class WorkWitthWorker
+    class WorkerDescriptiom
     {
         public class DescriptionOfWorker
         {
@@ -34,18 +36,18 @@ namespace RepairFlatRestApi.Models
         }
 
 
-        public class ListOfWorkingWorker: BaseResult
+        public class ListOfWorkingWorker : BaseResult
         {
             public List<ListOfWorkersThatWork> Workers;
         }
 
 
 
-        public class MakeNewWorker: DescriptionOfUser
+        public class MakeNewWorker : DescriptionOfUser
         {
             public Guid idAdress;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public InformationAboutContact InformatioAboutContact;
+            public PersonDesctiption.InformationAboutContact InformatioAboutContact;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string DescOfAdress;
         }

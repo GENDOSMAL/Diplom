@@ -53,8 +53,6 @@ namespace RepairFlatWPF.UserControls.AditinalControl
             NumberOfDelen.Text = listOfUserAdressInf.NumberOfDelen?.Trim();
             RegionName.Text = listOfUserAdressInf.RegionName?.Trim();
             Street.Text = listOfUserAdressInf.Street?.Trim();
-
-
         }
 
         private async void CreateNewAdress_Click(object sender, RoutedEventArgs e)

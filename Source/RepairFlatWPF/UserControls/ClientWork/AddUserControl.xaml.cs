@@ -63,6 +63,7 @@ namespace RepairFlatWPF.UserControls
                 AddBtn.Content = "Редактировать";
                 NewData = false;
                 makeloadingListOfContact();
+                DeleteElement.IsEnabled = false;
             }
             else
             {

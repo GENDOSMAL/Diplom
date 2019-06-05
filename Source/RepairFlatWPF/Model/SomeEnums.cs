@@ -99,7 +99,12 @@ namespace RepairFlatWPF
             /// <summary>
             /// Необходимо для мобилки если она будет но это не точно
             /// </summary>
-            SW
+            SW,
+            /// <summary>
+            /// Кандидат либо уволенный
+            /// </summary>
+            KD
+
         }
 
         public enum TypeOfSubs

@@ -69,5 +69,15 @@ namespace RepairFlatWPF.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] WorkerData {
+            get {
+                object obj = ResourceManager.GetObject("WorkerData", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

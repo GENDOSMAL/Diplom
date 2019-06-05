@@ -81,7 +81,6 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
             string urlSend = "api/substring/contact/update";
             MakeSomeHelp.UpdloadDataToServer(urlSend, Json);
             window.Close();
-
         }
 
         private void RetutnBTN_Click(object sender, RoutedEventArgs e)

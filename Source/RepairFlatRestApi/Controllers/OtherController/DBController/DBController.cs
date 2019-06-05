@@ -345,7 +345,7 @@ namespace RepairFlatRestApi.Controllers
                 else
                 {
                     var data = InfrormationAboutLogin.FirstOrDefault();
-                    string dd = $"{data.User.LastName} {data.User.Name.Substring(0, 1).ToUpper()}.{data.User.Patronymic.Substring(0, 1)}.";
+                    string dd = $"{data.User.LastName.Trim()} {data.User.Name.Substring(0, 1).ToUpper()}.{data.User.Patronymic.Substring(0, 1)}.";
                     return new AuthDescription.ResultOfInformation
                     {
                         success = true,

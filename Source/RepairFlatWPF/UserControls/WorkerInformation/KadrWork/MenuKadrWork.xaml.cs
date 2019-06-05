@@ -38,6 +38,7 @@ namespace RepairFlatWPF.UserControls.KadrWork
 
         private void WorkWithWorker_Click(object sender, RoutedEventArgs e)
         {
+
             MakeSomeHelp.DataGridMakeWork(new ShowAllWorkers());
             
         }

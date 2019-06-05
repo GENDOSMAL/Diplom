@@ -50,6 +50,14 @@ namespace RepairFlat.Model
         {
             public Guid idUser;
         }
+        public class InformationAboutContact
+        {
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public List<ContactModel.InformationAboutContact> ListOfContact;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public List<Guid?> ListForDelete;
+        }
+
         /// <summary>
         /// Описание того, как будет выглядеть дата
         /// </summary>
