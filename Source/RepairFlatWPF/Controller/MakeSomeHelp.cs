@@ -274,7 +274,7 @@ namespace RepairFlatWPF
                     DataAboutSomeSubInf.Columns.Add(NameOfColumn);
                 }
 
-                string query = "select * from OurServices";
+                string query = "select * from PremisesType";
                 var datafr = MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
                 if (datafr != null)
                 {

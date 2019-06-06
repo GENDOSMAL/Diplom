@@ -69,7 +69,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return OtherController.WorkerDBConroller.CreateNewPostData(DataAboutPost);
             }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
         }
-        [HttpPost, Route("createorupdate/postData")]
+        [HttpPost, Route("giveworker")]
         public HttpResponseMessage GiveMoneyToWorker(PayWagesM DataAboutGiveMoney)
         {
             return CatchError(() =>

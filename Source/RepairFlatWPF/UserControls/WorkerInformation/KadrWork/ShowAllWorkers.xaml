@@ -35,9 +35,11 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddWorker" Click="AddWorker_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditWorker" Click="EditWorker_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="240" Height="60" Content="Назад" Name="RetInMainWindow" Click="RetInMainWindow_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddWorker" Click="AddWorker_Click" />
+                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditWorker" Click="EditWorker_Click" />
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="3" Margin="7.5 10 15 15" Width="240" Height="60" Content="Печать данных" Name="PrintData" Click="PrintData_Click" />
 
             </Grid>

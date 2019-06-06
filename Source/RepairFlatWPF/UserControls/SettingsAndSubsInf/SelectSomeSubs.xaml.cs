@@ -55,8 +55,10 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                         if (Convert.ToInt32(DataAboutSomeSubInf.Rows[i][0].ToString()) == numberOfRows)
                         {
                             Guid idSubs = ListofId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
+                            
                             SaveSomeData.MakeSomeOperation = true;
-                            SaveSomeData.SomeObject = idSubs;
+                            SaveSomeData.SomeObject = DataAboutSomeSubInf.Rows[i];
+                            SaveSomeData.idSubs = idSubs;
                             BaseWindow.Close();
                         }
                     }                    

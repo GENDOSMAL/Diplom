@@ -1,5 +1,6 @@
 ﻿using RepairFlatWPF.Controller;
 using RepairFlatWPF.Model;
+using RepairFlatWPF.UserControls.KadrWork;
 using RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,11 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
         SomeEnums.TypeOfSubs typeOfSubs;
         DataTable DataAboutSomeSubInf;
         List<Tuple<int, Guid>> ListofId;
-        public RedactSomeSubs(SomeEnums.TypeOfSubs typeOfSubs)
+        bool whenPost = false;
+        public RedactSomeSubs(SomeEnums.TypeOfSubs typeOfSubs,bool whenPost=false)
         {
             InitializeComponent();
+            this.whenPost = whenPost;
             this.typeOfSubs = typeOfSubs;
             makeSelectFromDB();
         }
@@ -59,7 +62,10 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void RetunBtn_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.SelectDataForRedactUC());
+            if(!whenPost)
+                MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.SelectDataForRedactUC());
+            else
+                MakeSomeHelp.DataGridMakeWork(new MenuKadrWork());
         }
 
         private void AddElement_Click(object sender, RoutedEventArgs e)
@@ -198,7 +204,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                         listOfServises.idServises = idSubs;
                                         listOfServises.Nomination = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1).ToString();
                                         listOfServises.TypeOfServises = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2).ToString();
-                                        listOfServises.Cost = Convert.ToDecimal(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 3).ToString());
+                                        listOfServises.Cost = Convert.ToDecimal(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 3)?.ToString());
                                         listOfServises.Description = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 4).ToString();
                                         BaseWindow baseWindow = new BaseWindow("Обновление данных об услугах");
                                         baseWindow.MakeOpen(new ServisesRedactUC(ref baseWindow, listOfServises));

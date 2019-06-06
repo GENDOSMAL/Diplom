@@ -37,11 +37,13 @@ namespace RepairFlatWPF
 
         public static string[] WorkerTables = new string[] { "Номер", "Фамилия", "Имя",  "Отчество", "Пол", "Дата рождения" };
 
+        public static string[] WorkerTablesRedact = new string[] { "Номер", "Фамилия", "Имя",  "Отчество", "Пол", "Дата рождения", "Должность","Оклад" };
+
         public static string[] PostSubs= new string[] { "Номер", "Название должности", "Базовый оклад",  "Выполняет заказы" };
 
         public static string[] MaterialSubs= new string[] { "Номер", "Название материала", "Еденица измерения","Тип материала",  "Стоимость",  "Описание" };
 
-        public static string[] ServisesSubs= new string[] { "Номер", "Название услуги", "Тип сервиса","Цена",  "Описание" };
+        public static string[] ServisesSubs= new string[] { "Номер", "Название услуги", "Тип сервиса", "Цена",  "Описание" };
 
         public static string[] ContactSubs= new string[] { "Номер", "Название",  "Описание" };
 
@@ -121,6 +123,20 @@ namespace RepairFlatWPF
         {
             Servises,
             Premises
+        }
+        public enum TypeOfUserNeed
+        {
+            KD,
+            All,
+            ForOrder,
+            ForRedact
+
+        }
+        public enum TypeOfOperate
+        {
+            Adoption,
+            Permutation,
+            Firing
         }
     }
 }

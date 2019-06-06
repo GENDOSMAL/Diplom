@@ -140,8 +140,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                             idServises = Guid.Parse(Data.Rows[i][0].ToString()),
                             Nomination = Data.Rows[i][1].ToString(),
                             TypeOfServises= Data.Rows[i][2].ToString(),
-                            Cost = Convert.ToDecimal(Data.Rows[i][4].ToString()),
-                            Description = Data.Rows[i][5].ToString(),
+                            Cost = Convert.ToDecimal(Data.Rows[i][3].ToString()),
+                            Description = Data.Rows[i][4].ToString(),
                         };
                         ListOfServises.Add(ServisesUpdate);
                     }

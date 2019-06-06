@@ -38,8 +38,8 @@
                 </Style>
             </DatePicker.Resources>
         </DatePicker>
-        <TextBox Name="Adress" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="3" Grid.Row="5" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Адрес" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" />
-        <Button Name="WorkWithAdress" Click="WorkWithAdress_Click" Content="Указать" Style="{StaticResource AllButtonAction}" Grid.Row="6" Grid.ColumnSpan="2"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
+        <TextBox Name="Adress" FontFamily="Times New Roman"  IsEnabled="False" FontSize="25" Grid.ColumnSpan="3" Grid.Row="5" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Адрес" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" />
+        <Button Name="WorkWithAdress" Click="WorkWithAdress_Click"  Content="Указать" Style="{StaticResource AllButtonAction}" Grid.Row="6" Grid.ColumnSpan="2"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="40" Width="240"/>
         <Grid Grid.ColumnSpan="2" Grid.Row="7">
             <Grid.RowDefinitions>
                 <RowDefinition Height="25"/>

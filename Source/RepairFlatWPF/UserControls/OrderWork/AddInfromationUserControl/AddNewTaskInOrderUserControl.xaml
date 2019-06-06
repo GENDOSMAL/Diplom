@@ -38,14 +38,21 @@
                         </Button.Content>
                     </Button>
                   
-                    <Button Uid="1" Grid.Column="2" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                    <Button Uid="1" Grid.Column="1" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
+                        <Button.Content>
+                            <Viewbox  >
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выбранные работники" FontFamily="Times New Roman" FontSize="45 "/>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>                    
+                    <Button Uid="2" Grid.Column="2" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация об услугах" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
                     </Button>
-                    <Button Uid="2" Grid.Column="3"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
+                    <Button Uid="3" Grid.Column="3"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация о материалах" FontFamily="Times New Roman" FontSize="45 "/>
@@ -57,6 +64,7 @@
 
                 <Grid Grid.Row="1" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>

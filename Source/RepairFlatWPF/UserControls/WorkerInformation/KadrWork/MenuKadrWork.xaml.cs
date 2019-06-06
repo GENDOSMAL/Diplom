@@ -28,19 +28,18 @@ namespace RepairFlatWPF.UserControls.KadrWork
 
         private void KadrPermises_Click(object sender, RoutedEventArgs e)
         {
-           
+            MakeSomeHelp.DataGridMakeWork(new TypeOfPeremeMenu());
         }
 
         private void WorkWithPost_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.RedactSomeSubs(SomeEnums.TypeOfSubs.Post));
+            MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.RedactSomeSubs(SomeEnums.TypeOfSubs.Post,true));
         }
 
         private void WorkWithWorker_Click(object sender, RoutedEventArgs e)
         {
-
-            MakeSomeHelp.DataGridMakeWork(new ShowAllWorkers());
-            
+            BaseWindow baseWindow = new BaseWindow("");
+            MakeSomeHelp.DataGridMakeWork(new ShowAllWorkers(ref baseWindow));            
         }
     }
 }

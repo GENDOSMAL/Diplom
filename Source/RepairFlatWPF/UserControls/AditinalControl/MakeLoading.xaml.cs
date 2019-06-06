@@ -199,12 +199,12 @@ namespace RepairFlatWPF.UserControls
                         MakeSmF = true;
                         foreach (var ServisUpdate in InformationAboutServises.ListOfServises)
                         {
-                            SQLiteParameter[] parameters = new SQLiteParameter[6];
+                            SQLiteParameter[] parameters = new SQLiteParameter[5];
                             parameters[0] = new SQLiteParameter("@idServis", ServisUpdate.idServises.ToString());
-                            parameters[1] = new SQLiteParameter("@Nomination", ServisUpdate.Nomination);
-                            parameters[2] = new SQLiteParameter("@TypeOfServices", ServisUpdate.TypeOfServises);
-                            parameters[4] = new SQLiteParameter("@Cost", ServisUpdate.Cost);
-                            parameters[5] = new SQLiteParameter("@Descriprtion", ServisUpdate.Description);
+                            parameters[1] = new SQLiteParameter("@Nomination", ServisUpdate.Nomination?.Trim());
+                            parameters[2] = new SQLiteParameter("@TypeOfServices", ServisUpdate.TypeOfServises?.Trim());
+                            parameters[3] = new SQLiteParameter("@Cost", ServisUpdate.Cost);
+                            parameters[4] = new SQLiteParameter("@Descriprtion", ServisUpdate.Description?.Trim());
                             command.Parameters.AddRange(parameters);
                             command.CommandText = MakeQuery;
                             command.ExecuteNonQuery();
@@ -251,10 +251,10 @@ namespace RepairFlatWPF.UserControls
                         {
                             SQLiteParameter[] parameters = new SQLiteParameter[5];
                             parameters[0] = new SQLiteParameter("@idMaterials", MaterialsUpdate.idMaterials.ToString());
-                            parameters[1] = new SQLiteParameter("@NameOfMaterial", MaterialsUpdate.NameOfMaterial);
-                            parameters[2] = new SQLiteParameter("@UnitOfMeasue", MaterialsUpdate.UnitOfMeasue);
+                            parameters[1] = new SQLiteParameter("@NameOfMaterial", MaterialsUpdate.NameOfMaterial?.Trim());
+                            parameters[2] = new SQLiteParameter("@UnitOfMeasue", MaterialsUpdate.UnitOfMeasue?.Trim());
                             parameters[3] = new SQLiteParameter("@Cost", MaterialsUpdate.Cost);
-                            parameters[4] = new SQLiteParameter("@Descriprtion", MaterialsUpdate.Description);
+                            parameters[4] = new SQLiteParameter("@Descriprtion", MaterialsUpdate.Description?.Trim());
                             command.Parameters.AddRange(parameters);
                             command.CommandText = MakeQuery;
                             command.ExecuteNonQuery();
@@ -301,8 +301,8 @@ namespace RepairFlatWPF.UserControls
                         {
                             SQLiteParameter[] parameters = new SQLiteParameter[3];
                             parameters[0] = new SQLiteParameter("@idPremises", PremisesUpdate.idPremises.ToString());
-                            parameters[1] = new SQLiteParameter("@NameOfPremises", PremisesUpdate.Name);
-                            parameters[2] = new SQLiteParameter("@Descriprtion", PremisesUpdate.Description);
+                            parameters[1] = new SQLiteParameter("@NameOfPremises", PremisesUpdate.Name?.Trim());
+                            parameters[2] = new SQLiteParameter("@Descriprtion", PremisesUpdate.Description?.Trim());
                             command.Parameters.AddRange(parameters);
                             command.CommandText = MakeQuery;
                             command.ExecuteNonQuery();

@@ -317,10 +317,10 @@
           <Property Name="Name" Type="nchar" MaxLength="50" />
           <Property Name="LastName" Type="nchar" MaxLength="50" />
           <Property Name="Patronymic" Type="nchar" MaxLength="50" />
-          <Property Name="Pasport" Type="nchar" MaxLength="10" />
+          <Property Name="Pasport" Type="nchar" MaxLength="20" />
           <Property Name="Female" Type="int" />
           <Property Name="BirstDay" Type="date" />
-          <Property Name="TypeOfUser" Type="nchar" MaxLength="2" />
+          <Property Name="TypeOfUser" Type="nchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="UserContact">
           <Key>
@@ -1538,10 +1538,10 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Pasport" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Pasport" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Female" Type="Int32" />
           <Property Name="BirstDay" Type="DateTime" Precision="0" />
-          <Property Name="TypeOfUser" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="TypeOfUser" Type="String" MaxLength="5" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="ClientDetails" Relationship="Self.FK_ClientDetails_User" FromRole="User" ToRole="ClientDetails" />
           <NavigationProperty Name="LoginInformation" Relationship="Self.FK_LoginInformation_User" FromRole="User" ToRole="LoginInformation" />
           <NavigationProperty Name="MaterialsUpdate" Relationship="Self.FK_MaterialsUpdate_User" FromRole="User" ToRole="MaterialsUpdate" />

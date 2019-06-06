@@ -57,7 +57,6 @@ namespace RepairFlatWPF.UserControls.AditinalControl
 
         private async void CreateNewAdress_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(idAdress.ToString());
             if (CheckData())
             {
                 if (Redact)

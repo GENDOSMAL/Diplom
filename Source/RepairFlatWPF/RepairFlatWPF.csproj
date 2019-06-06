@@ -243,14 +243,8 @@
     <Compile Include="UserControls\WorkerInformation\KadrWork\CreateNewWorker.xaml.cs">
       <DependentUpon>CreateNewWorker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\WorkerInformation\KadrWork\MakeCanditateToWork.xaml.cs">
-      <DependentUpon>MakeCanditateToWork.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\WorkerInformation\KadrWork\MakeOperationWithWorkUC.xaml.cs">
-      <DependentUpon>MakeOperationWithWorkUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\WorkerInformation\KadrWork\MakeOperatsWithWorkers.xaml.cs">
-      <DependentUpon>MakeOperatsWithWorkers.xaml</DependentUpon>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\MakeLoginAndPassword.xaml.cs">
+      <DependentUpon>MakeLoginAndPassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\MenuKadrWork.xaml.cs">
       <DependentUpon>MenuKadrWork.xaml</DependentUpon>
@@ -270,11 +264,14 @@
     <Compile Include="UserControls\SettingsAndSubsInf\WorkWithSubInfromation.xaml.cs">
       <DependentUpon>WorkWithSubInfromation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\WorkerInformation\KadrWork\MenuSetPost.xaml.cs">
-      <DependentUpon>MenuSetPost.xaml</DependentUpon>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\SetWorkerDolzn.xaml.cs">
+      <DependentUpon>SetWorkerDolzn.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\WorkerInformation\KadrWork\ShowAllWorkers.xaml.cs">
       <DependentUpon>ShowAllWorkers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WorkerInformation\KadrWork\TypeOfPeremeMenu.xaml.cs">
+      <DependentUpon>TypeOfPeremeMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="WorkWithServer\BaseWorkWithServer.cs" />
     <Page Include="UserControls\AditinalControl\AddContactUserConrol.xaml">
@@ -393,15 +390,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\WorkerInformation\KadrWork\MakeCanditateToWork.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\WorkerInformation\KadrWork\MakeOperationWithWorkUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\WorkerInformation\KadrWork\MakeOperatsWithWorkers.xaml">
+    <Page Include="UserControls\WorkerInformation\KadrWork\MakeLoginAndPassword.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -469,11 +458,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\WorkerInformation\KadrWork\MenuSetPost.xaml">
+    <Page Include="UserControls\WorkerInformation\KadrWork\SetWorkerDolzn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\WorkerInformation\KadrWork\ShowAllWorkers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\WorkerInformation\KadrWork\TypeOfPeremeMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -498,6 +491,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Resours\DescriprionOfDB.json" />
+    <None Include="Resours\Documents\MakePerestanovka.dotx" />
     <None Include="Resours\Documents\WorkerData.dotx" />
     <Resource Include="Image\fontawesome-webfont.ttf" />
     <None Include="bin\Debug\DescriprionOfDB.json" />

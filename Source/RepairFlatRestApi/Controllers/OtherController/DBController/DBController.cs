@@ -350,7 +350,7 @@ namespace RepairFlatRestApi.Controllers
                     {
                         success = true,
                         idUser = data.IdLog,
-                        typeofpolz = data.User.TypeOfUser,
+                        typeofpolz = data.User.TypeOfUser?.Trim(),
                         LastNameAndIni = dd
                     };
                 }
@@ -385,14 +385,14 @@ namespace RepairFlatRestApi.Controllers
                     return new AuthDescription.SucessNewUser
                     {
                         success = false,
-                        description = "Логин уже исползуется"
+                        description = "Логин уже используется"
                     };
                 }
                 var newLogInformation = new LoginInformation
                 {
                     IdLog = idUser,
                     Login = informationAboutNewPerson.login,
-                    Password = HelperUS.PasswordDesript(informationAboutNewPerson.password)
+                    Password = informationAboutNewPerson.password
                 };
                 db.LoginInformation.Add(newLogInformation);
                 db.SaveChanges();
@@ -526,6 +526,7 @@ namespace RepairFlatRestApi.Controllers
 
                             db.OurServices.AddOrUpdate(NewServises);
                             db.ServicesUpdate.Add(InformationAboutIsert);
+                            db.SaveChanges();
                         }
                     }                   
 
@@ -1148,33 +1149,6 @@ namespace RepairFlatRestApi.Controllers
         #endregion
 
         #region Базовые вещи
-        /// <summary>
-        /// Базовый метод обработки запросов который также обрабатывает ошибки
-        /// </summary>
-        /// <param name="dbAction">Событие работы с базой данных</param>
-        /// <param name="nameOfMethod">Наименование метода, необходимо для логирования</param>
-        //public static void Run(Action<RepairFlatDB> dbAction, string nameOfMethod)
-        //{
-        //    using (var db = new RepairFlatDB())
-        //    {
-        //        try
-        //        {
-        //            dbAction(db);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new Exception($"В методе {nameof(DBController)}::{nameOfMethod} произошла ошибка: <{ex.ToString()}>");
-        //        }
-        //    }
-        //}
-        /// <summary>
-        /// Метод обработки работы с базой данных, который также может возвращать некоторые данные
-        /// </summary>
-        /// <typeparam name="TResult">Тип данных который будет вернут от метода</typeparam>
-        /// <param name="dbFunction">событие работы базы данных</param>
-        /// <param name="NameOfClass">Наименование класса в котором происходит обработка метода, необходимо для логирования</param>
-        /// <param name="nameOfMethod">Наименование метода, который вызывает данный метод, необходимо для ведения логов</param>
-        /// <returns></returns>
         public static TResult Run<TResult>(Func<RepairFlatDB, TResult> dbFunction, string NameOfClass, string nameOfMethod)
         {
             using (var db = new RepairFlatDB())

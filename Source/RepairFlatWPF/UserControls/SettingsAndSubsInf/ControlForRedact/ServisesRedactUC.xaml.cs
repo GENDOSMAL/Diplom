@@ -43,6 +43,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 Cost.Text = obf.Cost.Value.ToString();
                 Descriprtion.Text = obf.Description?.Trim();
                 AddBtn.Content = "Редактировать";
+                idServises = obf.idServises;
             }
             else
             {
@@ -68,12 +69,12 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 {
                     query = "Update OurServices set Nomination=@Nomination, TypeOfServices=@TypeOfServices, Cost=@Cost , Descriprtion=@Descriprtion where idServis=@idServis;";
                 }
-                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[4];
+                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[5];
                 sQLiteParameter[0] = new SQLiteParameter("@idServis", idServises.ToString());
                 sQLiteParameter[1] = new SQLiteParameter("@Nomination", NameOfServises.Text.Trim());
                 sQLiteParameter[2] = new SQLiteParameter("@TypeOfServices", TypeOfServis.Text?.Trim());
                 sQLiteParameter[3] = new SQLiteParameter("@Cost", cost);
-                sQLiteParameter[3] = new SQLiteParameter("@Descriprtion", Descriprtion.Text?.Trim());
+                sQLiteParameter[4] = new SQLiteParameter("@Descriprtion", Descriprtion.Text?.Trim());
                 MakeWorkWirthDataBase.MakeSomeQueryWork(query, parameters: sQLiteParameter);
                 MakeUpdateServer();
             }

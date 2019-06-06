@@ -35,6 +35,12 @@ namespace RepairFlatWPF
 
         public void Makecheck()
         {
+            WorkWithOrder.Visibility = Visibility.Collapsed;
+            ClientWork.Visibility = Visibility.Collapsed;
+            Spravoch.Visibility = Visibility.Collapsed;
+            KadrWork.Visibility = Visibility.Collapsed;
+            Finans.Visibility = Visibility.Collapsed;
+            Settings.Visibility = Visibility.Collapsed;
             NameOfPolz.Text = SaveSomeData.LastNameAndIni;
             if (SaveSomeData.TypeOfUser == SomeEnums.TypeOfUser.AD.ToString())
             {//Администратор

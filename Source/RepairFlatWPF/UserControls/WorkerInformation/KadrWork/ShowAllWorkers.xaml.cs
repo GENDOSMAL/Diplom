@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using RepairFlat.Model;
+using RepairFlatWPF.Model;
 using RepairFlatWPF.UserControls.KadrWork;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static RepairFlatWPF.Model.WorkerDescriptiom;
+using static RepairFlatWPF.SomeEnums;
 
 namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 {
@@ -28,12 +30,24 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
     {
         DataTable DataAboutWorker;
         List<Tuple<int, Guid>> DataAboutGuid;
-        public ShowAllWorkers(bool SelectWorkerForTask = false)
+        TypeOfUserNeed typeOfUserNeed;
+        string Route = "";
+        BaseWindow BaseWindow;
+        public ShowAllWorkers(ref BaseWindow baseWindow,TypeOfUserNeed typeOfUserNeed= TypeOfUserNeed.All)
         {
             InitializeComponent();
+            this.typeOfUserNeed = typeOfUserNeed;
+            switch (typeOfUserNeed)
+            {
+                case TypeOfUserNeed.All: Route = $"api/worker/allworker"; break;
+                case TypeOfUserNeed.ForOrder: Route = $"api/worker/allworkerfororder"; break;
+                case TypeOfUserNeed.ForRedact: Route = $"api/worker/allworkerforredact"; break;
+                case TypeOfUserNeed.KD: Route = $"api/worker/allworkercanditate"; break;
+            }
+            this.BaseWindow = baseWindow;
             MakeWorkBetter();
             
-            if (SelectWorkerForTask)
+            if (typeOfUserNeed!=TypeOfUserNeed.All)
             {
                 ForWindow.Visibility = Visibility.Visible;
             }
@@ -46,32 +60,65 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         {
             DataAboutWorker = new DataTable("WorkerInf");
             DataAboutGuid = new List<Tuple<int, Guid>>();
-           
-            foreach (string ColumnName in SomeEnums.WorkerTables)
-            {
-                DataAboutWorker.Columns.Add(ColumnName);
-            }
             DataGrid.ItemsSource = DataAboutWorker.DefaultView;
-
-            var InformFromserver = await Task.Run(() => MakeDownloadByLink($"api/worker/allworker"));
-            var ListOfWorkers = JsonConvert.DeserializeObject<ListOfAllWorkers>(InformFromserver.ToString());
-            if (ListOfWorkers.success)
+            if (typeOfUserNeed== TypeOfUserNeed.ForRedact)
             {
-                int number = 1;
-                foreach (var WorkerInf in ListOfWorkers.Workers)
+                foreach (string ColumnName in SomeEnums.WorkerTablesRedact)
                 {
-                    DataRow newClientRow = DataAboutWorker.NewRow();
-                    newClientRow[0] = number;
-                    newClientRow[1] = WorkerInf.LastName.ToString()?.Trim();
-                    newClientRow[2] = WorkerInf.Name.ToString()?.Trim();
-                    newClientRow[3] = WorkerInf.Patronymic.ToString()?.Trim();
-                    newClientRow[4] = WorkerInf.Female.ToString()?.Trim();
-                    newClientRow[5] = WorkerInf.DateRozd?.Trim();
-                    DataAboutWorker.Rows.Add(newClientRow);
-                    DataAboutGuid.Add(new Tuple<int, Guid>(number, WorkerInf.idUser));
-                    number++;
+                    DataAboutWorker.Columns.Add(ColumnName);
+                }
+                var InformFromserver = await Task.Run(() => MakeDownloadByLink(Route));
+                var ListOfWorkers = JsonConvert.DeserializeObject<ListOfWorkingWorker>(InformFromserver.ToString());
+                if (ListOfWorkers.success)
+                {
+                    int number = 1;
+                    foreach (var WorkerInf in ListOfWorkers.Workers)
+                    {
+                        DataRow newClientRow = DataAboutWorker.NewRow();
+                        newClientRow[0] = number;
+                        newClientRow[1] = WorkerInf.LastName.ToString()?.Trim();
+                        newClientRow[2] = WorkerInf.Name.ToString()?.Trim();
+                        newClientRow[3] = WorkerInf.Patronymic.ToString()?.Trim();
+                        newClientRow[4] = WorkerInf.Female.ToString()?.Trim();
+                        newClientRow[5] = WorkerInf.DateRozd?.Trim().Substring(0, 10);
+                        newClientRow[6] = WorkerInf.NameOfPost?.Trim();
+                        newClientRow[7] = WorkerInf.Salary?.ToString().Trim();
+                        DataAboutWorker.Rows.Add(newClientRow);
+                        DataAboutGuid.Add(new Tuple<int, Guid>(number, WorkerInf.idUser));
+                        number++;
+                    }
                 }
             }
+            else
+            {
+                foreach (string ColumnName in SomeEnums.WorkerTables)
+                {
+                    DataAboutWorker.Columns.Add(ColumnName);
+                }
+                var InformFromserver = await Task.Run(() => MakeDownloadByLink(Route));
+                var ListOfWorkers = JsonConvert.DeserializeObject<ListOfAllWorkers>(InformFromserver.ToString());
+                if (ListOfWorkers.success)
+                {
+                    int number = 1;
+                    foreach (var WorkerInf in ListOfWorkers.Workers)
+                    {
+                        DataRow newClientRow = DataAboutWorker.NewRow();
+                        newClientRow[0] = number;
+                        newClientRow[1] = WorkerInf.LastName.ToString()?.Trim();
+                        newClientRow[2] = WorkerInf.Name.ToString()?.Trim();
+                        newClientRow[3] = WorkerInf.Patronymic.ToString()?.Trim();
+                        newClientRow[4] = WorkerInf.Female.ToString()?.Trim();
+                        newClientRow[5] = WorkerInf.DateRozd?.Trim().Substring(0, 10);
+                        DataAboutWorker.Rows.Add(newClientRow);
+                        DataAboutGuid.Add(new Tuple<int, Guid>(number, WorkerInf.idUser));
+                        number++;
+                    }
+                }
+            }
+
+            
+
+            
 
             
         }
@@ -86,7 +133,6 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             BaseWindow baseWindow = new BaseWindow("Создание нового работника");
             baseWindow.MakeOpen(new CreateNewWorker(ref baseWindow));
             baseWindow.ShowDialog();
-            MakeWorkBetter();
         }
 
         private void EditWorker_Click(object sender, RoutedEventArgs e)
@@ -131,9 +177,10 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                         if (Convert.ToInt32(DataAboutWorker.Rows[i][0].ToString()) == numberOfRows)
                         {
                             Guid idWorker = DataAboutGuid.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                            BaseWindow baseWindow = new BaseWindow("Создание нового работника");
-                            baseWindow.MakeOpen(new CreateNewWorker(ref baseWindow, idWorker));
-                            baseWindow.ShowDialog();
+                            SaveSomeData.MakeSomeOperation = true;
+                            SaveSomeData.SomeObject = DataAboutWorker.Rows[i];
+                            SaveSomeData.idSubs = idWorker;
+                            BaseWindow.Close();
                         }
                     }
                 }
@@ -146,7 +193,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
         private void ReturnBTN_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.DataGridMakeWork(new MenuKadrWork());
+            BaseWindow.Close();
             
         }
 
@@ -299,7 +346,9 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             return listOfUserAdressInf;
         }
 
-
-
+        private void RetInMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            MakeSomeHelp.DataGridMakeWork(new MenuKadrWork());
+        }
     }
 }

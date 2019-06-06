@@ -220,9 +220,9 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         if (!string.IsNullOrEmpty(dataAboutPost.TypeOfUser))
                         {
                             var selectDataAboutUser = db.User.Where(ee => ee.idUser == dataAboutPost.idWorker).FirstOrDefault();
-                            selectDataAboutUser.TypeOfUser = dataAboutPost.TypeOfUser;
+                            selectDataAboutUser.TypeOfUser = dataAboutPost.TypeOfUser?.Trim();
                         }
-
+                        db.SaveChanges();
                         db.EstabilismentPost.Add(new EstabilismentPost
                         {
                             Salary = dataAboutPost.Salary,
@@ -231,6 +231,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
 
                             idEstabilisment = dataAboutPost.idEstabilisment
                         });
+                        db.SaveChanges();
                         db.WorkersOperats.Add(new WorkersOperats
                         {
                             idEstabilisment = dataAboutPost.idEstabilisment,
