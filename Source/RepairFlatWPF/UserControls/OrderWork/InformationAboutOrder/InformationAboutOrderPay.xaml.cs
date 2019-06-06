@@ -1,5 +1,8 @@
-﻿using System;
+﻿using RepairFlatWPF.Controller;
+using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,11 +23,33 @@ namespace RepairFlatWPF.UserControls.OrderWork
     /// </summary>
     public partial class InformationAboutOrderPay : UserControl
     {
+        DataTable dataTable = new DataTable();
         Guid idOrder;
         public InformationAboutOrderPay(Guid idOrder)
         {
             InitializeComponent();
             this.idOrder = idOrder;
+            string query = "select Number,NameOfUserMake,Date,Summa,Desc from InformationAboutPyment where idOrder=@idOrder;";
+            SQLiteParameter[] sQLiteParameters = new SQLiteParameter[1];
+            sQLiteParameters[0] = new SQLiteParameter("@idOrder", idOrder.ToString());
+            var dd =MakeWorkWirthDataBase.MakeSomeQueryWork(query,parameters: sQLiteParameters, WorkWithTables: true) ;
+            if (dd != null)
+            {
+                dataTable = dd as DataTable;
+                for (int i = 0; i < SomeEnums.PayInf.Length; i++)
+                {
+                    dataTable.Columns[i].ColumnName = SomeEnums.PayInf[i];
+                }
+            }
+            else
+            {
+                foreach(string asd in SomeEnums.PayInf)
+                {
+                    dataTable.Columns.Add(asd);
+                }
+            }
+
+            DataGrid.ItemsSource = dataTable.DefaultView;
         }
 
         private void AddPayment_Click(object sender, RoutedEventArgs e)

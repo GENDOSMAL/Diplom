@@ -26,11 +26,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddTask" Click="AddTask_Click" />
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditTask" Click="EditTask_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 15 15" Width="220" Height="60" Content="Удаление" Name="DeleteTask" Click="DeleteTask_Click" />
             </Grid>
         </Grid>
     </materialDesign:TransitioningContent>

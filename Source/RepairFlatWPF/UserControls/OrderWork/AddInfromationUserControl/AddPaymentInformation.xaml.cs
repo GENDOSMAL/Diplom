@@ -30,20 +30,30 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         #endregion
 
         #region Обработки
-        public AddPaymentInformation(Guid idOrder,ref BaseWindow baseWindow, object InfromationAboutPayment = null)
+        public AddPaymentInformation(Guid idOrder,ref BaseWindow baseWindow, int number=0)
         {
             InitializeComponent();
             window = baseWindow;
             this.idOrder = idOrder;
-            if (InfromationAboutPayment != null)
+            if (number ==0)
             {
+                string query = $"select * from InformationAboutPyment where Number={number}";
                 NewOrder = false;
-                AddPayment.Content = "Редактировать";
             }
             else
             {
-                idPayment = Guid.NewGuid();
+               
             }
+            
+            //if (InfromationAboutPayment != null)
+            //{
+            //    NewOrder = false;
+            //    AddPayment.Content = "Редактировать";
+            //}
+            //else
+            //{
+            //    idPayment = Guid.NewGuid();
+            //}
         }
 
         private void AddPayment_Click(object sender, RoutedEventArgs e)

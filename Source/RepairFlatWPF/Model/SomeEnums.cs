@@ -45,11 +45,23 @@ namespace RepairFlatWPF
 
         public static string[] ServisesSubs= new string[] { "Номер", "Название услуги", "Тип сервиса", "Цена",  "Описание" };
 
+        
+
         public static string[] ContactSubs= new string[] { "Номер", "Название",  "Описание" };
 
         public static string[] PremisesSubs = new string[] { "Номер", "Название",  "Описание" };
 
 
+        public static string[] WorkerTask = new string[] { "Номер", "ФИО работника", "Роль" };
+
+        public static string[] ServisesTask = new string[] { "Номер", "Наименование услуги", "Количество","Стоимость", "Описание" };
+
+        public static string[] ServisesMaterials = new string[] { "Номер", "Наименование услуги", "Количество","Стоимость", "Описание" };
+
+
+        public static string[] PayInf = new string[] { "Номер", "Дата создания", "Сумма оплаты", "Кто создал", "Описание" };
+
+        public static string[] TaskTable = new string[] { "Номер", "Дата начала", "Планируемое время завершения", "Цена", "Описание" };
         #endregion
 
 

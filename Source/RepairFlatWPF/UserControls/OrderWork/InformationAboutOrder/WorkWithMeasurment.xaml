@@ -26,12 +26,10 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddMeasurmant" Click="AddMeasurmant_Click" />
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditMeasurment" Click="EditMeasurment_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 15 15" Width="220" Height="60" Content="Удаление" Name="DeleteMeasurment" Click="DeleteMeasurment_Click" />
-            </Grid>
+             </Grid>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>
