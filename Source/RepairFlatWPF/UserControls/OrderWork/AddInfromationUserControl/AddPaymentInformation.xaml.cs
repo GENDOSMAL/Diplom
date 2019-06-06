@@ -29,6 +29,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         BaseWindow window;
         #endregion
 
+        int number = 0;
         #region Обработки
         public AddPaymentInformation(Guid idOrder,ref BaseWindow baseWindow, int number=0)
         {
@@ -37,7 +38,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             this.idOrder = idOrder;
             if (number ==0)
             {
+                this.number = number;
                 string query = $"select * from InformationAboutPyment where Number={number}";
+
                 NewOrder = false;
             }
             else
@@ -62,7 +65,8 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             {
                 if (NewOrder)
                 {
-                    //Если новый заказ
+                    string insert = "insert into InformationAboutPyment (idOrder,NameOfUserMake,Summa,Desc,Date) values (@idOrder,@NameOfUserMake,@Summa,@Desc,@Date)";
+
                 }
                 else
                 {
