@@ -13,10 +13,10 @@ namespace RepairFlatRestApi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RepairFlatDB : DbContext
+    public partial class RepairFlatDBEntities : DbContext
     {
-        public RepairFlatDB()
-            : base("name=RepairFlatDB")
+        public RepairFlatDBEntities()
+            : base("name=RepairFlatDBEntities")
         {
         }
     
@@ -28,26 +28,26 @@ namespace RepairFlatRestApi.Models
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<AdressDescription> AdressDescription { get; set; }
         public virtual DbSet<ClientDetails> ClientDetails { get; set; }
-        public virtual DbSet<ContactUpdate> ContactUpdate { get; set; }
         public virtual DbSet<DeletedSubStr> DeletedSubStr { get; set; }
+        public virtual DbSet<DocPayment> DocPayment { get; set; }
         public virtual DbSet<EstabilismentPost> EstabilismentPost { get; set; }
+        public virtual DbSet<InformatioForPayment> InformatioForPayment { get; set; }
         public virtual DbSet<LoginInformation> LoginInformation { get; set; }
-        public virtual DbSet<MaterialsUpdate> MaterialsUpdate { get; set; }
         public virtual DbSet<OrderElementOfMeasurments> OrderElementOfMeasurments { get; set; }
         public virtual DbSet<OrderInformation> OrderInformation { get; set; }
-        public virtual DbSet<OrderMaterial> OrderMaterial { get; set; }
         public virtual DbSet<OrderMeasurements> OrderMeasurements { get; set; }
         public virtual DbSet<OrderPayment> OrderPayment { get; set; }
-        public virtual DbSet<OrderServises> OrderServises { get; set; }
         public virtual DbSet<OrderTasks> OrderTasks { get; set; }
         public virtual DbSet<OrderTasksState> OrderTasksState { get; set; }
         public virtual DbSet<OurMaterials> OurMaterials { get; set; }
         public virtual DbSet<OurServices> OurServices { get; set; }
         public virtual DbSet<PremisesType> PremisesType { get; set; }
-        public virtual DbSet<PremisesUpdate> PremisesUpdate { get; set; }
-        public virtual DbSet<ServicesUpdate> ServicesUpdate { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<TaskMaterials> TaskMaterials { get; set; }
+        public virtual DbSet<TaskServis> TaskServis { get; set; }
+        public virtual DbSet<TaskWorker> TaskWorker { get; set; }
         public virtual DbSet<TypeOfContact> TypeOfContact { get; set; }
+        public virtual DbSet<UpdateSubInformation> UpdateSubInformation { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserContact> UserContact { get; set; }
         public virtual DbSet<WorkerDetails> WorkerDetails { get; set; }

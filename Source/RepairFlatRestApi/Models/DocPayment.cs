@@ -24,8 +24,7 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.DateTime> DateOfDoc { get; set; }
         public Nullable<System.Guid> idWorker { get; set; }
         public Nullable<System.Guid> idClient { get; set; }
-        public Nullable<decimal> Summa { get; set; }
-        public Nullable<System.Guid> idInformatioAboutPayment { get; set; }
+        public Nullable<System.Guid> idInformatioForPayment { get; set; }
     
         public virtual ClientDetails ClientDetails { get; set; }
         public virtual InformatioForPayment InformatioForPayment { get; set; }

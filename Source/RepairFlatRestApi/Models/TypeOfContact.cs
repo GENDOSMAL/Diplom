@@ -17,16 +17,17 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TypeOfContact()
         {
-            this.ContactUpdate = new HashSet<ContactUpdate>();
+            this.UpdateSubInformation = new HashSet<UpdateSubInformation>();
             this.UserContact = new HashSet<UserContact>();
         }
     
         public System.Guid idContact { get; set; }
         public string Value { get; set; }
         public string Description { get; set; }
+        public string Regex { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContactUpdate> ContactUpdate { get; set; }
+        public virtual ICollection<UpdateSubInformation> UpdateSubInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserContact> UserContact { get; set; }
     }

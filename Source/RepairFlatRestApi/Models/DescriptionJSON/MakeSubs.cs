@@ -160,6 +160,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Guid? idContact;
             public string Value;
             public string Description;
+            public string Regex;
+
         }
 
         public class ListOfContactsUpd : ListOfContacts

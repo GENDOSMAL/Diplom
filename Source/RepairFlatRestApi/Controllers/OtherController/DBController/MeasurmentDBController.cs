@@ -77,7 +77,6 @@ namespace RepairFlatRestApi.Controllers.OtherController
                                 Lenght = element.Lenght,
                                 POfElement = element.POfElement,
                                 Width = element.Width,
-                                WidthOfSlope = element.WidthOfSlope,
                                 TypeOfElement = element.TypeOfElement
                             };
                             db.OrderElementOfMeasurments.Add(elementOfMeasurment);
@@ -126,7 +125,6 @@ namespace RepairFlatRestApi.Controllers.OtherController
                                     Lenght = element.Lenght,
                                     POfElement = element.POfElement,
                                     Width = element.Width,
-                                    WidthOfSlope = element.WidthOfSlope,
                                     TypeOfElement = element.TypeOfElement
                                 };
                                 db.OrderElementOfMeasurments.AddOrUpdate(elementOfMeasurment);
@@ -176,7 +174,6 @@ namespace RepairFlatRestApi.Controllers.OtherController
                             POfElement = element.POfElement,
                             TypeOfElement = element.TypeOfElement,
                             Width = element.Width,
-                            WidthOfSlope = element.WidthOfSlope
                         };
                         listOFElement.Add(elementOf);
                     }

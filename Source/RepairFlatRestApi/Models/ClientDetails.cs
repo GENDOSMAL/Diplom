@@ -17,8 +17,8 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ClientDetails()
         {
-            this.OrderInformation = new HashSet<OrderInformation>();
             this.DocPayment = new HashSet<DocPayment>();
+            this.OrderInformation = new HashSet<OrderInformation>();
         }
     
         public System.Guid IdClient { get; set; }
@@ -26,8 +26,8 @@ namespace RepairFlatRestApi.Models
     
         public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderInformation> OrderInformation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocPayment> DocPayment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderInformation> OrderInformation { get; set; }
     }
 }

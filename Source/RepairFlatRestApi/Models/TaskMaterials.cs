@@ -14,11 +14,14 @@ namespace RepairFlatRestApi.Models
     
     public partial class TaskMaterials
     {
-        public System.Guid idOfCompare { get; set; }
+        public System.Guid idTaskMaterials { get; set; }
         public Nullable<System.Guid> idTask { get; set; }
-        public Nullable<System.Guid> idMaterials { get; set; }
+        public Nullable<System.Guid> idMaterial { get; set; }
+        public Nullable<double> Count { get; set; }
+        public Nullable<decimal> Cost { get; set; }
+        public string Description { get; set; }
     
-        public virtual OrderMaterial OrderMaterial { get; set; }
         public virtual OrderTasks OrderTasks { get; set; }
+        public virtual OurMaterials OurMaterials { get; set; }
     }
 }

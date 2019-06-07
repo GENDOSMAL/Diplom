@@ -18,7 +18,7 @@ namespace RepairFlatRestApi.Models
         public PremisesType()
         {
             this.OrderMeasurements = new HashSet<OrderMeasurements>();
-            this.PremisesUpdate = new HashSet<PremisesUpdate>();
+            this.UpdateSubInformation = new HashSet<UpdateSubInformation>();
         }
     
         public System.Guid idPremises { get; set; }
@@ -28,6 +28,6 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderMeasurements> OrderMeasurements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PremisesUpdate> PremisesUpdate { get; set; }
+        public virtual ICollection<UpdateSubInformation> UpdateSubInformation { get; set; }
     }
 }

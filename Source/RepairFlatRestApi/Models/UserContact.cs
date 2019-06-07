@@ -27,9 +27,9 @@ namespace RepairFlatRestApi.Models
         public string Description { get; set; }
         public Nullable<System.DateTime> DateAdd { get; set; }
     
-        public virtual TypeOfContact TypeOfContact { get; set; }
-        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderInformation> OrderInformation { get; set; }
+        public virtual TypeOfContact TypeOfContact { get; set; }
+        public virtual User User { get; set; }
     }
 }

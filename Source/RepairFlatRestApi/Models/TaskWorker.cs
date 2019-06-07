@@ -10,10 +10,15 @@
 namespace RepairFlatRestApi.Models
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_helpdiagramdefinition_Result
+    public partial class TaskWorker
     {
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public System.Guid idCmbination { get; set; }
+        public Nullable<System.Guid> idTask { get; set; }
+        public Nullable<System.Guid> idWorker { get; set; }
+    
+        public virtual OrderTasks OrderTasks { get; set; }
+        public virtual User User { get; set; }
     }
 }

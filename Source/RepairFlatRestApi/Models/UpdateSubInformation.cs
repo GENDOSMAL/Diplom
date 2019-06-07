@@ -12,15 +12,20 @@ namespace RepairFlatRestApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PremisesUpdate
+    public partial class UpdateSubInformation
     {
-        public System.Guid idPremisesUpdate { get; set; }
-        public Nullable<System.Guid> idPremises { get; set; }
-        public Nullable<System.DateTime> DateOfUpdate { get; set; }
-        public Nullable<System.Guid> IdUser { get; set; }
+        public System.Guid idInformation { get; set; }
+        public Nullable<System.Guid> idSubIn { get; set; }
         public string TypeOfUpdate { get; set; }
+        public string TypeOfSubs { get; set; }
+        public Nullable<System.DateTime> DateOfUpdate { get; set; }
+        public Nullable<System.Guid> idUserMake { get; set; }
     
+        public virtual OurMaterials OurMaterials { get; set; }
+        public virtual OurServices OurServices { get; set; }
         public virtual PremisesType PremisesType { get; set; }
+        public virtual TypeOfContact TypeOfContact { get; set; }
         public virtual User User { get; set; }
+        public virtual WorkerPosts WorkerPosts { get; set; }
     }
 }

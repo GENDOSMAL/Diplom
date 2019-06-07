@@ -18,11 +18,10 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.Guid> idMeasurements { get; set; }
         public string TypeOfElement { get; set; }
         public Nullable<double> Lenght { get; set; }
+        public Nullable<double> Height { get; set; }
         public Nullable<double> Width { get; set; }
         public Nullable<double> POfElement { get; set; }
-        public Nullable<double> WidthOfSlope { get; set; }
         public string Description { get; set; }
-        public Nullable<double> Height { get; set; }
     
         public virtual OrderMeasurements OrderMeasurements { get; set; }
     }

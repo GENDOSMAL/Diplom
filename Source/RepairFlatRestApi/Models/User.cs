@@ -17,14 +17,10 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.MaterialsUpdate = new HashSet<MaterialsUpdate>();
-            this.PremisesUpdate = new HashSet<PremisesUpdate>();
-            this.ServicesUpdate = new HashSet<ServicesUpdate>();
-            this.UserContact = new HashSet<UserContact>();
-            this.ContactUpdate = new HashSet<ContactUpdate>();
             this.DeletedSubStr = new HashSet<DeletedSubStr>();
-            this.PostsUpdate = new HashSet<PostsUpdate>();
-            this.OrderWorker = new HashSet<OrderWorker>();
+            this.TaskWorker = new HashSet<TaskWorker>();
+            this.UpdateSubInformation = new HashSet<UpdateSubInformation>();
+            this.UserContact = new HashSet<UserContact>();
         }
     
         public System.Guid idUser { get; set; }
@@ -37,23 +33,15 @@ namespace RepairFlatRestApi.Models
         public string TypeOfUser { get; set; }
     
         public virtual ClientDetails ClientDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeletedSubStr> DeletedSubStr { get; set; }
         public virtual LoginInformation LoginInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MaterialsUpdate> MaterialsUpdate { get; set; }
+        public virtual ICollection<TaskWorker> TaskWorker { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PremisesUpdate> PremisesUpdate { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ServicesUpdate> ServicesUpdate { get; set; }
+        public virtual ICollection<UpdateSubInformation> UpdateSubInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserContact> UserContact { get; set; }
         public virtual WorkerDetails WorkerDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ContactUpdate> ContactUpdate { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeletedSubStr> DeletedSubStr { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PostsUpdate> PostsUpdate { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderWorker> OrderWorker { get; set; }
     }
 }

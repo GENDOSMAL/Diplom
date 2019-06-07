@@ -17,10 +17,8 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OrderInformation()
         {
-            this.OrderMaterial = new HashSet<OrderMaterial>();
             this.OrderMeasurements = new HashSet<OrderMeasurements>();
             this.OrderPayment = new HashSet<OrderPayment>();
-            this.OrderServises = new HashSet<OrderServises>();
             this.OrderTasks = new HashSet<OrderTasks>();
         }
     
@@ -38,17 +36,13 @@ namespace RepairFlatRestApi.Models
     
         public virtual AdressDescription AdressDescription { get; set; }
         public virtual ClientDetails ClientDetails { get; set; }
+        public virtual UserContact UserContact { get; set; }
         public virtual WorkerDetails WorkerDetails { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderMaterial> OrderMaterial { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderMeasurements> OrderMeasurements { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderPayment> OrderPayment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderServises> OrderServises { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderTasks> OrderTasks { get; set; }
-        public virtual UserContact UserContact { get; set; }
     }
 }

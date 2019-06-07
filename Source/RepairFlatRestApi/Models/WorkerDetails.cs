@@ -17,15 +17,15 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public WorkerDetails()
         {
+            this.DocPayment = new HashSet<DocPayment>();
             this.EstabilismentPost = new HashSet<EstabilismentPost>();
+            this.InformatioForPayment = new HashSet<InformatioForPayment>();
             this.OrderInformation = new HashSet<OrderInformation>();
             this.OrderPayment = new HashSet<OrderPayment>();
             this.OrderTasksState = new HashSet<OrderTasksState>();
             this.WorkersOperats = new HashSet<WorkersOperats>();
             this.WorkersPayGive = new HashSet<WorkersPayGive>();
             this.WorkersPayGive1 = new HashSet<WorkersPayGive>();
-            this.DocPayment = new HashSet<DocPayment>();
-            this.InformatioForPayment = new HashSet<InformatioForPayment>();
         }
     
         public System.Guid IdWorker { get; set; }
@@ -33,7 +33,11 @@ namespace RepairFlatRestApi.Models
     
         public virtual AdressDescription AdressDescription { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DocPayment> DocPayment { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EstabilismentPost> EstabilismentPost { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InformatioForPayment> InformatioForPayment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderInformation> OrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,9 +51,5 @@ namespace RepairFlatRestApi.Models
         public virtual ICollection<WorkersPayGive> WorkersPayGive { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkersPayGive> WorkersPayGive1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DocPayment> DocPayment { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<InformatioForPayment> InformatioForPayment { get; set; }
     }
 }
