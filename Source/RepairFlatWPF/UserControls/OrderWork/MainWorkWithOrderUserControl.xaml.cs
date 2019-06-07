@@ -52,7 +52,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void ReturnBtn_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+            MakeSomeHelp.DataGridMakeWork(new SelectOrderToWork());
         }
 
         private void SelectTabsClick(object sender, RoutedEventArgs e)

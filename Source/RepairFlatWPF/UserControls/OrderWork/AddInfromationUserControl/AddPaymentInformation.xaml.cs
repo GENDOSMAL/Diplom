@@ -29,19 +29,16 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         BaseWindow window;
         #endregion
 
-        int number = 0;
         #region Обработки
-        public AddPaymentInformation(Guid idOrder,ref BaseWindow baseWindow, int number=0)
+        public AddPaymentInformation(Guid idOrder,ref BaseWindow baseWindow,object DataAboutPayment=null)
         {
             InitializeComponent();
             window = baseWindow;
             this.idOrder = idOrder;
-            if (number ==0)
+            if (DataAboutPayment!=null)
             {
-                this.number = number;
-                string query = $"select * from InformationAboutPyment where Number={number}";
-
                 NewOrder = false;
+                //Обновление данных 
             }
             else
             {
@@ -64,8 +61,8 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             if (CheckFields())
             {
                 if (NewOrder)
-                {
-                    string insert = "insert into InformationAboutPyment (idOrder,NameOfUserMake,Summa,Desc,Date) values (@idOrder,@NameOfUserMake,@Summa,@Desc,@Date)";
+                {//Если добавление
+                    
 
                 }
                 else
@@ -88,11 +85,11 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         private bool CheckFields()
         {//TODO Глобально над этим подумать
             bool result = true;
-            if (string.IsNullOrEmpty(NumberOfDoc.Text.Trim()))
-            {
-                MakeSomeHelp.MSG("Необходимо указать номер документа об оплате!", MsgBoxImage: MessageBoxImage.Error);
-                return false;
-            }
+            //if (string.IsNullOrEmpty(NumberOfDoc.Text.Trim()))
+            //{
+            //    MakeSomeHelp.MSG("Необходимо указать номер документа об оплате!", MsgBoxImage: MessageBoxImage.Error);
+            //    return false;
+            //}
             if (!DatePayment.SelectedDate.HasValue)
             {
                 MakeSomeHelp.MSG("Необходимо указать дату оплаты!", MsgBoxImage: MessageBoxImage.Error);

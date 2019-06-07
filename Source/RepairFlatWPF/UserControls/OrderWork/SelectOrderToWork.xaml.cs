@@ -15,59 +15,109 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static RepairFlatWPF.Model.OrderDesc;
 
 namespace RepairFlatWPF.UserControls
 {
     /// <summary>
     /// Interaction logic for MainOrderUserControler.xaml
     /// </summary>
-    public partial class MainOrderUserControler : UserControl
+    public partial class SelectOrderToWork : UserControl
     {
         DataTable AllDataOfOrder;
         DataTable SelectedData;
-
+        Model.OrderDesc.AllOrder ListofOrders = new Model.OrderDesc.AllOrder();
         List<Tuple<int, Guid?>> DataAboutidOrder;
-        public MainOrderUserControler()
+        bool start = true;
+        public SelectOrderToWork()
         {
             InitializeComponent();
+            DownloadDataAboutOrderы();
             foreach (var type in SomeEnums.RypeOfSearchOrder)
             {
                 SertedType.Items.Add(type);
             }
-            DownloadDataAboutOrder();
+            StatusOfOrders.Items.Add("Все заказы");
+            foreach (string str in SomeEnums.StatusOfOrder)
+            {
+                StatusOfOrders.Items.Add(str);
+            }
+           
+            StatusOfOrders.SelectedIndex = 0;
+            
         }
 
-        private async void DownloadDataAboutOrder()
+        async private void DownloadDataAboutOrderы()
+        {
+            var InformFromserver = await Task.Run(() => MakeDownloadByLink($"api/order/allorders"));
+            ListofOrders = JsonConvert.DeserializeObject<Model.OrderDesc.AllOrder>(InformFromserver.ToString());
+            MakeDataTable();
+        }
+
+        void MakeDataTable()
         {
             AllDataOfOrder = new DataTable("Client");
             foreach (string NameOfColumn in SomeEnums.OrderMainTable)
             {
                 AllDataOfOrder.Columns.Add(NameOfColumn);
             }
-            DataGrid.ItemsSource = AllDataOfOrder.DefaultView;
+           
             DataAboutidOrder = new List<Tuple<int, Guid?>>();
-            var InformFromserver = await Task.Run(() => MakeDownloadByLink($"api/order/allorders"));
-            var ListofOrders = JsonConvert.DeserializeObject<Model.OrderDesc.AllOrder>(InformFromserver.ToString());
+           
+            int sele = StatusOfOrders.SelectedIndex;
+            if (sele == 0)
+                MakeDataTableWork();
+            else
+                MakeDataTableWork(SomeEnums.StatusOfOrder[sele-1]);
+            DataGrid.ItemsSource = AllDataOfOrder.DefaultView;
+            if (AllDataOfOrder.Rows.Count == 0)
+            {
+                if (StatusOfOrders.SelectedIndex != 0)
+                    MakeSomeHelp.MSG($"Для статуса <{StatusOfOrders.Text}> не найдено заказов");
+            }
+        }
+
+        public void MakeDataTableWork(string TypeOfOrder = "")
+        {
             if (ListofOrders.success)
             {
                 int number = 1;
                 foreach (var orderInf in ListofOrders.listOfOrders)
                 {
-                    DataRow newClientRow = AllDataOfOrder.NewRow();
-                    newClientRow[0] = number;
-                    newClientRow[1] = orderInf.DataStart.Value.ToString("dd.MM.yyyy");
-                    newClientRow[2] = SomeEnums.StatusOfOrder[orderInf.Status ?? default(int)];
-                    newClientRow[3] = orderInf.FIOClient;
-                    newClientRow[4] = orderInf.ContactData;
-                    newClientRow[5] = orderInf.DataAboutAdress;
-                    newClientRow[6] = orderInf.AllSumma;
-                    newClientRow[7] = orderInf.Desc;
-
-                    AllDataOfOrder.Rows.Add(newClientRow);
-                    DataAboutidOrder.Add(new Tuple<int, Guid?>(number, orderInf.idOrder));
-                    number++;
+                    if (!string.IsNullOrEmpty(TypeOfOrder))
+                    {
+                        if (SomeEnums.StatusOfOrder[orderInf.Status ?? default(int)] == TypeOfOrder)
+                        {
+                            MakeRow(orderInf, number);
+                            number++;
+                        }
+                    }
+                    else
+                    {
+                        MakeRow(orderInf, number);
+                        number++;
+                    }
                 }
+
             }
+
+        }
+
+        void MakeRow(AllDataAboutOrder orderInf, int number)
+        {
+            DataRow newClientRow = AllDataOfOrder.NewRow();
+            newClientRow[0] = number;
+            newClientRow[1] = orderInf.DataStart.Value.ToString("dd.MM.yyyy");
+            newClientRow[2] = SomeEnums.StatusOfOrder[orderInf.Status ?? default(int)];
+            newClientRow[3] = orderInf.FIOClient;
+            newClientRow[4] = orderInf.ContactData;
+            newClientRow[5] = orderInf.DataAboutAdress;
+            newClientRow[6] = orderInf.AllSumma;
+            newClientRow[7] = orderInf.Desc;
+
+            AllDataOfOrder.Rows.Add(newClientRow);
+            DataAboutidOrder.Add(new Tuple<int, Guid?>(number, orderInf.idOrder));
+           
         }
 
         public object MakeDownloadByLink(string UrlOfDownload)
@@ -79,9 +129,9 @@ namespace RepairFlatWPF.UserControls
         private void AddOrder_Click(object sender, RoutedEventArgs e)
         {
             BaseWindow baseWindow = new BaseWindow("Cоздание нового заказа");
-            baseWindow.MakeOpen(new OrderWork.MakeNewOrderUserControl(ref baseWindow));
+            baseWindow.MakeOpen(new OrderWork.CreateNewOrder(ref baseWindow));
             baseWindow.ShowDialog();
-            DownloadDataAboutOrder();
+            MakeDataTable();
         }
 
         private void EditOrder_Click(object sender, RoutedEventArgs e)
@@ -95,9 +145,9 @@ namespace RepairFlatWPF.UserControls
                 {
                     var idSelectOrder = DataAboutidOrder.Where(e1 => e1.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                     BaseWindow baseWindow = new BaseWindow($"Редактирование заказа");
-                    baseWindow.MakeOpen(new OrderWork.MakeNewOrderUserControl(ref baseWindow, false, idSelectOrder ?? default(Guid)));
+                    baseWindow.MakeOpen(new OrderWork.CreateNewOrder(ref baseWindow, false, idSelectOrder ?? default(Guid)));
                     baseWindow.ShowDialog();
-                    DownloadDataAboutOrder();
+                    MakeDataTable();
                 }
             }
             else
@@ -130,14 +180,14 @@ namespace RepairFlatWPF.UserControls
             if (SelectIndex != -1)
             {
                 var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex);
-                string fioclient = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex,3).ToString();
+                string fioclient = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex, 3).ToString();
                 string adress = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex, 5).ToString();
                 string allsumma = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex, 6).ToString();
                 int numberOfRows = 0;
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
                     var idSelectOrder = DataAboutidOrder.Where(e1 => e1.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                    MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(idSelectOrder ?? default(Guid),FioClient:fioclient,Adress:adress,AllSumma:allsumma));
+                    MakeSomeHelp.DataGridMakeWork(new OrderWork.MainWorkWithOrderUserControl(idSelectOrder ?? default(Guid), FioClient: fioclient, Adress: adress, AllSumma: allsumma));
                 }
             }
             else
@@ -162,15 +212,12 @@ namespace RepairFlatWPF.UserControls
                             idColumn = 2;
                             break;
                         case 2:
-                            idColumn = 1;
-                            break;
-                        case 3:
                             idColumn = 3;
                             break;
                     }
 
 
-                    if (SertedType.SelectedIndex==0)
+                    if (SertedType.SelectedIndex == 0)
                     {
                         DataGrid.ItemsSource = AllDataOfOrder.DefaultView;
                     }
@@ -185,7 +232,7 @@ namespace RepairFlatWPF.UserControls
                         List<DataRow> listOfOrder = new List<DataRow>();
                         for (int i = 0; i < AllDataOfOrder.Rows.Count; i++)
                         {
-                            if (AllDataOfOrder.Rows[i][idColumn].ToString().Trim().Contains( SearchText.Text.Trim()))
+                            if (AllDataOfOrder.Rows[i][idColumn].ToString().Trim().Contains(SearchText.Text.Trim()))
                             {
                                 DataRow newOrderRow = SelectedData.NewRow();
                                 newOrderRow[0] = AllDataOfOrder.Rows[i][0];
@@ -202,7 +249,7 @@ namespace RepairFlatWPF.UserControls
                         if (listOfOrder.Count != 0)
                         {
                             SelectedData.Rows.Clear();
-                            for(int i=0;i< listOfOrder.Count; i++)
+                            for (int i = 0; i < listOfOrder.Count; i++)
                             {
                                 SelectedData.Rows.Add(listOfOrder[i]);
                             }
@@ -215,7 +262,7 @@ namespace RepairFlatWPF.UserControls
                     }
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MakeSomeHelp.MSG($"Произошла ошибка при поиске{ex.ToString()}");
                 }
@@ -232,5 +279,18 @@ namespace RepairFlatWPF.UserControls
 
         }
 
+        private void StatusOfOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!start)
+                MakeDataTable();
+            else
+                start = false;
+
+
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Office.Interop.Excel;
+using Newtonsoft.Json;
 using RepairFlat.Model;
 using RepairFlatWPF.Model;
 using RepairFlatWPF.UserControls.KadrWork;
@@ -20,6 +21,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static RepairFlatWPF.Model.WorkerDescriptiom;
 using static RepairFlatWPF.SomeEnums;
+using DataTable = System.Data.DataTable;
 
 namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 {
@@ -306,11 +308,10 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                                                 rows.Cells[4].Range.Text = conact.Desctription.ToString();
                                                 Number++;
                                             }
-                                        }
-
+                                        }                                       
                                     }
-
                                     application.Activate();
+                                    
                                 }
 
                             }

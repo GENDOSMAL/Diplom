@@ -126,7 +126,7 @@
             </Grid.ColumnDefinitions>
             <Grid Name="GridForContent" Grid.Column="1" >
             </Grid>
-            <Grid Name="Bluring" Background="Black" Grid.Column="1" Opacity="0.3"/>
+            <Grid Name="Bluring" Background="Black" Grid.Column="1" Opacity="0.3" MouseLeftButtonUp="Bluring_MouseLeftButtonUp"/>
             
             <Grid Name="GridMenu" Background="{StaticResource MenuColor}"   Grid.Column="0" Grid.ColumnSpan="2" Width="300" HorizontalAlignment="Left" >
                 <StackPanel>

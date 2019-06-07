@@ -64,7 +64,7 @@ namespace RepairFlatWPF
                 WorkWithOrder.Visibility = Visibility.Visible;
                 ClientWork.Visibility = Visibility.Visible;
                 Spravoch.Visibility = Visibility.Visible;
-                MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+                MakeSomeHelp.DataGridMakeWork(new SelectOrderToWork());
             }
             else if (SaveSomeData.TypeOfUser == SomeEnums.TypeOfUser.BB.ToString())
             {//Босс
@@ -74,7 +74,7 @@ namespace RepairFlatWPF
                 KadrWork.Visibility = Visibility.Visible;
                 Finans.Visibility = Visibility.Visible;
                 Settings.Visibility = Visibility.Visible;
-                MakeSomeHelp.DataGridMakeWork(new MainOrderUserControler());
+                MakeSomeHelp.DataGridMakeWork(new SelectOrderToWork());
             }
         }
 
@@ -105,7 +105,7 @@ namespace RepairFlatWPF
                         //Работа с заказами
                         CloseMenu();
 
-                        MakeSomeHelp.DataGridMakeWork(new UserControls.MainOrderUserControler());
+                        MakeSomeHelp.DataGridMakeWork(new UserControls.SelectOrderToWork());
                         break;
                     case 1:
                         //Работа с клиентами
@@ -187,6 +187,11 @@ namespace RepairFlatWPF
         {
             MainGrid.Children.Clear();
             MainGrid.Children.Add(ss1);
+        }
+
+        private void Bluring_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            CloseMenu();
         }
     }
 }

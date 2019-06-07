@@ -252,14 +252,14 @@
     <Compile Include="UserControls\MoneyInformation\FinansInformation.xaml.cs">
       <DependentUpon>FinansInformation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\OrderWork\MainOrderUserControler.xaml.cs">
-      <DependentUpon>MainOrderUserControler.xaml</DependentUpon>
+    <Compile Include="UserControls\OrderWork\SelectOrderToWork.xaml.cs">
+      <DependentUpon>SelectOrderToWork.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\BaseWindow.xaml.cs">
       <DependentUpon>BaseWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\OrderWork\MakeNewOrderUserControl.xaml.cs">
-      <DependentUpon>MakeNewOrderUserControl.xaml</DependentUpon>
+    <Compile Include="UserControls\OrderWork\CreateNewOrder.xaml.cs">
+      <DependentUpon>CreateNewOrder.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SettingsAndSubsInf\WorkWithSubInfromation.xaml.cs">
       <DependentUpon>WorkWithSubInfromation.xaml</DependentUpon>
@@ -442,7 +442,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\OrderWork\MainOrderUserControler.xaml">
+    <Page Include="UserControls\OrderWork\SelectOrderToWork.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -450,7 +450,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\OrderWork\MakeNewOrderUserControl.xaml">
+    <Page Include="UserControls\OrderWork\CreateNewOrder.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
