@@ -9,11 +9,15 @@
     <Grid>
         <Grid    >
             <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="55"/>
-                
+                <RowDefinition Height="65"/>
+
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Background="#e9e9e9" Margin="0 15 0 0">
+            <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
+                <TextBlock Name="NumberOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Создание нового задания" FontFamily="Times New Roman" FontSize="45 "/>
+            </Viewbox>
+            <Grid Grid.Row="1" Background="#e9e9e9" Margin="0 15 0 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="55"/>
                     <RowDefinition Height="5"/>
@@ -29,7 +33,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Button Uid="0" Grid.Column="0"   Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
@@ -37,30 +41,30 @@
                             </Viewbox>
                         </Button.Content>
                     </Button>
-                  
+
                     <Button Uid="1" Grid.Column="1" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
-                        <Button.Content>
-                            <Viewbox  >
-                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выбранные работники" FontFamily="Times New Roman" FontSize="45 "/>
-                            </Viewbox>
-                        </Button.Content>
-                    </Button>                    
-                    <Button Uid="2" Grid.Column="2" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация об услугах" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
                     </Button>
-                    <Button Uid="3" Grid.Column="3"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
+                    <Button Uid="2" Grid.Column="2" Grid.Row="0"     Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick" FontSize="18" Style="{StaticResource AllButtonAction}">
                         <Button.Content>
                             <Viewbox  >
                                 <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Информация о материалах" FontFamily="Times New Roman" FontSize="45 "/>
                             </Viewbox>
                         </Button.Content>
                     </Button>
+                    <Button Uid="3" Grid.Column="3"  Grid.Row="0"    Height="40" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Black" Click="SelectTabsClick"  FontSize="18" Style="{StaticResource AllButtonAction}">
+                        <Button.Content>
+                            <Viewbox  >
+                                <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выбранные работники" FontFamily="Times New Roman" FontSize="45 "/>
+                            </Viewbox>
+                        </Button.Content>
+                    </Button>
                 </Grid>
-               
+
 
                 <Grid Grid.Row="1" Grid.ColumnSpan="3">
                     <Grid.ColumnDefinitions>
@@ -71,9 +75,9 @@
                     </Grid.ColumnDefinitions>
                     <Rectangle Name="GridCursor" Grid.Column="0" Fill="#673ab7" />
                 </Grid>
-                <Grid x:Name="GridForMainContent" Grid.Row="2" Grid.ColumnSpan="3" >
+                <Grid x:Name="GridForMainContent" Grid.Row="2" Grid.ColumnSpan="3"   >
                     <!--Для основной информации о задании-->
-                    <Grid Name="ForMainData" MaxWidth="800" MaxHeight="700" Visibility="Collapsed" >
+                    <Grid Name="ForMainData" MaxWidth="800" MaxHeight="500" Visibility="Collapsed" >
                         <Grid.RowDefinitions>
                             <!--Для описания-->
                             <RowDefinition Height="*"/>
@@ -83,7 +87,7 @@
                             <RowDefinition Height="auto"/>
                             <!--Для суммы данной операции-->
                             <RowDefinition Height="*"/>
-                            
+
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <TextBox Name="Description" Grid.Row="2" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Описание (не больше 500)" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" Height="auto" TextWrapping="Wrap"/>
@@ -104,87 +108,105 @@
                         <TextBox Name="AllSumma" Grid.Row="3" FontFamily="Times New Roman" FontSize="25"   Margin="15,10,15,10" materialDesign:HintAssist.Hint="Стоимость задания" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="500" IsEnabled="False" />
 
                     </Grid>
-
+                    <!---->
                     <!--Для информации об услугах-->
-                    <Grid Name="ForServises"  Visibility="Collapsed" >
+                    <Grid Name="ForServises"  Visibility="Collapsed">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="35"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="43"/>
                         </Grid.RowDefinitions>
-                        <!--Область поиска-->
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedTypeServises" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
-                            <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchTextServises" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
-                            <Button Name="BtnSearchServis" Click="BtnSearchServis_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
-                        </Grid>
+                        <!--Область заголовка-->
+                        <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
+                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Добавление услуг" FontFamily="Times New Roman" FontSize="45 "/>
+                        </Viewbox>
                         <!--Таблица-->
                         <DataGrid Grid.Row="1" x:Name="DataAboutServises" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
                         <!--Кнопки-->
-                        <Grid Grid.Row="2" Name="ForUser"  >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Добавление" Name="AddServises" Click="AddServises_Click" />
-                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Редактировние" Name="EditServises" Click="EditServises_Click" />
-                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Удаление" Name="DeleteSerises" Click="DeleteSerises_Click" />
-                        </Grid>
-
+                        <Viewbox Grid.Row="2" Margin="0 0 0 3">
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Добавление" Name="AddServises" Click="AddServises_Click" />
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Редактировние" Name="EditServises" Click="EditServises_Click" />
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Удаление" Name="DeleteSerises" Click="DeleteSerises_Click" />
+                            </Grid>
+                        </Viewbox>
                     </Grid>
-                    <!--Для информации о материалах-->
-                    <Grid Name="ForMaterials" Visibility="Collapsed" >
+                    <!--Для информации о материалах  -->
+                    <Grid Name="ForMaterials"  Visibility="Collapsed">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="35"/>
                             <RowDefinition Height="*"/>
-                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="43"/>
                         </Grid.RowDefinitions>
-                        <!--Область поиска-->
-                        <Grid Grid.Row="0">
-                            <Grid.ColumnDefinitions>
-
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <ComboBox materialDesign:HintAssist.Hint="Критерия поиска" Name="SelectedTypeMeasurment" Grid.Column="0" Margin="15 5 7.5 0" FontFamily="Times New Roman" FontSize="20"/>
-                            <TextBox Style="{StaticResource ResourceKey=MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Текст для поиска" Grid.Column="1" Name="SearchTextMeasurment" Margin="7.5 0 7.5 8" FontFamily="Times New Roman" FontSize="22"/>
-                            <Button Name="BtnSearchMaterials" Click="BtnSearchMaterials_Click" Grid.Column="2" Margin="8,5,15,8" FontSize="26" Style="{StaticResource AllButtonAction}" Content="Поиск" Height="Auto" />
-                        </Grid>
+                        <!--Область заголовка-->
+                        <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
+                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Требуемые материалы" FontFamily="Times New Roman" FontSize="45 "/>
+                        </Viewbox>
                         <!--Таблица-->
-                        <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+                        <DataGrid Grid.Row="1" x:Name="DataAboutMaterials" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
                         <!--Кнопки-->
-                        <Grid Grid.Row="2" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Добавление" Name="AddMaterials" Click="AddMaterials_Click" />
-                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Редактировние" Name="EditMaterials" Click="EditMaterials_Click" />
-                            <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Удаление" Name="DeleteMaterials" Click="DeleteMaterials_Click" />
-                        </Grid>
+                        <Viewbox Grid.Row="2" Margin="0 0 0 3">
+                            <Grid  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Добавление" Name="AddMaterials" Click="AddMaterials_Click" />
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Редактировние" Name="EditMaterials" Click="EditMaterials_Click" />
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Удаление" Name="DeleteMaterials" Click="DeleteMaterials_Click" />
+                            </Grid>
+                        </Viewbox>
+                    </Grid>
+                    <!--Для информации о работниках  -->
+                    <Grid Name="ForWorker" Visibility="Collapsed">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="43"/>
+                        </Grid.RowDefinitions>
+                        <!--Область заголовка-->
+                        <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
+                            <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="Требуемые работники" FontFamily="Times New Roman" FontSize="45 "/>
+                        </Viewbox>
+                        <!--Таблица-->
+                        <DataGrid Grid.Row="1" x:Name="DataAboutWorker" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+                        <!--Кнопки-->
+                        <Viewbox Grid.Row="2" Margin="0 0 0 3">
+                            <Grid  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Выбрать" Name="SelectWorker" Click="SelectWorker_Click" />
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Редактировние" Name="EditSelectWorker" Click="EditSelectWorker_Click" />
+                                <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 0 7.5 0" Width="240" Height="40" Content="Исключить" Name="DeleteWorker" Click="DeleteWorker_Click" />
+                            </Grid>
+                        </Viewbox>
                     </Grid>
                 </Grid>
             </Grid>
 
-            
 
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button x:Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0"   VerticalAlignment="Center" Height="40" Width="240" Margin="0"/>
-                <Button x:Name="ExtionButton" Click="ExtionButton_Click"  Content="Сохранить"  Style="{StaticResource AllButtonAction}" Grid.Column="2"  VerticalAlignment="Center" Height="40" Width="240"/>
-            </Grid>
+            <Viewbox Grid.Row="2" Margin="0 10 0 5">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Возврат"  Style="{StaticResource AllButtonAction}" Grid.Column="0"   VerticalAlignment="Center" Height="40" Width="240" Margin="10 0 0 0"/>
+                    <Button x:Name="ShowPremises" Click="ShowPremises_Click"  Content="Просмотр помещений"  FontSize="22" Style="{StaticResource AllButtonAction}" Grid.Column="1"  VerticalAlignment="Center" Height="40" Width="240" Margin="15 0 15 0"/>
+                    <Button x:Name="ExtionButton" Click="ExtionButton_Click"  Content="Сохранить"  Style="{StaticResource AllButtonAction}" Grid.Column="2"  VerticalAlignment="Center" Height="40" Width="240" Margin="0 0 10 0"/>
+                </Grid>
+            </Viewbox>
+
         </Grid>
     </Grid>
 </UserControl>

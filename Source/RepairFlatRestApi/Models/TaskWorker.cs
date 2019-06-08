@@ -17,6 +17,7 @@ namespace RepairFlatRestApi.Models
         public System.Guid idCmbination { get; set; }
         public Nullable<System.Guid> idTask { get; set; }
         public Nullable<System.Guid> idWorker { get; set; }
+        public string Role { get; set; }
     
         public virtual OrderTasks OrderTasks { get; set; }
         public virtual User User { get; set; }

@@ -88,7 +88,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError(() =>
             {
-                return OrderDBController.MakeDataAboutAllOrderPayment(idOrder);
+                return OrderDBController.MakeDataAboutAllOrderTask(idOrder);
             }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
         }
 

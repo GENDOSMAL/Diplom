@@ -799,15 +799,20 @@ namespace RepairFlatRestApi.Controllers
                                 TypeOfMaterial = NewMaterial.TypeOfMaterial,
                                 UnitOfMeasue = NewMaterial.UnitOfMeasue
                             };
+                            var dd = new Promezh
+                            {
+                                idColob = Guid.NewGuid(),
+                                idSubInf = NewMaterial.idMaterials
 
+                            };
                             var NMatHistory = new UpdateSubInformation
                             {
                                 DateOfUpdate = DateOfAction,
                                 TypeOfUpdate = SomeEnums.TypeOfAction.AddOrUpdate.ToString(),
-                                TypeOfSubs=SomeEnums.TypeOfSubs.Materials.ToString(),
-                                idSubIn= NewMaterial.idMaterials,
-                                idInformation=Guid.NewGuid(),
-                                idUserMake= ListOfMaterials.idUser                                
+                                TypeOfSubs = SomeEnums.TypeOfSubs.Materials.ToString(),
+                                idSubIn = NewMaterial.idMaterials,
+                                idInformation = Guid.NewGuid(),
+                                idUserMake = ListOfMaterials.idUser
 
                             };
                             db.OurMaterials.AddOrUpdate(NMat);

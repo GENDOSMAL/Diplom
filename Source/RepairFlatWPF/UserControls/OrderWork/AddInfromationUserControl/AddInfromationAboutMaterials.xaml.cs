@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RepairFlatWPF.Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static RepairFlatWPF.Model.OrderDesc;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 {
@@ -20,38 +23,40 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
     /// </summary>
     public partial class AddInfromationAboutMaterials : UserControl
     {
-        Guid idOrder;
         Guid idMaterial;
         bool NewInformation = true;
         bool InformationSelect = false;
         double Count;
+        decimal cost;
         BaseWindow window;
-        public AddInfromationAboutMaterials(Guid IdOrder,ref BaseWindow baseWindow,object InfromationAboutMaterial=null)
+        public AddInfromationAboutMaterials(ref BaseWindow baseWindow,object InfromationAboutMaterial=null)
         {
             InitializeComponent();
             window = baseWindow;
-            this.idOrder = IdOrder;
             if (InfromationAboutMaterial != null)
             {
                 AddMaterial.Content = "Редактировать";
                 NewInformation = false;
+                var data = InfromationAboutMaterial as TaskMaterial;
             }
-            else
-            {
-                idMaterial = Guid.NewGuid();
-            }
+
         }
 
         private void SelectMaterial_Click(object sender, RoutedEventArgs e)
         {
-            //TODO Окно с выбором материала
-            if (true)//Если материал был выбран
+            BaseWindow baseWindow = new BaseWindow("Выбор материала");
+            baseWindow.MakeOpen(new SettingsAndSubsInf.SelectSomeSubs(ref baseWindow, SomeEnums.TypeOfSubs.Materials));
+            baseWindow.ShowDialog();
+            if (SaveSomeData.MakeSomeOperation)
             {
                 InformationSelect = true;
-            }
-            else
-            {
-                InformationSelect = false;
+                idMaterial = SaveSomeData.idSubs;
+                SaveSomeData.idSubs = new Guid();
+                var row = SaveSomeData.SomeObject as DataRow;
+                SaveSomeData.SomeObject = null;
+                cost = decimal.Parse(row[4].ToString());
+                NameOfMaterial.Text = row[1].ToString()?.Trim();
+                Cost.Text = cost.ToString();
             }
         }
 
@@ -64,14 +69,16 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         {
             if (CheckFields())
             {
-                if (NewInformation)
+                TaskMaterial taskMat = new TaskMaterial
                 {
-                    //Добавляем материал
-                }
-                else
-                {
-                    //Редактируем
-                }
+                    NameOfMaterials = NameOfMaterial.Text,
+                    cost = cost,
+                    count = Count,
+                    idMaterial = idMaterial,
+                };
+                SaveSomeData.SomeObject = taskMat;
+                SaveSomeData.MakeSomeOperation = true;
+                window.Close();
             }
         }
 

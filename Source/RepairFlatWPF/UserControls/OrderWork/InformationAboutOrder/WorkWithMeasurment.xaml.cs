@@ -87,12 +87,13 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     BaseWindow baseWindow = new BaseWindow("Редактирование данных о помещениях");
                     baseWindow.MakeOpen(new AddInfromationUserControl.AddPremises(idOrder, ref baseWindow, idPremises));
                     baseWindow.ShowDialog();
+
                     MakeDataAboutMeasurment();
                 }
             }
             else
             {
-                MakeSomeHelp.MSG("Не выбрано помещений для редактирование!");
+                MakeSomeHelp.MSG("Не выбрано помещений для редактирование!", MsgBoxImage: MessageBoxImage.Hand);
             }
 
 
@@ -100,12 +101,28 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         private void DeleteMeasurment_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.MSG("Не реализовано");
+            int index = DataGrid.SelectedIndex;
+            if (index != -1)
+            {
+                var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index);
+                int numberOfRows = 0;
+                if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
+                {
+                    Guid idPremises = DataAboutMeasurment.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First() ?? default(Guid);
+                    if (MakeSomeHelp.MSG($"Вы действительно хотете удалить помещение под номером {numberOfRows}?", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
+                    {
+                        //TODO Удаление данных о помещениях
+
+                        MakeDataAboutMeasurment();
+                    }
+
+                }
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Не выбрано помещений для удаления!", MsgBoxImage: MessageBoxImage.Hand);
+            }
         }
 
-        private void BtnSearch_Click(object sender, RoutedEventArgs e)
-        {
-            MakeSomeHelp.MSG("Не реализовано");
-        }
     }
 }

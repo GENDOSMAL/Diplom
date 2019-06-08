@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
              mc:Ignorable="d" 
              Height="auto" Width="auto">
-    <Grid MaxHeight="800">
+    <Grid MaxHeight="700">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>

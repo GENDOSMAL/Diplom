@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RepairFlatWPF.Model;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static RepairFlatWPF.Model.OrderDesc;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 {
@@ -22,41 +25,49 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
     {
         #region Переменные
 
-        Guid idOrder;
         Guid idServis;
-        bool NewInfromation = true;
         bool IsSelect = false;
-        double Count;
+        int Count;
+        decimal cost;
         BaseWindow window;
-
         #endregion
+
         #region Обработка событий
-        public AddServisesInOrder(Guid IdOrder,ref BaseWindow baseWindow, object InfromationAboutServis = null)
+        public AddServisesInOrder(ref BaseWindow baseWindow, object InfromationAboutServis = null)
         {
             InitializeComponent();
             window = baseWindow;
             if (InfromationAboutServis != null)
             {
-                NewInfromation = false;
                 AddServis.Content = "Редактировать";
-            }
-            else
-            {
-                NewInfromation = true;
-                idServis = Guid.NewGuid();
+                var dataAbout = InfromationAboutServis as TaskServises;
+                idServis = dataAbout.idServis;
+                NameOfServis.Text = dataAbout.NameOfServises;
+                cost = dataAbout.cost ?? default;
+                Cost.Text = cost.ToString();
+                Count = Convert.ToInt32(dataAbout.count);
+                CountOfServis.Text = Count.ToString();
+                IsSelect = true;
             }
         }
 
         private void SelectServis_Click(object sender, RoutedEventArgs e)
         {
-            if (true)//Если выбран
+            BaseWindow baseWindow = new BaseWindow("Выбор услуги");
+            baseWindow.MakeOpen(new SettingsAndSubsInf.SelectSomeSubs(ref baseWindow, SomeEnums.TypeOfSubs.Servises));
+            baseWindow.ShowDialog();
+            if (SaveSomeData.MakeSomeOperation)
             {
                 IsSelect = true;
+                idServis = SaveSomeData.idSubs;
+                SaveSomeData.idSubs = new Guid();
+                var row = SaveSomeData.SomeObject as DataRow;
+                SaveSomeData.SomeObject = null;
+                cost = decimal.Parse(row[3].ToString());
+                NameOfServis.Text = row[1].ToString()?.Trim();
+                Cost.Text = cost.ToString();
             }
-            else
-            {
 
-            }
         }
 
         private void Return_Click(object sender, RoutedEventArgs e)
@@ -68,14 +79,16 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         {
             if (CheckFields())
             {
-                if (NewInfromation)
+                TaskServises taskServises = new TaskServises
                 {
-
-                }
-                else
-                {
-                    //Редактирование
-                }
+                    NameOfServises = NameOfServis.Text,
+                    cost = cost,
+                    count = Count,
+                    idServis = idServis
+                };
+                SaveSomeData.SomeObject = taskServises;
+                SaveSomeData.MakeSomeOperation = true;
+                window.Close();
             }
         }
         #endregion
@@ -89,9 +102,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 MakeSomeHelp.MSG("Необходимо выбрать услугу");
                 result = false;
             }
-            if (!double.TryParse(CountOfServis.Text.Trim(),out Count) && IsSelect)
+            if (!int.TryParse(CountOfServis.Text.Trim(), out Count) && IsSelect)
             {
-                MakeSomeHelp.MSG("Необходимо указать количество");
+                MakeSomeHelp.MSG("Необходимо указать количество и оно должно быть целым числом",MsgBoxImage:MessageBoxImage.Hand);
                 result = false;
             }
             return result;

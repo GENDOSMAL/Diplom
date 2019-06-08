@@ -19,7 +19,6 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.Guid> idServis { get; set; }
         public Nullable<double> Count { get; set; }
         public Nullable<decimal> Cost { get; set; }
-        public string Description { get; set; }
     
         public virtual OrderTasks OrderTasks { get; set; }
         public virtual OurServices OurServices { get; set; }

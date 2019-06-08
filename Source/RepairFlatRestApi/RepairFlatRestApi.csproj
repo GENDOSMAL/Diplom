@@ -211,6 +211,9 @@
     <Compile Include="Models\PremisesType.cs">
       <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Promezh.cs">
+      <DependentUpon>RepaFlat.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RepaFlat.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

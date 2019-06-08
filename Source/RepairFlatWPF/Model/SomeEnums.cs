@@ -19,6 +19,8 @@ namespace RepairFlatWPF
 
         public static string[] TypeOfElement = new string[] { "Окно", "Дверь" };
 
+        public static string[] RoleOfWorker = new string[] { "Прораб", "Рабочий" };
+
 
 
         #endregion
@@ -61,7 +63,18 @@ namespace RepairFlatWPF
 
         public static string[] PayInf = new string[] { "Номер", "Дата создания", "Сумма оплаты", "Кто создал", "Описание" };
 
-        public static string[] TaskTable = new string[] { "Номер",  "Цена", "Описание", "Дата начала", "Планируемое время завершения", };
+
+        #region Описание задания
+        public static string[] TaskTable = new string[] { "Номер", "Цена", "Описание", "Дата начала", "Планируемое время завершения", };
+
+        public static string[] TaskMaterialTable = new string[] { "Номер", "Название", "Количество", "Стоимость", "Сумма" };
+
+        public static string[] TaskServisTable = new string[] { "Номер", "Название", "Количество", "Стоимость", "Сумма" };
+
+        public static string[] TaskWorkerTable = new string[] { "Номер", "ФИО работника", "Должность", "Роль работника"};
+
+
+        #endregion
         #endregion
 
 

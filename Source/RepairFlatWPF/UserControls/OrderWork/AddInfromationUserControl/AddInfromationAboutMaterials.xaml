@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              MaxWidth="800"
              Height="auto" Width="auto">
-    <Grid>
+    <Grid MaxHeight="500">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -19,16 +19,14 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
         <TextBox Name="NameOfMaterial" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="0" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Наименование материала" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
         <Button Name="SelectMaterial" Click="SelectMaterial_Click" Content="Выбор материала" Style="{StaticResource AllButtonAction}" Grid.ColumnSpan="2" Grid.Row="1" Margin="50,10,50,10" VerticalAlignment="Center" Height="40" Width="280"/>
         <TextBox Name="CountOfMaterial" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Количество материала" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" />
-        <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
-        <TextBox Name="Cost" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="4" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Цена" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"  IsEnabled="False"/>
-        <Button Name="Return" Click="Return_Click" Content="Возврат" Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="5" Margin="50,10,50,10" VerticalAlignment="Center" Height="40" Width="280"/>
-        <Button Name="AddMaterial" Click="AddMaterial_Click" Content="Добавить" Style="{StaticResource AllButtonAction}" Grid.Column="1" Grid.Row="5" Margin="50,10,50,10" VerticalAlignment="Center" Height="40" Width="280"/>
+        <TextBox Name="Cost" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Цена" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"  IsEnabled="False"/>
+        <Button Name="Return" Click="Return_Click" Content="Возврат" Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="4" Margin="50,10,50,10" VerticalAlignment="Center" Height="40" Width="280"/>
+        <Button Name="AddMaterial" Click="AddMaterial_Click" Content="Добавить" Style="{StaticResource AllButtonAction}" Grid.Column="1" Grid.Row="4" Margin="50,10,50,10" VerticalAlignment="Center" Height="40" Width="280"/>
 
 
     </Grid>

@@ -1,9 +1,7 @@
-﻿using RepairFlat.Model;
+﻿using Newtonsoft.Json;
+using RepairFlat.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepairFlatWPF.Model
 {
@@ -65,6 +63,67 @@ namespace RepairFlatWPF.Model
             public DateTime? DateEnd;
             public decimal? Summa;
             public string Description;
+        }
+
+        public class InformationAboutTask : BaseResult
+        {
+            public Guid idTask;
+            public DateTime? DateStart;
+            public DateTime? DateEnd;
+            public decimal? Summa;
+            public string Description;
+            public MaterialInfTask InfAbMat;
+            public ServisesInfTask InfAbServ;
+            public WorkersInfTask InfAbWorkers;
+        }
+
+
+        public class MaterialInfTask
+        {
+            public List<TaskMaterial> materialsInf;
+            public List<Guid> DeleteMaterials;
+        }
+
+        public class ServisesInfTask
+        {
+            public List<TaskServises> ServisInf;
+            public List<Guid> DeleteServises;
+        }
+        public class WorkersInfTask
+        {
+            public List<TaskWorker> WorkerInf;
+            public List<Guid> DeleteWorkers;
+        }
+
+        public class TaskMaterial
+        {
+            public Guid idTaskMaterial;
+            public Guid idMaterial;
+            public double? count;
+            public decimal? cost;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string NameOfMaterials;
+        }
+
+        public class TaskServises
+        {
+            public Guid idTaskServises;
+            public Guid idServis;
+            public double? count;
+            public decimal? cost;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string NameOfServises;
+        }
+
+        public class TaskWorker
+        {
+            public Guid idTaskWorker;
+            public Guid idWorker;
+            public string Role;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string FioOfWorker;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string NameOfPost;
         }
         #endregion
     }

@@ -1,5 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using RepairFlat.Model;
 using RepairFlatWPF.Model;
 using RepairFlatWPF.UserControls.KadrWork;
@@ -8,17 +7,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.WorkerDescriptiom;
 using static RepairFlatWPF.SomeEnums;
 using DataTable = System.Data.DataTable;
@@ -35,7 +26,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         TypeOfUserNeed typeOfUserNeed;
         string Route = "";
         BaseWindow BaseWindow;
-        public ShowAllWorkers(ref BaseWindow baseWindow,TypeOfUserNeed typeOfUserNeed= TypeOfUserNeed.All)
+        public ShowAllWorkers(ref BaseWindow baseWindow, TypeOfUserNeed typeOfUserNeed = TypeOfUserNeed.All)
         {
             InitializeComponent();
             this.typeOfUserNeed = typeOfUserNeed;
@@ -48,8 +39,8 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             }
             this.BaseWindow = baseWindow;
             MakeWorkBetter();
-            
-            if (typeOfUserNeed!=TypeOfUserNeed.All)
+
+            if (typeOfUserNeed != TypeOfUserNeed.All)
             {
                 ForWindow.Visibility = Visibility.Visible;
             }
@@ -63,7 +54,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             DataAboutWorker = new DataTable("WorkerInf");
             DataAboutGuid = new List<Tuple<int, Guid>>();
             DataGrid.ItemsSource = DataAboutWorker.DefaultView;
-            if (typeOfUserNeed== TypeOfUserNeed.ForRedact)
+            if (typeOfUserNeed == TypeOfUserNeed.ForRedact || typeOfUserNeed == TypeOfUserNeed.ForOrder)
             {
                 foreach (string ColumnName in SomeEnums.WorkerTablesRedact)
                 {
@@ -117,12 +108,6 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                     }
                 }
             }
-
-            
-
-            
-
-            
         }
 
         public object MakeDownloadByLink(string UrlOfDownload)
@@ -153,7 +138,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                             Guid idWorker = DataAboutGuid.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                             BaseWindow baseWindow = new BaseWindow("Редактирование данных о работниках");
                             baseWindow.MakeOpen(new CreateNewWorker(ref baseWindow, idWorker));
-                            baseWindow.ShowDialog();                            
+                            baseWindow.ShowDialog();
                         }
                     }
                 }
@@ -196,7 +181,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         private void ReturnBTN_Click(object sender, RoutedEventArgs e)
         {
             BaseWindow.Close();
-            
+
         }
 
         private void PrintData_Click(object sender, RoutedEventArgs e)
@@ -222,8 +207,8 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                                     Directory.CreateDirectory(Director);
                                 }
 
-                                string NameOfFile = System.IO.Path.Combine(Director,"woker.dotx");
-                                if(!File.Exists(NameOfFile))
+                                string NameOfFile = System.IO.Path.Combine(Director, "woker.dotx");
+                                if (!File.Exists(NameOfFile))
                                     File.WriteAllBytes(NameOfFile, RepairFlatWPF.Properties.Resources.WorkerData);
 
                                 var DataAboutWorker = makeotherSelectData(idWorker) as MakeNewWorker;
@@ -243,24 +228,24 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                                         var PasportData = document.Bookmarks["PasportData"].Range;
                                         PasportData.Text = $" {DataAboutWorker.Pasport}";
                                         var DataRozd = document.Bookmarks["DataRozd"].Range;
-                                        DataRozd.Text =$" {DataAboutWorker.Birstday?.ToString("dd.MM.yyyy")}";
+                                        DataRozd.Text = $" {DataAboutWorker.Birstday?.ToString("dd.MM.yyyy")}";
 
 
                                         if (!String.IsNullOrEmpty(DataAboutAdress.description?.Trim()))
-                                        { 
+                                        {
                                             var Description = document.Bookmarks["Description"].Range;
-                                            Description.Text = $"Описание: {DataAboutAdress.description?.Trim()}{Environment.NewLine}";                                            
+                                            Description.Text = $"Описание: {DataAboutAdress.description?.Trim()}{Environment.NewLine}";
                                         }
 
                                         if (!String.IsNullOrEmpty(DataAboutAdress.NumberOfDelen?.Trim()))
                                         {
                                             var NumberOfDelen = document.Bookmarks["NumberOfDelen"].Range;
-                                            NumberOfDelen.Text =$"Квартира/офис: {DataAboutAdress.NumberOfDelen?.Trim()}{Environment.NewLine}";
+                                            NumberOfDelen.Text = $"Квартира/офис: {DataAboutAdress.NumberOfDelen?.Trim()}{Environment.NewLine}";
                                         }
                                         if (!String.IsNullOrEmpty(DataAboutAdress.Entrance?.Trim()))
                                         {
                                             var Entrance = document.Bookmarks["Entrance"].Range;
-                                            Entrance.Text =  $"Подъезд: {DataAboutAdress.Entrance?.Trim()}{Environment.NewLine}";
+                                            Entrance.Text = $"Подъезд: {DataAboutAdress.Entrance?.Trim()}{Environment.NewLine}";
                                         }
                                         if (!String.IsNullOrEmpty(DataAboutAdress.House?.Trim()))
                                         {
@@ -271,11 +256,12 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                                         {
                                             var Street = document.Bookmarks["Street"].Range;
                                             Street.Text = $"Улица: {DataAboutAdress.Street?.Trim()}{Environment.NewLine}";
-                                        } 
+                                        }
                                         if (!String.IsNullOrEmpty(DataAboutAdress.MicroAreaName?.Trim()))
                                         {
                                             var MicroAreaName = document.Bookmarks["MicroAreaName"].Range;
-                                            MicroAreaName.Text = $"Микрорайон: {DataAboutAdress.MicroAreaName?.Trim()}{Environment.NewLine}";                                        } 
+                                            MicroAreaName.Text = $"Микрорайон: {DataAboutAdress.MicroAreaName?.Trim()}{Environment.NewLine}";
+                                        }
                                         if (!String.IsNullOrEmpty(DataAboutAdress.CityName?.Trim()))
                                         {
                                             var CityName = document.Bookmarks["CityName"].Range;
@@ -284,13 +270,13 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                                         if (!String.IsNullOrEmpty(DataAboutAdress.AreaName?.Trim()))
                                         {
                                             var AreaName = document.Bookmarks["AreaName"].Range;
-                                            AreaName.Text =$"Область: {DataAboutAdress.AreaName?.Trim()}{Environment.NewLine}" ;
+                                            AreaName.Text = $"Область: {DataAboutAdress.AreaName?.Trim()}{Environment.NewLine}";
 
                                         }
                                         if (!String.IsNullOrEmpty(DataAboutAdress.RegionName?.Trim()))
                                         {
                                             var RegionName = document.Bookmarks["RegionName"].Range;
-                                            RegionName.Text =  $"Страна: {DataAboutAdress.RegionName?.Trim()}{Environment.NewLine}";
+                                            RegionName.Text = $"Страна: {DataAboutAdress.RegionName?.Trim()}{Environment.NewLine}";
                                         }
                                         if (Databoutcontact.listOfContact != null)
                                         {
@@ -308,10 +294,10 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                                                 rows.Cells[4].Range.Text = conact.Desctription.ToString();
                                                 Number++;
                                             }
-                                        }                                       
+                                        }
                                     }
                                     application.Activate();
-                                    
+
                                 }
 
                             }
@@ -327,7 +313,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
         private object makeotherSelectData(Guid idUser)
         {
-            var InformationFromServer =  MakeDownloadByLink($"api/worker/getData?idWorker={idUser}");
+            var InformationFromServer = MakeDownloadByLink($"api/worker/getData?idWorker={idUser}");
             var dataAbWorker = JsonConvert.DeserializeObject<MakeNewWorker>(InformationFromServer.ToString());
             return dataAbWorker;
         }
@@ -335,14 +321,14 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         private object makeloadingListOfContact(Guid idUser)
         {
 
-            var InformationFromServer =  MakeDownloadByLink($"api/contact/getusercontact?idUser={idUser}");
+            var InformationFromServer = MakeDownloadByLink($"api/contact/getusercontact?idUser={idUser}");
             ContactModel.ListOfUserContactInf listOfUserContactInf = JsonConvert.DeserializeObject<ContactModel.ListOfUserContactInf>(InformationFromServer.ToString());
             return listOfUserContactInf;
         }
 
         private object MakeDataAboutAdress(Guid idAdress)
         {
-            var InformationFromServer =MakeDownloadByLink($"api/adress/data?idAdress={idAdress}");
+            var InformationFromServer = MakeDownloadByLink($"api/adress/data?idAdress={idAdress}");
             ModelAdress.DataAboutAdress listOfUserAdressInf = JsonConvert.DeserializeObject<ModelAdress.DataAboutAdress>(InformationFromServer.ToString());
             return listOfUserAdressInf;
         }

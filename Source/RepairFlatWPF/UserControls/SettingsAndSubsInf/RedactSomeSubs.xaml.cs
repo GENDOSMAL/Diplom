@@ -136,8 +136,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                             {
                                 case SomeEnums.TypeOfSubs.Contact:
                                     {//Работа с контакной информацией
-                                        string value = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1).ToString();
-                                        string desc = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2).ToString();
+                                        string value = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1)?.ToString();
+                                        string desc = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString();
                                         BaseWindow baseWindow = new BaseWindow("Редактирование контакной информации");
                                         baseWindow.MakeOpen(new ContactTypeRedactUC(ref baseWindow, idSubs, value, desc));
                                         baseWindow.ShowDialog();
@@ -147,11 +147,19 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                 case SomeEnums.TypeOfSubs.Materials:
                                     {//Работа с материалами
                                         RepairFlat.Model.MakeSubs.ListOfMaterials listOfMaterials = new RepairFlat.Model.MakeSubs.ListOfMaterials();
-                                        listOfMaterials.NameOfMaterial = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1).ToString();
-                                        listOfMaterials.UnitOfMeasue = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2).ToString();
-                                        listOfMaterials.TypeOfMaterial = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 3).ToString();
-                                        listOfMaterials.Cost = Decimal.Parse(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 4).ToString());
-                                        listOfMaterials.Description = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 5).ToString();
+                                        listOfMaterials.NameOfMaterial = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1)?.ToString();
+                                        listOfMaterials.UnitOfMeasue = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString();
+                                        listOfMaterials.TypeOfMaterial = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 3)?.ToString();
+                                        if(Decimal.TryParse(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 4)?.ToString() ,out decimal temp))
+                                        {
+                                            listOfMaterials.Cost = temp;
+                                        }
+                                        else
+                                        {
+                                            listOfMaterials.Cost = null;
+                                        }
+                                        listOfMaterials.idMaterials = idSubs;
+                                        listOfMaterials.Description = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 5)?.ToString();
                                         BaseWindow baseWindow = new BaseWindow("Редактирование материала");
                                         baseWindow.MakeOpen(new MaterialsRedactUC(ref baseWindow, listOfMaterials));
                                         baseWindow.ShowDialog();
@@ -176,10 +184,17 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                         }
 
                                         RepairFlat.Model.MakeSubs.ListOfPost listOfPost = new RepairFlat.Model.MakeSubs.ListOfPost();
-                                        listOfPost.NameOfPost = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1).ToString();
+                                        listOfPost.NameOfPost = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1)?.ToString();
                                         listOfPost.MakeWork = MakeWoe;
                                         listOfPost.idPost = idSubs;
-                                        listOfPost.BaseWage = Convert.ToDecimal(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2).ToString());
+                                        if (decimal.TryParse(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString(),out decimal temp))
+                                        {
+                                            listOfPost.BaseWage = temp;
+                                        }
+                                        else
+                                        {
+                                            listOfPost.BaseWage = null;
+                                        }
                                         BaseWindow baseWindow = new BaseWindow("Редактирование данных о должностях");
                                         baseWindow.MakeOpen(new PostRedactUC(ref baseWindow, listOfPost));
                                         baseWindow.ShowDialog();
@@ -190,8 +205,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                     {//Работа с типами помещений
                                         RepairFlat.Model.MakeSubs.ListOfPremises listOfPremises = new RepairFlat.Model.MakeSubs.ListOfPremises();
                                         listOfPremises.idPremises = idSubs;
-                                        listOfPremises.Name = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1).ToString();
-                                        listOfPremises.Description = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2).ToString();
+                                        listOfPremises.Name = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1)?.ToString();
+                                        listOfPremises.Description = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString();
                                         BaseWindow baseWindow = new BaseWindow("Обновление данных о типах помещений");
                                         baseWindow.MakeOpen(new PremisesRedactUC(ref baseWindow, listOfPremises));
                                         baseWindow.ShowDialog();
@@ -205,7 +220,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                         listOfServises.Nomination = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1).ToString();
                                         listOfServises.TypeOfServises = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2).ToString();
                                         listOfServises.Cost = Convert.ToDecimal(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 3)?.ToString());
-                                        listOfServises.Description = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 4).ToString();
+                                        listOfServises.Description = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 4)?.ToString();
                                         BaseWindow baseWindow = new BaseWindow("Обновление данных об услугах");
                                         baseWindow.MakeOpen(new ServisesRedactUC(ref baseWindow, listOfServises));
                                         baseWindow.ShowDialog();

@@ -12,15 +12,12 @@ namespace RepairFlatRestApi.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class TaskMaterials
+    public partial class Promezh
     {
-        public System.Guid idTaskMaterials { get; set; }
-        public Nullable<System.Guid> idTask { get; set; }
-        public Nullable<System.Guid> idMaterial { get; set; }
-        public Nullable<double> Count { get; set; }
-        public Nullable<decimal> Cost { get; set; }
+        public System.Guid idColob { get; set; }
+        public Nullable<System.Guid> idSubInf { get; set; }
     
-        public virtual OrderTasks OrderTasks { get; set; }
         public virtual OurMaterials OurMaterials { get; set; }
+        public virtual UpdateSubInformation UpdateSubInformation { get; set; }
     }
 }

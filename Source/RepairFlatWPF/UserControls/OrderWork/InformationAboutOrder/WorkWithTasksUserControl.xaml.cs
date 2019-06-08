@@ -31,7 +31,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
         private void AddTask_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             BaseWindow redactwindow = new BaseWindow("Создание нового задания");
-            redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder, ref redactwindow));
+            redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl( ref redactwindow, idOrder));
             redactwindow.ShowDialog();
             if (SaveSomeData.MakeSomeOperation)
             {
@@ -50,7 +50,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 {
                     Guid idTask = ListOfId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                     BaseWindow redactwindow = new BaseWindow("Редактирование сущестующего задания");
-                    redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(idOrder, ref redactwindow, idTask));
+                    redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(ref redactwindow, idOrder, idTask));
                     redactwindow.ShowDialog();
                     if (SaveSomeData.MakeSomeOperation)
                     {
@@ -96,6 +96,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 DataAboutTask.Columns.Add(NameOfColumn);
             }
             DataGrid.ItemsSource = DataAboutTask.DefaultView;
+            MakeDataAboutTaskFromServer();
         }
 
         private async void MakeDataAboutTaskFromServer()

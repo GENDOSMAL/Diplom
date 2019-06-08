@@ -192,6 +192,9 @@
     <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddServisesInOrder.xaml.cs">
       <DependentUpon>AddServisesInOrder.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddWorkerInTask.xaml.cs">
+      <DependentUpon>AddWorkerInTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderWork\InformationAboutOrder\AditionalTablesUserControl.xaml.cs">
       <DependentUpon>AditionalTablesUserControl.xaml</DependentUpon>
     </Compile>
@@ -319,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddServisesInOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderWork\AddInfromationUserControl\AddWorkerInTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

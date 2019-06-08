@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RepairFlat.Model;
 using RepairFlatWPF.Controller;
 using RepairFlatWPF.Model;
 using System;
@@ -42,6 +43,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 TypeOfMaterial.Text = obf.TypeOfMaterial?.Trim();
                 Descriprtion.Text = obf.Description?.Trim();
                 Redact = true;
+                idMaterial = obf.idMaterials;
                 AddBtn.Content = "Редактировать";
             }
             else
@@ -69,19 +71,19 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 {
                     query = "Update OurMaterials set   NameOfMaterial=@NameOfMaterial, UnitOfMeasue=@UnitOfMeasue, Cost=@Cost, TypeOfMaterial=@TypeOfMaterial, Descriprtion=@Descriprtion where idMaterials=@idMaterials;";
                 }
-                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[7];
+                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[6];
                 sQLiteParameter[0] = new SQLiteParameter("@idMaterials", idMaterial.ToString());
                 sQLiteParameter[1] = new SQLiteParameter("@NameOfMaterial", NameOfMaterial.Text.Trim());
-                sQLiteParameter[3] = new SQLiteParameter("@UnitOfMeasue", UnitOfMeasue.Text.Trim());
-                sQLiteParameter[4] = new SQLiteParameter("@Cost", cost);
-                sQLiteParameter[5] = new SQLiteParameter("@TypeOfMaterial", TypeOfMaterial.Text.Trim());
-                sQLiteParameter[6] = new SQLiteParameter("@Descriprtion", Descriprtion.Text.Trim());
+                sQLiteParameter[2] = new SQLiteParameter("@UnitOfMeasue", UnitOfMeasue.Text.Trim());
+                sQLiteParameter[3] = new SQLiteParameter("@Cost", cost);
+                sQLiteParameter[4] = new SQLiteParameter("@TypeOfMaterial", TypeOfMaterial.Text.Trim());
+                sQLiteParameter[5] = new SQLiteParameter("@Descriprtion", Descriprtion.Text.Trim());
                 MakeWorkWirthDataBase.MakeSomeQueryWork(query, parameters: sQLiteParameter);
                 MakeUpdateServer();
             }
         }
 
-        private void MakeUpdateServer()
+        private async void MakeUpdateServer()
         {
             MakeUpdOrInsMaterials makeUpdOrInsMaterials = new MakeUpdOrInsMaterials();
             makeUpdOrInsMaterials.idUser = SaveSomeData.IdUser ?? default;
@@ -91,7 +93,16 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
             makeUpdOrInsMaterials.ListOfMaterials.Add(listOfContacts);
             string Json = JsonConvert.SerializeObject(makeUpdOrInsMaterials);
             string urlSend = "api/substring/material/update";
-            MakeSomeHelp.UpdloadDataToServer(urlSend, Json);
+            var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeUpdateServer)));
+            var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+            if (!deserializedProduct.success)
+            {
+                MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Операции над данными были произведены!", MsgBoxImage: MessageBoxImage.Information);
+            }
             window.Close();
         }
         bool CheckData()

@@ -8,7 +8,6 @@ using System.Windows.Input;
 
 namespace RepairFlatWPF
 {
-    //TODO Почистить все, что не связано с отображением окна
     class MainWindowViewModel: BaseViewModel
     {
         #region Приватные поля
