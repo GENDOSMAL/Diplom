@@ -34,9 +34,7 @@
             <TextBox Name="Width" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Ширна" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" TextChanged="Width_TextChanged" />
             <TextBox Name="Height" FontFamily="Times New Roman" FontSize="25" Grid.Column="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Высота" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10"  TextChanged="Height_TextChanged"/>
         </Grid>
-        
-        <TextBox Name="WidOfSlope" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Ширина откоса" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center"   />
-        <TextBox Name="POfElement" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P элемента" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
+        <TextBox Name="POfElement" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P элемента" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
         <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
         <Button Name="RetutnBTN" Click="RetutnBTN_Click"  Content="Вернуться"  Style="{StaticResource AllButtonAction}" Grid.Column="0" Grid.Row="5"  Margin="15,0,7.5,0" VerticalAlignment="Center" Height="50" Width="240"/>
         <Button Name="AddBtn" Click="AddBtn_Click" Content="Добавить"  Style="{StaticResource AllButtonAction}"  Grid.Column="1" Grid.Row="5" Margin="15,0,7.5,0" VerticalAlignment="Center" Height="50" Width="240"/>

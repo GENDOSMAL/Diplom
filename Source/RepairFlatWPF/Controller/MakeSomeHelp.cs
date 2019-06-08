@@ -33,6 +33,12 @@ namespace RepairFlatWPF
             return MessageBox.Show(Message,Settings.Default.DefaultHeaderOfMessageBox,MsgBoxButton,MsgBoxImage);
         }
 
+        public static object MakeDownloadByLink(string UrlOfDownload)
+        {
+            return BaseWorkWithServer.CatchErrorWithGet(UrlOfDownload, "GET", nameof(MakeLoading), nameof(MakeDownloadByLink));
+        }
+
+
         public static bool MakePingToServer(string ServerAdress)
         {
             try

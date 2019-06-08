@@ -43,16 +43,6 @@
           <Property Name="DateOfDelete" Type="datetime2" Precision="7" />
           <Property Name="idUserDelete" Type="uniqueidentifier" />
         </EntityType>
-        <EntityType Name="DocPayment">
-          <Key>
-            <PropertyRef Name="idDocPayment" />
-          </Key>
-          <Property Name="idDocPayment" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="DateOfDoc" Type="datetime2" Precision="7" />
-          <Property Name="idWorker" Type="uniqueidentifier" />
-          <Property Name="idClient" Type="uniqueidentifier" />
-          <Property Name="idInformatioForPayment" Type="uniqueidentifier" />
-        </EntityType>
         <EntityType Name="EstabilismentPost">
           <Key>
             <PropertyRef Name="idEstabilisment" />
@@ -137,9 +127,10 @@
           <Property Name="IdPayment" Type="uniqueidentifier" Nullable="false" />
           <Property Name="IdOrder" Type="uniqueidentifier" />
           <Property Name="IdWorkerMake" Type="uniqueidentifier" />
-          <Property Name="idDocPayment" Type="uniqueidentifier" />
+          <Property Name="idInformatioForPayment" Type="uniqueidentifier" />
           <Property Name="Summa" Type="money" />
           <Property Name="Description" Type="nchar" MaxLength="100" />
+          <Property Name="DateOfDoc" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="OrderTasks">
           <Key>
@@ -151,7 +142,6 @@
           <Property Name="DateStart" Type="datetime2" Precision="7" />
           <Property Name="DeadEnd" Type="datetime2" Precision="7" />
           <Property Name="SummaAboutTask" Type="money" />
-          <Property Name="idBrigade" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="OrderTasksState">
           <Key>
@@ -338,42 +328,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DocPayment_ClientDetails">
-          <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClientDetails">
-              <PropertyRef Name="IdClient" />
-            </Principal>
-            <Dependent Role="DocPayment">
-              <PropertyRef Name="idClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DocPayment_InformatioForPayment">
-          <End Role="InformatioForPayment" Type="Self.InformatioForPayment" Multiplicity="0..1" />
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InformatioForPayment">
-              <PropertyRef Name="idInfPayment" />
-            </Principal>
-            <Dependent Role="DocPayment">
-              <PropertyRef Name="idInformatioForPayment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DocPayment_WorkerDetails">
-          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerDetails">
-              <PropertyRef Name="IdWorker" />
-            </Principal>
-            <Dependent Role="DocPayment">
-              <PropertyRef Name="idWorker" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_EstabilismentPost_WorkerDetails">
           <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
           <End Role="EstabilismentPost" Type="Self.EstabilismentPost" Multiplicity="*" />
@@ -506,15 +460,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderPayment_DocPayment">
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="0..1" />
+        <Association Name="FK_OrderPayment_InformatioForPayment">
+          <End Role="InformatioForPayment" Type="Self.InformatioForPayment" Multiplicity="0..1" />
           <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="DocPayment">
-              <PropertyRef Name="idDocPayment" />
+            <Principal Role="InformatioForPayment">
+              <PropertyRef Name="idInfPayment" />
             </Principal>
             <Dependent Role="OrderPayment">
-              <PropertyRef Name="idDocPayment" />
+              <PropertyRef Name="idInformatioForPayment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -530,7 +484,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderPayment_WorkerDetails">
+        <Association Name="FK_OrderPayment_WorkerDetails1">
           <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
           <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -823,7 +777,6 @@
           <EntitySet Name="AdressDescription" EntityType="Self.AdressDescription" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClientDetails" EntityType="Self.ClientDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DeletedSubStr" EntityType="Self.DeletedSubStr" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DocPayment" EntityType="Self.DocPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstabilismentPost" EntityType="Self.EstabilismentPost" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformatioForPayment" EntityType="Self.InformatioForPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginInformation" EntityType="Self.LoginInformation" Schema="dbo" store:Type="Tables" />
@@ -855,18 +808,6 @@
           <AssociationSet Name="FK_DeletedSubStr_User" Association="Self.FK_DeletedSubStr_User">
             <End Role="User" EntitySet="User" />
             <End Role="DeletedSubStr" EntitySet="DeletedSubStr" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DocPayment_ClientDetails" Association="Self.FK_DocPayment_ClientDetails">
-            <End Role="ClientDetails" EntitySet="ClientDetails" />
-            <End Role="DocPayment" EntitySet="DocPayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DocPayment_InformatioForPayment" Association="Self.FK_DocPayment_InformatioForPayment">
-            <End Role="InformatioForPayment" EntitySet="InformatioForPayment" />
-            <End Role="DocPayment" EntitySet="DocPayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DocPayment_WorkerDetails" Association="Self.FK_DocPayment_WorkerDetails">
-            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
-            <End Role="DocPayment" EntitySet="DocPayment" />
           </AssociationSet>
           <AssociationSet Name="FK_EstabilismentPost_WorkerDetails" Association="Self.FK_EstabilismentPost_WorkerDetails">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
@@ -912,15 +853,15 @@
             <End Role="PremisesType" EntitySet="PremisesType" />
             <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderPayment_DocPayment" Association="Self.FK_OrderPayment_DocPayment">
-            <End Role="DocPayment" EntitySet="DocPayment" />
+          <AssociationSet Name="FK_OrderPayment_InformatioForPayment" Association="Self.FK_OrderPayment_InformatioForPayment">
+            <End Role="InformatioForPayment" EntitySet="InformatioForPayment" />
             <End Role="OrderPayment" EntitySet="OrderPayment" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderPayment_OrderInformation" Association="Self.FK_OrderPayment_OrderInformation">
             <End Role="OrderInformation" EntitySet="OrderInformation" />
             <End Role="OrderPayment" EntitySet="OrderPayment" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderPayment_WorkerDetails" Association="Self.FK_OrderPayment_WorkerDetails">
+          <AssociationSet Name="FK_OrderPayment_WorkerDetails1" Association="Self.FK_OrderPayment_WorkerDetails1">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="OrderPayment" EntitySet="OrderPayment" />
           </AssociationSet>
@@ -1051,7 +992,6 @@
           <Property Name="IdClient" Type="Guid" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_ClientDetails_User" FromRole="ClientDetails" ToRole="User" />
-          <NavigationProperty Name="DocPayment" Relationship="Self.FK_DocPayment_ClientDetails" FromRole="ClientDetails" ToRole="DocPayment" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_ClientDetails" FromRole="ClientDetails" ToRole="OrderInformation" />
         </EntityType>
         <EntityType Name="DeletedSubStr">
@@ -1064,20 +1004,6 @@
           <Property Name="DateOfDelete" Type="DateTime" Precision="7" />
           <Property Name="idUserDelete" Type="Guid" />
           <NavigationProperty Name="User" Relationship="Self.FK_DeletedSubStr_User" FromRole="DeletedSubStr" ToRole="User" />
-        </EntityType>
-        <EntityType Name="DocPayment">
-          <Key>
-            <PropertyRef Name="idDocPayment" />
-          </Key>
-          <Property Name="idDocPayment" Type="Guid" Nullable="false" />
-          <Property Name="DateOfDoc" Type="DateTime" Precision="7" />
-          <Property Name="idWorker" Type="Guid" />
-          <Property Name="idClient" Type="Guid" />
-          <Property Name="idInformatioForPayment" Type="Guid" />
-          <NavigationProperty Name="ClientDetails" Relationship="Self.FK_DocPayment_ClientDetails" FromRole="DocPayment" ToRole="ClientDetails" />
-          <NavigationProperty Name="InformatioForPayment" Relationship="Self.FK_DocPayment_InformatioForPayment" FromRole="DocPayment" ToRole="InformatioForPayment" />
-          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_DocPayment_WorkerDetails" FromRole="DocPayment" ToRole="WorkerDetails" />
-          <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_DocPayment" FromRole="DocPayment" ToRole="OrderPayment" />
         </EntityType>
         <EntityType Name="EstabilismentPost">
           <Key>
@@ -1105,8 +1031,8 @@
           <Property Name="BIK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="YIN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DateOfInsert" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="DocPayment" Relationship="Self.FK_DocPayment_InformatioForPayment" FromRole="InformatioForPayment" ToRole="DocPayment" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_InformatioForPayment_WorkerDetails" FromRole="InformatioForPayment" ToRole="WorkerDetails" />
+          <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_InformatioForPayment" FromRole="InformatioForPayment" ToRole="OrderPayment" />
         </EntityType>
         <EntityType Name="LoginInformation">
           <Key>
@@ -1180,12 +1106,13 @@
           <Property Name="IdPayment" Type="Guid" Nullable="false" />
           <Property Name="IdOrder" Type="Guid" />
           <Property Name="IdWorkerMake" Type="Guid" />
-          <Property Name="idDocPayment" Type="Guid" />
+          <Property Name="idInformatioForPayment" Type="Guid" />
           <Property Name="Summa" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="DocPayment" Relationship="Self.FK_OrderPayment_DocPayment" FromRole="OrderPayment" ToRole="DocPayment" />
+          <Property Name="DateOfDoc" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="InformatioForPayment" Relationship="Self.FK_OrderPayment_InformatioForPayment" FromRole="OrderPayment" ToRole="InformatioForPayment" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderPayment_OrderInformation" FromRole="OrderPayment" ToRole="OrderInformation" />
-          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_OrderPayment_WorkerDetails" FromRole="OrderPayment" ToRole="WorkerDetails" />
+          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_OrderPayment_WorkerDetails1" FromRole="OrderPayment" ToRole="WorkerDetails" />
         </EntityType>
         <EntityType Name="OrderTasks">
           <Key>
@@ -1197,7 +1124,6 @@
           <Property Name="DateStart" Type="DateTime" Precision="7" />
           <Property Name="DeadEnd" Type="DateTime" Precision="7" />
           <Property Name="SummaAboutTask" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="idBrigade" Type="Guid" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderTasks_OrderInformation1" FromRole="OrderTasks" ToRole="OrderInformation" />
           <NavigationProperty Name="OrderTasksState" Relationship="Self.FK_OrderTasksState_OrderTasks" FromRole="OrderTasks" ToRole="OrderTasksState" />
           <NavigationProperty Name="TaskWorker" Relationship="Self.FK_OrderWorker_OrderTasks" FromRole="OrderTasks" ToRole="TaskWorker" />
@@ -1305,9 +1231,9 @@
           <Property Name="idContact" Type="Guid" Nullable="false" />
           <Property Name="Value" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="Regex" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="UpdateSubInformation" Relationship="Self.FK_UpdateSubInformation_TypeOfContact" FromRole="TypeOfContact" ToRole="UpdateSubInformation" />
           <NavigationProperty Name="UserContact" Relationship="Self.FK_UserContact_TypeOfContact" FromRole="TypeOfContact" ToRole="UserContact" />
-          <Property Name="Regex" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="UpdateSubInformation">
           <Key>
@@ -1367,11 +1293,10 @@
           <Property Name="IdWorker" Type="Guid" Nullable="false" />
           <Property Name="idAdress" Type="Guid" />
           <NavigationProperty Name="AdressDescription" Relationship="Self.FK_WorkerDetails_AdressDescription" FromRole="WorkerDetails" ToRole="AdressDescription" />
-          <NavigationProperty Name="DocPayment" Relationship="Self.FK_DocPayment_WorkerDetails" FromRole="WorkerDetails" ToRole="DocPayment" />
           <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_EstabilismentPost_WorkerDetails" FromRole="WorkerDetails" ToRole="EstabilismentPost" />
           <NavigationProperty Name="InformatioForPayment" Relationship="Self.FK_InformatioForPayment_WorkerDetails" FromRole="WorkerDetails" ToRole="InformatioForPayment" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderInformation" />
-          <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderPayment" />
+          <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_WorkerDetails1" FromRole="WorkerDetails" ToRole="OrderPayment" />
           <NavigationProperty Name="OrderTasksState" Relationship="Self.FK_OrderTasksState_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderTasksState" />
           <NavigationProperty Name="User" Relationship="Self.FK_WorkerDetails_User" FromRole="WorkerDetails" ToRole="User" />
           <NavigationProperty Name="WorkersOperats" Relationship="Self.FK_WorkersOperats_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkersOperats" />
@@ -1450,18 +1375,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DocPayment_ClientDetails">
-          <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClientDetails">
-              <PropertyRef Name="IdClient" />
-            </Principal>
-            <Dependent Role="DocPayment">
-              <PropertyRef Name="idClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderInformation_ClientDetails">
           <End Role="ClientDetails" Type="Self.ClientDetails" Multiplicity="0..1" />
           <End Role="OrderInformation" Type="Self.OrderInformation" Multiplicity="*" />
@@ -1483,42 +1396,6 @@
             </Principal>
             <Dependent Role="DeletedSubStr">
               <PropertyRef Name="idUserDelete" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DocPayment_InformatioForPayment">
-          <End Role="InformatioForPayment" Type="Self.InformatioForPayment" Multiplicity="0..1" />
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="InformatioForPayment">
-              <PropertyRef Name="idInfPayment" />
-            </Principal>
-            <Dependent Role="DocPayment">
-              <PropertyRef Name="idInformatioForPayment" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DocPayment_WorkerDetails">
-          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerDetails">
-              <PropertyRef Name="IdWorker" />
-            </Principal>
-            <Dependent Role="DocPayment">
-              <PropertyRef Name="idWorker" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderPayment_DocPayment">
-          <End Role="DocPayment" Type="Self.DocPayment" Multiplicity="0..1" />
-          <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DocPayment">
-              <PropertyRef Name="idDocPayment" />
-            </Principal>
-            <Dependent Role="OrderPayment">
-              <PropertyRef Name="idDocPayment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1567,6 +1444,18 @@
             </Principal>
             <Dependent Role="InformatioForPayment">
               <PropertyRef Name="idWorkerMake" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderPayment_InformatioForPayment">
+          <End Role="InformatioForPayment" Type="Self.InformatioForPayment" Multiplicity="0..1" />
+          <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformatioForPayment">
+              <PropertyRef Name="idInfPayment" />
+            </Principal>
+            <Dependent Role="OrderPayment">
+              <PropertyRef Name="idInformatioForPayment" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1666,7 +1555,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderPayment_WorkerDetails">
+        <Association Name="FK_OrderPayment_WorkerDetails1">
           <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
           <End Role="OrderPayment" Type="Self.OrderPayment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1918,12 +1807,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="RepairFlatDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="RepaFlat" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
           <EntitySet Name="AdressDescription" EntityType="Self.AdressDescription" />
           <EntitySet Name="ClientDetails" EntityType="Self.ClientDetails" />
           <EntitySet Name="DeletedSubStr" EntityType="Self.DeletedSubStr" />
-          <EntitySet Name="DocPayment" EntityType="Self.DocPayment" />
           <EntitySet Name="EstabilismentPost" EntityType="Self.EstabilismentPost" />
           <EntitySet Name="InformatioForPayment" EntityType="Self.InformatioForPayment" />
           <EntitySet Name="LoginInformation" EntityType="Self.LoginInformation" />
@@ -1960,10 +1848,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="ClientDetails" EntitySet="ClientDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_DocPayment_ClientDetails" Association="Self.FK_DocPayment_ClientDetails">
-            <End Role="ClientDetails" EntitySet="ClientDetails" />
-            <End Role="DocPayment" EntitySet="DocPayment" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderInformation_ClientDetails" Association="Self.FK_OrderInformation_ClientDetails">
             <End Role="ClientDetails" EntitySet="ClientDetails" />
             <End Role="OrderInformation" EntitySet="OrderInformation" />
@@ -1971,18 +1855,6 @@
           <AssociationSet Name="FK_DeletedSubStr_User" Association="Self.FK_DeletedSubStr_User">
             <End Role="User" EntitySet="User" />
             <End Role="DeletedSubStr" EntitySet="DeletedSubStr" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DocPayment_InformatioForPayment" Association="Self.FK_DocPayment_InformatioForPayment">
-            <End Role="InformatioForPayment" EntitySet="InformatioForPayment" />
-            <End Role="DocPayment" EntitySet="DocPayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DocPayment_WorkerDetails" Association="Self.FK_DocPayment_WorkerDetails">
-            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
-            <End Role="DocPayment" EntitySet="DocPayment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderPayment_DocPayment" Association="Self.FK_OrderPayment_DocPayment">
-            <End Role="DocPayment" EntitySet="DocPayment" />
-            <End Role="OrderPayment" EntitySet="OrderPayment" />
           </AssociationSet>
           <AssociationSet Name="FK_EstabilismentPost_WorkerDetails" Association="Self.FK_EstabilismentPost_WorkerDetails">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
@@ -1999,6 +1871,10 @@
           <AssociationSet Name="FK_InformatioForPayment_WorkerDetails" Association="Self.FK_InformatioForPayment_WorkerDetails">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="InformatioForPayment" EntitySet="InformatioForPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderPayment_InformatioForPayment" Association="Self.FK_OrderPayment_InformatioForPayment">
+            <End Role="InformatioForPayment" EntitySet="InformatioForPayment" />
+            <End Role="OrderPayment" EntitySet="OrderPayment" />
           </AssociationSet>
           <AssociationSet Name="FK_LoginInformation_User" Association="Self.FK_LoginInformation_User">
             <End Role="User" EntitySet="User" />
@@ -2032,7 +1908,7 @@
             <End Role="PremisesType" EntitySet="PremisesType" />
             <End Role="OrderMeasurements" EntitySet="OrderMeasurements" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderPayment_WorkerDetails" Association="Self.FK_OrderPayment_WorkerDetails">
+          <AssociationSet Name="FK_OrderPayment_WorkerDetails1" Association="Self.FK_OrderPayment_WorkerDetails1">
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="OrderPayment" EntitySet="OrderPayment" />
           </AssociationSet>
@@ -2122,7 +1998,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="RepairFlatDBModelStoreContainer" CdmEntityContainer="RepairFlatDBEntities">
+        <EntityContainerMapping StorageEntityContainer="RepairFlatDBModelStoreContainer" CdmEntityContainer="RepaFlat">
           <EntitySetMapping Name="C__RefactorLog">
             <EntityTypeMapping TypeName="RepairFlatDBModel.C__RefactorLog">
               <MappingFragment StoreEntitySet="__RefactorLog">
@@ -2162,17 +2038,6 @@
                 <ScalarProperty Name="TypeOfDeleted" ColumnName="TypeOfDeleted" />
                 <ScalarProperty Name="DateOfDelete" ColumnName="DateOfDelete" />
                 <ScalarProperty Name="idUserDelete" ColumnName="idUserDelete" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DocPayment">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.DocPayment">
-              <MappingFragment StoreEntitySet="DocPayment">
-                <ScalarProperty Name="idDocPayment" ColumnName="idDocPayment" />
-                <ScalarProperty Name="DateOfDoc" ColumnName="DateOfDoc" />
-                <ScalarProperty Name="idWorker" ColumnName="idWorker" />
-                <ScalarProperty Name="idClient" ColumnName="idClient" />
-                <ScalarProperty Name="idInformatioForPayment" ColumnName="idInformatioForPayment" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2265,9 +2130,10 @@
                 <ScalarProperty Name="IdPayment" ColumnName="IdPayment" />
                 <ScalarProperty Name="IdOrder" ColumnName="IdOrder" />
                 <ScalarProperty Name="IdWorkerMake" ColumnName="IdWorkerMake" />
-                <ScalarProperty Name="idDocPayment" ColumnName="idDocPayment" />
+                <ScalarProperty Name="idInformatioForPayment" ColumnName="idInformatioForPayment" />
                 <ScalarProperty Name="Summa" ColumnName="Summa" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateOfDoc" ColumnName="DateOfDoc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2280,7 +2146,6 @@
                 <ScalarProperty Name="DateStart" ColumnName="DateStart" />
                 <ScalarProperty Name="DeadEnd" ColumnName="DeadEnd" />
                 <ScalarProperty Name="SummaAboutTask" ColumnName="SummaAboutTask" />
-                <ScalarProperty Name="idBrigade" ColumnName="idBrigade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2375,10 +2240,10 @@
           <EntitySetMapping Name="TypeOfContact">
             <EntityTypeMapping TypeName="RepairFlatDBModel.TypeOfContact">
               <MappingFragment StoreEntitySet="TypeOfContact">
-                <ScalarProperty Name="Regex" ColumnName="Regex" />
                 <ScalarProperty Name="idContact" ColumnName="idContact" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Regex" ColumnName="Regex" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

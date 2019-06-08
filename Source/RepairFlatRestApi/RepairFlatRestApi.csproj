@@ -154,16 +154,16 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdressDescription.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ClientDetails.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C__RefactorLog.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DeletedSubStr.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DescriptionJSON\AdressModel.cs" />
     <Compile Include="Models\DescriptionJSON\AuthDescription.cs" />
@@ -175,96 +175,93 @@
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWithOrder.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWitthWorker.cs" />
-    <Compile Include="Models\DocPayment.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EstabilismentPost.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InformatioForPayment.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginInformation.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderElementOfMeasurments.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderInformation.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderMeasurements.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderPayment.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderTasks.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderTasksState.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OurMaterials.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OurServices.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PremisesType.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RepairFlatDB.Context.cs">
+    <Compile Include="Models\RepaFlat.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RepairFlatDB.Context.tt</DependentUpon>
+      <DependentUpon>RepaFlat.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RepairFlatDB.cs">
+    <Compile Include="Models\RepaFlat.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\RepairFlatDB.Designer.cs">
+    <Compile Include="Models\RepaFlat.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RepairFlatDB.edmx</DependentUpon>
+      <DependentUpon>RepaFlat.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\SomeEnums.cs" />
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskMaterials.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskServis.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TaskWorker.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TypeOfContact.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UpdateSubInformation.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\User.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserContact.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkerDetails.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkerPosts.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkersOperats.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkersPayGive.cs">
-      <DependentUpon>RepairFlatDB.tt</DependentUpon>
+      <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -282,12 +279,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="ClassDiagram1.cd" />
-    <EntityDeploy Include="Models\RepairFlatDB.edmx">
+    <EntityDeploy Include="Models\RepaFlat.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RepairFlatDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>RepaFlat.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\RepairFlatDB.edmx.diagram">
-      <DependentUpon>RepairFlatDB.edmx</DependentUpon>
+    <Content Include="Models\RepaFlat.edmx.diagram">
+      <DependentUpon>RepaFlat.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
@@ -297,15 +294,15 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Content Include="Models\RepairFlatDB.Context.tt">
+    <Content Include="Models\RepaFlat.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RepairFlatDB.edmx</DependentUpon>
-      <LastGenOutput>RepairFlatDB.Context.cs</LastGenOutput>
+      <DependentUpon>RepaFlat.edmx</DependentUpon>
+      <LastGenOutput>RepaFlat.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\RepairFlatDB.tt">
+    <Content Include="Models\RepaFlat.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RepairFlatDB.edmx</DependentUpon>
-      <LastGenOutput>RepairFlatDB.cs</LastGenOutput>
+      <DependentUpon>RepaFlat.edmx</DependentUpon>
+      <LastGenOutput>RepaFlat.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

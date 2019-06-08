@@ -1157,9 +1157,9 @@ namespace RepairFlatRestApi.Controllers
         #endregion
 
         #region Базовые вещи
-        public static TResult Run<TResult>(Func<RepairFlatDBEntities, TResult> dbFunction, string NameOfClass, string nameOfMethod)
+        public static TResult Run<TResult>(Func<RepaFlat, TResult> dbFunction, string NameOfClass, string nameOfMethod)
         {
-            using (var db = new RepairFlatDBEntities())
+            using (var db = new RepaFlat())
             {
                 try
                 {
@@ -1172,9 +1172,9 @@ namespace RepairFlatRestApi.Controllers
             }
         }
 
-        public static TResult Run<TResult>(Func<RepairFlatDBEntities, TResult> dbFunction)
+        public static TResult Run<TResult>(Func<RepaFlat, TResult> dbFunction)
         {
-            using (var db = new RepairFlatDBEntities())
+            using (var db = new RepaFlat())
             {
                 try
                 {

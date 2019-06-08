@@ -17,7 +17,7 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public InformatioForPayment()
         {
-            this.DocPayment = new HashSet<DocPayment>();
+            this.OrderPayment = new HashSet<OrderPayment>();
         }
     
         public System.Guid idInfPayment { get; set; }
@@ -31,8 +31,8 @@ namespace RepairFlatRestApi.Models
         public string YIN { get; set; }
         public Nullable<System.DateTime> DateOfInsert { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DocPayment> DocPayment { get; set; }
         public virtual WorkerDetails WorkerDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderPayment> OrderPayment { get; set; }
     }
 }

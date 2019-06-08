@@ -13,10 +13,10 @@ namespace RepairFlatRestApi.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class RepairFlatDBEntities : DbContext
+    public partial class RepaFlat : DbContext
     {
-        public RepairFlatDBEntities()
-            : base("name=RepairFlatDBEntities")
+        public RepaFlat()
+            : base("name=RepaFlat")
         {
         }
     
@@ -29,7 +29,6 @@ namespace RepairFlatRestApi.Models
         public virtual DbSet<AdressDescription> AdressDescription { get; set; }
         public virtual DbSet<ClientDetails> ClientDetails { get; set; }
         public virtual DbSet<DeletedSubStr> DeletedSubStr { get; set; }
-        public virtual DbSet<DocPayment> DocPayment { get; set; }
         public virtual DbSet<EstabilismentPost> EstabilismentPost { get; set; }
         public virtual DbSet<InformatioForPayment> InformatioForPayment { get; set; }
         public virtual DbSet<LoginInformation> LoginInformation { get; set; }

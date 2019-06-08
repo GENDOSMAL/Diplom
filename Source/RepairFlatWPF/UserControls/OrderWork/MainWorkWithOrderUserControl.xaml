@@ -16,7 +16,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="20"/>
+            <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="85"/>
         </Grid.RowDefinitions>
@@ -31,6 +31,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Viewbox Margin="7.5 0 7.5 0" Grid.Row="1" Grid.Column="0" >
                 <TextBlock Name="FIOClient"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="ФИО: " FontFamily="Times New Roman" FontSize="45 "/>
@@ -40,6 +41,9 @@
             </Viewbox>
             <Viewbox Margin="7.5 0 0 0" Grid.Row="1" Grid.Column="2" >
                 <TextBlock Name="SummaOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Сумма: " FontFamily="Times New Roman" FontSize="45 "/>
+            </Viewbox>                        
+            <Viewbox Margin="7.5 0 0 0" Grid.Row="1" Grid.Column="3" >
+                <TextBlock Name="Ostatok" HorizontalAlignment="Center" VerticalAlignment="Center" Text="К оплате: " FontFamily="Times New Roman" FontSize="45 "/>
             </Viewbox>            
 
         </Grid>

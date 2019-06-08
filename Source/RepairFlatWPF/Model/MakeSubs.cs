@@ -160,6 +160,7 @@ namespace RepairFlat.Model
             public Guid? idContact;
             public string Value;
             public string Description;
+            public string Regex;
         }
 
         public class ListOfContactsUpd : ListOfContacts

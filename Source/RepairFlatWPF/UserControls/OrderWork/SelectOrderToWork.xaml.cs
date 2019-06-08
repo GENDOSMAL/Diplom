@@ -42,14 +42,14 @@ namespace RepairFlatWPF.UserControls
             {
                 StatusOfOrders.Items.Add(str);
             }
-           
+
             StatusOfOrders.SelectedIndex = 0;
-            
+
         }
 
         async private void DownloadDataAboutOrderы()
         {
-            var InformFromserver = await Task.Run(() => MakeDownloadByLink($"api/order/allorders"));
+            var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/order/allorders"));
             ListofOrders = JsonConvert.DeserializeObject<Model.OrderDesc.AllOrder>(InformFromserver.ToString());
             MakeDataTable();
         }
@@ -61,14 +61,14 @@ namespace RepairFlatWPF.UserControls
             {
                 AllDataOfOrder.Columns.Add(NameOfColumn);
             }
-           
+
             DataAboutidOrder = new List<Tuple<int, Guid?>>();
-           
+
             int sele = StatusOfOrders.SelectedIndex;
             if (sele == 0)
                 MakeDataTableWork();
             else
-                MakeDataTableWork(SomeEnums.StatusOfOrder[sele-1]);
+                MakeDataTableWork(SomeEnums.StatusOfOrder[sele - 1]);
             DataGrid.ItemsSource = AllDataOfOrder.DefaultView;
             if (AllDataOfOrder.Rows.Count == 0)
             {
@@ -117,13 +117,10 @@ namespace RepairFlatWPF.UserControls
 
             AllDataOfOrder.Rows.Add(newClientRow);
             DataAboutidOrder.Add(new Tuple<int, Guid?>(number, orderInf.idOrder));
-           
+
         }
 
-        public object MakeDownloadByLink(string UrlOfDownload)
-        {
-            return BaseWorkWithServer.CatchErrorWithGet(UrlOfDownload, "GET", nameof(MakeLoading), nameof(MakeDownloadByLink));
-        }
+
 
 
         private void AddOrder_Click(object sender, RoutedEventArgs e)
@@ -275,7 +272,32 @@ namespace RepairFlatWPF.UserControls
 
         private void DeleteOrder_Click(object sender, RoutedEventArgs e)
         {
-            MakeSomeHelp.MSG("Не реализовано", MsgBoxImage: MessageBoxImage.Warning);
+            int SelectIndex = DataGrid.SelectedIndex;
+            if (SelectIndex != -1)
+            {
+                var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, SelectIndex);
+                int numberOfRows = 0;
+                if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
+                {
+                    var idSelectOrder = DataAboutidOrder.Where(e1 => e1.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
+                    for(int i=0;i< AllDataOfOrder.Rows.Count; i++)
+                    {
+                        if(AllDataOfOrder.Rows[i][2].ToString()!= "В исполнении")
+                        {
+                            //TODO УДАЛЕНИЕ ЗАКАЗОВ
+                        }
+                        else
+                        {
+                            MakeSomeHelp.MSG("Нельзя удалять заказы со статусом <В исполнении>!", MsgBoxImage: MessageBoxImage.Error);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Необходимо выбрать заказ для удаления!", MsgBoxImage: MessageBoxImage.Hand);
+            }
+
 
         }
 
@@ -287,10 +309,6 @@ namespace RepairFlatWPF.UserControls
                 start = false;
 
 
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

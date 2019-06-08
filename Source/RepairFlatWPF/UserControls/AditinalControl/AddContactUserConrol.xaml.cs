@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,7 +23,7 @@ namespace RepairFlatWPF.UserControls
     {
 
         ContactModel.InformationAboutContact informationAboutContact;
-        List<Guid> idContactType;
+        List<Tuple<Guid,string>> idContactType;
         List<string> Tooltip;
         Guid? idUser;
         Guid idContact;
@@ -65,7 +66,7 @@ namespace RepairFlatWPF.UserControls
                 int index = 0;
                 for (int i = 0; i < idContactType.Count; i++)
                 {
-                    if (idContactType[i] == informationAboutContact.idTypeOfContact)
+                    if (idContactType[i].Item1 == informationAboutContact.idTypeOfContact)
                     {
                         index = i;
                     }
@@ -87,7 +88,7 @@ namespace RepairFlatWPF.UserControls
                         DateAdd = DateTime.Now,
                         Desctription = Description.Text.Trim(),
                         idContact = idContact,
-                        idTypeOfContact = idContactType[TypeOFContact.SelectedIndex],
+                        idTypeOfContact = idContactType[TypeOFContact.SelectedIndex].Item1,
                         Value = Value.Text.Trim(),
                         idUser = idUser,
                         NameOfValue = TypeOFContact.Text.Trim()
@@ -102,7 +103,7 @@ namespace RepairFlatWPF.UserControls
                     {
                         Desctription = Description.Text.Trim(),
                         idContact = idContact,
-                        idTypeOfContact = idContactType[TypeOFContact.SelectedIndex],
+                        idTypeOfContact = idContactType[TypeOFContact.SelectedIndex].Item1,
                         Value = Value.Text.Trim(),
                         idUser = idUser,
                         NameOfValue = TypeOFContact.Text.Trim(),
@@ -117,16 +118,29 @@ namespace RepairFlatWPF.UserControls
 
         private bool ResultIsHave()
         {
-            if (TypeOFContact.SelectedIndex == -1)
-            {
-                MakeSomeHelp.MSG("Неоходимо выбрать тип контакта", MsgBoxImage: MessageBoxImage.Error);
-                return false;
-            }
             if (string.IsNullOrEmpty(Value.Text.Trim()))
             {
                 MakeSomeHelp.MSG("Неоходимо указать значение контакта", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
+            if (TypeOFContact.SelectedIndex == -1)
+            {
+                MakeSomeHelp.MSG("Неоходимо выбрать тип контакта", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(idContactType[TypeOFContact.SelectedIndex].Item2) )
+                {                   
+                    if(!Regex.IsMatch(Value.Text.Trim(), idContactType[TypeOFContact.SelectedIndex].Item2))
+                    {
+                        MakeSomeHelp.MSG("Не соответсвует требуемому значению", MsgBoxImage: MessageBoxImage.Error);
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -139,7 +153,7 @@ namespace RepairFlatWPF.UserControls
         private List<string> MakeListOfTypeOfContact()
         {
             List<string> TypeOfContact = new List<string>();
-            idContactType = new List<Guid>();
+            idContactType = new List<Tuple<Guid, string>>();
             Tooltip = new List<string>();
             string query = "Select * from ContactType";
             var TablesOfTypeOfContact = Controller.MakeWorkWirthDataBase.MakeSomeQueryWork(query, WorkWithTables: true);
@@ -156,7 +170,7 @@ namespace RepairFlatWPF.UserControls
                         Guid id;
                         if (Guid.TryParse(ContactType.Rows[i]["idContact"].ToString(), out id))
                         {
-                            idContactType.Add(id);
+                            idContactType.Add(new Tuple<Guid, string>(id, ContactType.Rows[i]["Regex"].ToString()));
                         }
                         else
                         {

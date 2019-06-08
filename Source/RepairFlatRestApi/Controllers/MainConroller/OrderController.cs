@@ -1,4 +1,5 @@
-﻿using RepairFlatRestApi.Models.DescriptionJSON;
+﻿using RepairFlatRestApi.Controllers.OtherController;
+using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
     public class OrderController:BaseController
     {
         #region Контроллеры самого заказа
+
         [HttpGet, Route("alldata")]
         public HttpResponseMessage SelectDataAbOrderByID([FromUri] Guid idOrder)
         {
@@ -65,6 +67,32 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return DBController.CreateNewServis(NewServisData);
             }, nameof(SubStringController), nameof(SelectAllOrder));
         }
-        #endregion 
+        #endregion
+
+        #region Контроллер оплаты
+        [HttpGet, Route("get/payment")]
+        public HttpResponseMessage SelectDataAbOrderPaymentByIDorder([FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.MakeDataAboutAllOrderPayment(idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderPaymentByIDorder));
+        }
+
+        #endregion
+
+
+        #region Работа с заданиями
+        [HttpGet, Route("get/task")]
+        public HttpResponseMessage SelectDataAbOrderTaskByIDOrder([FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.MakeDataAboutAllOrderPayment(idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
+
+
+        #endregion
     }
 }

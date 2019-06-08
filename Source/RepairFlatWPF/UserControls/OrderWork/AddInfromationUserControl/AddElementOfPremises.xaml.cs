@@ -31,7 +31,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 Lenght.Text = object1.Lenght.ToString();
                 Width.Text = object1.Width.ToString();
                 Height.Text = object1.Height.ToString();
-                WidOfSlope.Text = object1.WidthOfSlope.ToString();
                 POfElement.Text = object1.POfElement.ToString();
                 lenghtData = object1.Lenght?? default(double);
                 WidthData = object1.Width?? default(double);
@@ -113,11 +112,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             if (!double.TryParse(Width.Text.Trim(), out WidthData))
             {
                 MakeSomeHelp.MSG("Необходимо указать ширину", MsgBoxImage: MessageBoxImage.Error);
-                return false;
-            }
-            if (!double.TryParse(WidOfSlope.Text.Trim(), out withOfSlopData))
-            {
-                MakeSomeHelp.MSG("Необходимо указать ширину откоса", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
             return true;

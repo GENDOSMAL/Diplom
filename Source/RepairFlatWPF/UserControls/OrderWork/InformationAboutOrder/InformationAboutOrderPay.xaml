@@ -22,14 +22,16 @@
             <!--Таблица-->
             <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
             <!--Кнопки-->
-            <Grid Grid.Row="2" Name="ForUser"  >
+            <Viewbox Grid.Row="2">
+                <Grid Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddPayment" Click="AddPayment_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditPayment" Click="EditPayment_Click" />
-            </Grid>
+                    <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditPayment" Click="EditPayment_Click" />
+                </Grid>
+            </Viewbox>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>

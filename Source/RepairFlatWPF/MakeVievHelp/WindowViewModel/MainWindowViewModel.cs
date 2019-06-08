@@ -11,14 +11,14 @@ namespace RepairFlatWPF
     //TODO Почистить все, что не связано с отображением окна
     class MainWindowViewModel: BaseViewModel
     {
-        #region Private Member
+        #region Приватные поля
         private Window mWindow;
 
         private int mOuterMarginSize = 10;
         private int mWindowRadius = 10;
         #endregion
 
-        #region Constructor
+        #region Конструктор
         public MainWindowViewModel(Window window, string Title)
         {
             this.Title = Title;
@@ -54,7 +54,7 @@ namespace RepairFlatWPF
         }
         #endregion
 
-        #region Public Member
+        #region Публичные поля
 
         public string LastNameAndIni { get; set; } = Model.SaveSomeData.LastNameAndIni;
         public string Title { get; set; } = Model.SaveSomeData.LastNameAndIni;
@@ -103,7 +103,7 @@ namespace RepairFlatWPF
 
         #endregion
 
-        #region Commands
+        #region Команды
 
         public ICommand MinimazeCommand { get; set; }
 

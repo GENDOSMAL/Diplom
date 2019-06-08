@@ -29,7 +29,6 @@ namespace RepairFlatRestApi.Models
         public Nullable<System.DateTime> DateStart { get; set; }
         public Nullable<System.DateTime> DeadEnd { get; set; }
         public Nullable<decimal> SummaAboutTask { get; set; }
-        public Nullable<System.Guid> idBrigade { get; set; }
     
         public virtual OrderInformation OrderInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

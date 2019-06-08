@@ -17,6 +17,11 @@
           "NameOfCol": "Description",
           "TypeOfCol": "Text",
           "IsPk": false
+        },
+        {
+          "NameOfCol": "Regex",
+          "TypeOfCol": "Text",
+          "IsPk": false
         }
       ]
     },

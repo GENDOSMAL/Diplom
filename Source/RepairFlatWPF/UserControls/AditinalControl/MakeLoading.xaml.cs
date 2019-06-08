@@ -337,7 +337,7 @@ namespace RepairFlatWPF.UserControls
 
         public void ContactUpdlocToDB(MakeSubs.ContactsMake InformationContact)
         {
-            string MakeQuery = "Insert into ContactType (idContact,Value,Description) Values (@idContact,@Value,@Description) On CONFLICT(idContact) DO UPDATE SET  Value=@Value, Description=@Description;";
+            string MakeQuery = "Insert into ContactType (idContact,Value,Description,Regex) Values (@idContact,@Value,@Description,@Regex) On CONFLICT(idContact) DO UPDATE SET  Value=@Value, Description=@Description,Regex=@Regex;";
             MakeWorkWirthDataBase.Run((command) =>
             {
                 bool MakeSmF = false;
@@ -348,10 +348,11 @@ namespace RepairFlatWPF.UserControls
                         MakeSmF = true;
                         foreach (var ContactUpdate in InformationContact.listOfContacts)
                         {
-                            SQLiteParameter[] parameters = new SQLiteParameter[3];
+                            SQLiteParameter[] parameters = new SQLiteParameter[4];
                             parameters[0] = new SQLiteParameter("@idContact", ContactUpdate.idContact.ToString());
                             parameters[1] = new SQLiteParameter("@Value", ContactUpdate.Value);
                             parameters[2] = new SQLiteParameter("@Description", ContactUpdate.Description);
+                            parameters[3] = new SQLiteParameter("@Regex", ContactUpdate.Regex);
                             command.Parameters.AddRange(parameters);
                             command.CommandText = MakeQuery;
                             command.ExecuteNonQuery();

@@ -22,14 +22,18 @@
             <!--Таблица-->
             <DataGrid Grid.Row="1" x:Name="DataGrid" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
             <!--Кнопки-->
-            <Grid Grid.Row="2" Name="ForUser"  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddTask" Click="AddTask_Click" />
-                <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditTask" Click="EditTask_Click" />
-            </Grid>
+            <Viewbox Grid.Row="2">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource AllButtonAction}" Grid.Column="0" Margin="15 10 7.5 15" Width="220" Height="60" Content="Добавление" Name="AddTask" Click="AddTask_Click" />
+                    <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Редактировние" Name="EditTask" Click="EditTask_Click" />
+                    <Button Style="{StaticResource AllButtonAction}" Grid.Column="2" Margin="7.5 10 7.5 15" Width="220" Height="60" Content="Удаление" Name="DeleteTask" Click="DeleteTask_Click" />
+                </Grid>
+            </Viewbox>
         </Grid>
     </materialDesign:TransitioningContent>
 </UserControl>

@@ -61,13 +61,13 @@ namespace RepairFlatWPF
 
         public static string[] PayInf = new string[] { "Номер", "Дата создания", "Сумма оплаты", "Кто создал", "Описание" };
 
-        public static string[] TaskTable = new string[] { "Номер", "Дата начала", "Планируемое время завершения", "Цена", "Описание" };
+        public static string[] TaskTable = new string[] { "Номер",  "Цена", "Описание", "Дата начала", "Планируемое время завершения", };
         #endregion
 
 
         public enum TypeOfAction
         {
-            Add,
+            AddOrUpdate,
             Update,
             Delete
         }

@@ -33,5 +33,39 @@ namespace RepairFlatWPF.Model
             public Guid? idContact;
             public Guid? idUser;
         }
+
+        #region Данные об оплате
+
+        public class DataAboutPaymentInOrder : BaseResult
+        {
+            public List<PaymentInf> InfPayment;
+        }
+
+        public class PaymentInf
+        {
+            public Guid idPayment;
+            public string FioMake;
+            public decimal? Summa;
+            public string Description;
+            public DateTime? DateOfMake;
+        }
+        #endregion
+
+        #region Данные о заданиях
+
+        public class DataAboutTaskInOrder : BaseResult
+        {
+            public List<TaskInf> InfTask;
+        }
+
+        public class TaskInf
+        {
+            public Guid idTask;
+            public DateTime? DateStart;
+            public DateTime? DateEnd;
+            public decimal? Summa;
+            public string Description;
+        }
+        #endregion
     }
 }
