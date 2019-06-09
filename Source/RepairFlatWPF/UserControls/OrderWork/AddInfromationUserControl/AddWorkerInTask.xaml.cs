@@ -29,6 +29,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         string NameOfPost;
         BaseWindow window;
         #endregion
+
         #region Конструктор
         public AddWorkerInTask(ref BaseWindow baseWindow, object InfAbWorker = null)
         {
@@ -48,6 +49,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 WorkerSel = true;
                 SetWorkers.Content = "Редактировать";
                 NameOfPost = dd.NameOfPost;
+                SetWorkers.IsEnabled = false;
             }
         }
         #endregion

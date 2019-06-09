@@ -30,9 +30,9 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBox Name="Lenght" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Длина" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
-            <TextBox Name="Width" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Ширна" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" TextChanged="Width_TextChanged" />
-            <TextBox Name="Height" FontFamily="Times New Roman" FontSize="25" Grid.Column="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Высота" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10"  TextChanged="Height_TextChanged"/>
+            <TextBox Name="Lenght" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Толщина" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" />
+            <TextBox Name="Width" FontFamily="Times New Roman" FontSize="25" Grid.Column="2" Margin="15,0,7.5,0" materialDesign:HintAssist.Hint="Ширна" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10" TextChanged="Width_TextChanged" />
+            <TextBox Name="Height" FontFamily="Times New Roman" FontSize="25" Grid.Column="1" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Высота" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="10"  TextChanged="Height_TextChanged"/>
         </Grid>
         <TextBox Name="POfElement" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="2" Margin="15,0,15,0" materialDesign:HintAssist.Hint="P элемента" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" IsEnabled="False" />
         <TextBox Name="Description" FontFamily="Times New Roman" FontSize="25" Grid.ColumnSpan="2" Grid.Row="3" Margin="15,0,15,0" materialDesign:HintAssist.Hint="Описание" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />

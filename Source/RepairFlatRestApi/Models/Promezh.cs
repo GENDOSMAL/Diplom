@@ -19,5 +19,10 @@ namespace RepairFlatRestApi.Models
     
         public virtual OurMaterials OurMaterials { get; set; }
         public virtual UpdateSubInformation UpdateSubInformation { get; set; }
+        public virtual OurServices OurServices { get; set; }
+        public virtual PremisesType PremisesType { get; set; }
+        public virtual TypeOfContact TypeOfContact { get; set; }
+        public virtual UpdateSubInformation UpdateSubInformation1 { get; set; }
+        public virtual WorkerPosts WorkerPosts { get; set; }
     }
 }

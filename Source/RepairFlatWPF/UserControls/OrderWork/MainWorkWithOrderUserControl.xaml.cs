@@ -37,14 +37,15 @@ namespace RepairFlatWPF.UserControls.OrderWork
             ForPermisent.Children.Add(new WorkWithMeasurment(idOrder));
             //данные о заданиях
             ForTasks.Children.Clear();
-            ForTasks.Children.Add(new WorkWithTasksUserControl(idOrder));                      
+            ForTasks.Children.Add(new WorkWithTasksUserControl(idOrder,ref SummaOfOrder,ref Ostatok));                      
             //Данные об оплате 
             ForPayment.Children.Clear();
             ForPayment.Children.Add(new InformationAboutOrderPay(idOrder));
-            #endregion
             //При загрузке полностью данные о заказе
             ForPrint.Children.Clear();
             ForPrint.Children.Add(new AditionalTablesUserControl(idOrder));
+            #endregion
+
 
 
 

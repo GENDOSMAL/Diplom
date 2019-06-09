@@ -38,6 +38,12 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 AddMaterial.Content = "Редактировать";
                 NewInformation = false;
                 var data = InfromationAboutMaterial as TaskMaterial;
+                NameOfMaterial.Text = data.NameOfMaterials;
+                CountOfMaterial.Text = data.count.ToString();
+                cost = data.cost ?? default ;
+                Cost.Text = data.cost.ToString();
+                SelectMaterial.IsEnabled = false;
+                InformationSelect = true;
             }
 
         }

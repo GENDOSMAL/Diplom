@@ -73,10 +73,7 @@ namespace RepairFlatRestApi.Controllers
             });
         }
 
-        internal static object CreateNewServis(WorkWithOrder.DataAboutServis newServisData)
-        {
-            throw new NotImplementedException();
-        }
+
 
 
 

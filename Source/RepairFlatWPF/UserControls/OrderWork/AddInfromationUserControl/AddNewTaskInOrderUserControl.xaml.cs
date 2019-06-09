@@ -1,8 +1,10 @@
-﻿using RepairFlatWPF.Model;
+﻿using Newtonsoft.Json;
+using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using static RepairFlatWPF.Model.OrderDesc;
@@ -23,32 +25,37 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         DataTable TableOfMaterials, TableOfServises, TableOfWorker;
         int MaxServis = 1, MaxMaterial = 1, MaxWorker = 1;
-        List<Tuple<int, Guid>> ListOfMateriaslId, ListOfServisesId, ListOfWorkerId;
+        List<Tuple<int, Guid, Guid>> ListOfMateriaslId, ListOfServisesId, ListOfWorkerId;
         List<Guid> ListOfDeleteServ, ListOfDeleteMat, ListOfDeleteWorker;
 
+        TextBlock textBoxSumma, textBoxost;
         #endregion
 
         #region Конструктор
-        public AddNewTaskInOrderUserControl(ref BaseWindow baseWindow, Guid idOrder, Guid idTask = new Guid())
+        public AddNewTaskInOrderUserControl(ref BaseWindow baseWindow, ref TextBlock textBoxSumma, ref TextBlock textBoxost, Guid idOrder, Guid idTask = new Guid())
         {
             InitializeComponent();
+            this.textBoxSumma = textBoxSumma;
+            this.textBoxost = textBoxost;
             this.idOrder = idOrder;
             ShowNeededPage(ForMainData);
             Window = baseWindow;
-
+            MakePreparationTableColumnName();
             if (idTask != new Guid())
             {
                 this.idTask = idTask;
                 NewTask = false;
+                MakeDataByid();
+                ExtionButton.Content = "Редактировать";
             }
             else
             {
-                MakePreparationTableColumnName();
-                idTask = Guid.NewGuid();
+                this.idTask = Guid.NewGuid();
             }
-
         }
         #endregion
+
+
 
         #region Обработки основной части формы
         private void SelectTabsClick(object sender, RoutedEventArgs e)
@@ -86,15 +93,97 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         }
 
 
-        private void ExtionButton_Click(object sender, RoutedEventArgs e)
+        private async void ExtionButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NewTask)
-            {//Создание задания
+            if (MakeCheckData())
+            {
+                InformationAboutTask informationAboutTask = new InformationAboutTask();
+                informationAboutTask.idOrder = idOrder;
+                informationAboutTask.idTask = idTask;
 
-            }
-            else
-            {//Редактирование задания
+                informationAboutTask.InfAbMat = new MaterialInfTask();
+                informationAboutTask.InfAbWorkers = new WorkersInfTask();
+                informationAboutTask.InfAbServ = new ServisesInfTask();
+                informationAboutTask.InfAbMat.materialsInf = new List<TaskMaterial>();
+                informationAboutTask.InfAbWorkers.WorkerInf = new List<TaskWorker>();
+                informationAboutTask.InfAbServ.ServisInf = new List<TaskServises>();
+                if (!NewTask)
+                {
+                    if (ListOfDeleteServ.Any())
+                    {
+                        informationAboutTask.InfAbServ.DeleteServises = new List<Guid>();
+                        informationAboutTask.InfAbServ.DeleteServises = ListOfDeleteServ;
+                    }
+                    if (ListOfDeleteMat.Any())
+                    {
+                        informationAboutTask.InfAbMat.DeleteMaterials = new List<Guid>();
+                        informationAboutTask.InfAbMat.DeleteMaterials = ListOfDeleteMat;
+                    }
 
+                    if (ListOfDeleteWorker.Any())
+                    {
+                        informationAboutTask.InfAbWorkers.DeleteWorkers = new List<Guid>();
+                        informationAboutTask.InfAbWorkers.DeleteWorkers = ListOfDeleteWorker;
+                    }
+
+                }
+                informationAboutTask.DateEnd = DateEnd.SelectedDate;
+                informationAboutTask.DateStart = DateStart.SelectedDate;
+                informationAboutTask.Description = Description.Text?.Trim();
+                for (int i = 0; i < TableOfMaterials.Rows.Count; i++)
+                {
+                    var dd = ListOfMateriaslId.Where(ee => ee.Item1 == Convert.ToInt32(TableOfMaterials.Rows[i][0].ToString())).First();
+                    TaskMaterial taskMaterial = new TaskMaterial
+                    {
+                        cost = Convert.ToDecimal(TableOfMaterials.Rows[i][3].ToString()),
+                        count = Convert.ToDouble(TableOfMaterials.Rows[i][2].ToString()),
+                        idMaterial = dd.Item2,
+                        idTaskMaterial = dd.Item3,
+                        NameOfMaterials = TableOfMaterials.Rows[i][1].ToString()
+                    };
+                    informationAboutTask.InfAbMat.materialsInf.Add(taskMaterial);
+                }
+                for (int i = 0; i < TableOfServises.Rows.Count; i++)
+                {
+                    var dd = ListOfServisesId.Where(ee => ee.Item1 == Convert.ToInt32(TableOfServises.Rows[i][0].ToString())).First();
+                    TaskServises taskServises = new TaskServises
+                    {
+                        cost = Convert.ToDecimal(TableOfServises.Rows[i][3].ToString()),
+                        count = Convert.ToDouble(TableOfServises.Rows[i][2].ToString()),
+                        idServis = dd.Item2,
+                        idTaskServises = dd.Item3,
+                        NameOfServises = TableOfServises.Rows[i][1].ToString()
+                    };
+                    informationAboutTask.InfAbServ.ServisInf.Add(taskServises);
+                }
+                for (int i = 0; i < TableOfWorker.Rows.Count; i++)
+                {
+                    var dd = ListOfWorkerId.Where(ee => ee.Item1 == Convert.ToInt32(TableOfWorker.Rows[i][0].ToString())).First();
+                    TaskWorker TaskWorker = new TaskWorker
+                    {
+                        FioOfWorker = TableOfWorker.Rows[i][1].ToString(),
+                        idWorker = dd.Item2,
+                        Role = TableOfWorker.Rows[i][3].ToString(),
+                        idTaskWorker = dd.Item3,
+                    };
+                    informationAboutTask.InfAbWorkers.WorkerInf.Add(TaskWorker);
+                }
+                informationAboutTask.Summa = Convert.ToDecimal(AllSumma.Text.ToString());
+                string Json = JsonConvert.SerializeObject(informationAboutTask);
+                string urlSend = "api/order/create/task";
+                var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(ExtionButton_Click)));
+                var deserializedProduct = JsonConvert.DeserializeObject<SummaOfOrder>(task.ToString());
+                if (!deserializedProduct.success)
+                {
+                    MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                }
+                else
+                {
+                    textBoxost.Text = deserializedProduct.NeedPay.ToString();
+                    textBoxSumma.Text = deserializedProduct.summaOfOrder.ToString();
+                    MakeSomeHelp.MSG("Операции над данными были произведены!", MsgBoxImage: MessageBoxImage.Information);
+                }
+                Window.Close();
             }
         }
 
@@ -119,7 +208,11 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 int numberOfRows = 0;
                 if (ListOfServisesId.Any())
                 {
-                    numberOfRows = ListOfServisesId.Where(e2 => e2.Item2 == dataAbout.idServis).Select(e1 => e1.Item1).First();
+                    var sel = ListOfServisesId.Where(e2 => e2.Item2 == dataAbout.idServis);
+                    if (sel.Any())
+                    {
+                        numberOfRows = sel.Select(e1 => e1.Item1).First();
+                    }
                 }
                 decimal cost = dataAbout.cost ?? default;
                 double count = dataAbout.count ?? default;
@@ -147,9 +240,10 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     dataRow[3] = dataAbout.cost;
                     dataRow[4] = summa;
                     TableOfServises.Rows.Add(dataRow);
-                    ListOfServisesId.Add(new Tuple<int, Guid>(MaxServis, dataAbout.idServis));
+                    ListOfServisesId.Add(new Tuple<int, Guid, Guid>(MaxServis, dataAbout.idServis, Guid.NewGuid()));
                     MaxServis++;
                 }
+                MakeSumma();
             }
         }
 
@@ -199,6 +293,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             }
                         }
                     }
+                    MakeSumma();
                 }
             }
             else
@@ -219,7 +314,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     Guid idServis = ListOfServisesId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                     if (!NewTask)
                     {
-                        ListOfDeleteServ.Add(idServis);
+                        ListOfDeleteServ.Add(ListOfServisesId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item3).First());
                     }
                     for (int i = 0; i < TableOfServises.Rows.Count; i++)
                     {
@@ -230,6 +325,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     }
                     var delete = ListOfServisesId.Where(e1 => e1.Item2 == idServis).First();
                     ListOfServisesId.Remove(delete);
+                    MakeSumma();
                 }
             }
             else
@@ -254,7 +350,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 int numberOfRows = 0;
                 if (ListOfMateriaslId.Any())
                 {
-                    numberOfRows = ListOfMateriaslId.Where(e2 => e2.Item2 == dataAboutMaterials.idMaterial).Select(e1 => e1.Item1).First();
+                    var sele = ListOfMateriaslId.Where(e2 => e2.Item2 == dataAboutMaterials.idMaterial);
+                    if (sele.Any())
+                        numberOfRows = sele.Select(e1 => e1.Item1).First();
                 }
                 decimal cost = dataAboutMaterials.cost ?? default;
                 double count = dataAboutMaterials.count ?? default;
@@ -282,9 +380,10 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     dataRow[3] = dataAboutMaterials.cost;
                     dataRow[4] = summa;
                     TableOfMaterials.Rows.Add(dataRow);
-                    ListOfMateriaslId.Add(new Tuple<int, Guid>(MaxMaterial, dataAboutMaterials.idMaterial));
+                    ListOfMateriaslId.Add(new Tuple<int, Guid, Guid>(MaxMaterial, dataAboutMaterials.idMaterial, Guid.NewGuid()));
                     MaxMaterial++;
                 }
+                MakeSumma();
             }
         }
 
@@ -313,7 +412,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                         }
                     }
                     BaseWindow baseWindow = new BaseWindow("Редактирование данных о материале");
-                    baseWindow.MakeOpen(new AddServisesInOrder(ref baseWindow, InfAbMat));
+                    baseWindow.MakeOpen(new AddInfromationAboutMaterials(ref baseWindow, InfAbMat));
                     baseWindow.ShowDialog();
                     if (SaveSomeData.MakeSomeOperation)
                     {
@@ -334,6 +433,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             }
                         }
                     }
+                    MakeSumma();
                 }
             }
             else
@@ -355,7 +455,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     Guid idMaterial = ListOfMateriaslId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                     if (!NewTask)
                     {
-                        ListOfDeleteMat.Add(idMaterial);
+                        ListOfDeleteMat.Add(ListOfMateriaslId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item3).First());
                     }
                     for (int i = 0; i < TableOfMaterials.Rows.Count; i++)
                     {
@@ -366,6 +466,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     }
                     var delete = ListOfMateriaslId.Where(e1 => e1.Item2 == idMaterial).First();
                     ListOfMateriaslId.Remove(delete);
+                    MakeSumma();
                 }
             }
             else
@@ -377,8 +478,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         #endregion
 
         #region Обработки при работе с работниками
-
-
         private void SelectWorker_Click(object sender, RoutedEventArgs e)
         {
             BaseWindow baseWindow = new BaseWindow("Добавление новых работников в задание");
@@ -392,7 +491,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 int numberOfRows = 0;
                 if (ListOfWorkerId.Any())
                 {
-                    numberOfRows = ListOfWorkerId.Where(e2 => e2.Item2 == dataAbout.idWorker).Select(e1 => e1.Item1).First();
+                    var sele = ListOfWorkerId.Where(e2 => e2.Item2 == dataAbout.idWorker);
+                    if (sele.Any())
+                        numberOfRows = sele.Select(e1 => e1.Item1).First();
 
                 }
                 if (numberOfRows != 0)
@@ -418,10 +519,11 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                         dataRow[2] = dataAbout.NameOfPost;
                         dataRow[3] = dataAbout.Role;
                         TableOfWorker.Rows.Add(dataRow);
-                        ListOfWorkerId.Add(new Tuple<int, Guid>(MaxWorker, dataAbout.idWorker));
+                        ListOfWorkerId.Add(new Tuple<int, Guid, Guid>(MaxWorker, dataAbout.idWorker, Guid.NewGuid()));
                         MaxWorker++;
                     }
                 }
+
             }
         }
 
@@ -488,7 +590,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             }
                         }
                     }
-
                 }
             }
             else
@@ -507,6 +608,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
                     Guid idWorker = ListOfWorkerId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
+
                     if (NewTask)
                     {
                         for (int i = 0; i < TableOfWorker.Rows.Count; i++)
@@ -521,7 +623,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     }
                     else
                     {//TODO Удаление при редактировании задании
-                        ListOfDeleteWorker.Add(idWorker);
+                        ListOfDeleteWorker.Add(ListOfWorkerId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item3).First());
                         for (int i = 0; i < TableOfServises.Rows.Count; i++)
                         {
                             if (Convert.ToInt32(TableOfWorker.Rows[i][0].ToString()) == numberOfRows)
@@ -555,6 +657,80 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             grid.Visibility = Visibility.Visible;
         }
 
+        private async void MakeDataByid()
+        {
+            var DataDle = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/order/get/task?idTask={idTask}"));
+            var DataAbTask = JsonConvert.DeserializeObject<InformationAboutTask>(DataDle.ToString());
+            if (DataAbTask.success)
+            {
+                DateStart.SelectedDate = DataAbTask.DateStart;
+                DateEnd.SelectedDate = DataAbTask.DateEnd;
+                Description.Text = DataAbTask.Description?.Trim();
+                AllSumma.Text = DataAbTask.Summa.ToString();
+                if (DataAbTask.InfAbWorkers != null)
+                {
+                    if (DataAbTask.InfAbWorkers.WorkerInf.Any())
+                    {
+                        foreach (var Worker in DataAbTask.InfAbWorkers.WorkerInf)
+                        {
+                            DataRow dataRow = TableOfWorker.NewRow();
+                            dataRow[0] = MaxWorker;
+                            dataRow[1] = Worker.FioOfWorker?.Trim();
+                            dataRow[2] = Worker.NameOfPost?.Trim();
+                            dataRow[3] = Worker.Role?.Trim();
+                            TableOfWorker.Rows.Add(dataRow);
+                            ListOfWorkerId.Add(new Tuple<int, Guid, Guid>(MaxWorker, Worker.idWorker, Worker.idTaskWorker));
+                            MaxWorker++;
+                        }
+                    }
+                }
+
+                if (DataAbTask.InfAbMat != null)
+                {
+                    if (DataAbTask.InfAbMat.materialsInf.Any())
+                    {
+                        foreach (var Material in DataAbTask.InfAbMat.materialsInf)
+                        {
+                            decimal cost = Material.cost ?? default;
+                            double count = Material.count ?? default;
+                            decimal summa = cost * Convert.ToDecimal(count);
+                            DataRow dataRow = TableOfMaterials.NewRow();
+                            dataRow[0] = MaxMaterial;
+                            dataRow[1] = Material.NameOfMaterials?.Trim();
+                            dataRow[2] = Material.count;
+                            dataRow[3] = Material.cost;
+                            dataRow[4] = summa;
+                            TableOfMaterials.Rows.Add(dataRow);
+                            ListOfMateriaslId.Add(new Tuple<int, Guid, Guid>(MaxMaterial, Material.idMaterial, Material.idTaskMaterial));
+                            MaxMaterial++;
+                        }
+                    }
+                }
+
+                if (DataAbTask.InfAbServ != null)
+                {
+                    if (DataAbTask.InfAbServ.ServisInf.Any())
+                    {
+                        foreach (var Serv in DataAbTask.InfAbServ.ServisInf)
+                        {
+                            decimal cost = Serv.cost ?? default;
+                            double count = Serv.count ?? default;
+                            decimal summa = cost * Convert.ToDecimal(count);
+                            DataRow dataRow = TableOfServises.NewRow();
+                            dataRow[0] = MaxServis;
+                            dataRow[1] = Serv.NameOfServises?.Trim();
+                            dataRow[2] = Serv.count;
+                            dataRow[3] = Serv.cost;
+                            dataRow[4] = summa;
+                            TableOfServises.Rows.Add(dataRow);
+                            ListOfServisesId.Add(new Tuple<int, Guid, Guid>(MaxServis, Serv.idServis, Serv.idTaskServises));
+                            MaxServis++;
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
 
         private void MakePreparationTableColumnName()
@@ -563,9 +739,12 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             TableOfMaterials = new DataTable();
             TableOfServises = new DataTable();
             TableOfWorker = new DataTable();
-            ListOfMateriaslId = new List<Tuple<int, Guid>>();
-            ListOfServisesId = new List<Tuple<int, Guid>>();
-            ListOfWorkerId = new List<Tuple<int, Guid>>();
+            ListOfMateriaslId = new List<Tuple<int, Guid, Guid>>();
+            ListOfServisesId = new List<Tuple<int, Guid, Guid>>();
+            ListOfWorkerId = new List<Tuple<int, Guid, Guid>>();
+            ListOfDeleteMat = new List<Guid>();
+            ListOfDeleteServ = new List<Guid>();
+            ListOfDeleteWorker = new List<Guid>();
             foreach (string NameOfMat in SomeEnums.TaskMaterialTable)
             {
                 TableOfMaterials.Columns.Add(NameOfMat);
@@ -583,6 +762,57 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             DataAboutWorker.ItemsSource = TableOfWorker.DefaultView;
         }
 
+        private bool MakeCheckData()
+        {
+            if (!DateStart.SelectedDate.HasValue)
+            {
+                MakeSomeHelp.MSG("Необходимо указать дату начала", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (!DateEnd.SelectedDate.HasValue)
+            {
+                MakeSomeHelp.MSG("Необходимо указать планируемую дату окончания", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (DateStart.SelectedDate > DateEnd.SelectedDate)
+            {
+                MakeSomeHelp.MSG("Дата начала не может быть больше даты окончания", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            if (TableOfServises.Rows.Count == 0)
+            {
+                if (TableOfWorker.Rows.Count == 0)
+                {
+                    MakeSomeHelp.MSG("Для создания задания необходимо иметь какие либо услуги и работников, которые должны выполнить", MsgBoxImage: MessageBoxImage.Hand);
+                    return false;
+                }
+                else
+                {
+                    MakeSomeHelp.MSG("Для создания задания необходимо иметь какие либо услуги", MsgBoxImage: MessageBoxImage.Hand);
+                    return false;
+                }
+            }
+            if (TableOfWorker.Rows.Count == 0)
+            {
+                MakeSomeHelp.MSG("Укажите работников для выполнения задания", MsgBoxImage: MessageBoxImage.Hand);
+                return false;
+            }
+            return true;
+        }
+
+        private void MakeSumma()
+        {
+            double summa = 0;
+            for (int i = 0; i < TableOfMaterials.Rows.Count; i++)
+            {
+                summa = summa + Convert.ToDouble(TableOfMaterials.Rows[i][4].ToString());
+            }
+            for (int i = 0; i < TableOfServises.Rows.Count; i++)
+            {
+                summa = summa + Convert.ToDouble(TableOfServises.Rows[i][4].ToString());
+            }
+            AllSumma.Text = summa.ToString();
+        }
 
         #endregion
     }

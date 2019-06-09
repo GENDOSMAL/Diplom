@@ -28,5 +28,6 @@ namespace RepairFlatRestApi.Models
         public virtual User User { get; set; }
         public virtual WorkerPosts WorkerPosts { get; set; }
         public virtual Promezh Promezh { get; set; }
+        public virtual Promezh Promezh1 { get; set; }
     }
 }

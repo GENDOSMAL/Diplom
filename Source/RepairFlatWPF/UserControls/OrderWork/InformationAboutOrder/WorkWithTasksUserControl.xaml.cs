@@ -16,13 +16,18 @@ namespace RepairFlatWPF.UserControls.OrderWork
         Guid idOrder;
         DataTable DataAboutTask;
         List<Tuple<int, Guid>> ListOfId;
+
+        TextBlock textBoxSumma, textBoxost;
         #endregion
 
         #region Конструктор
-        public WorkWithTasksUserControl(Guid idOrder, object DataAboutTasks = null)
+        public WorkWithTasksUserControl(Guid idOrder, ref TextBlock textBoxSumma, ref TextBlock textBoxost, object DataAboutTasks = null)
         {
             InitializeComponent();
+            this.textBoxost = textBoxost;
+            this.textBoxSumma = textBoxSumma;
             this.idOrder = idOrder;
+            
             MakePreparateDataTable();
         }
         #endregion
@@ -31,10 +36,15 @@ namespace RepairFlatWPF.UserControls.OrderWork
         private void AddTask_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             BaseWindow redactwindow = new BaseWindow("Создание нового задания");
-            redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl( ref redactwindow, idOrder));
+            redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(ref redactwindow, ref textBoxSumma, ref textBoxost, idOrder));
             redactwindow.ShowDialog();
             if (SaveSomeData.MakeSomeOperation)
             {
+                SaveSomeData.MakeSomeOperation = false;
+                var dd = SaveSomeData.SomeObject as OrderDesc.SummaOfOrder;
+                SaveSomeData.SomeObject = null;
+                textBoxSumma.Text = dd.summaOfOrder.ToString();
+                textBoxost.Text = dd.NeedPay.ToString();
                 MakePreparateDataTable();
             }
         }
@@ -50,13 +60,11 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 {
                     Guid idTask = ListOfId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                     BaseWindow redactwindow = new BaseWindow("Редактирование сущестующего задания");
-                    redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(ref redactwindow, idOrder, idTask));
+                    redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(ref redactwindow, ref textBoxSumma, ref textBoxost, idOrder, idTask));
                     redactwindow.ShowDialog();
-                    if (SaveSomeData.MakeSomeOperation)
-                    {
-                        SaveSomeData.MakeSomeOperation = false;
-                        MakePreparateDataTable();
-                    }
+
+                    MakePreparateDataTable();
+
                 }
             }
             else
@@ -65,7 +73,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
             }
         }
 
-        private void DeleteTask_Click(object sender, System.Windows.RoutedEventArgs e)
+        private async void DeleteTask_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             int index = DataGrid.SelectedIndex;
             if (index != -1)
@@ -76,6 +84,15 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 {
                     Guid idTask = ListOfId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                     //TODO Удаление заданий
+                    var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/order/delete/task?idTask={idTask}&idOrder={idOrder}"));
+                    var DataAbout = JsonConvert.DeserializeObject<OrderDesc.SummaOfOrder>(InformFromserver.ToString());
+                    MakePreparateDataTable();
+                    if (DataAbout.success)
+                    {
+                        MakeSomeHelp.MSG($"Данные о из строки <{numberOfRows}> помещении удалены", MessageBoxButton.OK, MessageBoxImage.Question);
+                        textBoxSumma.Text = DataAbout.summaOfOrder.ToString();
+                        textBoxost.Text = DataAbout.NeedPay.ToString();
+                    }
                 }
             }
             else
@@ -91,7 +108,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
             DataAboutTask = new DataTable("Task");
             ListOfId = new List<Tuple<int, Guid>>();
-            foreach(string NameOfColumn in SomeEnums.TaskTable)
+            foreach (string NameOfColumn in SomeEnums.TaskTable)
             {
                 DataAboutTask.Columns.Add(NameOfColumn);
             }
@@ -110,8 +127,9 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
             if (taskInOrderdataAbout.success)
             {
+                textBoxost.Text = taskInOrderdataAbout.Ostatok?.ToString();
                 int number = 1;
-                foreach(var task in taskInOrderdataAbout.InfTask)
+                foreach (var task in taskInOrderdataAbout.InfTask)
                 {
                     DataRow dataRow = DataAboutTask.NewRow();
                     dataRow[0] = number;

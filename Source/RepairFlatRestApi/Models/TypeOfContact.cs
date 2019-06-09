@@ -19,6 +19,7 @@ namespace RepairFlatRestApi.Models
         {
             this.UpdateSubInformation = new HashSet<UpdateSubInformation>();
             this.UserContact = new HashSet<UserContact>();
+            this.Promezh = new HashSet<Promezh>();
         }
     
         public System.Guid idContact { get; set; }
@@ -30,5 +31,7 @@ namespace RepairFlatRestApi.Models
         public virtual ICollection<UpdateSubInformation> UpdateSubInformation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserContact> UserContact { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Promezh> Promezh { get; set; }
     }
 }

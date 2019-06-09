@@ -140,6 +140,13 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         #endregion
 
+        public class SummaOfOrder : BaseResult
+        {
+            public Guid IdOrder;
+            public decimal summaOfOrder;
+            public decimal NeedPay;
+        }
+
         #region Данные об оплате
 
         public class DataAboutPaymentInOrder:BaseResult
@@ -162,6 +169,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         public class DataAboutTaskInOrder : BaseResult
         {
             public List<TaskInf> InfTask;
+            public decimal? Ostatok;
         }
 
         public class TaskInf
@@ -176,6 +184,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         public class InformationAboutTask: BaseResult
         {
             public Guid idTask;
+            public Guid idOrder;
             public DateTime? DateStart;
             public DateTime? DateEnd;
             public decimal? Summa;

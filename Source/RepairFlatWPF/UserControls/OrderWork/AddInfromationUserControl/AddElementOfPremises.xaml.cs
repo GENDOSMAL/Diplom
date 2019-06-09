@@ -36,7 +36,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 WidthData = object1.Width?? default(double);
                 heightData = object1.Height?? default(double);
                 pofelement = object1.POfElement?? default(double);
-                withOfSlopData = object1.WidthOfSlope?? default(double);
                 Description.Text = object1.Description;
                 AddBtn.Content = "Редактировать";
             }
@@ -62,7 +61,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     POfElement = pofelement,
                     Width = WidthData,
                     TypeOfElement = TypeOfElement.Text,
-                    WidthOfSlope = withOfSlopData
                 };
                 window.Close();
 
@@ -71,18 +69,18 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         private void Width_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (double.TryParse(Lenght.Text.Trim(), out lenghtData) && double.TryParse(Width.Text.Trim(), out WidthData))
+            if (double.TryParse(Height.Text.Trim(), out heightData) && double.TryParse(Width.Text.Trim(), out WidthData))
             {
-                pofelement = 2 * (lenghtData + WidthData);
+                pofelement = 2 * (heightData + WidthData);
                 POfElement.Text = pofelement.ToString();
             }
         }
 
         private void Height_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (double.TryParse(Lenght.Text.Trim(), out lenghtData) && double.TryParse(Width.Text.Trim(), out WidthData))
+            if (double.TryParse(Height.Text.Trim(), out heightData) && double.TryParse(Width.Text.Trim(), out WidthData))
             {
-                pofelement = (lenghtData * WidthData);
+                pofelement = 2*(heightData * WidthData);
                 POfElement.Text = pofelement.ToString();
             }
         }

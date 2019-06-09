@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RepairFlat.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -99,7 +100,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         }
 
-        private void DeleteMeasurment_Click(object sender, RoutedEventArgs e)
+        private async void DeleteMeasurment_Click(object sender, RoutedEventArgs e)
         {
             int index = DataGrid.SelectedIndex;
             if (index != -1)
@@ -111,9 +112,10 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     Guid idPremises = DataAboutMeasurment.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First() ?? default(Guid);
                     if (MakeSomeHelp.MSG($"Вы действительно хотете удалить помещение под номером {numberOfRows}?", MessageBoxButton.OKCancel, MessageBoxImage.Question) == MessageBoxResult.OK)
                     {
-                        //TODO Удаление данных о помещениях
-
+                        var InformFromserver = await Task.Run(() => MakeDownloadByLink($"api/measurment/delete?idPremises={idPremises}"));
+                        var ListofOrders = JsonConvert.DeserializeObject<BaseResult>(InformFromserver.ToString());                        
                         MakeDataAboutMeasurment();
+                        MakeSomeHelp.MSG($"Данные о из строки <{numberOfRows}> помещении удалены", MessageBoxButton.OK, MessageBoxImage.Question);
                     }
 
                 }

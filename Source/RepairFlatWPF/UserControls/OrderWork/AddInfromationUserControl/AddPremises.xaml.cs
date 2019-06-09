@@ -55,7 +55,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 this.idPremises = idPremises;
                 MakeDataAboutElement();
                 AddBtn.Content = "Редактировать";
-                
+
 
             }
             else
@@ -125,9 +125,8 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     newEmentRow[2] = elementInf.Lenght;
                     newEmentRow[3] = elementInf.Width;
                     newEmentRow[4] = elementInf.Height;
-                    newEmentRow[5] = elementInf.WidthOfSlope;
-                    newEmentRow[6] = elementInf.POfElement;
-                    newEmentRow[7] = elementInf.Description;
+                    newEmentRow[5] = elementInf.POfElement;
+                    newEmentRow[6] = elementInf.Description;
 
                     DataAboutElement.Rows.Add(newEmentRow);
                     DataAboutID.Add(new Tuple<int, Guid>(number, elementInf.idElement));
@@ -152,28 +151,27 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
 
-                    int indeInTable= 0 ;
+                    int indeInTable = 0;
                     Guid idRedElement = DataAboutID.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                    for(int i=0;i< DataAboutElement.Rows.Count; i++)
+                    for (int i = 0; i < DataAboutElement.Rows.Count; i++)
                     {
-                        if(Convert.ToInt32(DataAboutElement.Rows[i][0].ToString())== numberOfRows)
+                        if (Convert.ToInt32(DataAboutElement.Rows[i][0].ToString()) == numberOfRows)
                         {
                             indeInTable = i;
                         }
                     }
-                    
+
                     var modelForRedact = new ElementOfMeasurment
                     {
-                        
+
                         idElement = idRedElement,
                         idMeasurements = idPremises,
-                        Description = DataAboutElement.Rows[indeInTable][7].ToString(),
+                        Description = DataAboutElement.Rows[indeInTable][6].ToString(),
                         Height = Convert.ToDouble(DataAboutElement.Rows[indeInTable][4].ToString()),
                         Lenght = Convert.ToDouble(DataAboutElement.Rows[indeInTable][2].ToString()),
-                        POfElement = Convert.ToDouble(DataAboutElement.Rows[indeInTable][6].ToString()),
+                        POfElement = Convert.ToDouble(DataAboutElement.Rows[indeInTable][5].ToString()),
                         Width = Convert.ToDouble(DataAboutElement.Rows[indeInTable][3].ToString()),
                         TypeOfElement = DataAboutElement.Rows[indeInTable][1].ToString(),
-                        WidthOfSlope = Convert.ToDouble(DataAboutElement.Rows[indeInTable][5].ToString())
                     };
 
                     BaseWindow baseWindow = new BaseWindow("Редактирование данных об элементах помещений");
@@ -194,14 +192,13 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             newEmentRow[2] = dataAbPomes.Lenght;
                             newEmentRow[3] = dataAbPomes.Width;
                             newEmentRow[4] = dataAbPomes.Height;
-                            newEmentRow[5] = dataAbPomes.WidthOfSlope;
-                            newEmentRow[6] = dataAbPomes.POfElement;
-                            newEmentRow[7] = dataAbPomes.Description;
+                            newEmentRow[5] = dataAbPomes.POfElement;
+                            newEmentRow[6] = dataAbPomes.Description;
                             DataAboutElement.Rows.Add(newEmentRow);
                             DataAboutID.Add(new Tuple<int, Guid>(numberOfRows, dataAbPomes.idElement));
                         }
+                        MakeSomeCalc();
                     }
-
                 }
             }
             else
@@ -230,7 +227,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 {
                     for (int i = 0; i < DataAboutElement.Rows.Count; i++)
                     {
-                        SElement += Convert.ToDouble(DataAboutElement.Rows[i][6]);
+                        SElement += Convert.ToDouble(DataAboutElement.Rows[i][5]);
                     }
                 }
                 Sfloor = ((HeightData * WidthData) * 4) - SElement;
@@ -266,7 +263,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     }
                     else
                     {
-                       
+
                         DeletedGuid.Add(DataAboutID.Where(ee => ee.Item1 == numberOfRows).Select(ee => ee.Item2).First());
                         DataAboutID.RemoveAll(ee => ee.Item1 == numberOfRows);
                         for (int i = 0; i < DataAboutElement.Rows.Count; i++)
@@ -319,11 +316,11 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     newEmentRow[2] = dataAbPomes.Lenght;
                     newEmentRow[3] = dataAbPomes.Width;
                     newEmentRow[4] = dataAbPomes.Height;
-                    newEmentRow[5] = dataAbPomes.WidthOfSlope;
-                    newEmentRow[6] = dataAbPomes.POfElement;
-                    newEmentRow[7] = dataAbPomes.Description;
+                    newEmentRow[5] = dataAbPomes.POfElement;
+                    newEmentRow[6] = dataAbPomes.Description;
                     DataAboutElement.Rows.Add(newEmentRow);
                     DataAboutID.Add(new Tuple<int, Guid>(numb, dataAbPomes.idElement));
+                    MakeSomeCalc();
                 }
             }
 
@@ -341,15 +338,14 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     {
                         listOfElement.Add(new ElementOfMeasurment
                         {
-                            Description = DataAboutElement.Rows[i][7].ToString(),
+                            Description = DataAboutElement.Rows[i][6].ToString(),
                             Height = Convert.ToDouble(DataAboutElement.Rows[i][3].ToString()),
                             idMeasurements = idPremises,
                             Lenght = Convert.ToDouble(DataAboutElement.Rows[i][2].ToString()),
                             idElement = DataAboutID.Where(ee => ee.Item1 == Convert.ToInt32(DataAboutElement.Rows[i][0].ToString())).Select(ee => ee.Item2).First(),
                             TypeOfElement = DataAboutElement.Rows[i][1].ToString(),
-                            POfElement = Convert.ToDouble(DataAboutElement.Rows[i][6].ToString()),
+                            POfElement = Convert.ToDouble(DataAboutElement.Rows[i][5].ToString()),
                             Width = Convert.ToDouble(DataAboutElement.Rows[i][3].ToString()),
-                            WidthOfSlope = Convert.ToDouble(DataAboutElement.Rows[i][5].ToString()),
                         });
 
                     }
@@ -367,7 +363,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                         Pwalls = Pwalls,
                         Sfloor = Sfloor,
                         Swalls = SWall,
-                        
+
 
                     };
                     string Json = JsonConvert.SerializeObject(meas);
@@ -395,18 +391,18 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     List<ElementOfMeasurment> listOfElement = new List<ElementOfMeasurment>();
                     for (int i = 0; i < DataAboutElement.Rows.Count; i++)
                     {
-                        listOfElement.Add(new ElementOfMeasurment
-                        {
-                            Description = DataAboutElement.Rows[i][7].ToString(),
-                            Height = Convert.ToDouble(DataAboutElement.Rows[i][3].ToString()),
-                            idMeasurements = idPremises,
-                            Lenght = Convert.ToDouble(DataAboutElement.Rows[i][2].ToString()),
-                            idElement = DataAboutID.Where(ee => ee.Item1 == Convert.ToInt32(DataAboutElement.Rows[i][0].ToString())).Select(ee => ee.Item2).First(),
-                            TypeOfElement = DataAboutElement.Rows[i][1].ToString(),
-                            POfElement = Convert.ToDouble(DataAboutElement.Rows[i][6].ToString()),
-                            Width = Convert.ToDouble(DataAboutElement.Rows[i][3].ToString()),
-                            WidthOfSlope = Convert.ToDouble(DataAboutElement.Rows[i][5].ToString()),
-                        });
+                        var el = new ElementOfMeasurment();
+
+                        el.Description = DataAboutElement.Rows[i][6].ToString();
+                        el.Height = Convert.ToDouble(DataAboutElement.Rows[i][3].ToString());
+                        el.idMeasurements = idPremises;
+                        el.Lenght = Convert.ToDouble(DataAboutElement.Rows[i][2].ToString());
+                        el.idElement = DataAboutID.Where(ee => ee.Item1 == Convert.ToInt32(DataAboutElement.Rows[i][0].ToString())).Select(ee => ee.Item2).First();
+                        el.idElement = DataAboutID.Where(ee => ee.Item1 == Convert.ToInt32(DataAboutElement.Rows[i][0].ToString())).Select(ee => ee.Item2).First();
+                        el.TypeOfElement = DataAboutElement.Rows[i][1].ToString();
+                        el.POfElement = Convert.ToDouble(DataAboutElement.Rows[i][5].ToString());
+                        el.Width = Convert.ToDouble(DataAboutElement.Rows[i][3].ToString());
+                        listOfElement.Add(el);
 
                     }
                     DataAboutMeassFromDB meas = new DataAboutMeassFromDB

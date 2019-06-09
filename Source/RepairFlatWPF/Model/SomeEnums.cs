@@ -35,7 +35,7 @@ namespace RepairFlatWPF
 
         public static string[] MeasurmentMainTable = new string[] { "Номер", "Наименование", "Описание","Длина", "Ширина", "Высота","P стен", "P пола", "S стен", "S пола" };
 
-        public static string[] DataAboutElement = new string[] { "Номер", "Тип элемента", "Длина","Ширина", "Высота","Ширина откоса","S элемента", "Описание" };
+        public static string[] DataAboutElement = new string[] { "Номер", "Тип элемента", "Длина","Ширина", "Толщина","P элемента", "Описание" };
 
         public static string[] WorkerTables = new string[] { "Номер", "Фамилия", "Имя",  "Отчество", "Пол", "Дата рождения" };
 

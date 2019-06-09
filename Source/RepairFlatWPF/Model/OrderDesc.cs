@@ -54,6 +54,7 @@ namespace RepairFlatWPF.Model
         public class DataAboutTaskInOrder : BaseResult
         {
             public List<TaskInf> InfTask;
+            public decimal? Ostatok;
         }
 
         public class TaskInf
@@ -68,6 +69,7 @@ namespace RepairFlatWPF.Model
         public class InformationAboutTask : BaseResult
         {
             public Guid idTask;
+            public Guid idOrder;
             public DateTime? DateStart;
             public DateTime? DateEnd;
             public decimal? Summa;
@@ -124,6 +126,13 @@ namespace RepairFlatWPF.Model
             public string FioOfWorker;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfPost;
+        }
+
+        public class SummaOfOrder : BaseResult
+        {
+            public Guid IdOrder;
+            public decimal summaOfOrder;
+            public decimal NeedPay;
         }
         #endregion
     }

@@ -40,10 +40,24 @@
                 <TextBlock Name="Adress" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Адресс: " FontFamily="Times New Roman" FontSize="45 "/>
             </Viewbox>
             <Viewbox Margin="7.5 0 0 0" Grid.Row="1" Grid.Column="2" >
-                <TextBlock Name="SummaOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Сумма: " FontFamily="Times New Roman" FontSize="45 "/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="Desc" HorizontalAlignment="Center" x:FieldModifier="public" Grid.Column="0" VerticalAlignment="Center" Text="Сумма: " FontFamily="Times New Roman" FontSize="45 "/>
+                    <TextBlock Name="SummaOfOrder" HorizontalAlignment="Center" x:FieldModifier="public" Grid.Column="1" VerticalAlignment="Center" Text="" FontFamily="Times New Roman" FontSize="45 "/>
+                </Grid>
             </Viewbox>                        
             <Viewbox Margin="7.5 0 0 0" Grid.Row="1" Grid.Column="3" >
-                <TextBlock Name="Ostatok" HorizontalAlignment="Center" VerticalAlignment="Center" Text="К оплате: " FontFamily="Times New Roman" FontSize="45 "/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Name="Desc1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="К оплате: " Grid.Column="0" FontFamily="Times New Roman" FontSize="45 "/>
+                    <TextBlock Name="Ostatok" HorizontalAlignment="Center" VerticalAlignment="Center" Text="0.0" Grid.Column="1" FontFamily="Times New Roman" FontSize="45 "/>
+                </Grid>
             </Viewbox>            
 
         </Grid>

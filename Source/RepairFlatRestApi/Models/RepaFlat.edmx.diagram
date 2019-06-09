@@ -75,6 +75,11 @@
         <EntityTypeShape EntityType="RepairFlatDBModel.Promezh" Width="1.5" PointX="9.75" PointY="37.5" />
         <AssociationConnector Association="RepairFlatDBModel.FK_Promezh_OurMaterials" />
         <AssociationConnector Association="RepairFlatDBModel.FK_UpdateSubInformation_Promezh" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_Promezh_OurServices" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_Promezh_PremisesType" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_Promezh_TypeOfContact" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_Promezh_UpdateSubInformation" />
+        <AssociationConnector Association="RepairFlatDBModel.FK_Promezh_WorkerPosts" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

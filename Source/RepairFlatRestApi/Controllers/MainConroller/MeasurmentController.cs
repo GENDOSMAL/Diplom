@@ -1,4 +1,5 @@
-﻿using RepairFlatRestApi.Models;
+﻿using RepairFlatRestApi.Controllers.OtherController;
+using RepairFlatRestApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             return CatchError(() =>
             {
                 return OtherController.MeasurmentDBController.MakeDataAbouMeas(idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderByID));
+        }
+        [HttpGet, Route("delete")]
+        public HttpResponseMessage DeletePremmises([FromUri] Guid idPremises)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.DeletePremises(idPremises);
             }, nameof(SubStringController), nameof(SelectDataAbOrderByID));
         }
 

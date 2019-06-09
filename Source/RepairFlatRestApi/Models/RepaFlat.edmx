@@ -574,6 +574,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Promezh_OurServices">
+          <End Role="OurServices" Type="Self.OurServices" Multiplicity="0..1" />
+          <End Role="Promezh" Type="Self.Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurServices">
+              <PropertyRef Name="idServis" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_PremisesType">
+          <End Role="PremisesType" Type="Self.PremisesType" Multiplicity="0..1" />
+          <End Role="Promezh" Type="Self.Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PremisesType">
+              <PropertyRef Name="idPremises" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_TypeOfContact">
+          <End Role="TypeOfContact" Type="Self.TypeOfContact" Multiplicity="0..1" />
+          <End Role="Promezh" Type="Self.Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfContact">
+              <PropertyRef Name="idContact" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_UpdateSubInformation">
+          <End Role="UpdateSubInformation" Type="Self.UpdateSubInformation" Multiplicity="1" />
+          <End Role="Promezh" Type="Self.Promezh" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateSubInformation">
+              <PropertyRef Name="idInformation" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idColob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_WorkerPosts">
+          <End Role="WorkerPosts" Type="Self.WorkerPosts" Multiplicity="0..1" />
+          <End Role="Promezh" Type="Self.Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerPosts">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TaskMaterials_OrderTasks">
           <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
           <End Role="TaskMaterials" Type="Self.TaskMaterials" Multiplicity="*" />
@@ -619,18 +679,6 @@
             </Principal>
             <Dependent Role="TaskServis">
               <PropertyRef Name="idServis" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UpdateSubInformation_Promezh">
-          <End Role="Promezh" Type="Self.Promezh" Multiplicity="1" />
-          <End Role="UpdateSubInformation" Type="Self.UpdateSubInformation" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Promezh">
-              <PropertyRef Name="idColob" />
-            </Principal>
-            <Dependent Role="UpdateSubInformation">
-              <PropertyRef Name="idInformation" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -860,6 +908,26 @@
             <End Role="OurMaterials" EntitySet="OurMaterials" />
             <End Role="Promezh" EntitySet="Promezh" />
           </AssociationSet>
+          <AssociationSet Name="FK_Promezh_OurServices" Association="Self.FK_Promezh_OurServices">
+            <End Role="OurServices" EntitySet="OurServices" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_PremisesType" Association="Self.FK_Promezh_PremisesType">
+            <End Role="PremisesType" EntitySet="PremisesType" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_TypeOfContact" Association="Self.FK_Promezh_TypeOfContact">
+            <End Role="TypeOfContact" EntitySet="TypeOfContact" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_UpdateSubInformation" Association="Self.FK_Promezh_UpdateSubInformation">
+            <End Role="UpdateSubInformation" EntitySet="UpdateSubInformation" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_WorkerPosts" Association="Self.FK_Promezh_WorkerPosts">
+            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
           <AssociationSet Name="FK_TaskMaterials_OrderTasks" Association="Self.FK_TaskMaterials_OrderTasks">
             <End Role="OrderTasks" EntitySet="OrderTasks" />
             <End Role="TaskMaterials" EntitySet="TaskMaterials" />
@@ -875,10 +943,6 @@
           <AssociationSet Name="FK_TaskServis_OurServices" Association="Self.FK_TaskServis_OurServices">
             <End Role="OurServices" EntitySet="OurServices" />
             <End Role="TaskServis" EntitySet="TaskServis" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UpdateSubInformation_Promezh" Association="Self.FK_UpdateSubInformation_Promezh">
-            <End Role="Promezh" EntitySet="Promezh" />
-            <End Role="UpdateSubInformation" EntitySet="UpdateSubInformation" />
           </AssociationSet>
           <AssociationSet Name="FK_UpdateSubInformation_User" Association="Self.FK_UpdateSubInformation_User">
             <End Role="User" EntitySet="User" />
@@ -1127,6 +1191,7 @@
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="TaskServis" Relationship="Self.FK_TaskServis_OurServices" FromRole="OurServices" ToRole="TaskServis" />
           <NavigationProperty Name="UpdateSubInformation" Relationship="Self.FK_UpdateSubInformation_OurServices" FromRole="OurServices" ToRole="UpdateSubInformation" />
+          <NavigationProperty Name="Promezh" Relationship="RepairFlatDBModel.FK_Promezh_OurServices" FromRole="OurServices" ToRole="Promezh" />
         </EntityType>
         <EntityType Name="PremisesType">
           <Key>
@@ -1137,6 +1202,7 @@
           <Property Name="Descriprtion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="OrderMeasurements" Relationship="Self.FK_OrderMeasurements_PremisesType" FromRole="PremisesType" ToRole="OrderMeasurements" />
           <NavigationProperty Name="UpdateSubInformation" Relationship="Self.FK_UpdateSubInformation_PremisesType" FromRole="PremisesType" ToRole="UpdateSubInformation" />
+          <NavigationProperty Name="Promezh" Relationship="RepairFlatDBModel.FK_Promezh_PremisesType" FromRole="PremisesType" ToRole="Promezh" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1193,6 +1259,7 @@
           <Property Name="Regex" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="UpdateSubInformation" Relationship="Self.FK_UpdateSubInformation_TypeOfContact" FromRole="TypeOfContact" ToRole="UpdateSubInformation" />
           <NavigationProperty Name="UserContact" Relationship="Self.FK_UserContact_TypeOfContact" FromRole="TypeOfContact" ToRole="UserContact" />
+          <NavigationProperty Name="Promezh" Relationship="RepairFlatDBModel.FK_Promezh_TypeOfContact" FromRole="TypeOfContact" ToRole="Promezh" />
         </EntityType>
         <EntityType Name="UpdateSubInformation">
           <Key>
@@ -1211,6 +1278,7 @@
           <NavigationProperty Name="User" Relationship="Self.FK_UpdateSubInformation_User" FromRole="UpdateSubInformation" ToRole="User" />
           <NavigationProperty Name="WorkerPosts" Relationship="Self.FK_UpdateSubInformation_WorkerPosts" FromRole="UpdateSubInformation" ToRole="WorkerPosts" />
           <NavigationProperty Name="Promezh" Relationship="RepairFlatDBModel.FK_UpdateSubInformation_Promezh" FromRole="UpdateSubInformation" ToRole="Promezh" />
+          <NavigationProperty Name="Promezh1" Relationship="RepairFlatDBModel.FK_Promezh_UpdateSubInformation" FromRole="UpdateSubInformation" ToRole="Promezh" />
           </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1273,6 +1341,7 @@
           <Property Name="MakeWork" Type="Boolean" />
           <NavigationProperty Name="EstabilismentPost" Relationship="Self.FK_EstabilismentPost_WorkerPosts" FromRole="WorkerPosts" ToRole="EstabilismentPost" />
           <NavigationProperty Name="UpdateSubInformation" Relationship="Self.FK_UpdateSubInformation_WorkerPosts" FromRole="WorkerPosts" ToRole="UpdateSubInformation" />
+          <NavigationProperty Name="Promezh" Relationship="RepairFlatDBModel.FK_Promezh_WorkerPosts" FromRole="WorkerPosts" ToRole="Promezh" />
         </EntityType>
         <EntityType Name="WorkersOperats">
           <Key>
@@ -1961,6 +2030,26 @@
             <End Role="Promezh" EntitySet="Promezh" />
             <End Role="UpdateSubInformation" EntitySet="UpdateSubInformation" />
           </AssociationSet>
+          <AssociationSet Name="FK_Promezh_OurServices" Association="RepairFlatDBModel.FK_Promezh_OurServices">
+            <End Role="OurServices" EntitySet="OurServices" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_PremisesType" Association="RepairFlatDBModel.FK_Promezh_PremisesType">
+            <End Role="PremisesType" EntitySet="PremisesType" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_TypeOfContact" Association="RepairFlatDBModel.FK_Promezh_TypeOfContact">
+            <End Role="TypeOfContact" EntitySet="TypeOfContact" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_UpdateSubInformation" Association="RepairFlatDBModel.FK_Promezh_UpdateSubInformation">
+            <End Role="UpdateSubInformation" EntitySet="UpdateSubInformation" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Promezh_WorkerPosts" Association="RepairFlatDBModel.FK_Promezh_WorkerPosts">
+            <End Role="WorkerPosts" EntitySet="WorkerPosts" />
+            <End Role="Promezh" EntitySet="Promezh" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Promezh">
           <Key>
@@ -1970,6 +2059,11 @@
           <Property Name="idSubInf" Type="Guid" />
           <NavigationProperty Name="OurMaterials" Relationship="RepairFlatDBModel.FK_Promezh_OurMaterials" FromRole="Promezh" ToRole="OurMaterials" />
           <NavigationProperty Name="UpdateSubInformation" Relationship="RepairFlatDBModel.FK_UpdateSubInformation_Promezh" FromRole="Promezh" ToRole="UpdateSubInformation" />
+          <NavigationProperty Name="OurServices" Relationship="RepairFlatDBModel.FK_Promezh_OurServices" FromRole="Promezh" ToRole="OurServices" />
+          <NavigationProperty Name="PremisesType" Relationship="RepairFlatDBModel.FK_Promezh_PremisesType" FromRole="Promezh" ToRole="PremisesType" />
+          <NavigationProperty Name="TypeOfContact" Relationship="RepairFlatDBModel.FK_Promezh_TypeOfContact" FromRole="Promezh" ToRole="TypeOfContact" />
+          <NavigationProperty Name="UpdateSubInformation1" Relationship="RepairFlatDBModel.FK_Promezh_UpdateSubInformation" FromRole="Promezh" ToRole="UpdateSubInformation" />
+          <NavigationProperty Name="WorkerPosts" Relationship="RepairFlatDBModel.FK_Promezh_WorkerPosts" FromRole="Promezh" ToRole="WorkerPosts" />
         </EntityType>
         <Association Name="FK_Promezh_OurMaterials">
           <End Type="RepairFlatDBModel.OurMaterials" Role="OurMaterials" Multiplicity="0..1" />
@@ -1992,6 +2086,66 @@
             </Principal>
             <Dependent Role="UpdateSubInformation">
               <PropertyRef Name="idInformation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_OurServices">
+          <End Type="RepairFlatDBModel.OurServices" Role="OurServices" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.Promezh" Role="Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OurServices">
+              <PropertyRef Name="idServis" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_PremisesType">
+          <End Type="RepairFlatDBModel.PremisesType" Role="PremisesType" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.Promezh" Role="Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PremisesType">
+              <PropertyRef Name="idPremises" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_TypeOfContact">
+          <End Type="RepairFlatDBModel.TypeOfContact" Role="TypeOfContact" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.Promezh" Role="Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfContact">
+              <PropertyRef Name="idContact" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_UpdateSubInformation">
+          <End Type="RepairFlatDBModel.UpdateSubInformation" Role="UpdateSubInformation" Multiplicity="1" />
+          <End Type="RepairFlatDBModel.Promezh" Role="Promezh" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UpdateSubInformation">
+              <PropertyRef Name="idInformation" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idColob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Promezh_WorkerPosts">
+          <End Type="RepairFlatDBModel.WorkerPosts" Role="WorkerPosts" Multiplicity="0..1" />
+          <End Type="RepairFlatDBModel.Promezh" Role="Promezh" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkerPosts">
+              <PropertyRef Name="idPost" />
+            </Principal>
+            <Dependent Role="Promezh">
+              <PropertyRef Name="idSubInf" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RepairFlat.Model;
 using RepairFlatWPF.Controller;
 using RepairFlatWPF.Model;
 using System;
@@ -79,7 +80,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 MakeUpdateServer();
             }
         }
-        private void MakeUpdateServer()
+        private async void MakeUpdateServer()
         {
             MakeUpdOrInsServises makeUpdOrInsServ = new MakeUpdOrInsServises();
             makeUpdOrInsServ.idUser = SaveSomeData.IdUser ?? default;
@@ -97,7 +98,16 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
             makeUpdOrInsServ.ListOfServises.Add(listOfPost);
             string Json = JsonConvert.SerializeObject(makeUpdOrInsServ);
             string urlSend = "api/substring/servises/update";
-            MakeSomeHelp.UpdloadDataToServer(urlSend, Json);
+            var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeUpdateServer)));
+            var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+            if (!deserializedProduct.success)
+            {
+                MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+            }
+            else
+            {
+                MakeSomeHelp.MSG("Операции над данными были произведены!", MsgBoxImage: MessageBoxImage.Information);
+            }
             window.Close();
         }
 

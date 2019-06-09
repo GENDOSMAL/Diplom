@@ -57,7 +57,6 @@ namespace RepairFlatWPF.Model
             public double? Lenght;
             public double? Width;
             public double? POfElement;
-            public double? WidthOfSlope;
             public string Description;
             public double? Height;
         }

@@ -48,6 +48,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 Count = Convert.ToInt32(dataAbout.count);
                 CountOfServis.Text = Count.ToString();
                 IsSelect = true;
+                SelectServis.IsEnabled = false;
             }
         }
 

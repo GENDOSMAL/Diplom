@@ -58,17 +58,6 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         }
         #endregion
 
-        #region Контроллеры данных об услугах
-        [HttpPost, Route("create/servis")]
-        public HttpResponseMessage CreateNewServis([FromBody] WorkWithOrder.DataAboutServis NewServisData)
-        {
-            return CatchError(() =>
-            {
-                return DBController.CreateNewServis(NewServisData);
-            }, nameof(SubStringController), nameof(SelectAllOrder));
-        }
-        #endregion
-
         #region Контроллер оплаты
         [HttpGet, Route("get/payment")]
         public HttpResponseMessage SelectDataAbOrderPaymentByIDorder([FromUri] Guid idOrder)
@@ -82,6 +71,9 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         #endregion
 
 
+
+
+
         #region Работа с заданиями
         [HttpGet, Route("get/task")]
         public HttpResponseMessage SelectDataAbOrderTaskByIDOrder([FromUri] Guid idOrder)
@@ -92,7 +84,32 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
         }
 
+        [HttpPost, Route("create/task")]
+        public HttpResponseMessage CreateTaskInOrder([FromBody] WorkWithOrder.InformationAboutTask DataAboutTask)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.CreateNewTask(DataAboutTask);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
 
+        [HttpGet, Route("get/task")]
+        public HttpResponseMessage CreateTaskInOrder([FromUri] Guid idTask)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.GetDataAboutTask(idTask);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
+
+        [HttpGet, Route("delete/task")]
+        public HttpResponseMessage DeleteTask([FromUri] Guid idTask,[FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.DeleteTask(idTask,idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
         #endregion
     }
 }
