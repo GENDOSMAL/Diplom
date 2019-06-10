@@ -24,12 +24,6 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
         {
             InitializeComponent();
         }
-
-        private void ShowInfromationAboutOrderPayment_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ShowStatistik_Click(object sender, RoutedEventArgs e)
         {
 
@@ -38,6 +32,11 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
         private void GiveWorkerPayment_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void SetDataForPayment_Click(object sender, RoutedEventArgs e)
+        {
+            MakeSomeHelp.DataGridMakeWork(new ShowDataForPayment());
         }
     }
 }

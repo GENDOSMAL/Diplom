@@ -133,7 +133,7 @@ namespace RepairFlatWPF
             public double? PWalls;
             public double? PCelling;
             public double? SWalls;
-            public double? PFloor;
+            public double? SFloor;
         }
 
         public class NewMeasurment

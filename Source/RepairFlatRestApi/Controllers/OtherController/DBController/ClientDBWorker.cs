@@ -16,7 +16,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
             {
                 try
                 {
-                    db.User.Add(new User
+                    db.User.AddOrUpdate(new User
                     {
                         idUser = descriptionPerson.idUser,
                         Name = descriptionPerson.Name,
@@ -27,19 +27,19 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         BirstDay = descriptionPerson.Birstday,
                         TypeOfUser = descriptionPerson.TypeOfUser
                     });
-                    db.ClientDetails.Add(new ClientDetails
+                    db.ClientDetails.AddOrUpdate(new ClientDetails
                     {
                         IdClient = descriptionPerson.idUser,
                         Description = descriptionPerson.Desc,
                     });
-
-                    if (descriptionPerson.DataAboutContact.ListOfContact != null)
+                    if (descriptionPerson.ListOfContact != null)
                     {
-                        if (descriptionPerson.DataAboutContact.ListOfContact.Count != 0)
+                        if (descriptionPerson.ListOfContact.Any())
                         {
-                            foreach (var contact in descriptionPerson.DataAboutContact.ListOfContact)
+
+                            foreach (var contact in descriptionPerson.ListOfContact)
                             {
-                                db.UserContact.Add(new UserContact
+                                db.UserContact.AddOrUpdate(new UserContact
                                 {
                                     DateAdd = contact.DateAdd,
                                     Description = contact.Desctription,
@@ -49,10 +49,9 @@ namespace RepairFlatRestApi.Controllers.OtherController
                                     Value = contact.Value
                                 });
                             }
+
                         }
                     }
-
-
                     db.SaveChanges();
                     return new BaseResult() { success = true };
                 }
@@ -63,6 +62,33 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         success = false,
                         description = ex.Message
                     };
+                }
+            });
+        }
+
+        internal static object GetDataAboutUser(Guid idUser)
+        {
+            return Run((db) =>
+            {
+                var data = db.ClientDetails.Where(ee => ee.IdClient == idUser).FirstOrDefault();
+                if (data != null)
+                {
+                    PersonDesctiption.CreateNewClient client = new PersonDesctiption.CreateNewClient
+                    {
+                        idUser = data.IdClient,
+                        Birstday = data.User.BirstDay,
+                        Desc = data.Description,
+                        Female = data.User.Female,
+                        Lastname = data.User.LastName,
+                        Name = data.User.Name,
+                        Pasport = data.User.Pasport,
+                        Patronymic = data.User.Patronymic
+                    };
+                    return client;
+                }
+                else
+                {
+                    return new PersonDesctiption.CreateNewClient { idUser = new Guid() };
                 }
             });
         }
@@ -81,9 +107,9 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     DataToUpdate.ClientDetails.Description = descriptionPerson.Desc;
                     DataToUpdate.BirstDay = descriptionPerson.Birstday;
                     DataToUpdate.Female = descriptionPerson.Female;
-                    if (descriptionPerson.DataAboutContact.ListOfContact != null)
+                    if (descriptionPerson.ListOfContact != null)
                     {
-                        foreach (var contact in descriptionPerson.DataAboutContact.ListOfContact)
+                        foreach (var contact in descriptionPerson.ListOfContact)
                         {
                             db.UserContact.AddOrUpdate(new UserContact
                             {

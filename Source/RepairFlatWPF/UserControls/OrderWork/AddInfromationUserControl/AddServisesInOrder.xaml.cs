@@ -43,7 +43,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 var dataAbout = InfromationAboutServis as TaskServises;
                 idServis = dataAbout.idServis;
                 NameOfServis.Text = dataAbout.NameOfServises;
-                cost = dataAbout.cost ?? default;
+                cost = Convert.ToDecimal(dataAbout.cost);
                 Cost.Text = cost.ToString();
                 Count = Convert.ToInt32(dataAbout.count);
                 CountOfServis.Text = Count.ToString();
@@ -83,7 +83,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 TaskServises taskServises = new TaskServises
                 {
                     NameOfServises = NameOfServis.Text,
-                    cost = cost,
+                    cost = Convert.ToDouble(cost),
                     count = Count,
                     idServis = idServis
                 };

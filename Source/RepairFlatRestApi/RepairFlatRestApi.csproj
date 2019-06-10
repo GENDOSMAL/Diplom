@@ -136,6 +136,7 @@
     <Compile Include="Controllers\MainConroller\ContactController.cs" />
     <Compile Include="Controllers\MainConroller\MeasurmentController.cs" />
     <Compile Include="Controllers\MainConroller\OrderController.cs" />
+    <Compile Include="Controllers\MainConroller\PaymentController.cs" />
     <Compile Include="Controllers\MainConroller\SomeHelpController.cs" />
     <Compile Include="Controllers\MainConroller\UserController.cs" />
     <Compile Include="Controllers\MainConroller\SubStringController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Controllers\OtherController\DBController\DBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\MeasurmentDBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\OrderDBController.cs" />
+    <Compile Include="Controllers\OtherController\DBController\PaymnetDBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\WorkWithContactDBController.cs" />
     <Compile Include="Controllers\OtherController\HelperUS.cs" />
     <Compile Include="Controllers\OtherController\Logger.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Models\DescriptionJSON\AuthDescription.cs" />
     <Compile Include="Models\DescriptionJSON\BaseResult.cs" />
     <Compile Include="Models\DescriptionJSON\ContactModel.cs" />
+    <Compile Include="Models\DescriptionJSON\DescMakePayment.cs" />
     <Compile Include="Models\DescriptionJSON\MakeSubs.cs" />
     <Compile Include="Models\DescriptionJSON\MeasurmentModel.cs" />
     <Compile Include="Models\DescriptionJSON\OrderData.cs" />
@@ -197,9 +200,6 @@
       <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderTasks.cs">
-      <DependentUpon>RepaFlat.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\OrderTasksState.cs">
       <DependentUpon>RepaFlat.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OurMaterials.cs">

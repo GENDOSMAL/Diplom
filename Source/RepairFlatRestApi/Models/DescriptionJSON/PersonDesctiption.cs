@@ -36,12 +36,12 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         }
 
 
-        public class CreateNewClient: DescriptionOfUser
+        public class CreateNewClient : DescriptionOfUser
         {
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string Desc;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            public InformationAboutContact DataAboutContact;
+            public List<ContactModel.InformationAboutContact> ListOfContact;
         }
 
         public class InformationAboutContact

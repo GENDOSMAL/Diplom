@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RepairFlat.Model;
+using RepairFlatWPF.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static RepairFlatWPF.Model.DescMakePayment;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 {
@@ -24,51 +28,80 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         Guid idOrder;
         Guid idPayment;
-        bool NewOrder = true;
-        double SummaPay;
+        bool NewData = true;
+        decimal SummaPay,needPayde;
         BaseWindow window;
+        MakeDataAboutPayment makeData=new MakeDataAboutPayment();
+        TextBlock needPay;
         #endregion
 
         #region Обработки
-        public AddPaymentInformation(Guid idOrder,ref BaseWindow baseWindow,object DataAboutPayment=null)
+        public AddPaymentInformation(Guid idOrder,ref TextBlock needPay,ref BaseWindow baseWindow,object DataAboutPayment=null)
         {
             InitializeComponent();
+            this.needPay = needPay;
+            decimal.TryParse(needPay.Text,out needPayde);
+            NeedSoPay.Text += needPay.Text;
             window = baseWindow;
             this.idOrder = idOrder;
             if (DataAboutPayment!=null)
             {
-                NewOrder = false;
-                //Обновление данных 
+                NewData = false;
+                makeData  = DataAboutPayment as MakeDataAboutPayment;
+                idPayment = makeData.idPayment;
+                Summa.Text = makeData.summa?.ToString();
+                Desc.Text = makeData.Desc?.Trim();
+                Summa.IsEnabled = false;
+                AddPayment.Content = "Редактировать";
             }
             else
             {
-               
+                idPayment = Guid.NewGuid();
             }
-            
-            //if (InfromationAboutPayment != null)
-            //{
-            //    NewOrder = false;
-            //    AddPayment.Content = "Редактировать";
-            //}
-            //else
-            //{
-            //    idPayment = Guid.NewGuid();
-            //}
         }
 
-        private void AddPayment_Click(object sender, RoutedEventArgs e)
+        private async void AddPayment_Click(object sender, RoutedEventArgs e)
         {
             if (CheckFields())
             {
-                if (NewOrder)
-                {//Если добавление
-                    
+                var DataDle = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/payment/getdata"));
+                var DataAbInf = JsonConvert.DeserializeObject<DataAboutPayment>(DataDle.ToString());
 
+                MakeDataAboutPayment Result =new MakeDataAboutPayment();
+                if (NewData)
+                {
+                    Result.summa = SummaPay;
+                    Result.idWorkerMake = SaveSomeData.IdUser;
+                    Result.idPayment = idPayment;
+                    Result.idOrder = idOrder;
+                    Result.idInfForPayment = DataAbInf.idInfPayment;
+                    Result.Desc = Desc.Text?.Trim();
+                    Result.DateOfDoc = DateTime.Now;
                 }
                 else
                 {
-                    //Если обновление
+                    Result.summa = SummaPay;
+                    Result.idWorkerMake = makeData.idWorkerMake;
+                    Result.idPayment = makeData.idPayment;
+                    Result.idOrder = makeData.idOrder;
+                    Result.idInfForPayment = makeData.idInfForPayment;
+                    Result.Desc = Desc.Text?.Trim();
+                    Result.DateOfDoc = makeData.DateOfDoc;
                 }
+                string Json = JsonConvert.SerializeObject(Result);
+                var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost("api/payment/create/payment", "POST", Json, nameof(BaseWorkWithServer), nameof(AddPayment_Click)));
+                var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+
+                if (!deserializedProduct.success)
+                {
+                    MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                }
+                else
+                {
+                    Model.SaveSomeData.MakeSomeOperation = true;
+                    MakeSomeHelp.MSG("Операции над данными совершены!", MsgBoxImage: MessageBoxImage.Information);
+                }
+                window.Close();
             }
         }
 
@@ -85,23 +118,20 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         private bool CheckFields()
         {//TODO Глобально над этим подумать
             bool result = true;
-            //if (string.IsNullOrEmpty(NumberOfDoc.Text.Trim()))
-            //{
-            //    MakeSomeHelp.MSG("Необходимо указать номер документа об оплате!", MsgBoxImage: MessageBoxImage.Error);
-            //    return false;
-            //}
-            if (!DatePayment.SelectedDate.HasValue)
-            {
-                MakeSomeHelp.MSG("Необходимо указать дату оплаты!", MsgBoxImage: MessageBoxImage.Error);
-                return false;
-            }
-            if(!double.TryParse(Summa.Text.Trim(),out SummaPay))
+            if(!decimal.TryParse(Summa.Text.Trim(),out SummaPay))
             {
                 MakeSomeHelp.MSG("Необходимо указать сумму оплаты!", MsgBoxImage: MessageBoxImage.Error);
+                return false;
+            }
+            else if(SummaPay> needPayde)
+            {
+                MakeSomeHelp.MSG($"Сумма оплаты больше, чем остаток {needPay.Text}", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
             return result;
         }
         #endregion
+
+
     }
 }

@@ -37,6 +37,15 @@ namespace RepairFlatRestApi.Controllers
             }, nameof(LoginController), nameof(CreateNewPerson));
         }
 
+        [HttpGet, Route("get")]
+        public HttpResponseMessage DataAboutUser ([FromUri] Guid idUser)
+        {
+            return CatchError(() =>
+            {
+                return OtherController.ClientDBWorker.GetDataAboutUser(idUser);
+            }, nameof(LoginController), nameof(CreateNewPerson));
+        }
+
 
 
     }

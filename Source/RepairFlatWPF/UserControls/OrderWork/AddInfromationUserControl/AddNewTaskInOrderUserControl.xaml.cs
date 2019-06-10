@@ -55,8 +55,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         }
         #endregion
 
-
-
         #region Обработки основной части формы
         private void SelectTabsClick(object sender, RoutedEventArgs e)
         {
@@ -135,7 +133,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     var dd = ListOfMateriaslId.Where(ee => ee.Item1 == Convert.ToInt32(TableOfMaterials.Rows[i][0].ToString())).First();
                     TaskMaterial taskMaterial = new TaskMaterial
                     {
-                        cost = Convert.ToDecimal(TableOfMaterials.Rows[i][3].ToString()),
+                        cost = Convert.ToDouble(TableOfMaterials.Rows[i][3].ToString()),
                         count = Convert.ToDouble(TableOfMaterials.Rows[i][2].ToString()),
                         idMaterial = dd.Item2,
                         idTaskMaterial = dd.Item3,
@@ -148,7 +146,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     var dd = ListOfServisesId.Where(ee => ee.Item1 == Convert.ToInt32(TableOfServises.Rows[i][0].ToString())).First();
                     TaskServises taskServises = new TaskServises
                     {
-                        cost = Convert.ToDecimal(TableOfServises.Rows[i][3].ToString()),
+                        cost = Convert.ToDouble(TableOfServises.Rows[i][3].ToString()),
                         count = Convert.ToDouble(TableOfServises.Rows[i][2].ToString()),
                         idServis = dd.Item2,
                         idTaskServises = dd.Item3,
@@ -214,9 +212,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                         numberOfRows = sel.Select(e1 => e1.Item1).First();
                     }
                 }
-                decimal cost = dataAbout.cost ?? default;
+                double cost = dataAbout.cost ?? default;
                 double count = dataAbout.count ?? default;
-                decimal summa = cost * Convert.ToDecimal(count);
+                double summa = cost * count;
                 if (numberOfRows != 0)
                 {//Обновление
                     for (int i = 0; i < TableOfServises.Rows.Count; i++)
@@ -227,7 +225,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             TableOfServises.Rows[i][1] = dataAbout.NameOfServises;
                             TableOfServises.Rows[i][2] = dataAbout.count + countTek;
                             TableOfServises.Rows[i][3] = dataAbout.cost;
-                            TableOfServises.Rows[i][4] = cost * Convert.ToDecimal((dataAbout.count + countTek));
+                            TableOfServises.Rows[i][4] = cost * (dataAbout.count + countTek);
                         }
                     }
                 }
@@ -265,7 +263,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             InfAbServ = new TaskServises
                             {
                                 idServis = idServis,
-                                cost = Convert.ToDecimal(TableOfServises.Rows[i][3].ToString()),
+                                cost = Convert.ToDouble(TableOfServises.Rows[i][3].ToString()),
                                 count = Convert.ToInt32(TableOfServises.Rows[i][2].ToString()),
                                 NameOfServises = TableOfServises.Rows[i][1].ToString()
                             };
@@ -279,9 +277,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                         SaveSomeData.MakeSomeOperation = false;
                         var updatedData = SaveSomeData.SomeObject as TaskServises;
                         SaveSomeData.SomeObject = null;
-                        decimal cost = updatedData.cost ?? default;
+                        double cost = updatedData.cost ?? default;
                         double count = updatedData.count ?? default;
-                        decimal summa = cost * Convert.ToDecimal(count);
+                        double summa = cost * count;
                         for (int i = 0; i < TableOfServises.Rows.Count; i++)
                         {
                             if (Convert.ToInt32(TableOfServises.Rows[i][0].ToString()) == numberOfRows)
@@ -354,9 +352,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     if (sele.Any())
                         numberOfRows = sele.Select(e1 => e1.Item1).First();
                 }
-                decimal cost = dataAboutMaterials.cost ?? default;
+                double cost = dataAboutMaterials.cost ?? default;
                 double count = dataAboutMaterials.count ?? default;
-                decimal summa = cost * Convert.ToDecimal(count);
+                double summa = cost * count;
                 if (numberOfRows != 0)
                 {//Обновление
                     for (int i = 0; i < TableOfMaterials.Rows.Count; i++)
@@ -367,7 +365,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             TableOfMaterials.Rows[i][1] = dataAboutMaterials.NameOfMaterials;
                             TableOfMaterials.Rows[i][2] = dataAboutMaterials.count + countTek;
                             TableOfMaterials.Rows[i][3] = dataAboutMaterials.cost;
-                            TableOfMaterials.Rows[i][4] = cost * Convert.ToDecimal((dataAboutMaterials.count + countTek));
+                            TableOfMaterials.Rows[i][4] = cost * (dataAboutMaterials.count + countTek);
                         }
                     }
                 }
@@ -405,7 +403,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                             InfAbMat = new TaskMaterial
                             {
                                 idMaterial = idMaterial,
-                                cost = Convert.ToDecimal(TableOfMaterials.Rows[i][3].ToString()),
+                                cost = Convert.ToDouble(TableOfMaterials.Rows[i][3].ToString()),
                                 count = Convert.ToInt32(TableOfMaterials.Rows[i][2].ToString()),
                                 NameOfMaterials = TableOfMaterials.Rows[i][1].ToString()
                             };
@@ -419,9 +417,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                         SaveSomeData.MakeSomeOperation = false;
                         var updatedData = SaveSomeData.SomeObject as TaskMaterial;
                         SaveSomeData.SomeObject = null;
-                        decimal cost = updatedData.cost ?? default;
+                        double cost = updatedData.cost ?? default;
                         double count = updatedData.count ?? default;
-                        decimal summa = cost * Convert.ToDecimal(count);
+                        double summa = cost * count;
                         for (int i = 0; i < TableOfMaterials.Rows.Count; i++)
                         {
                             if (Convert.ToInt32(TableOfMaterials.Rows[i][0].ToString()) == numberOfRows)
@@ -691,9 +689,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     {
                         foreach (var Material in DataAbTask.InfAbMat.materialsInf)
                         {
-                            decimal cost = Material.cost ?? default;
+                            double cost = Material.cost ?? default;
                             double count = Material.count ?? default;
-                            decimal summa = cost * Convert.ToDecimal(count);
+                            double summa = cost * count;
                             DataRow dataRow = TableOfMaterials.NewRow();
                             dataRow[0] = MaxMaterial;
                             dataRow[1] = Material.NameOfMaterials?.Trim();
@@ -713,9 +711,9 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                     {
                         foreach (var Serv in DataAbTask.InfAbServ.ServisInf)
                         {
-                            decimal cost = Serv.cost ?? default;
+                            double cost = Serv.cost ?? default;
                             double count = Serv.count ?? default;
-                            decimal summa = cost * Convert.ToDecimal(count);
+                            double summa = cost * count;
                             DataRow dataRow = TableOfServises.NewRow();
                             dataRow[0] = MaxServis;
                             dataRow[1] = Serv.NameOfServises?.Trim();

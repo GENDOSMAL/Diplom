@@ -55,11 +55,11 @@ namespace RepairFlatWPF.UserControls.ClientWork
                 {
                     DataRow newClientRow = DataAboutClient.NewRow();
                     newClientRow[0] = number;
-                    newClientRow[1] = client.Name;
-                    newClientRow[2] = client.Lastname;
-                    newClientRow[3] = client.Patronymic;
-                    newClientRow[4] = client.Female == 1 ? "МУЖ" : "ЖЕН";
-                    newClientRow[5] = client.Description;
+                    newClientRow[1] = client.Name?.Trim();
+                    newClientRow[2] = client.Lastname?.Trim();
+                    newClientRow[3] = client.Patronymic?.Trim();
+                    newClientRow[4] = SomeEnums.FemaleType[client.Female ?? default];
+                    newClientRow[5] = client.Description?.Trim();
                     DataAboutClient.Rows.Add(newClientRow);
                     DataOfClient.Add(new Tuple<int, Guid?>(number, client.idUser));
                     number++;
@@ -81,18 +81,18 @@ namespace RepairFlatWPF.UserControls.ClientWork
                 int numberOfRows = 0;
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
-                    var idSelectClient=DataOfClient.Where(e1 => e1.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                    var que=listOfUserclientInf.listOfClient.Where(ee => ee.idUser == idSelectClient);
+                    var idSelectClient = DataOfClient.Where(e1 => e1.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
+                    var que = listOfUserclientInf.listOfClient.Where(ee => ee.idUser == idSelectClient);
                     DescriptionOfUser descriptionOfUser = que.Select(e1 => new DescriptionOfUser
                     {
-                        idUser =e1.idUser,
-                        Birstday=e1.Birstday,
-                        Female=e1.Female,
-                        Lastname=e1.Lastname,
-                        Name=e1.Name,
-                        Pasport=e1.Pasport,
-                        Patronymic=e1.Patronymic
-                        
+                        idUser = e1.idUser,
+                        Birstday = e1.Birstday,
+                        Female = e1.Female,
+                        Lastname = e1.Lastname,
+                        Name = e1.Name,
+                        Pasport = e1.Pasport,
+                        Patronymic = e1.Patronymic
+
                     }).First();
                     SaveSomeData.MakeSomeOperation = true;
                     SaveSomeData.SomeObject = descriptionOfUser;
@@ -101,15 +101,28 @@ namespace RepairFlatWPF.UserControls.ClientWork
             }
             else
             {
-                MakeSomeHelp.MSG("Необходимо выбрать клиента из списка представленных",MsgBoxImage:MessageBoxImage.Error);
+                MakeSomeHelp.MSG("Необходимо выбрать клиента из списка представленных", MsgBoxImage: MessageBoxImage.Error);
             }
         }
 
         private void EditClient_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow("Редактирование данных о клиенте");
-            baseWindow.MakeOpen(new AddUserControl(Guid.NewGuid(), ref baseWindow, typeOfConrols));
-            baseWindow.ShowDialog();
+            int index = DataGrid.SelectedIndex;
+            if (index != -1)
+            {
+                var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index);
+                int numberOfRows = 0;
+                if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
+                {
+                    Guid idWorker = DataOfClient.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First() ?? default;
+                    BaseWindow baseWindow = new BaseWindow("Редактирование данных о клиенте");
+                    baseWindow.MakeOpen(new AddUserControl(idWorker, ref baseWindow, true));
+                    baseWindow.ShowDialog();
+                    makeloadingListOfUser();
+
+                }
+            }
+
         }
 
         private void Add_Click(object sender, RoutedEventArgs e)
@@ -129,12 +142,5 @@ namespace RepairFlatWPF.UserControls.ClientWork
         {
             MakeSomeHelp.MSG("Не реализовано");
         }
-
-        //private void GetLoginInformation_Click(object sender, RoutedEventArgs e)
-        //{
-        //    BaseWindow baseWindow = new BaseWindow("Информация о логине и пароле");
-        //    baseWindow.MakeOpen(new AditinalControl.ShowDataForAuth(Guid.NewGuid(), ref baseWindow));
-        //    baseWindow.ShowDialog();
-        //}
     }
 }

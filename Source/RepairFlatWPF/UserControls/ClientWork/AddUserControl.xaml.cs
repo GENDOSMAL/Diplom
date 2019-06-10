@@ -40,7 +40,7 @@ namespace RepairFlatWPF.UserControls
         #endregion
 
         #region Констурктор и обработчик
-        public AddUserControl(Guid? idUser, ref BaseWindow baseWindow, object InformationAboutClient = null)
+        public AddUserControl(Guid? idUser, ref BaseWindow baseWindow, bool redact = false)
         {
             InitializeComponent();
             this.idUser = idUser;
@@ -58,16 +58,33 @@ namespace RepairFlatWPF.UserControls
             }
             DataGrid.ItemsSource = TableOfContactInformation.DefaultView;
 
-            if (InformationAboutClient != null)
+            if (redact)
             {
                 AddBtn.Content = "Редактировать";
                 NewData = false;
                 makeloadingListOfContact();
                 DeleteElement.IsEnabled = false;
+                makeLoadingDataAboutContact();
             }
             else
             {
                 idUser = Guid.NewGuid();
+            }
+        }
+
+        private async void makeLoadingDataAboutContact()
+        {
+            var InformationFromServer = await Task.Run(() => MakeDownloadByLink($"api/user/get?idUser={idUser}"));
+            CreateNewClient DataAboutClient = JsonConvert.DeserializeObject<CreateNewClient>(InformationFromServer.ToString());
+            if (DataAboutClient.idUser != new Guid())
+            {
+                Name.Text = DataAboutClient.Name?.Trim();
+                Famil.Text = DataAboutClient.Lastname?.Trim();
+                Patronymic.Text = DataAboutClient.Patronymic?.Trim();
+                Pasport.Text = DataAboutClient.Pasport?.Trim();
+                Female.SelectedItem = SomeEnums.FemaleType[DataAboutClient.Female ?? default];
+                DateOfBirsd.SelectedDate = DataAboutClient.Birstday;
+                Description.Text = DataAboutClient.Desc?.Trim();
             }
         }
 
@@ -77,17 +94,19 @@ namespace RepairFlatWPF.UserControls
             ContactModel.ListOfUserContactInf listOfUserContactInf = JsonConvert.DeserializeObject<ContactModel.ListOfUserContactInf>(InformationFromServer.ToString());
             if (listOfUserContactInf != null)
             {
-                int number = 0;
+                int number = 1;
                 foreach (var contact in listOfUserContactInf.listOfContact)
                 {
                     DataRow NewContactData = TableOfContactInformation.NewRow();
                     NewContactData[0] = number;
-                    NewContactData[1] = contact.ValueTypeOfContact;
-                    NewContactData[2] = contact.Value;
-                    NewContactData[3] = contact.Desctription;
+                    NewContactData[1] = contact.ValueTypeOfContact?.Trim();
+                    NewContactData[2] = contact.Value?.Trim();
+                    NewContactData[3] = contact.Desctription?.Trim();
+                    TableOfContactInformation.Rows.Add(NewContactData);
                     IdContactAndTypeInTable.Add(new Tuple<int, Guid, Guid?>(number, contact.idContact, contact.idTypeOfContact));
                     number++;
                 }
+                DataGrid.ItemsSource = TableOfContactInformation.DefaultView;
             }
 
         }
@@ -101,69 +120,63 @@ namespace RepairFlatWPF.UserControls
         {
             if (CheckFields())
             {
-                if (NewData)
+                //Тут добавление
+                List<ContactModel.InformationAboutContact> ContactInformatio = new List<ContactModel.InformationAboutContact>();
+                
+                if (TableOfContactInformation.Rows.Count != 0)
                 {
-                    //Тут добавление
-                    List<ContactModel.InformationAboutContact> ContactInformatio = new List<ContactModel.InformationAboutContact>();
-                    if (TableOfContactInformation.Rows.Count != 0)
+                    for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
                     {
-                        for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
+                        Guid idContact = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item2).First();
+                        Guid? idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item3).First();
+                        ContactModel.InformationAboutContact contact = new ContactModel.InformationAboutContact()
                         {
-                            Guid idContact = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item2).First();
-                            Guid? idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == Convert.ToInt32(TableOfContactInformation.Rows[i][0])).Select(e1 => e1.Item3).First();
-                            ContactModel.InformationAboutContact contact = new ContactModel.InformationAboutContact()
-                            {
-                                DateAdd = DateTime.Now,
-                                Desctription = TableOfContactInformation.Rows[i][3].ToString(),
-                                idContact = idContact,
-                                idTypeOfContact = idType,
-                                idUser = idUser,
-                                Value = TableOfContactInformation.Rows[i][2].ToString()
-                            };
-                            ContactInformatio.Add(contact);
-                        }
+                            DateAdd = DateTime.Now,
+                            Desctription = TableOfContactInformation.Rows[i][3].ToString(),
+                            idContact = idContact,
+                            idTypeOfContact = idType,
+                            idUser = idUser,
+                            Value = TableOfContactInformation.Rows[i][2].ToString()
+                        };
+                        ContactInformatio.Add(contact);
                     }
-                    else
-                    {
-                        ContactInformatio = null;
-                    }
-                    CreateNewClient createNewClient = new CreateNewClient
-                    {
-                        idUser = idUser,
-                        Birstday = DateOfBirsd.SelectedDate.Value,
-                        Desc = Description.Text.Trim(),
-                        Female = Female.SelectedIndex + 1,
-                        Lastname = Famil.Text.Trim(),
-                        Name = Name.Text.Trim(),
-                        Pasport = Pasport.Text.Trim(),
-                        Patronymic = Patronymic.Text.Trim(),
-                        TypeOfUser = SomeEnums.TypeOfUser.Cl.ToString(),
-                        ListOfContact = ContactInformatio
-                    };
-                    string Json = JsonConvert.SerializeObject(createNewClient);
-                    string urlSend = "api/user/create";
-                    AddBtn.Content = "Ожидайте...";
-                    RetutnBTN.Content = "Ожидайте...";
-                    AddBtn.IsEnabled = false;
-                    RetutnBTN.IsEnabled = false;
-
-                    var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(AddBtn_Click)));
-                    var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
-
-                    if (!deserializedProduct.success)
-                    {
-                        MakeSomeHelp.MSG($"Произошла ошикбка при создании пользователя {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
-                    }
-                    else
-                    {
-                        MakeSomeHelp.MSG("Данные добавлены!", MsgBoxImage: MessageBoxImage.Information);
-                    }
-                    window.Close();
                 }
                 else
                 {
-                    //Тут обновление
+                    ContactInformatio = null;
                 }
+                CreateNewClient createNewClient = new CreateNewClient
+                {
+                    idUser = idUser,
+                    Birstday = DateOfBirsd.SelectedDate.Value,
+                    Desc = Description.Text.Trim(),
+                    Female = Female.SelectedIndex,
+                    Lastname = Famil.Text.Trim(),
+                    Name = Name.Text.Trim(),
+                    Pasport = Pasport.Text.Trim(),
+                    Patronymic = Patronymic.Text.Trim(),
+                    TypeOfUser = SomeEnums.TypeOfUser.Cl.ToString(),
+                    ListOfContact =ContactInformatio
+                };
+                string Json = JsonConvert.SerializeObject(createNewClient);
+                string urlSend = "api/user/create";
+                AddBtn.Content = "Ожидайте...";
+                RetutnBTN.Content = "Ожидайте...";
+                AddBtn.IsEnabled = false;
+                RetutnBTN.IsEnabled = false;
+
+                var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(AddBtn_Click)));
+                var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+
+                if (!deserializedProduct.success)
+                {
+                    MakeSomeHelp.MSG($"Произошла ошикбка при создании пользователя {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                }
+                else
+                {
+                    MakeSomeHelp.MSG("Операции над данными произведены!", MsgBoxImage: MessageBoxImage.Information);
+                }
+                window.Close();
             }
         }
 
@@ -174,7 +187,7 @@ namespace RepairFlatWPF.UserControls
             baseWindow.ShowDialog();
             if (SaveSomeData.MakeSomeOperation)
             {
-                
+
                 var contactInformation = SaveSomeData.SomeObject as ContactModel.InformationAboutContact;
                 SaveSomeData.SomeObject = null;
                 SaveSomeData.MakeSomeOperation = false;
@@ -198,56 +211,51 @@ namespace RepairFlatWPF.UserControls
                 int numberOfRows = 0;
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
-                    if (NewData)
+
+                    ContactModel.InformationAboutContact aboutContact = new ContactModel.InformationAboutContact();
+                    for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
                     {
-                        ContactModel.InformationAboutContact aboutContact = new ContactModel.InformationAboutContact();
+                        if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == numberOfRows)
+                        {
+                            Guid idContact = IdContactAndTypeInTable.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
+                            Guid? idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item3).First();
+
+                            aboutContact = new ContactModel.InformationAboutContact
+                            {
+                                idContact = idContact,
+                                idTypeOfContact = idType,
+                                idUser = idUser,
+                                Value = TableOfContactInformation.Rows[i][2].ToString(),
+                                Desctription = TableOfContactInformation.Rows[i][3].ToString(),
+                                NameOfValue = TableOfContactInformation.Rows[i][1].ToString(),
+                                Number = numberOfRows
+                            };
+
+                        }
+                    }
+
+                    BaseWindow baseWindow = new BaseWindow("Редактирование контактной информации");
+                    baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow, aboutContact));
+                    baseWindow.ShowDialog();
+                    if (SaveSomeData.MakeSomeOperation)
+                    {
+                        SaveSomeData.MakeSomeOperation = false;
+                        ContactModel.InformationAboutContact dataUpdated = SaveSomeData.SomeObject as ContactModel.InformationAboutContact;
+                        SaveSomeData.SomeObject = null;
                         for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
                         {
-                            if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == numberOfRows)
+                            if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == dataUpdated.Number)
                             {
-                                Guid idContact = IdContactAndTypeInTable.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                                Guid? idType = IdContactAndTypeInTable.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item3).First();
-
-                                aboutContact = new ContactModel.InformationAboutContact
-                                {
-                                    idContact = idContact,
-                                    idTypeOfContact = idType,
-                                    idUser = idUser,
-                                    Value = TableOfContactInformation.Rows[i][2].ToString(),
-                                    Desctription = TableOfContactInformation.Rows[i][3].ToString(),
-                                    NameOfValue = TableOfContactInformation.Rows[i][1].ToString(),
-                                    Number = numberOfRows
-                                };
-
-                            }
-                        }
-
-                        BaseWindow baseWindow = new BaseWindow("Редактирование контактной информации");
-                        baseWindow.MakeOpen(new AddContactUserConrol(idUser, ref baseWindow, aboutContact));
-                        baseWindow.ShowDialog();
-                        if (SaveSomeData.MakeSomeOperation)
-                        {
-                            SaveSomeData.MakeSomeOperation = false;
-                            ContactModel.InformationAboutContact dataUpdated = SaveSomeData.SomeObject as ContactModel.InformationAboutContact;
-                            SaveSomeData.SomeObject = null;
-                            for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
-                            {
-                                if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == dataUpdated.Number)
-                                {
-                                    TableOfContactInformation.Rows[i][1] = dataUpdated.NameOfValue;
-                                    TableOfContactInformation.Rows[i][2] = dataUpdated.Value;
-                                    TableOfContactInformation.Rows[i][3] = dataUpdated.Desctription;
-                                    var data = IdContactAndTypeInTable.Single(e1 => e1.Item1 == dataUpdated.Number);
-                                    IdContactAndTypeInTable.Remove(data);
-                                    IdContactAndTypeInTable.Add(new Tuple<int, Guid, Guid?>(dataUpdated.Number, dataUpdated.idContact, dataUpdated.idTypeOfContact));
-                                }
+                                TableOfContactInformation.Rows[i][1] = dataUpdated.NameOfValue;
+                                TableOfContactInformation.Rows[i][2] = dataUpdated.Value;
+                                TableOfContactInformation.Rows[i][3] = dataUpdated.Desctription;
+                                var data = IdContactAndTypeInTable.Single(e1 => e1.Item1 == dataUpdated.Number);
+                                IdContactAndTypeInTable.Remove(data);
+                                IdContactAndTypeInTable.Add(new Tuple<int, Guid, Guid?>(dataUpdated.Number, dataUpdated.idContact, dataUpdated.idTypeOfContact));
                             }
                         }
                     }
-                    else
-                    {
-                        //Если обновление данных о клиенте
-                    }
+
                 }
             }
             else
@@ -266,21 +274,14 @@ namespace RepairFlatWPF.UserControls
                 int numberOfRows = 0;
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
-                    if (NewData)
+                    for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
                     {
-                        for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
+                        if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == numberOfRows)
                         {
-                            if (Convert.ToInt32(TableOfContactInformation.Rows[i][0].ToString()) == numberOfRows)
-                            {
-                                TableOfContactInformation.Rows[i].Delete();
-                                var data = IdContactAndTypeInTable.Single(e1 => e1.Item1 == numberOfRows);
-                                IdContactAndTypeInTable.Remove(data);
-                            }
+                            TableOfContactInformation.Rows[i].Delete();
+                            var data = IdContactAndTypeInTable.Single(e1 => e1.Item1 == numberOfRows);
+                            IdContactAndTypeInTable.Remove(data);
                         }
-                    }
-                    else
-                    {
-                        //Если обновление данных о клиенте
                     }
                 }
             }

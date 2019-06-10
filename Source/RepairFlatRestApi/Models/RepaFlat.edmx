@@ -64,7 +64,7 @@
           <Property Name="BankOfPayment" Type="nvarchar" MaxLength="100" />
           <Property Name="CheckingAcount" Type="nvarchar" MaxLength="100" />
           <Property Name="BIK" Type="nvarchar" MaxLength="20" />
-          <Property Name="YIN" Type="nvarchar" MaxLength="20" />
+          <Property Name="YIN" Type="nvarchar" MaxLength="30" />
           <Property Name="DateOfInsert" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="LoginInformation">
@@ -128,8 +128,8 @@
           <Property Name="IdOrder" Type="uniqueidentifier" />
           <Property Name="IdWorkerMake" Type="uniqueidentifier" />
           <Property Name="idInformatioForPayment" Type="uniqueidentifier" />
-          <Property Name="Summa" Type="money" />
           <Property Name="Description" Type="nchar" MaxLength="100" />
+          <Property Name="Summa" Type="money" />
           <Property Name="DateOfDoc" Type="datetime2" Precision="7" />
         </EntityType>
         <EntityType Name="OrderTasks">
@@ -142,17 +142,6 @@
           <Property Name="DateStart" Type="datetime2" Precision="7" />
           <Property Name="DeadEnd" Type="datetime2" Precision="7" />
           <Property Name="SummaAboutTask" Type="money" />
-        </EntityType>
-        <EntityType Name="OrderTasksState">
-          <Key>
-            <PropertyRef Name="IdState" />
-          </Key>
-          <Property Name="IdState" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="IdTask" Type="uniqueidentifier" />
-          <Property Name="DateOf" Type="datetime2" Precision="7" />
-          <Property Name="State" Type="nchar" MaxLength="20" />
-          <Property Name="IdWorker" Type="uniqueidentifier" />
-          <Property Name="Description" Type="nchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="OurMaterials">
           <Key>
@@ -514,30 +503,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderTasksState_OrderTasks">
-          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
-          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderTasks">
-              <PropertyRef Name="IdTask" />
-            </Principal>
-            <Dependent Role="OrderTasksState">
-              <PropertyRef Name="IdTask" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderTasksState_WorkerDetails">
-          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
-          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerDetails">
-              <PropertyRef Name="IdWorker" />
-            </Principal>
-            <Dependent Role="OrderTasksState">
-              <PropertyRef Name="IdWorker" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderWorker_OrderTasks">
           <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
           <End Role="TaskWorker" Type="Self.TaskWorker" Multiplicity="*" />
@@ -803,7 +768,6 @@
           <EntitySet Name="OrderMeasurements" EntityType="Self.OrderMeasurements" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderPayment" EntityType="Self.OrderPayment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderTasks" EntityType="Self.OrderTasks" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderTasksState" EntityType="Self.OrderTasksState" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OurMaterials" EntityType="Self.OurMaterials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OurServices" EntityType="Self.OurServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PremisesType" EntityType="Self.PremisesType" Schema="dbo" store:Type="Tables" />
@@ -887,14 +851,6 @@
           <AssociationSet Name="FK_OrderTasks_OrderInformation1" Association="Self.FK_OrderTasks_OrderInformation1">
             <End Role="OrderInformation" EntitySet="OrderInformation" />
             <End Role="OrderTasks" EntitySet="OrderTasks" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderTasksState_OrderTasks" Association="Self.FK_OrderTasksState_OrderTasks">
-            <End Role="OrderTasks" EntitySet="OrderTasks" />
-            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderTasksState_WorkerDetails" Association="Self.FK_OrderTasksState_WorkerDetails">
-            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
-            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderWorker_OrderTasks" Association="Self.FK_OrderWorker_OrderTasks">
             <End Role="OrderTasks" EntitySet="OrderTasks" />
@@ -1052,7 +1008,7 @@
           <Property Name="BankOfPayment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CheckingAcount" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="BIK" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="YIN" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="YIN" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="DateOfInsert" Type="DateTime" Precision="7" />
           <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_InformatioForPayment_WorkerDetails" FromRole="InformatioForPayment" ToRole="WorkerDetails" />
           <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_InformatioForPayment" FromRole="InformatioForPayment" ToRole="OrderPayment" />
@@ -1148,23 +1104,9 @@
           <Property Name="DeadEnd" Type="DateTime" Precision="7" />
           <Property Name="SummaAboutTask" Type="Decimal" Precision="19" Scale="4" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderTasks_OrderInformation1" FromRole="OrderTasks" ToRole="OrderInformation" />
-          <NavigationProperty Name="OrderTasksState" Relationship="Self.FK_OrderTasksState_OrderTasks" FromRole="OrderTasks" ToRole="OrderTasksState" />
           <NavigationProperty Name="TaskWorker" Relationship="Self.FK_OrderWorker_OrderTasks" FromRole="OrderTasks" ToRole="TaskWorker" />
           <NavigationProperty Name="TaskMaterials" Relationship="Self.FK_TaskMaterials_OrderTasks" FromRole="OrderTasks" ToRole="TaskMaterials" />
           <NavigationProperty Name="TaskServis" Relationship="Self.FK_TaskServis_OrderTasks" FromRole="OrderTasks" ToRole="TaskServis" />
-        </EntityType>
-        <EntityType Name="OrderTasksState">
-          <Key>
-            <PropertyRef Name="IdState" />
-          </Key>
-          <Property Name="IdState" Type="Guid" Nullable="false" />
-          <Property Name="IdTask" Type="Guid" />
-          <Property Name="DateOf" Type="DateTime" Precision="7" />
-          <Property Name="State" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
-          <Property Name="IdWorker" Type="Guid" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="OrderTasks" Relationship="Self.FK_OrderTasksState_OrderTasks" FromRole="OrderTasksState" ToRole="OrderTasks" />
-          <NavigationProperty Name="WorkerDetails" Relationship="Self.FK_OrderTasksState_WorkerDetails" FromRole="OrderTasksState" ToRole="WorkerDetails" />
         </EntityType>
         <EntityType Name="OurMaterials">
           <Key>
@@ -1325,7 +1267,6 @@
           <NavigationProperty Name="InformatioForPayment" Relationship="Self.FK_InformatioForPayment_WorkerDetails" FromRole="WorkerDetails" ToRole="InformatioForPayment" />
           <NavigationProperty Name="OrderInformation" Relationship="Self.FK_OrderInformation_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderInformation" />
           <NavigationProperty Name="OrderPayment" Relationship="Self.FK_OrderPayment_WorkerDetails1" FromRole="WorkerDetails" ToRole="OrderPayment" />
-          <NavigationProperty Name="OrderTasksState" Relationship="Self.FK_OrderTasksState_WorkerDetails" FromRole="WorkerDetails" ToRole="OrderTasksState" />
           <NavigationProperty Name="User" Relationship="Self.FK_WorkerDetails_User" FromRole="WorkerDetails" ToRole="User" />
           <NavigationProperty Name="WorkersOperats" Relationship="Self.FK_WorkersOperats_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkersOperats" />
           <NavigationProperty Name="WorkersPayGive" Relationship="Self.FK_WorkersPayGive_WorkerDetails" FromRole="WorkerDetails" ToRole="WorkersPayGive" />
@@ -1596,18 +1537,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_OrderTasksState_OrderTasks">
-          <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
-          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrderTasks">
-              <PropertyRef Name="IdTask" />
-            </Principal>
-            <Dependent Role="OrderTasksState">
-              <PropertyRef Name="IdTask" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_OrderWorker_OrderTasks">
           <End Role="OrderTasks" Type="Self.OrderTasks" Multiplicity="0..1" />
           <End Role="TaskWorker" Type="Self.TaskWorker" Multiplicity="*" />
@@ -1641,18 +1570,6 @@
             </Principal>
             <Dependent Role="TaskServis">
               <PropertyRef Name="idTask" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrderTasksState_WorkerDetails">
-          <End Role="WorkerDetails" Type="Self.WorkerDetails" Multiplicity="0..1" />
-          <End Role="OrderTasksState" Type="Self.OrderTasksState" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkerDetails">
-              <PropertyRef Name="IdWorker" />
-            </Principal>
-            <Dependent Role="OrderTasksState">
-              <PropertyRef Name="IdWorker" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1849,7 +1766,6 @@
           <EntitySet Name="OrderMeasurements" EntityType="Self.OrderMeasurements" />
           <EntitySet Name="OrderPayment" EntityType="Self.OrderPayment" />
           <EntitySet Name="OrderTasks" EntityType="Self.OrderTasks" />
-          <EntitySet Name="OrderTasksState" EntityType="Self.OrderTasksState" />
           <EntitySet Name="OurMaterials" EntityType="Self.OurMaterials" />
           <EntitySet Name="OurServices" EntityType="Self.OurServices" />
           <EntitySet Name="PremisesType" EntityType="Self.PremisesType" />
@@ -1941,10 +1857,6 @@
             <End Role="WorkerDetails" EntitySet="WorkerDetails" />
             <End Role="OrderPayment" EntitySet="OrderPayment" />
           </AssociationSet>
-          <AssociationSet Name="FK_OrderTasksState_OrderTasks" Association="Self.FK_OrderTasksState_OrderTasks">
-            <End Role="OrderTasks" EntitySet="OrderTasks" />
-            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
-          </AssociationSet>
           <AssociationSet Name="FK_OrderWorker_OrderTasks" Association="Self.FK_OrderWorker_OrderTasks">
             <End Role="OrderTasks" EntitySet="OrderTasks" />
             <End Role="TaskWorker" EntitySet="TaskWorker" />
@@ -1956,10 +1868,6 @@
           <AssociationSet Name="FK_TaskServis_OrderTasks" Association="Self.FK_TaskServis_OrderTasks">
             <End Role="OrderTasks" EntitySet="OrderTasks" />
             <End Role="TaskServis" EntitySet="TaskServis" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrderTasksState_WorkerDetails" Association="Self.FK_OrderTasksState_WorkerDetails">
-            <End Role="WorkerDetails" EntitySet="WorkerDetails" />
-            <End Role="OrderTasksState" EntitySet="OrderTasksState" />
           </AssociationSet>
           <AssociationSet Name="FK_TaskMaterials_OurMaterials" Association="Self.FK_TaskMaterials_OurMaterials">
             <End Role="OurMaterials" EntitySet="OurMaterials" />
@@ -2302,18 +2210,6 @@
                 <ScalarProperty Name="DateStart" ColumnName="DateStart" />
                 <ScalarProperty Name="DeadEnd" ColumnName="DeadEnd" />
                 <ScalarProperty Name="SummaAboutTask" ColumnName="SummaAboutTask" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderTasksState">
-            <EntityTypeMapping TypeName="RepairFlatDBModel.OrderTasksState">
-              <MappingFragment StoreEntitySet="OrderTasksState">
-                <ScalarProperty Name="IdState" ColumnName="IdState" />
-                <ScalarProperty Name="IdTask" ColumnName="IdTask" />
-                <ScalarProperty Name="DateOf" ColumnName="DateOf" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="IdWorker" ColumnName="IdWorker" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

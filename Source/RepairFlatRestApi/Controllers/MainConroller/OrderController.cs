@@ -111,5 +111,35 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
         }
         #endregion
+
+
+        #region Для отчетов
+        [HttpGet, Route("doc/sprav")]
+        public HttpResponseMessage DataForSpravka([FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.MakeDataForSprav(idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
+        [HttpGet, Route("doc/dogovor")]
+        public HttpResponseMessage DataForDogovor([FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.MakeDataForDogovor(idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
+
+        [HttpGet, Route("doc/smeta1")]
+        public HttpResponseMessage DataAbSmeta([FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.MakeSmetaAll(idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
+
+        #endregion
     }
 }

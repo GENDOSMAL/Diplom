@@ -12,19 +12,19 @@ namespace RepairFlatRestApi.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class RepaFlat : DbContext
     {
         public RepaFlat()
             : base("name=RepaFlat")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+
         public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
         public virtual DbSet<AdressDescription> AdressDescription { get; set; }
         public virtual DbSet<ClientDetails> ClientDetails { get; set; }
@@ -37,7 +37,6 @@ namespace RepairFlatRestApi.Models
         public virtual DbSet<OrderMeasurements> OrderMeasurements { get; set; }
         public virtual DbSet<OrderPayment> OrderPayment { get; set; }
         public virtual DbSet<OrderTasks> OrderTasks { get; set; }
-        public virtual DbSet<OrderTasksState> OrderTasksState { get; set; }
         public virtual DbSet<OurMaterials> OurMaterials { get; set; }
         public virtual DbSet<OurServices> OurServices { get; set; }
         public virtual DbSet<PremisesType> PremisesType { get; set; }

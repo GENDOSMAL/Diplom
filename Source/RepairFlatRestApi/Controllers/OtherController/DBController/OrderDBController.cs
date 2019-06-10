@@ -92,7 +92,193 @@ namespace RepairFlatRestApi.Controllers.OtherController
             });
         }
 
-        internal static object DeleteTask(Guid idTask,Guid idOrder)
+        internal static object MakeDataForDogovor(Guid idOrder)
+        {
+            return Run((db) =>
+            {
+                var dd = db.OrderInformation.Where(ee => ee.IdOrder == idOrder).FirstOrDefault();
+                if (dd != null)
+                {
+                    return new MakeDogovor
+                    {
+                        Summa = Convert.ToDouble(dd.AllSumma),
+                        success = true,
+                        Adress = $"{dd.AdressDescription.RegionName?.Trim()} {dd.AdressDescription.AreaName?.Trim()} {dd.AdressDescription.CiryName?.Trim()} {dd.AdressDescription.MicroAreaName?.Trim()} {dd.AdressDescription.Street?.Trim()} {dd.AdressDescription.House?.Trim()} {dd.AdressDescription.Entrance?.Trim()} {dd.AdressDescription.NumberOfDelen?.Trim()}",
+                        ContactInf = $"{dd.UserContact.TypeOfContact.Value?.Trim()} : {dd.UserContact.Value?.Trim()} : {dd.UserContact.Description?.Trim()}",
+                        FIOSmall = $"{dd.ClientDetails.User.LastName?.Trim()} {dd.ClientDetails.User.Name?.Substring(0, 1)}.{dd.ClientDetails.User.Patronymic?.Substring(0, 1)}.",
+                        FullFIO = $"{dd.ClientDetails.User.LastName?.Trim()} {dd.ClientDetails.User.Name?.Trim()} {dd.ClientDetails.User.Patronymic?.Trim()} {dd.ClientDetails.User.Pasport?.Trim()}",
+                        Inn = dd.OrderPayment.First().InformatioForPayment.InnOfOrganization,
+                        KPP = dd.OrderPayment.First().InformatioForPayment.KppOfOrganization,
+                        NameOfOrganization = $"<{dd.OrderPayment.First().InformatioForPayment.NameOfRecipient}>"
+                    };
+                }
+                else
+                {
+                    return new MakeDogovor { success = false };
+                }
+            });
+        }
+
+        internal static object MakeSmetaAll(Guid idOrder)
+        {
+            return Run((db) =>
+            {
+                var sme = db.OrderInformation.Where(ee => ee.IdOrder == idOrder).First();
+                if (sme != null)
+                {
+                    MakeSmetaAll smet = new MakeSmetaAll();
+                    var dataAbMat = db.TaskMaterials.Where(ee => ee.OrderTasks.IdOrder == idOrder).AsEnumerable();
+                    var DataAbServ = db.TaskServis.Where(ee => ee.OrderTasks.IdOrder == idOrder).AsEnumerable();
+                    if (dataAbMat != null)
+                    {
+                        if (dataAbMat.Any())
+                        {
+                            int numb = 1;
+                            smet.materialsInf = new List<TaskMaterial>();
+                            foreach (var dd in dataAbMat)
+                            {
+                                bool need = true;
+                                if (smet.materialsInf.Any())
+                                {
+                                    var data = smet.materialsInf.Where(ee => ee.idMaterial == dd.idMaterial).First();
+                                    if (data != null)
+                                    {
+                                        data.count = data.count + dd.Count;
+                                        data.summa = Convert.ToDecimal(data.count) * data.cost;
+                                        need = false;
+                                    }
+                                }
+
+                                if(need)
+                                {
+                                    smet.materialsInf.Add(new TaskMaterial
+                                    {
+                                        cost = dd.Cost,
+                                        count = dd.Count,
+                                        NameOfMaterials = dd.OurMaterials.NameOfMaterial?.Trim(),
+                                        numb = numb,
+                                        summa = Convert.ToDecimal(dd.Count) * dd.Cost
+                                    });
+                                    numb++;
+                                }
+                                need = true;
+                            }
+                            smet.SummaMat = Convert.ToDouble(smet.materialsInf.Sum(ee => ee.summa));
+                        }
+                    }
+
+                    if (DataAbServ != null)
+                    {
+                        if (DataAbServ.Any())
+                        {
+                            smet.ServisInf = new List<TaskServises>();
+                            int numb = 1;
+                            foreach (var dd in DataAbServ)
+                            {
+                                bool need = true;
+                                if (smet.ServisInf.Any())
+                                {
+                                    var data = smet.ServisInf.Where(ee => ee.idServis == dd.idServis).First();
+                                    if (data != null)
+                                    {
+                                        data.count = data.count + dd.Count;
+                                        data.summa = Convert.ToDecimal(data.count) * data.cost;
+                                        need = false;
+                                    }
+
+                                }
+
+                                if(need)
+                                {
+                                    smet.ServisInf.Add(new TaskServises
+                                    {
+                                        cost = dd.Cost,
+                                        count = dd.Count,
+                                        NameOfServises = dd.OurServices.Nomination?.Trim(),
+                                        summa= Convert.ToDecimal(dd.Count) * dd.Cost,
+                                        numb=numb
+                                    });
+                                    numb++;
+                                }
+                                need = true;
+                                smet.SummaServ = Convert.ToDouble(smet.ServisInf.Sum(ee => ee.summa));
+                            }
+                        }
+                    }
+                    var Adress = db.OrderInformation.Where(ee => ee.IdOrder == idOrder).First();
+                    smet.AdressOfWork = $"{Adress.AdressDescription.RegionName?.Trim()} {Adress.AdressDescription.AreaName?.Trim()} {Adress.AdressDescription.CiryName?.Trim()} {Adress.AdressDescription.MicroAreaName?.Trim()} {Adress.AdressDescription.Street?.Trim()} {Adress.AdressDescription.House?.Trim()} {Adress.AdressDescription.Entrance?.Trim()} {Adress.AdressDescription.NumberOfDelen?.Trim()}";
+                    smet.Contact = $"{Adress.UserContact.TypeOfContact.Value?.Trim()} : {Adress.UserContact.Value?.Trim()} : {Adress.UserContact.Description?.Trim()}";
+                    smet.FIO = $"{Adress.ClientDetails.User.LastName?.Trim()} {Adress.ClientDetails.User.Name?.Trim()} {Adress.ClientDetails.User.Patronymic?.Trim()} ";
+                    return smet;
+                }
+                else
+                {
+                    return new MakeSmetaAll { success = false };
+                }
+            });
+        }
+
+        internal static object MakeDataForSprav(Guid idOrder)
+        {
+            return Run((db) =>
+            {
+                var dd = db.OrderInformation.Where(ee => ee.IdOrder == idOrder).FirstOrDefault();
+                if (dd != null)
+                {
+                    int num = 1;
+                    List<AllPremises> Premises = new List<AllPremises>();
+                    foreach (var prem in dd.OrderMeasurements)
+                    {
+                        Premises.Add(new AllPremises
+                        {
+                            Desc = prem.Description,
+                            Height = prem.Height,
+                            idMeasurment = prem.idMeasurements,
+                            lenght = prem.Lenght,
+                            NameOf = prem.PremisesType.NameOfPremises,
+                            number = num,
+                            PCelling = prem.PCelling,
+                            SFloor = prem.Pwalls,
+                            SWalls = prem.Swalls,
+                            Width = prem.Width,
+                            PWalls = prem.Sfloor
+                        });
+                        num++;
+                    }
+                    MakeDataForSpravka makeDataForSpravka = new MakeDataForSpravka
+                    {
+                        AreaName = dd.AdressDescription.AreaName,
+                        CityName = dd.AdressDescription.CiryName,
+                        DateMakeOrder = dd.DateStart,
+                        DateRozd = dd.ClientDetails.User.BirstDay,
+                        DescContact = dd.UserContact.Description,
+                        Description = dd.AdressDescription.Description,
+                        Entrance = dd.AdressDescription.Entrance,
+                        House = dd.AdressDescription.House,
+                        LastName = dd.ClientDetails.User.LastName,
+                        MicroAreaName = dd.AdressDescription.MicroAreaName,
+                        Name = dd.ClientDetails.User.Name,
+                        NumberOfDelen = dd.AdressDescription.NumberOfDelen,
+                        Patronymic = dd.ClientDetails.User.Patronymic,
+                        RegionName = dd.AdressDescription.RegionName,
+                        StatusOfOrder = dd.Status,
+                        Street = dd.AdressDescription.Street,
+                        SummaOfOrder = dd.AllSumma,
+                        TypeOfcontact = dd.UserContact.TypeOfContact.Value,
+                        Value = dd.UserContact.Value,
+                        success = true,
+                        Premises = Premises
+                    };
+                    return makeDataForSpravka;
+                }
+                else
+                {
+                    return new MakeDataForSpravka { success = false };
+                }
+            });
+        }
+
+        internal static object DeleteTask(Guid idTask, Guid idOrder)
         {
             return Run((db) =>
             {
@@ -134,10 +320,10 @@ namespace RepairFlatRestApi.Controllers.OtherController
                     }
                     else
                     {
-                        return new SummaOfOrder { success = false};
+                        return new SummaOfOrder { success = false };
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     return new SummaOfOrder { success = false, description = ex.ToString() };
                 }
@@ -401,6 +587,12 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         dataAboutPaymentInOrder.InfPayment.Add(inf);
                     }
                     dataAboutPaymentInOrder.success = true;
+                    decimal summa = db.OrderTasks.Where(ee => ee.IdOrder == idOrder).Sum(ee => ee.SummaAboutTask) ?? default;
+                    decimal Opl = db.OrderPayment.Where(ee => ee.IdOrder == idOrder).Sum(ee => ee.Summa) ?? default;
+                    decimal Needd = summa - Opl;
+                    db.OrderInformation.Where(ee => ee.IdOrder == idOrder).First().AllSumma = summa;
+                    dataAboutPaymentInOrder.NeedPay = Needd;
+                    dataAboutPaymentInOrder.summaOfOrder = summa;
                     return dataAboutPaymentInOrder;
                 }
                 else

@@ -2,6 +2,7 @@
 using RepairFlat.Model;
 using System;
 using System.Collections.Generic;
+using static RepairFlatWPF.WorkWithOrder;
 
 namespace RepairFlatWPF.Model
 {
@@ -37,6 +38,8 @@ namespace RepairFlatWPF.Model
         public class DataAboutPaymentInOrder : BaseResult
         {
             public List<PaymentInf> InfPayment;
+            public decimal summaOfOrder;
+            public decimal NeedPay;
         }
 
         public class PaymentInf
@@ -102,9 +105,13 @@ namespace RepairFlatWPF.Model
             public Guid idTaskMaterial;
             public Guid idMaterial;
             public double? count;
-            public decimal? cost;
+            public double? cost;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfMaterials;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public double? summa;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
         }
 
         public class TaskServises
@@ -112,9 +119,13 @@ namespace RepairFlatWPF.Model
             public Guid idTaskServises;
             public Guid idServis;
             public double? count;
-            public decimal? cost;
+            public double? cost;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfServises;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public double? summa;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
         }
 
         public class TaskWorker
@@ -133,6 +144,55 @@ namespace RepairFlatWPF.Model
             public Guid IdOrder;
             public decimal summaOfOrder;
             public decimal NeedPay;
+        }
+        #endregion
+
+        #region Справочная информация 
+        public class MakeDataForSpravka : BaseResult
+        {
+            public string AreaName;
+            public string CityName;
+            public DateTime? DateMakeOrder;
+            public DateTime? DateRozd;
+            public string DescContact;
+            public string Description;
+            public string Entrance;
+            public string House;
+            public string LastName;
+            public string MicroAreaName;
+            public string Name;
+            public string NumberOfDelen;
+            public string RegionName;
+            public int? StatusOfOrder;
+            public string Street;
+            public decimal? SummaOfOrder;
+            public string Patronymic;
+            public string TypeOfcontact;
+            public string Value;
+            public List<AllPremises> Premises;
+        }
+
+        public class MakeDogovor : BaseResult
+        {
+            public string Adress;
+            public string ContactInf;
+            public string FIOSmall;
+            public string FullFIO;
+            public string Inn;
+            public string KPP;
+            public string NameOfOrganization;
+            public decimal? Summa;
+        }
+        public class MakeSmetaAll : BaseResult
+        {
+            public List<TaskMaterial> materialsInf;
+            public List<TaskServises> ServisInf;
+            public string AdressOfWork;
+            public string Contact;
+            public string FIO;
+            public double SummaMat;
+            public double SummaServ;
+
         }
         #endregion
     }

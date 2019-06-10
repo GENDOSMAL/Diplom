@@ -129,7 +129,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public double? PWalls;
             public double? PCelling;
             public double? SWalls;
-            public double? PFloor;
+            public double? SFloor;
         }
 
         public class NewMeasurment
@@ -151,7 +151,9 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         public class DataAboutPaymentInOrder:BaseResult
         {
-            public List<PaymentInf> InfPayment;            
+            public List<PaymentInf> InfPayment;
+            public decimal summaOfOrder;
+            public decimal NeedPay;
         }
 
         public class PaymentInf
@@ -220,6 +222,10 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public decimal? cost;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfMaterials;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public decimal? summa;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
         }
 
         public class TaskServises
@@ -230,6 +236,10 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public decimal? cost;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfServises;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public decimal? summa;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
         }
 
         public class TaskWorker
@@ -242,9 +252,60 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfPost;
         }
+        #endregion
+
+        #region Справочная информация 
+        public class MakeSmetaAll : BaseResult
+        {
+            public List<TaskMaterial> materialsInf;
+            public List<TaskServises> ServisInf;
+            public string AdressOfWork;
+            public string Contact;
+            public string FIO;
+            public double SummaMat;
+            public double SummaServ;
+            
+        }
+
+
+        public class MakeDataForSpravka:BaseResult
+        {
+            public string AreaName;
+            public string CityName;
+            public DateTime? DateMakeOrder;
+            public DateTime? DateRozd;
+            public string DescContact;
+            public string Description;
+            public string Entrance;
+            public string House;
+            public string LastName;
+            public string MicroAreaName;
+            public string Name;
+            public string NumberOfDelen;
+            public string RegionName;
+            public int? StatusOfOrder;
+            public string Street;
+            public decimal? SummaOfOrder;
+            public string Patronymic;
+            public string TypeOfcontact;
+            public string Value;
+            public List<AllPremises> Premises;
+        }
+        public class MakeDogovor:BaseResult
+        {
+            public string Adress;
+            public string ContactInf;
+            public string FIOSmall;
+            public string FullFIO;
+            public string Inn;
+            public string KPP;
+            public string NameOfOrganization;
+            public double Summa;
+        }
 
 
         #endregion
+
 
 
         class CustomDateTimeConverter : IsoDateTimeConverter

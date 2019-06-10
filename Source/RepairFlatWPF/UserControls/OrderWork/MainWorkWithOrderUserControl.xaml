@@ -34,10 +34,25 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Viewbox Margin="7.5 0 7.5 0" Grid.Row="1" Grid.Column="0" >
-                <TextBlock Name="FIOClient"  HorizontalAlignment="Center" VerticalAlignment="Center" Text="ФИО: " FontFamily="Times New Roman" FontSize="45 "/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock  HorizontalAlignment="Center" VerticalAlignment="Center" Text="ФИО: "  Grid.Column="0"  FontFamily="Times New Roman" FontSize="45 "/>
+                    <TextBlock Name="FIOClient"  HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"  Text="" FontFamily="Times New Roman" FontSize="45 "/>
+                </Grid>
             </Viewbox>
             <Viewbox Margin="7.5 0 0 0" Grid.Row="1" Grid.Column="1" >
-                <TextBlock Name="Adress" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Адресс: " FontFamily="Times New Roman" FontSize="45 "/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock HorizontalAlignment="Center" Grid.Column="0" VerticalAlignment="Center" Text="Адресс: " FontFamily="Times New Roman" FontSize="45 "/>
+                    <TextBlock Name="Adress" HorizontalAlignment="Center" Grid.Column="1" VerticalAlignment="Center" Text="" FontFamily="Times New Roman" FontSize="45 "/>
+
+                </Grid>
             </Viewbox>
             <Viewbox Margin="7.5 0 0 0" Grid.Row="1" Grid.Column="2" >
                 <Grid>

@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="RepairFlatDBModel.OrderMeasurements" Width="1.5" PointX="10.5" PointY="20.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.OrderPayment" Width="1.5" PointX="10.5" PointY="16.5" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.OrderTasks" Width="1.5" PointX="7.5" PointY="29.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RepairFlatDBModel.OrderTasksState" Width="1.5" PointX="10.75" PointY="24.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.OurMaterials" Width="1.5" PointX="7.5" PointY="37" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.OurServices" Width="1.5" PointX="10.5" PointY="34" IsExpanded="true" />
         <EntityTypeShape EntityType="RepairFlatDBModel.PremisesType" Width="1.5" PointX="8.25" PointY="25.125" IsExpanded="true" />
@@ -52,11 +51,9 @@
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderTasks_OrderInformation1" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderMeasurements_PremisesType" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderPayment_WorkerDetails1" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_OrderTasksState_OrderTasks" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_OrderWorker_OrderTasks" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskMaterials_OrderTasks" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskServis_OrderTasks" ManuallyRouted="false" />
-        <AssociationConnector Association="RepairFlatDBModel.FK_OrderTasksState_WorkerDetails" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskMaterials_OurMaterials" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_UpdateSubInformation_OurMaterials" ManuallyRouted="false" />
         <AssociationConnector Association="RepairFlatDBModel.FK_TaskServis_OurServices" ManuallyRouted="false" />

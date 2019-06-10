@@ -17,7 +17,6 @@ namespace RepairFlatRestApi.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OrderTasks()
         {
-            this.OrderTasksState = new HashSet<OrderTasksState>();
             this.TaskWorker = new HashSet<TaskWorker>();
             this.TaskMaterials = new HashSet<TaskMaterials>();
             this.TaskServis = new HashSet<TaskServis>();
@@ -31,8 +30,6 @@ namespace RepairFlatRestApi.Models
         public Nullable<decimal> SummaAboutTask { get; set; }
     
         public virtual OrderInformation OrderInformation { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderTasksState> OrderTasksState { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskWorker> TaskWorker { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

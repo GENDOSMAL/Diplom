@@ -40,7 +40,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 var data = InfromationAboutMaterial as TaskMaterial;
                 NameOfMaterial.Text = data.NameOfMaterials;
                 CountOfMaterial.Text = data.count.ToString();
-                cost = data.cost ?? default ;
+                cost = Convert.ToDecimal(data.cost);
                 Cost.Text = data.cost.ToString();
                 SelectMaterial.IsEnabled = false;
                 InformationSelect = true;
@@ -78,7 +78,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 TaskMaterial taskMat = new TaskMaterial
                 {
                     NameOfMaterials = NameOfMaterial.Text,
-                    cost = cost,
+                    cost = Convert.ToDouble(cost),
                     count = Count,
                     idMaterial = idMaterial,
                 };
