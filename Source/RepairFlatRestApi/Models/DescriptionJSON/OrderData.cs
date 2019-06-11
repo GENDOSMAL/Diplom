@@ -1,10 +1,7 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+﻿using Newtonsoft.Json.Converters;
 using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlatRestApi.Models
 {
@@ -27,7 +24,7 @@ namespace RepairFlatRestApi.Models
             public List<AllDataAboutOrder> listOfOrders;
         }
 
-        public class DataForUpdate: AllDataAboutOrder
+        public class DataForUpdate : AllDataAboutOrder
         {
             public Guid? idAdress;
             public Guid? idContact;

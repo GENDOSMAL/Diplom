@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace RepairFlatRestApi.Models
+﻿namespace RepairFlatRestApi.Models
 {
     public class SomeEnums
     {
@@ -44,7 +39,7 @@ namespace RepairFlatRestApi.Models
             /// <summary>
             /// Необходимо для мобилки если она будет но это не точно
             /// </summary>
-            SW,           
+            SW,
             /// <summary>
             /// Кандидат либо уволенный
             /// </summary>

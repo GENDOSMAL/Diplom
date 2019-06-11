@@ -1,15 +1,12 @@
 ﻿using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace RepairFlatRestApi.Controllers
 {
     [RoutePrefix("api/User")]
-    public class UserController:BaseController
+    public class UserController : BaseController
     {
         [HttpPost, Route("create")]
         public HttpResponseMessage CreateNewPerson([FromBody] PersonDesctiption.CreateNewClient DescriptionPerson)
@@ -38,15 +35,12 @@ namespace RepairFlatRestApi.Controllers
         }
 
         [HttpGet, Route("get")]
-        public HttpResponseMessage DataAboutUser ([FromUri] Guid idUser)
+        public HttpResponseMessage DataAboutUser([FromUri] Guid idUser)
         {
             return CatchError(() =>
             {
                 return OtherController.ClientDBWorker.GetDataAboutUser(idUser);
             }, nameof(LoginController), nameof(CreateNewPerson));
         }
-
-
-
     }
 }

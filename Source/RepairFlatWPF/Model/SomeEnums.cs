@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace RepairFlatWPF
+﻿namespace RepairFlatWPF
 {
     public class SomeEnums
     {
@@ -11,9 +6,9 @@ namespace RepairFlatWPF
 
         public static string[] StatusOfOrder = new string[] { "Принят", "В исполнении", "Выполнен", "Отмен" };
 
-        public static string[] RypeOfSearchOrder = new string[] {"Все данные",  "Дата начала", "Фамилия клиента" };
+        public static string[] RypeOfSearchOrder = new string[] { "Все данные", "Дата начала", "Фамилия клиента" };
 
-        public static string[] TypeOfElementOfPremises= new string[] { "Оконо", "Дверь" };
+        public static string[] TypeOfElementOfPremises = new string[] { "Оконо", "Дверь" };
 
         public static string[] FemaleType = new string[] { "Мужчина", "Женщина" };
 
@@ -31,34 +26,34 @@ namespace RepairFlatWPF
 
         public static string[] ClientTables = new string[] { "Номер", "Имя", "Фамилия", "Отчество", "Пол", "Описание" };
 
-        public static string[] OrderMainTable = new string[] { "Номер", "Дата начала", "Статус","ФИО Клиента", "Контакная информация", "Данные об адресе","Сумма", "Описание" };
+        public static string[] OrderMainTable = new string[] { "Номер", "Дата начала", "Статус", "ФИО Клиента", "Контакная информация", "Данные об адресе", "Сумма", "Описание" };
 
-        public static string[] MeasurmentMainTable = new string[] { "Номер", "Наименование", "Описание","Длина", "Ширина", "Высота","P стен", "P пола", "S стен", "S пола" };
+        public static string[] MeasurmentMainTable = new string[] { "Номер", "Наименование", "Описание", "Длина", "Ширина", "Высота", "P стен", "P пола", "S стен", "S пола" };
 
-        public static string[] DataAboutElement = new string[] { "Номер", "Тип элемента", "Длина","Ширина", "Толщина","P элемента", "Описание" };
+        public static string[] DataAboutElement = new string[] { "Номер", "Тип элемента", "Длина", "Ширина", "Толщина", "P элемента", "Описание" };
 
-        public static string[] WorkerTables = new string[] { "Номер", "Фамилия", "Имя",  "Отчество", "Пол", "Дата рождения" };
+        public static string[] WorkerTables = new string[] { "Номер", "Фамилия", "Имя", "Отчество", "Пол", "Дата рождения" };
 
-        public static string[] WorkerTablesRedact = new string[] { "Номер", "Фамилия", "Имя",  "Отчество", "Пол", "Дата рождения", "Должность","Оклад" };
+        public static string[] WorkerTablesRedact = new string[] { "Номер", "Фамилия", "Имя", "Отчество", "Пол", "Дата рождения", "Должность", "Оклад" };
 
-        public static string[] PostSubs= new string[] { "Номер", "Название должности", "Базовый оклад",  "Выполняет заказы" };
+        public static string[] PostSubs = new string[] { "Номер", "Название должности", "Базовый оклад", "Выполняет заказы" };
 
-        public static string[] MaterialSubs= new string[] { "Номер", "Название материала", "Еденица измерения","Тип материала",  "Стоимость",  "Описание" };
+        public static string[] MaterialSubs = new string[] { "Номер", "Название материала", "Еденица измерения", "Тип материала", "Стоимость", "Описание" };
 
-        public static string[] ServisesSubs= new string[] { "Номер", "Название услуги", "Тип сервиса", "Цена",  "Описание" };
+        public static string[] ServisesSubs = new string[] { "Номер", "Название услуги", "Тип сервиса", "Цена", "Описание" };
 
-        
 
-        public static string[] ContactSubs= new string[] { "Номер", "Название",  "Описание" };
 
-        public static string[] PremisesSubs = new string[] { "Номер", "Название",  "Описание" };
+        public static string[] ContactSubs = new string[] { "Номер", "Название", "Описание", "Регулярное выражение" };
+
+        public static string[] PremisesSubs = new string[] { "Номер", "Название", "Описание" };
 
 
         public static string[] WorkerTask = new string[] { "Номер", "ФИО работника", "Роль" };
 
-        public static string[] ServisesTask = new string[] { "Номер", "Наименование услуги", "Количество","Стоимость", "Описание" };
+        public static string[] ServisesTask = new string[] { "Номер", "Наименование услуги", "Количество", "Стоимость", "Описание" };
 
-        public static string[] ServisesMaterials = new string[] { "Номер", "Наименование услуги", "Количество","Стоимость", "Описание" };
+        public static string[] ServisesMaterials = new string[] { "Номер", "Наименование услуги", "Количество", "Стоимость", "Описание" };
 
 
         public static string[] PayInf = new string[] { "Номер", "Дата создания", "Сумма оплаты", "Кто создал", "Описание" };
@@ -71,7 +66,7 @@ namespace RepairFlatWPF
 
         public static string[] TaskServisTable = new string[] { "Номер", "Название", "Количество", "Стоимость", "Сумма" };
 
-        public static string[] TaskWorkerTable = new string[] { "Номер", "ФИО работника", "Должность", "Роль работника"};
+        public static string[] TaskWorkerTable = new string[] { "Номер", "ФИО работника", "Должность", "Роль работника" };
 
 
         #endregion

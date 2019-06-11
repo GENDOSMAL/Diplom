@@ -2,8 +2,6 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlat.Model
 {
@@ -206,11 +204,6 @@ namespace RepairFlat.Model
             public string TypeOfUpdate;
         }
         #endregion
-
-
-
-
-
         class CustomDateTimeConverter : IsoDateTimeConverter
         {
             public CustomDateTimeConverter()

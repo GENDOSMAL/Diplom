@@ -12,13 +12,6 @@ namespace RepairFlatRestApi.Controllers
     /// </summary>
     public class BaseController : ApiController
     {
-        /// <summary>
-        /// Метод обработки ошибок в работе сервера 
-        /// </summary>
-        /// <param name="action">само исполняющеейся существо</param>
-        /// <param name="NameOfClass">Наименование класса в котором происходит операция</param>
-        /// <param name="nameOfMethod">Наименование метода в котором происходит операция</param>
-        /// <returns></returns>
         protected HttpResponseMessage CatchError(Func<object> action, string NameOfClass, string nameOfMethod)
         {
             try

@@ -131,9 +131,9 @@ namespace RepairFlatWPF.UserControls
             }
             else
             {
-                if (!string.IsNullOrEmpty(idContactType[TypeOFContact.SelectedIndex].Item2) )
+                if (!string.IsNullOrEmpty(idContactType[TypeOFContact.SelectedIndex].Item2.Trim()) )
                 {                   
-                    if(!Regex.IsMatch(Value.Text.Trim(), idContactType[TypeOFContact.SelectedIndex].Item2))
+                    if(!Regex.IsMatch(Value.Text.Trim(), idContactType[TypeOFContact.SelectedIndex].Item2.Trim()))
                     {
                         MakeSomeHelp.MSG("Не соответсвует требуемому значению", MsgBoxImage: MessageBoxImage.Error);
                         return false;

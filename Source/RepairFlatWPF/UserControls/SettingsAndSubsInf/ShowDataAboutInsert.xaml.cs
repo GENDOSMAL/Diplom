@@ -64,7 +64,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             }
             if (ListOfSelectSheet.Contains(2))
             {
-                DataAboutMaterial.ItemsSource = AllSheet.Tables["2"].DefaultView;
+                DataTable dd = AllSheet.Tables["2"];
+                DataAboutMaterial.ItemsSource = dd.DefaultView;
             }
             if (ListOfSelectSheet.Contains(3))
             {
@@ -266,7 +267,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                         {
                             string strColumn = "";
                             strColumn = (string)(excelRange.Cells[1, colCnt] as Microsoft.Office.Interop.Excel.Range).Value2;
-                            dataTable1.Columns.Add(strColumn, typeof(string));
+                            dataTable1.Columns.Add(strColumn);
                         }
                         for (rowCnt = 2; rowCnt <= excelRange.Rows.Count; rowCnt++)
                         {

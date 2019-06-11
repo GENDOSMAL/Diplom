@@ -1,8 +1,6 @@
 ﻿using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlatRestApi.Models
 {
@@ -18,18 +16,15 @@ namespace RepairFlatRestApi.Models
             public DateTime? DateAdd;
         }
 
-        public class ListOfContactUser: InformationAboutContact
-        {            
+        public class ListOfContactUser : InformationAboutContact
+        {
             public string ValueTypeOfContact;
         }
 
-        public class ListOfUserContactInf:BaseResult
+        public class ListOfUserContactInf : BaseResult
         {
             public Guid idUser;
             public List<ListOfContactUser> listOfContact;
         }
-
-
-
     }
 }

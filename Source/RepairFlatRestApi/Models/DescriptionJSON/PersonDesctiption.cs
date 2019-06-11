@@ -2,8 +2,6 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlatRestApi.Models.DescriptionJSON
 {
@@ -25,12 +23,12 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public int? Female;
         }
 
-        public class DataAboutClient: DescriptionOfUser
+        public class DataAboutClient : DescriptionOfUser
         {
             public string Description;
         }
 
-        public class ListOfClient:BaseResult
+        public class ListOfClient : BaseResult
         {
             public List<DataAboutClient> listOfClient;
         }
@@ -56,7 +54,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         /// <summary>
         /// Описание того, что будет вернуто на запрос о создании нового пользователя
         /// </summary>
-        public class ResultDescription:BaseResult
+        public class ResultDescription : BaseResult
         {
             public Guid idUser;
         }

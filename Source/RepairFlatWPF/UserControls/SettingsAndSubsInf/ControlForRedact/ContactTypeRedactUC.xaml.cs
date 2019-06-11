@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 using static RepairFlat.Model.MakeSubs;
 
 namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
@@ -29,7 +30,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
         BaseWindow window;
         Guid idContact;
         bool Redact = false;
-        public ContactTypeRedactUC(ref BaseWindow baseWindow, Guid idContact = new Guid(),string value="",string description="")
+        public ContactTypeRedactUC(ref BaseWindow baseWindow, Guid idContact = new Guid(), string value = "", string description = "", string regex = "")
         {
             InitializeComponent();
             this.window = baseWindow;
@@ -43,6 +44,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 this.idContact = idContact;
                 Value.Text = value?.Trim();
                 Description.Text = description?.Trim();
+                Regex.Text = regex?.Trim();
                 AddBtn.Content = "Редактировать";
             }
         }
@@ -54,28 +56,29 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 string query = "";
                 if (!Redact)
                 {
-                    query = "Insert into ContactType (idContact,Value,Description) values (@idContact,@Value,@Description)";
+                    query = "Insert into ContactType (idContact,Value,Description,Regex) values (@idContact,@Value,@Description,@Regex)";
                 }
                 else
                 {
-                    query = "Update ContactType set  Value=@Value , Description=@Description where idContact=@idContact;";
+                    query = "Update ContactType set  Value=@Value , Description=@Description, Regex=@Regex where idContact=@idContact;";
                 }
-                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[3];
+                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[4];
                 sQLiteParameter[0] = new SQLiteParameter("@idContact", idContact.ToString());
                 sQLiteParameter[1] = new SQLiteParameter("@Value", Value.Text.Trim());
                 sQLiteParameter[2] = new SQLiteParameter("@Description", Description.Text.Trim());
+                sQLiteParameter[3] = new SQLiteParameter("@Regex", Regex.Text.Trim());
                 MakeWorkWirthDataBase.MakeSomeQueryWork(query, parameters: sQLiteParameter);
                 MakeUpdateServer();
             }
         }
 
-        private  void MakeUpdateServer()
+        private void MakeUpdateServer()
         {
             MakeUpdOrInsContacts makeUpdOrInsContacts = new MakeUpdOrInsContacts();
             makeUpdOrInsContacts.idUser = SaveSomeData.IdUser ?? default;
             makeUpdOrInsContacts.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
             makeUpdOrInsContacts.ListOfContacts = new List<ListOfContacts>();
-            ListOfContacts listOfContacts = new ListOfContacts { Value = Value.Text.Trim(), idContact = idContact, Description = Description.Text.Trim() };
+            ListOfContacts listOfContacts = new ListOfContacts { Value = Value.Text.Trim(), idContact = idContact, Description = Description.Text.Trim(), Regex = Regex.Text.Trim() };
             makeUpdOrInsContacts.ListOfContacts.Add(listOfContacts);
             string Json = JsonConvert.SerializeObject(makeUpdOrInsContacts);
             string urlSend = "api/substring/contact/update";
@@ -89,6 +92,21 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
         }
         private bool Check()
         {
+            if (!string.IsNullOrEmpty(Regex.Text.Trim()))
+            {
+                if (string.IsNullOrEmpty(CheckFields.Text.Trim()))
+                {
+                    if (!System.Text.RegularExpressions.Regex.IsMatch(Value.Text.Trim(), Regex.Text.Trim()))
+                    {
+                        MakeSomeHelp.MSG("Не соответсвует требуемому значению", MsgBoxImage: MessageBoxImage.Error);
+                        return false;
+                    }
+                    else
+                    {
+                        MakeSomeHelp.MSG("Приведенный пример соответсвует требованию", MsgBoxImage: MessageBoxImage.Error);
+                    }
+                }
+            }
             if (string.IsNullOrEmpty(Value.Text.Trim()))
             {
                 MakeSomeHelp.MSG("Необходимо указать значение для типа контакной информации", MsgBoxImage: MessageBoxImage.Hand);

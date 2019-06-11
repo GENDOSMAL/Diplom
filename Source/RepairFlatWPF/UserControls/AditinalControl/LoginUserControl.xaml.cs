@@ -1,20 +1,11 @@
 ﻿using Newtonsoft.Json;
-using RepairFlatWPF.Controller;
 using RepairFlatWPF.Properties;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.LoginModel;
 
 namespace RepairFlatWPF
@@ -27,17 +18,17 @@ namespace RepairFlatWPF
         /// <summary>
         /// Конструктор
         /// </summary>
-        public  LoginUserControl()
+        public LoginUserControl()
         {
             InitializeComponent();
-           
+
         }
         /// <summary>
         /// Проверка на то, что логин и пароль актуален
         /// </summary>
         public async void CheckLogin_Click(object sender, RoutedEventArgs e)
         {
-            
+
             var task2 = await Task.Run(() => MakeSomeHelp.MakePingToServer(Settings.Default.BaseAdress));
             string TextForUser = task2 ? "Связь с сервером установлена..." : "Сервер не доступен!";
             Result.Content = TextForUser;
@@ -50,23 +41,32 @@ namespace RepairFlatWPF
             string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login.Text, password = base64Password });
 
             var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeAuth)));
-            var deserializedProduct = JsonConvert.DeserializeObject<WhatReturn>(task.ToString());
-            if (!deserializedProduct.success)
+            if (task != null)
             {
-                if(MakeSomeHelp.MSG(deserializedProduct.description,MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
-                 {
-                    Result.Content = "";
-                    CheckLogin.Content = "Авторизация";
-                    CheckLogin.IsEnabled = true;
+                var deserializedProduct = JsonConvert.DeserializeObject<WhatReturn>(task.ToString());
+                if (!deserializedProduct.success)
+                {
+                    if (MakeSomeHelp.MSG(deserializedProduct.description, MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+                    {
+                        Result.Content = "";
+                        CheckLogin.Content = "Авторизация";
+                        CheckLogin.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    Model.SaveSomeData.IdUser = deserializedProduct.idUser;
+                    Model.SaveSomeData.TypeOfUser = deserializedProduct.typeofpolz;
+                    Model.SaveSomeData.LastNameAndIni = deserializedProduct.LastNameAndIni;
+                    ((MainWindow)Application.Current.MainWindow).Makecheck();
+                    MakeSomeHelp.MakeLoading();
                 }
             }
             else
             {
-                Model.SaveSomeData.IdUser = deserializedProduct.idUser;
-                Model.SaveSomeData.TypeOfUser = deserializedProduct.typeofpolz;
-                Model.SaveSomeData.LastNameAndIni = deserializedProduct.LastNameAndIni;
-                ((MainWindow)Application.Current.MainWindow).Makecheck();
-                MakeSomeHelp.MakeLoading();
+                Result.Content = "";
+                CheckLogin.Content = "Авторизация";
+                CheckLogin.IsEnabled = true;
             }
         }
 

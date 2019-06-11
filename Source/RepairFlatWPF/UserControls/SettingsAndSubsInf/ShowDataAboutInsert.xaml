@@ -86,7 +86,7 @@
                     </Grid>
                     <!--Для информации о материалах-->
                     <Grid Name="ForServises" Visibility="Collapsed" >
-                        <DataGrid Grid.Row="1" x:Name="DataAboutServises" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />
+                        <DataGrid Grid.Row="1" x:Name="DataAboutServises" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"  EnableColumnVirtualization="True"    />
                     </Grid>
                     <Grid Name="ForPost"  Visibility="Collapsed" >
                         <DataGrid Grid.Row="1" x:Name="DataAboutPost" ColumnWidth="auto" Margin="15,10,15,10"  Style="{Binding SelectedValue.DESCRIPTION, ElementName=DataGrid}" Background="#FFF0F0F0" FontFamily="Times New Roman" FontSize="16" HeadersVisibility="All"  CanUserAddRows="False" CanUserResizeRows="False"    />

@@ -22,7 +22,7 @@
         <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
             <TextBlock Name="NumberOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите данные для работы" FontFamily="Times New Roman" FontSize="45 "/>
         </Viewbox>
-        <CheckBox Uid="1" Name="FirstSheet" Unchecked="Checbox_Unchecked"  Grid.ColumnSpan="2" Grid.Row="1" Content="Данные об элементах помещения" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0" />
+        <CheckBox Uid="1" Name="FirstSheet" Unchecked="Checbox_Unchecked"  Grid.ColumnSpan="2" Grid.Row="1" Content="Данные о типах помещений" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0" />
         <CheckBox Uid="2" Name="SecondSheet" Unchecked="Checbox_Unchecked"  Grid.ColumnSpan="2" Grid.Row="2" Content="Данные о материалах" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0"/>
         <CheckBox Uid="3" Unchecked="Checbox_Unchecked"  Name="ServiseSheet" Grid.ColumnSpan="2" Grid.Row="3" Content="Данные об услугах" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0" />
         <CheckBox Uid="4" Unchecked="Checbox_Unchecked" Name="PostSheet" Grid.ColumnSpan="2" Grid.Row="4" Content="Данные о должностях" FontSize="30" FontFamily="Times New Roman" Checked="Checbox_Checked" Margin="50 0 0 0" />

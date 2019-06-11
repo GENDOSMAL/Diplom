@@ -1,8 +1,6 @@
 ﻿using RepairFlatRestApi.Models.DescriptionJSON;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlatRestApi.Models
 {
@@ -22,17 +20,17 @@ namespace RepairFlatRestApi.Models
             public double? Sfloor;
         }
 
-        public class AllDataAbMeas:BaseResult
+        public class AllDataAbMeas : BaseResult
         {
             public List<DataAboutMeasForTable> listofmeas;
         }
-        public class AllDataBaseData:BaseResult
+        public class AllDataBaseData : BaseResult
         {
             public List<DataAboutMeassFromDB> DataAboutMeas;
         }
 
 
-        public class DataAboutMeassFromDB:BaseResult
+        public class DataAboutMeassFromDB : BaseResult
         {
             public System.Guid idMeasurements;
             public System.Guid? IdOrder;

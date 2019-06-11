@@ -2,10 +2,6 @@
 using RepairFlat.Model;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static RepairFlat.Model.ContactModel;
 using static RepairFlat.Model.PersonDesctiption;
 
 namespace RepairFlatWPF.Model

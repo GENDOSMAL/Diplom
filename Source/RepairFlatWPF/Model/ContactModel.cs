@@ -1,8 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlat.Model
 {
@@ -21,14 +19,11 @@ namespace RepairFlat.Model
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int Number;
         }
-
-        public class ListOfContactUser: InformationAboutContact
+        public class ListOfContactUser : InformationAboutContact
         {
-            
             public string ValueTypeOfContact;
         }
-
-        public class ListOfUserContactInf:BaseResult
+        public class ListOfUserContactInf : BaseResult
         {
             public Guid idUser;
             public List<ListOfContactUser> listOfContact;

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -7,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace RepairFlatWPF.Controller
@@ -45,7 +43,7 @@ namespace RepairFlatWPF.Controller
                 WorkWithDB.ColumnOfTable columnOfTableLast = columns.Last();
                 foreach (var colum in columns)
                 {
-                   
+
                     if (colum.Equals(columnOfTableLast))
                     {
                         CreateTableQuery.Append($" '{colum.NameOfCol}' {colum.TypeOfCol}");

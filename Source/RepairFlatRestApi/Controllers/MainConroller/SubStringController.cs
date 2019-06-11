@@ -1,9 +1,5 @@
 ﻿using RepairFlatRestApi.Models.DescriptionJSON;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace RepairFlatRestApi.Controllers
@@ -32,10 +28,10 @@ namespace RepairFlatRestApi.Controllers
         /// <param name="dateofclientlastupdate">Дата, в которую было последнее обновление</param>
         /// <returns></returns>
         [HttpGet, Route("servises/get")]
-        public HttpResponseMessage SendAllUpdateServises([FromUri] string dateofclientlastupdate="")
+        public HttpResponseMessage SendAllUpdateServises([FromUri] string dateofclientlastupdate = "")
         {
             return CatchError(() =>
-            {                
+            {
                 return DBController.MakeDataAboutUpdateServises(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdateServises));
         }
@@ -76,7 +72,7 @@ namespace RepairFlatRestApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost, Route("material/update")]
-        public HttpResponseMessage UpdateMaterial([FromBody]MakeSubs.MakeUpdOrInsMaterials ListOfMaterials )
+        public HttpResponseMessage UpdateMaterial([FromBody]MakeSubs.MakeUpdOrInsMaterials ListOfMaterials)
         {
             return CatchError(() =>
             {

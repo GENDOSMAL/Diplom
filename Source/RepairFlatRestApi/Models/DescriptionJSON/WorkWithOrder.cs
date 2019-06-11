@@ -55,14 +55,14 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         }
         #endregion
 
-        public class SelectAllDataForTable:BaseResult
+        public class SelectAllDataForTable : BaseResult
         {
             public int Kol;
             public List<AllServis> listOfServises;
             public List<AllMaterials> listOfMaterials;
             public List<AllPremises> listOfPremises;
             public List<AllPremises> listOfPayment;
-            
+
         }
 
         #region Данные об услугах
@@ -78,7 +78,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string Desc;
         }
 
-        public class DataAboutServis:BaseResult
+        public class DataAboutServis : BaseResult
         {
             public Guid? idServises;
             public Guid? idOrder;
@@ -89,7 +89,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public DateTime? DatePlaneStart;
         }
 
-        
+
         #endregion
 
         #region Данные о материалах
@@ -149,7 +149,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
 
         #region Данные об оплате
 
-        public class DataAboutPaymentInOrder:BaseResult
+        public class DataAboutPaymentInOrder : BaseResult
         {
             public List<PaymentInf> InfPayment;
             public decimal summaOfOrder;
@@ -183,7 +183,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string Description;
         }
 
-        public class InformationAboutTask: BaseResult
+        public class InformationAboutTask : BaseResult
         {
             public Guid idTask;
             public Guid idOrder;
@@ -264,11 +264,11 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string FIO;
             public double SummaMat;
             public double SummaServ;
-            
+
         }
 
 
-        public class MakeDataForSpravka:BaseResult
+        public class MakeDataForSpravka : BaseResult
         {
             public string AreaName;
             public string CityName;
@@ -291,7 +291,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string Value;
             public List<AllPremises> Premises;
         }
-        public class MakeDogovor:BaseResult
+        public class MakeDogovor : BaseResult
         {
             public string Adress;
             public string ContactInf;
@@ -302,12 +302,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string NameOfOrganization;
             public double Summa;
         }
-
-
         #endregion
-
-
-
         class CustomDateTimeConverter : IsoDateTimeConverter
         {
             public CustomDateTimeConverter()

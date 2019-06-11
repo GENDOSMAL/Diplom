@@ -29,7 +29,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
         DataTable DataAboutSomeSubInf;
         List<Tuple<int, Guid>> ListofId;
         bool whenPost = false;
-        public RedactSomeSubs(SomeEnums.TypeOfSubs typeOfSubs,bool whenPost=false)
+        public RedactSomeSubs(SomeEnums.TypeOfSubs typeOfSubs, bool whenPost = false)
         {
             InitializeComponent();
             this.whenPost = whenPost;
@@ -54,7 +54,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                 case SomeEnums.TypeOfSubs.Materials: { TypeOfWork.Text += " материалах."; break; }
                 case SomeEnums.TypeOfSubs.Post: { TypeOfWork.Text += " должностях."; break; }
                 case SomeEnums.TypeOfSubs.Premises: { TypeOfWork.Text += " типах помещений."; break; }
-                case SomeEnums.TypeOfSubs.Servises: { TypeOfWork.Text += "б услугах"; break; }
+                case SomeEnums.TypeOfSubs.Servises: { TypeOfWork.Text += " услугах"; break; }
             }
             ListofId = MakeSomeHelp.ListofId;
             DataGrid.ItemsSource = DataAboutSomeSubInf.DefaultView;
@@ -62,7 +62,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         private void RetunBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(!whenPost)
+            if (!whenPost)
                 MakeSomeHelp.DataGridMakeWork(new UserControls.SettingsAndSubsInf.SelectDataForRedactUC());
             else
                 MakeSomeHelp.DataGridMakeWork(new MenuKadrWork());
@@ -138,8 +138,9 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                     {//Работа с контакной информацией
                                         string value = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1)?.ToString();
                                         string desc = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString();
+                                        string regex = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 3)?.ToString();
                                         BaseWindow baseWindow = new BaseWindow("Редактирование контакной информации");
-                                        baseWindow.MakeOpen(new ContactTypeRedactUC(ref baseWindow, idSubs, value, desc));
+                                        baseWindow.MakeOpen(new ContactTypeRedactUC(ref baseWindow, idSubs, value, desc, regex));
                                         baseWindow.ShowDialog();
                                         makeSelectFromDB();
                                         break;
@@ -150,7 +151,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                         listOfMaterials.NameOfMaterial = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1)?.ToString();
                                         listOfMaterials.UnitOfMeasue = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString();
                                         listOfMaterials.TypeOfMaterial = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 3)?.ToString();
-                                        if(Decimal.TryParse(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 4)?.ToString() ,out decimal temp))
+                                        if (Decimal.TryParse(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 4)?.ToString(), out decimal temp))
                                         {
                                             listOfMaterials.Cost = temp;
                                         }
@@ -187,7 +188,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                                         listOfPost.NameOfPost = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 1)?.ToString();
                                         listOfPost.MakeWork = MakeWoe;
                                         listOfPost.idPost = idSubs;
-                                        if (decimal.TryParse(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString(),out decimal temp))
+                                        if (decimal.TryParse(MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index, 2)?.ToString(), out decimal temp))
                                         {
                                             listOfPost.BaseWage = temp;
                                         }
@@ -241,59 +242,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         }
 
-        private void DeleteElement_Click(object sender, RoutedEventArgs e)
-        {
-            int index = DataGrid.SelectedIndex;
-            if (index != -1)
-            {
-                var indexOfSelectedRows = MakeSomeHelp.SelectedRowsInDataGrid(ref DataGrid, index);
-                int numberOfRows = 0;
-                if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
-                {
-                    for (int i = 0; i < DataAboutSomeSubInf.Rows.Count; i++)
-                    {
-                        if (Convert.ToInt32(DataAboutSomeSubInf.Rows[i][0].ToString()) == numberOfRows)
-                        {
-                            Guid idSubs = ListofId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                            SaveSomeData.MakeSomeOperation = true;
-                            SaveSomeData.SomeObject = idSubs;
 
-                            switch (typeOfSubs)
-                            {
-                                case SomeEnums.TypeOfSubs.Contact:
-                                    {//Работа с контакной информацией
 
-                                        break;
-                                    }
-                                case SomeEnums.TypeOfSubs.Materials:
-                                    {//Работа с материалами
-
-                                        break;
-                                    }
-                                case SomeEnums.TypeOfSubs.Post:
-                                    {//Работа с должностями
-
-                                        break;
-                                    }
-                                case SomeEnums.TypeOfSubs.Premises:
-                                    {//Работа с типами помещений
-
-                                        break;
-                                    }
-                                case SomeEnums.TypeOfSubs.Servises:
-                                    {//Работа с услугами
-
-                                        break;
-                                    }
-                            }
-                        }
-                    }
-                }
-            }
-            else
-            {
-                MakeSomeHelp.MSG("Необходимо выбрать данные для работы!", MsgBoxImage: MessageBoxImage.Hand);
-            }
-        }
     }
 }

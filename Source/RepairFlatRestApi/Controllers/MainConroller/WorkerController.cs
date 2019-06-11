@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using static RepairFlatRestApi.Models.WorkWitthWorker;
 
 namespace RepairFlatRestApi.Controllers.MainConroller
 {
     [RoutePrefix("api/Worker")]
-    public class WorkerController:BaseController
+    public class WorkerController : BaseController
     {
         [HttpGet, Route("getData")]
         public HttpResponseMessage GetDataForRedact([FromUri] Guid idWorker)
@@ -77,7 +74,5 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return OtherController.WorkerDBConroller.CreateDataAboutPayWages(DataAboutGiveMoney);
             }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
         }
-
-
     }
 }

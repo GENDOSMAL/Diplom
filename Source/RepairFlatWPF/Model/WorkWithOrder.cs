@@ -12,7 +12,6 @@ namespace RepairFlatWPF
     public class WorkWithOrder
     {
         #region Данные о заказе
-
         public class DataForRedact
         {
             public string FioClient;
@@ -136,22 +135,7 @@ namespace RepairFlatWPF
             public double? SFloor;
         }
 
-        public class NewMeasurment
-        {
-
-        }
-
-
         #endregion
-
-        #region Данные об оплате
-
-        public class AllPayment
-        {
-
-        }
-        #endregion
-
         class CustomDateTimeConverter : IsoDateTimeConverter
         {
             public CustomDateTimeConverter()

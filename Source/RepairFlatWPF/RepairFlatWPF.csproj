@@ -132,7 +132,6 @@
     </ApplicationDefinition>
     <Compile Include="Controller\MakeSomeHelp.cs" />
     <Compile Include="Controller\MakeWorkWirthDataBase.cs" />
-    <Compile Include="Controller\MakeWorkWithWord.cs" />
     <Compile Include="Model\BaseJsonModel.cs" />
     <Compile Include="Model\BaseResult.cs" />
     <Compile Include="Model\ContactModel.cs" />

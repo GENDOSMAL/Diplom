@@ -1,16 +1,13 @@
 ﻿using RepairFlatRestApi.Controllers.OtherController;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using static RepairFlatRestApi.Models.DescriptionJSON.DescMakePayment;
 
 namespace RepairFlatRestApi.Controllers.MainConroller
 {
     [RoutePrefix("api/payment")]
-    public class PaymentController: BaseController
+    public class PaymentController : BaseController
     {
         [HttpGet, Route("getdata")]
         public HttpResponseMessage SelectDataAbOrderByID()
@@ -30,7 +27,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         }
 
         [HttpPost, Route("create/inf")]
-        public HttpResponseMessage CreateDataAboutPaymentMethod([FromBody]DataAboutPayment dataAboutPayment )
+        public HttpResponseMessage CreateDataAboutPaymentMethod([FromBody]DataAboutPayment dataAboutPayment)
         {
             return CatchError(() =>
             {
@@ -39,7 +36,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         }
 
         [HttpPost, Route("create/payment")]
-        public HttpResponseMessage CreateDataAbPayment([FromBody]MakeDataAboutPayment dataAboutPayment )
+        public HttpResponseMessage CreateDataAbPayment([FromBody]MakeDataAboutPayment dataAboutPayment)
         {
             return CatchError(() =>
             {

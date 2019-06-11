@@ -147,11 +147,9 @@
     <Compile Include="Controllers\OtherController\DBController\OrderDBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\PaymnetDBController.cs" />
     <Compile Include="Controllers\OtherController\DBController\WorkWithContactDBController.cs" />
-    <Compile Include="Controllers\OtherController\HelperUS.cs" />
     <Compile Include="Controllers\OtherController\Logger.cs" />
     <Compile Include="Controllers\MainConroller\LoginController.cs" />
     <Compile Include="Controllers\OtherController\DBController\WorkerDBConroller.cs" />
-    <Compile Include="Controllers\ReturnMessageBilder.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

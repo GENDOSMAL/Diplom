@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlatRestApi.Models.DescriptionJSON
 {
     public class DescMakePayment
     {
-        public class DataAboutPayment:BaseResult
+        public class DataAboutPayment : BaseResult
         {
             public System.Guid idInfPayment;
             public Nullable<System.Guid> idWorkerMake;

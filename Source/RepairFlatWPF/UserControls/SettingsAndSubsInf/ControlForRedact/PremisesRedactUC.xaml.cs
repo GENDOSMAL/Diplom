@@ -65,7 +65,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
                 {
                     query = "Update PremisesType set NameOfPremises=@NameOfPremises, Descriprtion=@Descriprtion where idPremises=@idPremises;";
                 }
-                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[4];
+                SQLiteParameter[] sQLiteParameter = new SQLiteParameter[3];
                 sQLiteParameter[0] = new SQLiteParameter("@idPremises", idPremises.ToString());
                 sQLiteParameter[1] = new SQLiteParameter("@NameOfPremises", NameOfPremises.Text.Trim());
                 sQLiteParameter[2] = new SQLiteParameter("@Descriprtion", Description.Text.Trim());

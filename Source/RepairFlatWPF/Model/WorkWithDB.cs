@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace RepairFlatWPF
 {
@@ -14,19 +10,15 @@ namespace RepairFlatWPF
             public string TypeOfCol { get; set; }
             public bool IsPk { get; set; }
         }
-
         public class Tableses
         {
             public List<Table> Tables { get; set; }
         }
-
-
         public class Table
         {
             public string NameOfTable { get; set; }
             public List<ColumnOfTable> ColumnOfTable { get; set; }
         }
-
         public class RootObject
         {
             public List<Table> Tables { get; set; }

@@ -2,8 +2,6 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlatRestApi.Models.DescriptionJSON
 {
@@ -28,7 +26,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         /// <summary>
         /// Список обновленных/добавленных сервисов. Необходимо для отправки на клиент
         /// </summary>
-        public class ListOfUpdatedServises: ListOfServises
+        public class ListOfUpdatedServises : ListOfServises
         {
             public string TypeOfUpdate;
         }
@@ -89,7 +87,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string Name;
             public string Description;
         }
-        public class ListOfPremisesUpd: ListOfPremises
+        public class ListOfPremisesUpd : ListOfPremises
         {
             public string TypeOfUpdate;
         }
@@ -127,7 +125,7 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public Nullable<decimal> Cost;
             public string TypeOfMaterial;
         }
-        public class ListOfMaterialsUpd: ListOfMaterials
+        public class ListOfMaterialsUpd : ListOfMaterials
         {
             public string TypeOfUpdate;
         }
@@ -206,11 +204,6 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string TypeOfUpdate;
         }
         #endregion
-
-
-
-
-
         class CustomDateTimeConverter : IsoDateTimeConverter
         {
             public CustomDateTimeConverter()

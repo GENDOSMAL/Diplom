@@ -2,16 +2,11 @@
 using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace RepairFlat.Model
 {
     public class PersonDesctiption
     {
-        /// <summary>
-        /// Описание того, что будет принято о новом пользователе при его регистрации
-        /// </summary>
         public class DescriptionOfUser
         {
             public Guid? idUser;
@@ -43,9 +38,6 @@ namespace RepairFlat.Model
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public List<ContactModel.InformationAboutContact> ListOfContact;
         }
-        /// <summary>
-        /// Описание того, что будет вернуто на запрос о создании нового пользователя
-        /// </summary>
         public class ResultDescription : BaseResult
         {
             public Guid idUser;
@@ -58,9 +50,6 @@ namespace RepairFlat.Model
             public List<Guid?> ListForDelete;
         }
 
-        /// <summary>
-        /// Описание того, как будет выглядеть дата
-        /// </summary>
         class CustomDateTimeConverter : IsoDateTimeConverter
         {
             public CustomDateTimeConverter()
