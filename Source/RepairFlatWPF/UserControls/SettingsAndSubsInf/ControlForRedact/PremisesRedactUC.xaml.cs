@@ -4,18 +4,8 @@ using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlat.Model.MakeSubs;
 
 namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
@@ -79,7 +69,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
             MakeUpdOrInsPremises makeUpdOrInsPremises = new MakeUpdOrInsPremises();
             makeUpdOrInsPremises.idUser = SaveSomeData.IdUser ?? default;
             makeUpdOrInsPremises.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
-            ListOfPremises listOfPremises = new ListOfPremises { idPremises = idPremises, Description = Description.Text.Trim(), Name= Description.Text.Trim() };
+            ListOfPremises listOfPremises = new ListOfPremises { idPremises = idPremises, Description = Description.Text.Trim(), Name = Description.Text.Trim() };
             makeUpdOrInsPremises.ListOfPremises = new List<ListOfPremises>();
             makeUpdOrInsPremises.ListOfPremises.Add(listOfPremises);
             string Json = JsonConvert.SerializeObject(makeUpdOrInsPremises);

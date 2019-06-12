@@ -2,19 +2,9 @@
 using RepairFlat.Model;
 using RepairFlatWPF.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.DescMakePayment;
 
 namespace RepairFlatWPF.UserControls.MoneyInformation
@@ -28,9 +18,9 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
         BaseWindow window;
         Guid idInf;
         #endregion
-        
+
         #region Конструктор
-        public MakeDataForPayment(ref BaseWindow baseWindow, DataAboutPayment dataAbout=null)
+        public MakeDataForPayment(ref BaseWindow baseWindow, DataAboutPayment dataAbout = null)
         {
             InitializeComponent();
             this.window = baseWindow;
@@ -43,13 +33,13 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
                 Bank.Text = dataAbout.BankOfPayment;
                 CheckingAcount.Text = dataAbout.CheckingAcount;
                 BIK.Text = dataAbout.BIK;
-                YIN.Text = dataAbout.YIN;                
+                YIN.Text = dataAbout.YIN;
             }
             else
             {
                 idInf = Guid.NewGuid();
             }
-            
+
         }
 
         #endregion
@@ -102,10 +92,10 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
         {
             if (string.IsNullOrEmpty(NameOfRecepient.Text.Trim()))
             {
-                MakeSomeHelp.MSG("Необходимо указаить наименование получателя", MsgBoxImage:MessageBoxImage.Hand);
+                MakeSomeHelp.MSG("Необходимо указаить наименование получателя", MsgBoxImage: MessageBoxImage.Hand);
                 return false;
             }
-            if(!IsDigitsOnly(INN.Text.Trim()))
+            if (!IsDigitsOnly(INN.Text.Trim()))
             {
                 MakeSomeHelp.MSG("ИНН может содержать только цифры", MsgBoxImage: MessageBoxImage.Hand);
                 return false;
@@ -113,7 +103,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
             else
             {
                 int le = INN.Text.Length;
-                if (INN.Text.Length >= 12 && INN.Text.Length <=10)
+                if (INN.Text.Length >= 12 && INN.Text.Length <= 10)
                 {
                     MakeSomeHelp.MSG("Длина ИНН должна быть больше или равна 10 и не больше 12", MsgBoxImage: MessageBoxImage.Hand);
                     return false;

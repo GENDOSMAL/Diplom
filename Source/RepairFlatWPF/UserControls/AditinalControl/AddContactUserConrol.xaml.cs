@@ -3,27 +3,16 @@ using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RepairFlatWPF.UserControls
 {
     public partial class AddContactUserConrol : UserControl
     {
-
         ContactModel.InformationAboutContact informationAboutContact;
-        List<Tuple<Guid,string>> idContactType;
+        List<Tuple<Guid, string>> idContactType;
         List<string> Tooltip;
         Guid? idUser;
         Guid idContact;
@@ -76,7 +65,6 @@ namespace RepairFlatWPF.UserControls
             }
 
         }
-
         private void CreateContact_Click(object sender, RoutedEventArgs e)
         {
             if (ResultIsHave())
@@ -107,7 +95,7 @@ namespace RepairFlatWPF.UserControls
                         Value = Value.Text.Trim(),
                         idUser = idUser,
                         NameOfValue = TypeOFContact.Text.Trim(),
-                        Number= informationAboutContact.Number
+                        Number = informationAboutContact.Number
                     };
                     SaveSomeData.SomeObject = contactModel;
                     SaveSomeData.MakeSomeOperation = true;
@@ -131,9 +119,9 @@ namespace RepairFlatWPF.UserControls
             }
             else
             {
-                if (!string.IsNullOrEmpty(idContactType[TypeOFContact.SelectedIndex].Item2.Trim()) )
-                {                   
-                    if(!Regex.IsMatch(Value.Text.Trim(), idContactType[TypeOFContact.SelectedIndex].Item2.Trim()))
+                if (!string.IsNullOrEmpty(idContactType[TypeOFContact.SelectedIndex].Item2.Trim()))
+                {
+                    if (!Regex.IsMatch(Value.Text.Trim(), idContactType[TypeOFContact.SelectedIndex].Item2.Trim()))
                     {
                         MakeSomeHelp.MSG("Не соответсвует требуемому значению", MsgBoxImage: MessageBoxImage.Error);
                         return false;

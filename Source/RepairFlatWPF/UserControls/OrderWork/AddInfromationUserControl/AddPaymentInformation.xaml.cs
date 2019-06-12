@@ -2,19 +2,9 @@
 using RepairFlat.Model;
 using RepairFlatWPF.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.DescMakePayment;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
@@ -29,25 +19,25 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         Guid idOrder;
         Guid idPayment;
         bool NewData = true;
-        decimal SummaPay,needPayde;
+        decimal SummaPay, needPayde;
         BaseWindow window;
-        MakeDataAboutPayment makeData=new MakeDataAboutPayment();
+        MakeDataAboutPayment makeData = new MakeDataAboutPayment();
         TextBlock needPay;
         #endregion
 
         #region Обработки
-        public AddPaymentInformation(Guid idOrder,ref TextBlock needPay,ref BaseWindow baseWindow,object DataAboutPayment=null)
+        public AddPaymentInformation(Guid idOrder, ref TextBlock needPay, ref BaseWindow baseWindow, object DataAboutPayment = null)
         {
             InitializeComponent();
             this.needPay = needPay;
-            decimal.TryParse(needPay.Text,out needPayde);
+            decimal.TryParse(needPay.Text, out needPayde);
             NeedSoPay.Text += needPay.Text;
             window = baseWindow;
             this.idOrder = idOrder;
-            if (DataAboutPayment!=null)
+            if (DataAboutPayment != null)
             {
                 NewData = false;
-                makeData  = DataAboutPayment as MakeDataAboutPayment;
+                makeData = DataAboutPayment as MakeDataAboutPayment;
                 idPayment = makeData.idPayment;
                 Summa.Text = makeData.summa?.ToString();
                 Desc.Text = makeData.Desc?.Trim();
@@ -67,7 +57,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 var DataDle = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/payment/getdata"));
                 var DataAbInf = JsonConvert.DeserializeObject<DataAboutPayment>(DataDle.ToString());
 
-                MakeDataAboutPayment Result =new MakeDataAboutPayment();
+                MakeDataAboutPayment Result = new MakeDataAboutPayment();
                 if (NewData)
                 {
                     Result.summa = SummaPay;
@@ -105,7 +95,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             }
         }
 
- 
+
 
         private void Return_Click(object sender, RoutedEventArgs e)
         {
@@ -118,12 +108,12 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         private bool CheckFields()
         {//TODO Глобально над этим подумать
             bool result = true;
-            if(!decimal.TryParse(Summa.Text.Trim(),out SummaPay))
+            if (!decimal.TryParse(Summa.Text.Trim(), out SummaPay))
             {
                 MakeSomeHelp.MSG("Необходимо указать сумму оплаты!", MsgBoxImage: MessageBoxImage.Error);
                 return false;
             }
-            else if(SummaPay> needPayde)
+            else if (SummaPay > needPayde)
             {
                 MakeSomeHelp.MSG($"Сумма оплаты больше, чем остаток {needPay.Text}", MsgBoxImage: MessageBoxImage.Error);
                 return false;
@@ -131,7 +121,5 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             return result;
         }
         #endregion
-
-
     }
 }

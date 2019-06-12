@@ -1,19 +1,8 @@
 ﻿using RepairFlatWPF.Model;
 using RepairFlatWPF.UserControls.WorkerInformation.KadrWork;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.OrderDesc;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
@@ -84,7 +73,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 SaveSomeData.idSubs = new Guid();
                 var row = SaveSomeData.SomeObject as System.Data.DataRow;
                 SaveSomeData.SomeObject = null;
-                NameOfWorker.Text = $"{row[1]?.ToString().Trim()} {row[2]?.ToString().Substring(0,1)}.{row[3]?.ToString().Substring(0, 1)}.";
+                NameOfWorker.Text = $"{row[1]?.ToString().Trim()} {row[2]?.ToString().Substring(0, 1)}.{row[3]?.ToString().Substring(0, 1)}.";
                 NameOfPost = row[6]?.ToString();
                 WorkerSel = true;
             }

@@ -1,20 +1,11 @@
 ﻿using Newtonsoft.Json;
 using RepairFlatWPF.Model;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.DescMakePayment;
 
 namespace RepairFlatWPF.UserControls.MoneyInformation
@@ -67,7 +58,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
                 {
                     using (var document = application.Documents.Add(NameOfFile))
                     {
-                         
+
                         string text = $"Получатель платежа: {InfAboutPayment.NameOfRecipient?.Trim()} {Environment.NewLine}ИНН: {InfAboutPayment.InnOfOrganization?.Trim()} {Environment.NewLine}КПП: {InfAboutPayment.KppOfOrganization?.Trim()} {Environment.NewLine}Банк получатель: {InfAboutPayment.BankOfPayment?.Trim()} {Environment.NewLine}Расчетный счет: {InfAboutPayment.CheckingAcount?.Trim()} {Environment.NewLine}БИК: {InfAboutPayment.BIK?.Trim()}  {Environment.NewLine}УИН: {InfAboutPayment.YIN?.Trim()}";
                         var InfrormationForPayment = document.Bookmarks["InfrormationForPayment"].Range;
                         InfrormationForPayment.Text = text;
@@ -94,7 +85,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
 
             var DataDle = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/payment/getdata"));
             var DataAbInf = JsonConvert.DeserializeObject<DataAboutPayment>(DataDle.ToString());
-            
+
             if (DataAbInf.success)
             {
                 InfAboutPayment = DataAbInf;
@@ -109,7 +100,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
                 doc.Text += $"Расчетный счет: <{DataAbInf.CheckingAcount?.Trim()}> {Environment.NewLine}";
                 doc.Text += $"БИК: <{DataAbInf.BIK}> {Environment.NewLine}";
                 doc.Text += $"УИН: <{DataAbInf.YIN}> {Environment.NewLine}";
-                doc.Text += $"Дата создания/последнего обновления: <{DataAbInf.DateOfMake.Value.ToString("dd.MM.yyyy")}> {Environment.NewLine}";              
+                doc.Text += $"Дата создания/последнего обновления: <{DataAbInf.DateOfMake.Value.ToString("dd.MM.yyyy")}> {Environment.NewLine}";
             }
             else
             {

@@ -3,18 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.OrderDesc;
 
 namespace RepairFlatWPF.UserControls
@@ -280,9 +271,9 @@ namespace RepairFlatWPF.UserControls
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
                     var idSelectOrder = DataAboutidOrder.Where(e1 => e1.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                    for(int i=0;i< AllDataOfOrder.Rows.Count; i++)
+                    for (int i = 0; i < AllDataOfOrder.Rows.Count; i++)
                     {
-                        if(AllDataOfOrder.Rows[i][2].ToString()!= "В исполнении")
+                        if (AllDataOfOrder.Rows[i][2].ToString() != "В исполнении")
                         {
                             //TODO УДАЛЕНИЕ ЗАКАЗОВ
                         }
@@ -297,8 +288,6 @@ namespace RepairFlatWPF.UserControls
             {
                 MakeSomeHelp.MSG("Необходимо выбрать заказ для удаления!", MsgBoxImage: MessageBoxImage.Hand);
             }
-
-
         }
 
         private void StatusOfOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -307,8 +296,6 @@ namespace RepairFlatWPF.UserControls
                 MakeDataTable();
             else
                 start = false;
-
-
         }
     }
 }

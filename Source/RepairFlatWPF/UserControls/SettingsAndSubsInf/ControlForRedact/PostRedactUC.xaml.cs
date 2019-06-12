@@ -4,18 +4,8 @@ using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlat.Model.MakeSubs;
 
 namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
@@ -32,7 +22,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
 
         public PostRedactUC(ref BaseWindow baseWindow, object DataAboutPost = null)
         {
-            InitializeComponent();            
+            InitializeComponent();
             CanMakeWork.Items.Add("Нет");
             CanMakeWork.Items.Add("Да");
             window = baseWindow;
@@ -89,7 +79,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
             makeUpdOrInsPost.idUser = SaveSomeData.IdUser ?? default;
             makeUpdOrInsPost.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
             bool ss = Convert.ToBoolean(CanMakeWork.SelectedIndex);
-            ListOfPost listOfPost = new ListOfPost { idPost = idPost, BaseWage = baseWage, MakeWork = ss,NameOfPost= NameOfPost.Text.Trim() };
+            ListOfPost listOfPost = new ListOfPost { idPost = idPost, BaseWage = baseWage, MakeWork = ss, NameOfPost = NameOfPost.Text.Trim() };
             if (Redact)
             {
                 makeUpdOrInsPost.listOfPostUpdate = new List<ListOfPost>();
@@ -99,7 +89,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf.ControlForRedact
             {
                 makeUpdOrInsPost.ListOfPostInsert = new List<ListOfPost>();
                 makeUpdOrInsPost.ListOfPostInsert.Add(listOfPost);
-            }            
+            }
             string Json = JsonConvert.SerializeObject(makeUpdOrInsPost);
             string urlSend = "api/substring/post/update";
             MakeSomeHelp.UpdloadDataToServer(urlSend, Json);

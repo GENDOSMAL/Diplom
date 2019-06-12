@@ -96,10 +96,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
             {
                 MakeSomeHelp.MSG("Не выбрано помещений для редактирование!", MsgBoxImage: MessageBoxImage.Hand);
             }
-
-
         }
-
         private async void DeleteMeasurment_Click(object sender, RoutedEventArgs e)
         {
             int index = DataGrid.SelectedIndex;

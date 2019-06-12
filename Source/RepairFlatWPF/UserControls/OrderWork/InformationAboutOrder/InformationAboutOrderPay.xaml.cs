@@ -1,23 +1,13 @@
 ﻿using Newtonsoft.Json;
-using RepairFlatWPF.Controller;
 using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.DescMakePayment;
 
 namespace RepairFlatWPF.UserControls.OrderWork
@@ -34,7 +24,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
         #endregion
 
         #region Контструктор
-        public InformationAboutOrderPay(Guid idOrder, ref TextBlock NeedPay,string FiOUser,string AdressOfClient)
+        public InformationAboutOrderPay(Guid idOrder, ref TextBlock NeedPay, string FiOUser, string AdressOfClient)
         {
             InitializeComponent();
             this.idOrder = idOrder;
@@ -106,9 +96,9 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 {
                     Guid idPayment = ListOfIdPayment.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
                     DataRow row = default;
-                    for(int i=0;i< DataAboutPayment.Rows.Count; i++)
+                    for (int i = 0; i < DataAboutPayment.Rows.Count; i++)
                     {
-                        if(Convert.ToInt32(DataAboutPayment.Rows[i][0].ToString())== numberOfRows)
+                        if (Convert.ToInt32(DataAboutPayment.Rows[i][0].ToString()) == numberOfRows)
                         {
                             row = DataAboutPayment.Rows[i];
                         }
@@ -202,14 +192,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 }
 
             }
-        }
-
-
-
-
-
+        }        
         #endregion
-
-
     }
 }

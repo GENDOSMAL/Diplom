@@ -4,20 +4,10 @@ using RepairFlatWPF.UserControls.KadrWork;
 using RepairFlatWPF.UserControls.MoneyInformation;
 using RepairFlatWPF.UserControls.SettingsAndSubsInf;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RepairFlatWPF
 {
@@ -182,13 +172,11 @@ namespace RepairFlatWPF
                 }
             }
         }
-
         public void setChildren(UserControl ss1)
         {
             MainGrid.Children.Clear();
             MainGrid.Children.Add(ss1);
         }
-
         private void Bluring_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             CloseMenu();

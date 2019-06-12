@@ -1,19 +1,8 @@
 ﻿using RepairFlatWPF.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.OrderDesc;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
@@ -29,7 +18,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
         double Count;
         decimal cost;
         BaseWindow window;
-        public AddInfromationAboutMaterials(ref BaseWindow baseWindow,object InfromationAboutMaterial=null)
+        public AddInfromationAboutMaterials(ref BaseWindow baseWindow, object InfromationAboutMaterial = null)
         {
             InitializeComponent();
             window = baseWindow;
@@ -96,7 +85,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 result = false;
                 MakeSomeHelp.MSG("Необходимо выбрать материал!", MsgBoxImage: MessageBoxImage.Error);
             }
-            if(!Double.TryParse(CountOfMaterial.Text.Trim(), out Count) && InformationSelect)
+            if (!Double.TryParse(CountOfMaterial.Text.Trim(), out Count) && InformationSelect)
             {
                 result = false;
                 MakeSomeHelp.MSG("Необходимо указать данные о количестве!", MsgBoxImage: MessageBoxImage.Error);

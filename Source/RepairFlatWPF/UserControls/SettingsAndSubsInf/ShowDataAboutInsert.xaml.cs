@@ -5,18 +5,9 @@ using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlat.Model.MakeSubs;
 
 namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
@@ -53,7 +44,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                 }
                 else
                 {
-                    ShowNeeded( ForMaterial);
+                    ShowNeeded(ForMaterial);
                     GridCursor.SetValue(Grid.ColumnProperty, 1);
                 }
             }
@@ -90,8 +81,8 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                 {
                     DataTable Data = AllSheet.Tables["1"];
                     MakeUpdOrInsPremises insPremises = new MakeUpdOrInsPremises();
-                    List<ListOfPremises> ListOfPremise = new List<ListOfPremises>(); 
-                    for (int i=0;i< Data.Rows.Count; i++)
+                    List<ListOfPremises> ListOfPremise = new List<ListOfPremises>();
+                    for (int i = 0; i < Data.Rows.Count; i++)
                     {
                         ListOfPremises premisesUpd = new ListOfPremises
                         {
@@ -101,7 +92,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                         };
                         ListOfPremise.Add(premisesUpd);
                     }
-                    insPremises.idUser = SaveSomeData.IdUser?? default(Guid);
+                    insPremises.idUser = SaveSomeData.IdUser ?? default(Guid);
                     insPremises.ListOfPremises = ListOfPremise;
                     insPremises.DateOfMake = DateTime.Now.ToString("dd.MM.yyyy HH:mm");
                     MakeSendDataToserver("api/substring/premises/update", insPremises);
@@ -119,7 +110,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                             NameOfMaterial = Data.Rows[i][1].ToString(),
                             UnitOfMeasue = Data.Rows[i][2].ToString(),
                             TypeOfMaterial = Data.Rows[i][3].ToString(),
-                            Cost =Convert.ToDecimal(Data.Rows[i][4].ToString()),                          
+                            Cost = Convert.ToDecimal(Data.Rows[i][4].ToString()),
                             Description = Data.Rows[i][5].ToString(),
                         };
                         ListOfMaterials.Add(premisesUpd);
@@ -140,7 +131,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                         {
                             idServises = Guid.Parse(Data.Rows[i][0].ToString()),
                             Nomination = Data.Rows[i][1].ToString(),
-                            TypeOfServises= Data.Rows[i][2].ToString(),
+                            TypeOfServises = Data.Rows[i][2].ToString(),
                             Cost = Convert.ToDecimal(Data.Rows[i][3].ToString()),
                             Description = Data.Rows[i][4].ToString(),
                         };
@@ -165,7 +156,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
                             idPost = Guid.Parse(Data.Rows[i][0].ToString()),
                             NameOfPost = Data.Rows[i][1].ToString(),
                             BaseWage = Convert.ToDecimal(Data.Rows[i][2].ToString()),
-                            MakeWork=Convert.ToBoolean(Data.Rows[i][3].ToString())
+                            MakeWork = Convert.ToBoolean(Data.Rows[i][3].ToString())
                         };
                         ListOfPost.Add(ServisesUpdate);
                     }
@@ -190,26 +181,26 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             switch (index)
             {
                 case 1:
-                    GridCursor.SetValue(Grid.ColumnProperty, index-1);
+                    GridCursor.SetValue(Grid.ColumnProperty, index - 1);
                     ShowNeeded(ForElement);
                     break;
                 case 2:
-                    GridCursor.SetValue(Grid.ColumnProperty, index-1);
+                    GridCursor.SetValue(Grid.ColumnProperty, index - 1);
                     ShowNeeded(ForMaterial);
                     break;
                 case 3:
-                    GridCursor.SetValue(Grid.ColumnProperty, index-1);
+                    GridCursor.SetValue(Grid.ColumnProperty, index - 1);
                     ShowNeeded(ForServises);
                     break;
                 case 4:
-                    GridCursor.SetValue(Grid.ColumnProperty, index-1);
+                    GridCursor.SetValue(Grid.ColumnProperty, index - 1);
                     ShowNeeded(ForPost);
                     break;
             }
         }
 
 
-        private async void MakeSendDataToserver(string urlSend,object json)
+        private async void MakeSendDataToserver(string urlSend, object json)
         {
             string Json = JsonConvert.SerializeObject(json);
             SaveDataBTN.Content = "Ожидайте...";
@@ -227,7 +218,7 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
 
         }
 
-        private void ShowNeeded( Grid grid)
+        private void ShowNeeded(Grid grid)
         {
             ForElement.Visibility = Visibility.Collapsed;
             ForMaterial.Visibility = Visibility.Collapsed;

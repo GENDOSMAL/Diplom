@@ -2,20 +2,10 @@
 using RepairFlat.Model;
 using RepairFlatWPF.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.WorkerDescriptiom;
 using static RepairFlatWPF.SomeEnums;
 
@@ -31,8 +21,8 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         BaseWindow window;
         bool Prinyt = true;
         decimal Dsalary;
-        string[] NameOfType = new string[] { "AD", "MG", "KW", "BW", "BB", "SW",};
-        public SetWorkerDolzn(ref BaseWindow baseWindow,bool Prinyt=true)
+        string[] NameOfType = new string[] { "AD", "MG", "KW", "BW", "BB", "SW", };
+        public SetWorkerDolzn(ref BaseWindow baseWindow, bool Prinyt = true)
         {
             InitializeComponent();
             TypeOfUser.Items.Add("Администратор");
@@ -58,7 +48,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             if (MakeCheck())
             {
                 DataAboutPost dataAbout = new DataAboutPost();
-                string typeofoperation = Prinyt==true? TypeOfOperate.Adoption.ToString(): TypeOfOperate.Permutation.ToString();
+                string typeofoperation = Prinyt == true ? TypeOfOperate.Adoption.ToString() : TypeOfOperate.Permutation.ToString();
                 dataAbout = new DataAboutPost()
                 {
                     DateOfOperate = DateTime.Now,
@@ -117,9 +107,9 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             if (Prinyt)
             {//Выбираем кандидатов
                 BaseWindow baseWindow = new BaseWindow("Выбор кандидата");
-                baseWindow.MakeOpen(new ShowAllWorkers(ref baseWindow,SomeEnums.TypeOfUserNeed.KD));
-                baseWindow.ShowDialog(); 
-                
+                baseWindow.MakeOpen(new ShowAllWorkers(ref baseWindow, SomeEnums.TypeOfUserNeed.KD));
+                baseWindow.ShowDialog();
+
             }
             else
             {//Выбираем всех кроме кандидатов
@@ -135,31 +125,31 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                 SaveSomeData.SomeObject = null;
                 idUser = SaveSomeData.idSubs;
                 SaveSomeData.idSubs = new Guid();
-                WorkerName.Text = $"{rows[1]?.ToString().Trim()} {rows[2]?.ToString().Trim().Substring(0,1)}.{rows[3]?.ToString().Trim().Substring(0, 1)} : {rows[5]}";
+                WorkerName.Text = $"{rows[1]?.ToString().Trim()} {rows[2]?.ToString().Trim().Substring(0, 1)}.{rows[3]?.ToString().Trim().Substring(0, 1)} : {rows[5]}";
             }
         }
 
         bool MakeCheck()
         {
-            if (idUser==new Guid())
+            if (idUser == new Guid())
             {
                 MakeSomeHelp.MSG("Необходимо выбрать работника", MsgBoxImage: MessageBoxImage.Hand);
                 return false;
             }
-            if (idPost==new Guid())
+            if (idPost == new Guid())
             {
                 MakeSomeHelp.MSG("Необходимо выбрать должность", MsgBoxImage: MessageBoxImage.Hand);
                 return false;
             }
 
-            if (!decimal.TryParse(Salary.Text?.Trim(),out Dsalary))
+            if (!decimal.TryParse(Salary.Text?.Trim(), out Dsalary))
             {
                 MakeSomeHelp.MSG("Необходимо указать заработную плату", MsgBoxImage: MessageBoxImage.Hand);
                 return false;
             }
             if (TypeOfUser.SelectedIndex == -1)
             {
-                MakeSomeHelp.MSG("Необходимо выбрать тип работника", MsgBoxImage:MessageBoxImage.Hand);
+                MakeSomeHelp.MSG("Необходимо выбрать тип работника", MsgBoxImage: MessageBoxImage.Hand);
                 return false;
             }
             return true;

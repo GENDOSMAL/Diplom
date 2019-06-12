@@ -1,12 +1,7 @@
 ﻿using RepairFlatWPF.Properties;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RepairFlatWPF
 {

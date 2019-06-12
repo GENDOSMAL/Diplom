@@ -1,18 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RepairFlatWPF.UserControls.OrderWork
 {
@@ -22,8 +10,8 @@ namespace RepairFlatWPF.UserControls.OrderWork
     public partial class MainWorkWithOrderUserControl : UserControl
     {
         Guid idOrder;
-        
-        public MainWorkWithOrderUserControl(Guid idOrder, object AllDataAboutOrder=null,string FioClient="",string Adress="",string AllSumma="")
+
+        public MainWorkWithOrderUserControl(Guid idOrder, object AllDataAboutOrder = null, string FioClient = "", string Adress = "", string AllSumma = "")
         {
             InitializeComponent();
             this.idOrder = idOrder;
@@ -37,7 +25,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
             ForPermisent.Children.Add(new WorkWithMeasurment(idOrder));
             //данные о заданиях
             ForTasks.Children.Clear();
-            ForTasks.Children.Add(new WorkWithTasksUserControl(idOrder,ref SummaOfOrder,ref Ostatok));                      
+            ForTasks.Children.Add(new WorkWithTasksUserControl(idOrder, ref SummaOfOrder, ref Ostatok));
             //Данные об оплате 
             ForPayment.Children.Clear();
             ForPayment.Children.Add(new InformationAboutOrderPay(idOrder, ref Ostatok, FioClient, Adress));

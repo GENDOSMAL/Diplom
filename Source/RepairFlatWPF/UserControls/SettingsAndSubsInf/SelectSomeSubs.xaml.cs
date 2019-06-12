@@ -70,15 +70,12 @@ namespace RepairFlatWPF.UserControls.SettingsAndSubsInf
             }
         }
         #endregion
-
-
         #region Дополнительные данные
         private void MakePreparateData()
         {
             DataAboutSomeSubInf = new DataTable();
             ListofId = new List<Tuple<int, Guid>>();
         }
-
         private void MakeDataFromDB()
         {
             MakePreparateData();

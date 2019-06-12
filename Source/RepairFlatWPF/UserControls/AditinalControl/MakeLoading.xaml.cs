@@ -1,17 +1,13 @@
-﻿using RepairFlatWPF.Controller;
+﻿using Newtonsoft.Json;
+using RepairFlat.Model;
+using RepairFlatWPF.Controller;
+using System;
 using System.Data;
+using System.Data.SQLite;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using System.Data.SQLite;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System;
-using System.Linq;
-using System.Text;
-using RepairFlatWPF.Model;
-using System.Threading;
-using RepairFlat.Model;
 
 namespace RepairFlatWPF.UserControls
 {
@@ -21,7 +17,7 @@ namespace RepairFlatWPF.UserControls
     public partial class MakeLoading : UserControl
     {
         bool forAll = true;
-        public MakeLoading(bool ForAllWindow=true)
+        public MakeLoading(bool ForAllWindow = true)
         {
             forAll = ForAllWindow;
             InitializeComponent();
@@ -52,7 +48,7 @@ namespace RepairFlatWPF.UserControls
                     if (someDate.Trim() != "")
                     {
                         if (DateTime.TryParse(someDate, out DateTime buf))
-                            someDate=buf.AddHours(-1).ToString("dd.MM.yyyy HH:mm");
+                            someDate = buf.AddHours(-1).ToString("dd.MM.yyyy HH:mm");
                         #region Получение данных от сервера
                         DescriptionOfWork.Content = "Получение данных об услугах с сервера ...";
                         ServisesDownload = await Task.Run(() => MakeDownloadByLink($"api/substring/servises/get?dateofclientlastupdate={someDate}")); //Скачивание данных о услугах
@@ -121,7 +117,7 @@ namespace RepairFlatWPF.UserControls
             ((Storyboard)FindResource("WaitStoryboard")).Stop();
             DescriptionOfWork.Content = "Данные обновлены";
             MakeSomeHelp.ShowMainGrid();
-                
+
         }
 
         private void PostUpdlocToDB(MakeSubs.PostMake postMake)
@@ -132,36 +128,36 @@ namespace RepairFlatWPF.UserControls
                 try
                 {
                     bool MakeSmF = false;
-                    if(postMake.listOfPost!=null)
-                    if (postMake.listOfPost.Count() != 0)
-                    {
-                        MakeSmF = true;
-                        foreach (var PostUpdate in postMake.listOfPost)
+                    if (postMake.listOfPost != null)
+                        if (postMake.listOfPost.Count() != 0)
                         {
-                            SQLiteParameter[] parameters = new SQLiteParameter[4];
-                            parameters[0] = new SQLiteParameter("@idPost", PostUpdate.idPost.ToString());
-                            parameters[1] = new SQLiteParameter("@NameOfPost", PostUpdate.NameOfPost);
-                            parameters[2] = new SQLiteParameter("@BaseWage", PostUpdate.BaseWage);
-                            parameters[3] = new SQLiteParameter("@MakeWork", Convert.ToInt32(PostUpdate.MakeWork));
-                            command.Parameters.AddRange(parameters);
-                            command.CommandText = MakeQuery;
-                            command.ExecuteNonQuery();
+                            MakeSmF = true;
+                            foreach (var PostUpdate in postMake.listOfPost)
+                            {
+                                SQLiteParameter[] parameters = new SQLiteParameter[4];
+                                parameters[0] = new SQLiteParameter("@idPost", PostUpdate.idPost.ToString());
+                                parameters[1] = new SQLiteParameter("@NameOfPost", PostUpdate.NameOfPost);
+                                parameters[2] = new SQLiteParameter("@BaseWage", PostUpdate.BaseWage);
+                                parameters[3] = new SQLiteParameter("@MakeWork", Convert.ToInt32(PostUpdate.MakeWork));
+                                command.Parameters.AddRange(parameters);
+                                command.CommandText = MakeQuery;
+                                command.ExecuteNonQuery();
+                            }
                         }
-                    }
                     if (postMake.ListOfDeletePost != null)
                         if (postMake.ListOfDeletePost.Count() != 0)
-                    {
-                        MakeSmF = true;
-                        string QueryForDelete = "Delete From PostData where idPost=@idPost;";
-                        foreach (var DeleteThings in postMake.ListOfDeletePost)
                         {
-                            SQLiteParameter[] parameters = new SQLiteParameter[1];
-                            parameters[0] = new SQLiteParameter("@idPost", DeleteThings.idGuid.ToString());
-                            command.Parameters.AddRange(parameters);
-                            command.CommandText = QueryForDelete;
-                            command.ExecuteNonQuery();
+                            MakeSmF = true;
+                            string QueryForDelete = "Delete From PostData where idPost=@idPost;";
+                            foreach (var DeleteThings in postMake.ListOfDeletePost)
+                            {
+                                SQLiteParameter[] parameters = new SQLiteParameter[1];
+                                parameters[0] = new SQLiteParameter("@idPost", DeleteThings.idGuid.ToString());
+                                command.Parameters.AddRange(parameters);
+                                command.CommandText = QueryForDelete;
+                                command.ExecuteNonQuery();
+                            }
                         }
-                    }
                     if (MakeSmF)
                     {
                         string QueryForHistory = "Insert into DateOfLastUpdate (TypeOfSubs,DateOfUpdate) Values (@TypeOfSubs,@DateOfUpdate)";
@@ -382,9 +378,7 @@ namespace RepairFlatWPF.UserControls
                     command.CommandText = QueryForHistory;
                     command.ExecuteNonQuery();
                 }
-
             });
         }
-
     }
 }

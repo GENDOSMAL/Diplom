@@ -4,17 +4,9 @@ using RepairFlatWPF.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlat.Model.PersonDesctiption;
 using static RepairFlatWPF.WorkWithOrder;
 
@@ -36,7 +28,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
 
         #region Конструктор
 
-        public CreateNewOrder(ref BaseWindow baseWindow, bool NewOrder = true,Guid idOrder=new Guid())
+        public CreateNewOrder(ref BaseWindow baseWindow, bool NewOrder = true, Guid idOrder = new Guid())
         {
             InitializeComponent();
             DateOfOrder.SelectedDate = DateTime.Now;
@@ -362,10 +354,10 @@ namespace RepairFlatWPF.UserControls.OrderWork
         {
             var InformationFromServer = await Task.Run(() => MakeDownloadByLink($"api/order/dataforupdate?idOrder={idOrder}"));
             OrderDesc.DataForUpdate DataAboutOrder = JsonConvert.DeserializeObject<OrderDesc.DataForUpdate>(InformationFromServer.ToString());
-            IdUser= DataAboutOrder.idUser;
-            idAdress= DataAboutOrder.idAdress ?? default(Guid);
-            TempidContact= DataAboutOrder.idContact ?? default(Guid);
-            idContact= DataAboutOrder.idContact ?? default(Guid);
+            IdUser = DataAboutOrder.idUser;
+            idAdress = DataAboutOrder.idAdress ?? default(Guid);
+            TempidContact = DataAboutOrder.idContact ?? default(Guid);
+            idContact = DataAboutOrder.idContact ?? default(Guid);
             DateOfOrder.SelectedDate = DataAboutOrder.DataStart;
             StatusOfOrders.SelectedIndex = DataAboutOrder.Status ?? default(int);
             AllSumma.Text = DataAboutOrder.AllSumma.ToString();

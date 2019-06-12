@@ -27,7 +27,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
             this.textBoxost = textBoxost;
             this.textBoxSumma = textBoxSumma;
             this.idOrder = idOrder;
-            
+
             MakePreparateDataTable();
         }
         #endregion

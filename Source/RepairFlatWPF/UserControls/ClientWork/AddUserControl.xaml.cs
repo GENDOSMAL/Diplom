@@ -5,17 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlat.Model.PersonDesctiption;
 
 namespace RepairFlatWPF.UserControls
@@ -122,7 +114,7 @@ namespace RepairFlatWPF.UserControls
             {
                 //Тут добавление
                 List<ContactModel.InformationAboutContact> ContactInformatio = new List<ContactModel.InformationAboutContact>();
-                
+
                 if (TableOfContactInformation.Rows.Count != 0)
                 {
                     for (int i = 0; i < TableOfContactInformation.Rows.Count; i++)
@@ -156,7 +148,7 @@ namespace RepairFlatWPF.UserControls
                     Pasport = Pasport.Text.Trim(),
                     Patronymic = Patronymic.Text.Trim(),
                     TypeOfUser = SomeEnums.TypeOfUser.Cl.ToString(),
-                    ListOfContact =ContactInformatio
+                    ListOfContact = ContactInformatio
                 };
                 string Json = JsonConvert.SerializeObject(createNewClient);
                 string urlSend = "api/user/create";

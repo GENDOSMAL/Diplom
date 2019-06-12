@@ -1,19 +1,8 @@
 ﻿using RepairFlatWPF.Model;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static RepairFlatWPF.Model.OrderDesc;
 
 namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
@@ -105,7 +94,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             }
             if (!int.TryParse(CountOfServis.Text.Trim(), out Count) && IsSelect)
             {
-                MakeSomeHelp.MSG("Необходимо указать количество и оно должно быть целым числом",MsgBoxImage:MessageBoxImage.Hand);
+                MakeSomeHelp.MSG("Необходимо указать количество и оно должно быть целым числом", MsgBoxImage: MessageBoxImage.Hand);
                 result = false;
             }
             return result;
