@@ -9,10 +9,8 @@ using static RepairFlatRestApi.Models.AdressModel;
 
 namespace RepairFlatRestApi.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class DBController
+
+    public class DBBaseController
     {
         #region Обработки при работе с данными пользователя
 
@@ -44,7 +42,7 @@ namespace RepairFlatRestApi.Controllers
                 };
 
                 return dataForRedact;
-            }, nameof(DBController), nameof(SelectAllDataAboutOrder));
+            }, nameof(DBBaseController), nameof(SelectAllDataAboutOrder));
         }
 
 
@@ -107,7 +105,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     return new BaseResult { success = false, description = ex.ToString() };
                 }
-            }, nameof(DBController), nameof(CreaNewAdress));
+            }, nameof(DBBaseController), nameof(CreaNewAdress));
         }
 
         internal static object UpdateDataAboutAdress(AdressModel.AdressDesc newAdress)
@@ -136,7 +134,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     return new BaseResult { success = false, description = ex.ToString() };
                 }
-            }, nameof(DBController), nameof(UpdateDataAboutAdress));
+            }, nameof(DBBaseController), nameof(UpdateDataAboutAdress));
         }
 
         internal static object MakeUpdatePost(MakeSubs.MakeUpdOrInsPost listOfPost)
@@ -245,7 +243,7 @@ namespace RepairFlatRestApi.Controllers
                     success = true,
                     description = "Операции над данными были произведены!"
                 };
-            }, nameof(DBController), nameof(MakeInserAndUpdateServises));
+            }, nameof(DBBaseController), nameof(MakeInserAndUpdateServises));
         }
 
         internal static MakeSubs.PostMake MakeDataAboutPost(string dateofclientlastupdate)
@@ -296,7 +294,7 @@ namespace RepairFlatRestApi.Controllers
                         };
                     }
                 }
-            }, nameof(DBController), nameof(UpdateDataAboutAdress));
+            }, nameof(DBBaseController), nameof(UpdateDataAboutAdress));
         }
 
         private static MakeSubs.PostMake AllPostHave()
@@ -353,7 +351,7 @@ namespace RepairFlatRestApi.Controllers
                         LastNameAndIni = dd
                     };
                 }
-            }, nameof(DBController), nameof(Logining));
+            }, nameof(DBBaseController), nameof(Logining));
         }
 
 
@@ -401,7 +399,7 @@ namespace RepairFlatRestApi.Controllers
                     idUser = idUser,
                     description = "Данные о логине и пароле добавлены"
                 };
-            }, nameof(DBController), nameof(CreateLoginPerson));
+            }, nameof(DBBaseController), nameof(CreateLoginPerson));
         }
         #endregion
 
@@ -481,7 +479,7 @@ namespace RepairFlatRestApi.Controllers
                         };
                     }
                 }
-            }, nameof(DBController), nameof(MakeDataAboutUpdateServises));
+            }, nameof(DBBaseController), nameof(MakeDataAboutUpdateServises));
         }
 
 
@@ -566,7 +564,7 @@ namespace RepairFlatRestApi.Controllers
                     success = true,
                     description = "Операции над данными были произведены!"
                 };
-            }, nameof(DBController), nameof(MakeInserAndUpdateServises));
+            }, nameof(DBBaseController), nameof(MakeInserAndUpdateServises));
         }
 
         internal static MakeSubs.ServisesMake AllServisesHave()
@@ -588,7 +586,7 @@ namespace RepairFlatRestApi.Controllers
                     ListOfServises = listOfServise,
                     DateOfMakeAnswer = DateTime.Now
                 };
-            }, nameof(DBController), nameof(AllServisesHave));
+            }, nameof(DBBaseController), nameof(AllServisesHave));
         }
 
         #endregion
@@ -671,7 +669,7 @@ namespace RepairFlatRestApi.Controllers
                     success = true,
                     description = "Операции над данными были произведены!"
                 };
-            }, nameof(DBController), nameof(MakeDataAboutUpdatePremises));
+            }, nameof(DBBaseController), nameof(MakeDataAboutUpdatePremises));
         }
 
         internal static MakeSubs.PremisesMake GetAllPremises(string dateofclientlastupdate)
@@ -720,7 +718,7 @@ namespace RepairFlatRestApi.Controllers
                         };
                     }
                 }
-            }, nameof(DBController), nameof(GetAllPremises));
+            }, nameof(DBBaseController), nameof(GetAllPremises));
         }
 
         private static MakeSubs.PremisesMake AllPremisesHave()
@@ -740,7 +738,7 @@ namespace RepairFlatRestApi.Controllers
                     listOfPremises = listOfServise,
                     DateOfMakeAnswer = DateTime.Now
                 };
-            }, nameof(DBController), nameof(AllServisesHave));
+            }, nameof(DBBaseController), nameof(AllServisesHave));
         }
         #endregion
 
@@ -765,7 +763,7 @@ namespace RepairFlatRestApi.Controllers
                     listOfMaterials = ListOfMaterial,
                     DateOfMakeAnswer = DateTime.Now
                 };
-            }, nameof(DBController), nameof(MakeAllDataAboutContackt));
+            }, nameof(DBBaseController), nameof(MakeAllDataAboutContackt));
         }
 
         internal static object MakeUpdateMaterials(MakeSubs.MakeUpdOrInsMaterials ListOfMaterials)
@@ -851,7 +849,7 @@ namespace RepairFlatRestApi.Controllers
                     success = true,
                     description = "Операции над данными были произведены!"
                 };
-            }, nameof(DBController), nameof(MakeUpdateMaterials));
+            }, nameof(DBBaseController), nameof(MakeUpdateMaterials));
         }
 
         internal static object MakeListOfMaterials(string dateofclientlastupdate)
@@ -903,7 +901,7 @@ namespace RepairFlatRestApi.Controllers
                         };
                     }
                 }
-            }, nameof(DBController), nameof(MakeListOfMaterials));
+            }, nameof(DBBaseController), nameof(MakeListOfMaterials));
         }
 
         #endregion
@@ -929,7 +927,7 @@ namespace RepairFlatRestApi.Controllers
                     listOfContacts = ListOfContacts,
                     DateOfMakeAnswer = DateTime.Now
                 };
-            }, nameof(DBController), nameof(MakeAllDataAboutContackt));
+            }, nameof(DBBaseController), nameof(MakeAllDataAboutContackt));
         }
 
         internal static object MakeUpdateContacts(MakeSubs.MakeUpdOrInsContacts ListOfContacts)
@@ -1006,7 +1004,7 @@ namespace RepairFlatRestApi.Controllers
                     success = true,
                     description = "Операции над данными были произведены!"
                 };
-            }, nameof(DBController), nameof(MakeUpdateContacts));
+            }, nameof(DBBaseController), nameof(MakeUpdateContacts));
         }
 
         internal static object MakeListOfContacts(string dateOfLastClientAction)
@@ -1014,7 +1012,7 @@ namespace RepairFlatRestApi.Controllers
             return Run((db) =>
             {
                 if (string.IsNullOrEmpty(dateOfLastClientAction))
-                {//Если строка пустая возвращаем все
+                {
                     return MakeAllDataAboutContacts();
                 }
                 else
@@ -1056,7 +1054,7 @@ namespace RepairFlatRestApi.Controllers
                         };
                     }
                 }
-            }, nameof(DBController), nameof(MakeUpdateContacts));
+            }, nameof(DBBaseController), nameof(MakeUpdateContacts));
         }
         #endregion
 
@@ -1095,7 +1093,7 @@ namespace RepairFlatRestApi.Controllers
 
                 }
                 return new WorkWithOrder.DataAboutAllOrder() { success = true, orders = orders, Count = orders.Count };
-            }, nameof(DBController), nameof(MakeDataAboutAllOrder));
+            }, nameof(DBBaseController), nameof(MakeDataAboutAllOrder));
         }
 
         internal static object CreateNewOrder(WorkWithOrder.BaseOrderInformation newOrderData)
@@ -1123,7 +1121,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     return new BaseResult { success = false, description = ex.Message };
                 }
-            }, nameof(DBController), nameof(CreateNewOrder));
+            }, nameof(DBBaseController), nameof(CreateNewOrder));
         }
         internal static object UpdateDataAboutOrder(WorkWithOrder.BaseOrderInformation updateDataAbOrder)
         {
@@ -1153,7 +1151,7 @@ namespace RepairFlatRestApi.Controllers
                 {
                     return new BaseResult { success = false, description = ex.Message };
                 }
-            }, nameof(DBController), nameof(CreateNewOrder));
+            }, nameof(DBBaseController), nameof(CreateNewOrder));
         }
 
 

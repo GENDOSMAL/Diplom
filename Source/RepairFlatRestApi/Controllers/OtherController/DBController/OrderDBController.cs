@@ -9,7 +9,7 @@ using static RepairFlatRestApi.Models.OrderData;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
-    public class OrderDBController : DBController
+    public class OrderDBController : DBBaseController
     {
         internal static object SelectDataAboutAllOrder()
         {

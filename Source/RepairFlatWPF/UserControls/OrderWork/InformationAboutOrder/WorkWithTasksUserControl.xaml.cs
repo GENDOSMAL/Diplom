@@ -121,8 +121,8 @@ namespace RepairFlatWPF.UserControls.OrderWork
             var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/order/get/task?idOrder={idOrder}"));
             var ListOfPayment = JsonConvert.DeserializeObject<Model.OrderDesc.DataAboutTaskInOrder>(InformFromserver.ToString());
             MakeDataTableData(ListOfPayment);
-
         }
+
         private void MakeDataTableData(Model.OrderDesc.DataAboutTaskInOrder taskInOrderdataAbout)
         {
             if (taskInOrderdataAbout.success)

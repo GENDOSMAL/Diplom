@@ -8,7 +8,7 @@ using static RepairFlatRestApi.Models.MeasurmentModel;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
-    public class MeasurmentDBController : DBController
+    public class MeasurmentDBController : DBBaseController
     {
         internal static object MakeDataAbouMeas(Guid idOrder)
         {

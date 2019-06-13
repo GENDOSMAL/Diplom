@@ -10,7 +10,7 @@ using static RepairFlatRestApi.Models.WorkWitthWorker;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
-    internal class WorkerDBConroller : DBController
+    internal class WorkerDBConroller : DBBaseController
     {
         internal static object CreateListAllWorker(bool canditate = false)
         {

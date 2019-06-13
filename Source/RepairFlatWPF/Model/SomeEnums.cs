@@ -59,6 +59,14 @@
         public static string[] PayInf = new string[] { "Номер", "Дата создания", "Сумма оплаты", "Кто создал", "Описание" };
 
 
+        #region Описание статистики
+        public static string[] InformationAboutSalary = new string[] { "№", "ФИО работника", "Должность", "Размер", "Дата и время" };
+
+
+        #endregion
+
+
+
         #region Описание задания
         public static string[] TaskTable = new string[] { "Номер", "Цена", "Описание", "Дата начала", "Планируемое время завершения", };
 

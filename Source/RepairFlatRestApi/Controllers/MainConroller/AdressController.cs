@@ -15,7 +15,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError(() =>
             {
-                return DBController.CreaNewAdress(NewAdress);
+                return DBBaseController.CreaNewAdress(NewAdress);
             }, nameof(SubStringController), nameof(CreateNewAdress));
         }
         [HttpGet, Route("data")]
@@ -23,7 +23,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError(() =>
             {
-                return DBController.GetDataAboutContact(idAdress);
+                return DBBaseController.GetDataAboutContact(idAdress);
             }, nameof(SubStringController), nameof(CreateNewAdress));
         }
 
@@ -32,7 +32,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError(() =>
             {
-                return DBController.UpdateDataAboutAdress(UpdatedAdress);
+                return DBBaseController.UpdateDataAboutAdress(UpdatedAdress);
             }, nameof(SubStringController), nameof(CreateNewAdress));
         }
     }

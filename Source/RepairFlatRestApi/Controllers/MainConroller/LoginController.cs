@@ -15,7 +15,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.Logining(InformationAboutAuth);
+                return DBBaseController.Logining(InformationAboutAuth);
             }, nameof(LoginController), nameof(MakeAuth));
         }
         [HttpPost, Route("api/main/createLogin")]
@@ -23,7 +23,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.CreateLoginPerson(InformationAboutNewPerson);
+                return DBBaseController.CreateLoginPerson(InformationAboutNewPerson);
             }, nameof(LoginController), nameof(MakeNewLoginPerson));
         }
 

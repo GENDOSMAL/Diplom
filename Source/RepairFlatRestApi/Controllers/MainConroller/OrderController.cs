@@ -19,7 +19,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError(() =>
             {
-                return DBController.SelectAllDataAboutOrder(idOrder);
+                return DBBaseController.SelectAllDataAboutOrder(idOrder);
             }, nameof(SubStringController), nameof(SelectDataAbOrderByID));
         }
 
@@ -45,7 +45,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError(() =>
             {
-                return DBController.CreateNewOrder(NewOrderData);
+                return DBBaseController.CreateNewOrder(NewOrderData);
             }, nameof(SubStringController), nameof(CreateNewOrders));
         }
         [HttpPost, Route("update")]
@@ -53,7 +53,7 @@ namespace RepairFlatRestApi.Controllers.MainConroller
         {
             return CatchError(() =>
             {
-                return DBController.UpdateDataAboutOrder(UpdateDataAbOrder);
+                return DBBaseController.UpdateDataAboutOrder(UpdateDataAbOrder);
             }, nameof(SubStringController), nameof(UpdateOrderInformation));
         }
         #endregion

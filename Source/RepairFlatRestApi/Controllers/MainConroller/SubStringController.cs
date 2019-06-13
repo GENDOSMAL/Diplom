@@ -18,7 +18,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeInserAndUpdateServises(makeUpdateOrInserNew);
+                return DBBaseController.MakeInserAndUpdateServises(makeUpdateOrInserNew);
             }, nameof(SubStringController), nameof(UpdateServises));
         }
 
@@ -32,7 +32,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeDataAboutUpdateServises(dateofclientlastupdate);
+                return DBBaseController.MakeDataAboutUpdateServises(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdateServises));
         }
         #endregion
@@ -47,7 +47,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeDataAboutUpdatePremises(makeUpdateOrInserNew);
+                return DBBaseController.MakeDataAboutUpdatePremises(makeUpdateOrInserNew);
             }, nameof(SubStringController), nameof(UpdatePremises));
         }
         /// <summary>
@@ -60,7 +60,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.GetAllPremises(dateofclientlastupdate);
+                return DBBaseController.GetAllPremises(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdatePremises));
         }
 
@@ -76,7 +76,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeUpdateMaterials(ListOfMaterials);
+                return DBBaseController.MakeUpdateMaterials(ListOfMaterials);
 
             }, nameof(SubStringController), nameof(UpdateMaterial));
         }
@@ -91,7 +91,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeListOfMaterials(dateofclientlastupdate);
+                return DBBaseController.MakeListOfMaterials(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdateMaterial));
         }
 
@@ -103,7 +103,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeUpdateContacts(ListOfContacts);
+                return DBBaseController.MakeUpdateContacts(ListOfContacts);
             }, nameof(SubStringController), nameof(UpdateContacts));
         }
 
@@ -112,7 +112,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeListOfContacts(dateofclientlastupdate);
+                return DBBaseController.MakeListOfContacts(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdateContacts));
         }
         [HttpPost, Route("post/update")]
@@ -120,7 +120,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeUpdatePost(ListOfPost);
+                return DBBaseController.MakeUpdatePost(ListOfPost);
             }, nameof(SubStringController), nameof(UpdateContacts));
         }
 
@@ -134,7 +134,7 @@ namespace RepairFlatRestApi.Controllers
         {
             return CatchError(() =>
             {
-                return DBController.MakeDataAboutPost(dateofclientlastupdate);
+                return DBBaseController.MakeDataAboutPost(dateofclientlastupdate);
             }, nameof(LoginController), nameof(SendAllUpdateContacts));
         }
         #endregion

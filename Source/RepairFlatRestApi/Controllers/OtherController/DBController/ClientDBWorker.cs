@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
-    public class ClientDBWorker : DBController
+    public class ClientDBWorker : DBBaseController
     {
         internal static object CreateNewClient(PersonDesctiption.CreateNewClient descriptionPerson)
         {

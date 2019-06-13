@@ -8,7 +8,7 @@ using static RepairFlatRestApi.Models.DescriptionJSON.DescMakePayment;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
-    public class PaymnetDBController : DBController
+    public class PaymnetDBController : DBBaseController
     {
         internal static object MakeDataAboutPyment()
         {

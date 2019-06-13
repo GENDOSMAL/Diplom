@@ -148,6 +148,7 @@
     <Compile Include="Model\PersonDesctiption.cs" />
     <Compile Include="Model\SaveSomeData.cs" />
     <Compile Include="Model\SomeEnums.cs" />
+    <Compile Include="Model\StatModel.cs" />
     <Compile Include="Model\WorkerDescriptiom.cs" />
     <Compile Include="Model\WorkWithDB.cs" />
     <Compile Include="Model\WorkWithOrder.cs" />
@@ -197,6 +198,12 @@
     </Compile>
     <Compile Include="UserControls\MoneyInformation\ShowOtchet\PaymentInformationAboutOrder.xaml.cs">
       <DependentUpon>PaymentInformationAboutOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoneyInformation\ShowOtchet\SelectSubDataForOtchet.xaml.cs">
+      <DependentUpon>SelectSubDataForOtchet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoneyInformation\ShowOtchet\StatistikMenu.xaml.cs">
+      <DependentUpon>StatistikMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MoneyInformation\ShowOtchet\UseMaterialsAndServises.xaml.cs">
       <DependentUpon>UseMaterialsAndServises.xaml</DependentUpon>
@@ -348,6 +355,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\MoneyInformation\ShowOtchet\PaymentInformationAboutOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MoneyInformation\ShowOtchet\SelectSubDataForOtchet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MoneyInformation\ShowOtchet\StatistikMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

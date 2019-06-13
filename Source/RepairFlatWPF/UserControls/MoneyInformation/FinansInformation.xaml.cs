@@ -36,5 +36,10 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
         {
             MakeSomeHelp.DataGridMakeWork(new ShowDataForPayment());
         }
+
+        private void ShowStatistik_Click(object sender, RoutedEventArgs e)
+        {
+            MakeSomeHelp.DataGridMakeWork(new ShowOtchet.StatistikMenu());
+        }
     }
 }

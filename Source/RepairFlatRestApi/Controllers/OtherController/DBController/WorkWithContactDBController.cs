@@ -8,7 +8,7 @@ using static RepairFlatRestApi.Models.ContactModel;
 
 namespace RepairFlatRestApi.Controllers.OtherController
 {
-    public  class WorkWithContactDBController: DBController
+    public  class WorkWithContactDBController: DBBaseController
     {
         internal static BaseResult CreaNewContact(InformationAboutContact newContact)
         {

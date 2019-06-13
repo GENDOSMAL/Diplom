@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <TextBox x:Name="WorkerName" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" IsEnabled="False"   materialDesign:HintAssist.Hint="Работник" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
-            <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 15 15" Grid.Row="5" Width="180" Height="60" Content="Выбрать" Name="SelectWorker" Click="SelectWorker_Click" />
+            <Button Style="{StaticResource AllButtonAction}" Grid.Column="1" Margin="7.5 10 15 15" Grid.Row="5" Width="180" Height="40" Content="Выбрать" Name="SelectWorker" Click="SelectWorker_Click" />
         </Grid>
         <TextBox x:Name="Salary" Grid.Row="2" FontFamily="Times New Roman" FontSize="25" Grid.Column="0" Margin="0 0 7.5 0"  IsEnabled="False"  materialDesign:HintAssist.Hint="Оплата" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  VerticalAlignment="Center" MaxLength="50" />
 
