@@ -19,7 +19,20 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
         {
             public List<DataAboutWorkerSalary> InformationAboutWorker;
             public double Summa;
-
+        }
+        
+        public class DataAboutOrderPay
+        {
+            public string FIOClient;
+            public string Desc;
+            public decimal Summa;
+            public DateTime DateOfMake;
+            public string FIOOfWorker;            
+        }
+        public class ListOfDataAboOrderPayment: BaseResult
+        {
+            public List<DataAboutOrderPay> InformationAboutOrderPay;
+            public double Summa;
         }
     }
 }

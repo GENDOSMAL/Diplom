@@ -8,7 +8,7 @@ using System.Web.Http;
 
 namespace RepairFlatRestApi.Controllers.MainConroller
 {
-    [RoutePrefix("api/Statistik")]
+    [RoutePrefix("api/statistik")]
     public class StatistikController:BaseController
     {
         [HttpGet, Route("salary")]
@@ -17,6 +17,15 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             return CatchError(() =>
             {
                 return DBStatistikController.MakeDataAboutWorkerSalary();
+            }, nameof(SubStringController), nameof(InformationAboutSalary));
+        }
+
+        [HttpGet, Route("payminf")]
+        public HttpResponseMessage DataAboutOrderPayment()
+        {
+            return CatchError(() =>
+            {
+                return DBStatistikController.MakeListOfOrderPayment();
             }, nameof(SubStringController), nameof(InformationAboutSalary));
         }
     }

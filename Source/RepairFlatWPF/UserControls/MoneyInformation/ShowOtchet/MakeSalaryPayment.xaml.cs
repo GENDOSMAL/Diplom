@@ -23,19 +23,26 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
     public partial class MakeSalaryPayment : UserControl
     {
         BaseWindow window;
-        public MakeSalaryPayment(ref BaseWindow baseWindow)
+        public MakeSalaryPayment(SomeEnums.TypeOfReport typeOfReport, ref BaseWindow baseWindow)
         {
             InitializeComponent();
             this.window = baseWindow;
-            MakeDataAboutPayWorker();
+            if (typeOfReport == SomeEnums.TypeOfReport.AboutSalary)
+            {
+                MakeDataAboutSalaryWorker();
+            }
+            else
+            {
+                MakeDataAboutOrderPayment();
+            }           
         }
 
-        private async void MakeDataAboutPayWorker()
+        private async void MakeDataAboutSalaryWorker()
         {
             var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/Statistik/salary"));
-            var DataFromServerSalary = JsonConvert.DeserializeObject<Model.StatModel.DataAboutWorkerPayment>(InformFromserver.ToString());
+            var DataAbSalaryFromServer = JsonConvert.DeserializeObject<Model.StatModel.DataAboutWorkerPayment>(InformFromserver.ToString());
             
-            if (DataFromServerSalary.success)
+            if (DataAbSalaryFromServer.success)
             {
                 DataTable DataAboutSalary = new DataTable("Salary");
                 foreach (string NameOfColumn in SomeEnums.InformationAboutSalary)
@@ -44,7 +51,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
                 }
                 DataAboutPayWorker.ItemsSource = DataAboutSalary.DefaultView;
                 int Numb = 1;
-                foreach(var InfABoutSalaryForWorker in DataFromServerSalary.InformationAboutWorker)
+                foreach(var InfABoutSalaryForWorker in DataAbSalaryFromServer.InformationAboutWorker)
                 {
                     DataRow dataRow = DataAboutSalary.NewRow();
                     dataRow[0] = Numb;
@@ -56,18 +63,28 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
                     Numb++;
                 }
                 DataOfCreate.Content += $" {DateTime.Now.ToString("dd.MM.yyyy")}";
-                Summa.Content += $" {DataFromServerSalary.Summa}";
+                Summa.Content += $" {DataAbSalaryFromServer.Summa}";
+            }
+            else
+            {
+                window.Close();
+                MakeSomeHelp.MSG($"Произошла ошибка <{DataAbSalaryFromServer.description}>",MsgBoxImage:MessageBoxImage.Error);
+            }
+        }
+        private async void MakeDataAboutOrderPayment()
+        {
+            var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/Statistik/payminf"));
+            var DataFromServerOrderPayment = JsonConvert.DeserializeObject<Model.StatModel.ListOfDataAboOrderPayment>(InformFromserver.ToString());
+
+            if (DataFromServerOrderPayment.success)
+            {
 
             }
             else
             {
                 window.Close();
-                MakeSomeHelp.MSG("Не найдено информации о выплате заработной платы!",MsgBoxImage:MessageBoxImage.Error);
+                MakeSomeHelp.MSG($"Произошла ошибка <{DataAbSalaryFromServer.description}>", MsgBoxImage: MessageBoxImage.Error);
             }
-
-
-
-
         }
 
         private void GetData_Click(object sender, RoutedEventArgs e)
@@ -77,7 +94,8 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
                 PrintDialog printDialog = new PrintDialog();
                 if (printDialog.ShowDialog() == true)
                 {
-                    printDialog.PrintVisual(ForPrint, "Информация о выдвче заработной платы");
+                    printDialog.PrintVisual(ForPrint, "Информация о выдаче заработной платы");
+                    window.Close();
                 }
             }
             finally
@@ -88,7 +106,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
 
         private void ReturnBTN_Click(object sender, RoutedEventArgs e)
         {
-
+            window.Close();
         }
     }
 }

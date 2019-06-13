@@ -62,6 +62,11 @@
         #region Описание статистики
         public static string[] InformationAboutSalary = new string[] { "№", "ФИО работника", "Должность", "Размер", "Дата и время" };
 
+        public enum TypeOfReport
+        {
+            AboutSalary,
+            AboutOrderPayment
+        }
 
         #endregion
 

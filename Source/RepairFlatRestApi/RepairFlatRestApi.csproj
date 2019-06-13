@@ -176,7 +176,7 @@
     <Compile Include="Models\DescriptionJSON\MeasurmentModel.cs" />
     <Compile Include="Models\DescriptionJSON\OrderData.cs" />
     <Compile Include="Models\DescriptionJSON\PersonDesctiption.cs" />
-    <Compile Include="Models\DescriptionJSON\StatController.cs" />
+    <Compile Include="Models\DescriptionJSON\StatModel.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWithOrder.cs" />
     <Compile Include="Models\DescriptionJSON\WorkWitthWorker.cs" />
     <Compile Include="Models\EstabilismentPost.cs">
