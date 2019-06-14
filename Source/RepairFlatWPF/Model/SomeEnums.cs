@@ -53,7 +53,7 @@
 
         public static string[] ServisesTask = new string[] { "Номер", "Наименование услуги", "Количество", "Стоимость", "Описание" };
 
-        public static string[] ServisesMaterials = new string[] { "Номер", "Наименование услуги", "Количество", "Стоимость", "Описание" };
+        public static string[] ServisesMaterials = new string[] { "Номер", "Наименование материала", "Количество", "Стоимость", "Описание" };
 
 
         public static string[] PayInf = new string[] { "Номер", "Дата создания", "Сумма оплаты", "Кто создал", "Описание" };

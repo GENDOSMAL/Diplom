@@ -226,6 +226,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public decimal? summa;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int numb;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string desc;
         }
 
         public class TaskServises
@@ -240,6 +242,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public decimal? summa;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int numb;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string desc;
         }
 
         public class TaskWorker
@@ -251,6 +255,8 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string FioOfWorker;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfPost;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
         }
         #endregion
 
@@ -264,6 +270,30 @@ namespace RepairFlatRestApi.Models.DescriptionJSON
             public string FIO;
             public double SummaMat;
             public double SummaServ;
+
+        }
+        public class MakeDataAboutAllTaskInOrder:BaseResult
+        {
+            public string AdressOfWork;
+            public string FIO;
+            public string Contact;
+            public List<DateAboutTask> TaskInf;
+
+        }
+
+        public class DateAboutTask
+        {
+            public Guid idTask;
+            public Guid idOrder;
+            public DateTime? DateStart;
+            public DateTime? DateEnd;
+            public decimal? Summa;
+            public string Description;
+            public MaterialInfTask InfAbMat;
+            public ServisesInfTask InfAbServ;
+            public WorkersInfTask InfAbWorkers;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
 
         }
 

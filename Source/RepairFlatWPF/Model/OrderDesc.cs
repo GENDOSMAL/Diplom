@@ -112,6 +112,8 @@ namespace RepairFlatWPF.Model
             public double? summa;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int numb;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string desc;
         }
 
         public class TaskServises
@@ -126,6 +128,8 @@ namespace RepairFlatWPF.Model
             public double? summa;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public int numb;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public string desc;
         }
 
         public class TaskWorker
@@ -137,6 +141,8 @@ namespace RepairFlatWPF.Model
             public string FioOfWorker;
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             public string NameOfPost;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
         }
 
         public class SummaOfOrder : BaseResult
@@ -194,6 +200,30 @@ namespace RepairFlatWPF.Model
             public double SummaServ;
 
         }
+
+        public class MakeDataAboutAllTaskInOrder : BaseResult
+        {
+            public string AdressOfWork;
+            public string FIO;
+            public string Contact;
+            public List<DateAboutTask> TaskInf;
+        }
+
+        public class DateAboutTask
+        {
+            public Guid idTask;
+            public Guid idOrder;
+            public DateTime? DateStart;
+            public DateTime? DateEnd;
+            public decimal? Summa;
+            public string Description;
+            public MaterialInfTask InfAbMat;
+            public ServisesInfTask InfAbServ;
+            public WorkersInfTask InfAbWorkers;
+            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+            public int numb;
+        }
+
         #endregion
     }
 }

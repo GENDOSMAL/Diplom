@@ -140,6 +140,15 @@ namespace RepairFlatRestApi.Controllers.MainConroller
             }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
         }
 
+
+        [HttpGet, Route("doc/smeta2")]
+        public HttpResponseMessage DataAbSmeta2([FromUri] Guid idOrder)
+        {
+            return CatchError(() =>
+            {
+                return OrderDBController.MakeSmetaByTask(idOrder);
+            }, nameof(SubStringController), nameof(SelectDataAbOrderTaskByIDOrder));
+        }
         #endregion
     }
 }

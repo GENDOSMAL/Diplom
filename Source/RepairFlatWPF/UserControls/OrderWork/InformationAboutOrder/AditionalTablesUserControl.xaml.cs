@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RepairFlatWPF.UserControls.OrderWork.InformationAboutOrder;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -28,7 +29,9 @@ namespace RepairFlatWPF.UserControls.OrderWork
             {
                 if (WhatPrint.SelectedIndex == 0)
                 {//Отдельно по заданиям
-
+                    BaseWindow baseWindow = new BaseWindow("Выберите задание для печати");
+                    baseWindow.MakeOpen(new MakeSmetaForTask(ref baseWindow,idOrder));
+                    baseWindow.ShowDialog();
                 }
                 else if (WhatPrint.SelectedIndex == 1)
                 {//Вместе по заданиям

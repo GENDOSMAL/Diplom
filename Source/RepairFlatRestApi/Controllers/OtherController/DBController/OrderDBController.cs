@@ -119,6 +119,115 @@ namespace RepairFlatRestApi.Controllers.OtherController
             });
         }
 
+        internal static object MakeSmetaByTask(Guid idOrder)
+        {
+            return Run((db) =>
+            {
+                var inf = db.OrderTasks.Where(ee => ee.IdOrder == idOrder);
+                if (inf != null)
+                {
+                    if (inf.Any())
+                    {
+                        MakeDataAboutAllTaskInOrder taskInOrder = new MakeDataAboutAllTaskInOrder();
+                        taskInOrder.success = true;
+                        taskInOrder.AdressOfWork = $"{inf.FirstOrDefault().OrderInformation.AdressDescription.RegionName?.Trim()} {inf.FirstOrDefault().OrderInformation.AdressDescription.AreaName?.Trim()} {inf.FirstOrDefault().OrderInformation.AdressDescription.CiryName?.Trim()} {inf.FirstOrDefault().OrderInformation.AdressDescription.MicroAreaName?.Trim()} {inf.FirstOrDefault().OrderInformation.AdressDescription.Street?.Trim()} {inf.FirstOrDefault().OrderInformation.AdressDescription.House?.Trim()} {inf.FirstOrDefault().OrderInformation.AdressDescription.Entrance?.Trim()} {inf.FirstOrDefault().OrderInformation.AdressDescription.NumberOfDelen?.Trim()}";
+                        taskInOrder.Contact = $"{inf.FirstOrDefault().OrderInformation.UserContact.TypeOfContact.Value?.Trim()} : {inf.FirstOrDefault().OrderInformation.UserContact.Value?.Trim()} : {inf.FirstOrDefault().OrderInformation.UserContact.Description?.Trim()}";
+                        taskInOrder.FIO = $"{inf.FirstOrDefault().OrderInformation.ClientDetails.User.LastName?.Trim()} {inf.FirstOrDefault().OrderInformation.ClientDetails.User.Name?.Trim()} {inf.FirstOrDefault().OrderInformation.ClientDetails.User.Patronymic?.Trim()} ";
+                        taskInOrder.TaskInf = new List<DateAboutTask>();
+                        int numb2 = 1;
+                        foreach (var Task in inf)
+                        {
+                            var tasks = new DateAboutTask();
+                            tasks.numb = numb2;
+                            tasks.idOrder = idOrder;
+                            tasks.idTask = Task.IdTask;
+                            tasks.Summa = Task.SummaAboutTask;
+                            tasks.Description = Task.Description?.Trim();
+                            tasks.DateStart = Task.DateStart;
+                            tasks.DateEnd = Task.DeadEnd;
+                            if (Task.TaskMaterials.Any())
+                            {
+                                tasks.InfAbMat = new MaterialInfTask();
+                                tasks.InfAbMat.materialsInf = new List<TaskMaterial>();
+                                int numb = 1;
+                                foreach (var mat in Task.TaskMaterials)
+                                {
+                                    TaskMaterial material = new TaskMaterial
+                                    {
+                                        cost = mat.Cost,
+                                        count = mat.Count,
+                                        idMaterial = mat.idMaterial ?? default,
+                                        idTaskMaterial = mat.idTaskMaterials,
+                                        NameOfMaterials = mat.OurMaterials.NameOfMaterial?.Trim(),
+                                        numb = numb,
+                                        summa = mat.Cost * Convert.ToDecimal(mat.Count),
+                                    };
+                                    tasks.InfAbMat.materialsInf.Add(material);
+                                    numb++;
+                                }
+                            }
+                            if (Task.TaskServis.Any())
+                            {
+                                tasks.InfAbServ = new ServisesInfTask();
+                                tasks.InfAbServ.ServisInf = new List<TaskServises>();
+                                int numb = 1;
+                                foreach (var serv in Task.TaskServis)
+                                {
+                                    TaskServises Serv = new TaskServises
+                                    {
+                                        cost = serv.Cost,
+                                        count = serv.Count,
+                                        idServis = serv.idServis ?? default,
+                                        idTaskServises = serv.IdTaskServises,
+                                        NameOfServises = serv.OurServices.Nomination?.Trim(),
+                                        numb = numb,
+                                        summa = serv.Cost * Convert.ToDecimal(serv.Count),
+                                        
+                                    };
+                                    tasks.InfAbServ.ServisInf.Add(Serv);
+                                    numb++;
+                                }
+                            }
+
+                            if (Task.TaskWorker.Any())
+                            {
+                                tasks.InfAbWorkers = new WorkersInfTask();
+                                tasks.InfAbWorkers.WorkerInf = new List<TaskWorker>();
+                                int numb = 1;
+                                foreach (var worker in Task.TaskWorker)
+                                {
+                                    TaskWorker work = new TaskWorker
+                                    {
+                                        FioOfWorker = $"{worker.User.LastName?.Trim()} {worker.User.Name?.Substring(0, 1)}.{worker.User.Patronymic?.Substring(0, 1)}.",
+                                        idTaskWorker = worker.idCmbination,
+                                        idWorker = worker.idWorker ?? default,
+                                        NameOfPost = worker.User.WorkerDetails.WorkersOperats.First().EstabilismentPost.WorkerPosts.NameOfPost?.Trim(),
+                                        numb = numb,
+                                        Role = worker.Role?.Trim(),
+                                    };
+                                    tasks.InfAbWorkers.WorkerInf.Add(work);
+                                    numb++;
+                                }
+                            }
+                            numb2++;
+                            taskInOrder.TaskInf.Add(tasks);
+
+
+                        }
+                        return taskInOrder;
+                    }
+                    else
+                    {
+                        return new MakeDataAboutAllTaskInOrder { success = false };
+                    }
+                }
+                else
+                {
+                    return new MakeDataAboutAllTaskInOrder { success = false };
+                }
+            });
+        }
+
         internal static object MakeSmetaAll(Guid idOrder)
         {
             return Run((db) =>
@@ -138,18 +247,20 @@ namespace RepairFlatRestApi.Controllers.OtherController
                             foreach (var dd in dataAbMat)
                             {
                                 bool need = true;
-                                if (smet.materialsInf.Any())
+
+                                if (smet.materialsInf.Count != 0)
                                 {
-                                    var data = smet.materialsInf.Where(ee => ee.idMaterial == dd.idMaterial).First();
-                                    if (data != null)
+                                    var data = smet.materialsInf.Where(ee => ee.idMaterial == dd.idMaterial);
+
+                                    if (data.Any())
                                     {
-                                        data.count = data.count + dd.Count;
-                                        data.summa = Convert.ToDecimal(data.count) * data.cost;
+                                        data.First().count = data.First().count + dd.Count;
+                                        data.First().summa = Convert.ToDecimal(data.First().count) * data.First().cost;
                                         need = false;
                                     }
                                 }
 
-                                if(need)
+                                if (need)
                                 {
                                     smet.materialsInf.Add(new TaskMaterial
                                     {
@@ -157,13 +268,17 @@ namespace RepairFlatRestApi.Controllers.OtherController
                                         count = dd.Count,
                                         NameOfMaterials = dd.OurMaterials.NameOfMaterial?.Trim(),
                                         numb = numb,
-                                        summa = Convert.ToDecimal(dd.Count) * dd.Cost
+                                        summa = Convert.ToDecimal(dd.Count) * dd.Cost,
+                                        idMaterial= dd.idMaterial ?? default
                                     });
                                     numb++;
                                 }
                                 need = true;
+                                smet.SummaMat = Convert.ToDouble(smet.materialsInf.Sum(ee => ee.summa));
+
+
                             }
-                            smet.SummaMat = Convert.ToDouble(smet.materialsInf.Sum(ee => ee.summa));
+
                         }
                     }
 
@@ -176,32 +291,37 @@ namespace RepairFlatRestApi.Controllers.OtherController
                             foreach (var dd in DataAbServ)
                             {
                                 bool need = true;
-                                if (smet.ServisInf.Any())
+
+
+                                if (smet.ServisInf.Count != 0)
                                 {
-                                    var data = smet.ServisInf.Where(ee => ee.idServis == dd.idServis).First();
-                                    if (data != null)
+                                    var data = smet.ServisInf.Where(ee => ee.idServis == dd.idServis);
+                                    if (data.Any())
                                     {
-                                        data.count = data.count + dd.Count;
-                                        data.summa = Convert.ToDecimal(data.count) * data.cost;
+                                        data.First().count = data.First().count + dd.Count;
+                                        data.First().summa = Convert.ToDecimal(data.First().count) * data.First().cost;
                                         need = false;
                                     }
-
                                 }
 
-                                if(need)
+                                if (need)
                                 {
                                     smet.ServisInf.Add(new TaskServises
                                     {
                                         cost = dd.Cost,
                                         count = dd.Count,
                                         NameOfServises = dd.OurServices.Nomination?.Trim(),
-                                        summa= Convert.ToDecimal(dd.Count) * dd.Cost,
-                                        numb=numb
+                                        summa = Convert.ToDecimal(dd.Count) * dd.Cost,
+                                        numb = numb,
+                                        idServis=dd.idServis ?? default
                                     });
                                     numb++;
                                 }
                                 need = true;
                                 smet.SummaServ = Convert.ToDouble(smet.ServisInf.Sum(ee => ee.summa));
+
+
+
                             }
                         }
                     }

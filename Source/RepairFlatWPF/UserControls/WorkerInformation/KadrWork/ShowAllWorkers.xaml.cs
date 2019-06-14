@@ -53,7 +53,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         {
             DataAboutWorker = new DataTable("WorkerInf");
             DataAboutGuid = new List<Tuple<int, Guid>>();
-            DataGrid.ItemsSource = DataAboutWorker.DefaultView;
+           
             if (typeOfUserNeed == TypeOfUserNeed.ForRedact || typeOfUserNeed == TypeOfUserNeed.ForOrder)
             {
                 foreach (string ColumnName in SomeEnums.WorkerTablesRedact)
@@ -108,6 +108,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                     }
                 }
             }
+            DataGrid.ItemsSource = DataAboutWorker.DefaultView;
         }
 
         public object MakeDownloadByLink(string UrlOfDownload)
@@ -120,6 +121,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             BaseWindow baseWindow = new BaseWindow("Создание нового работника");
             baseWindow.MakeOpen(new CreateNewWorker(ref baseWindow));
             baseWindow.ShowDialog();
+            MakeWorkBetter();
         }
 
         private void EditWorker_Click(object sender, RoutedEventArgs e)
@@ -139,6 +141,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                             BaseWindow baseWindow = new BaseWindow("Редактирование данных о работниках");
                             baseWindow.MakeOpen(new CreateNewWorker(ref baseWindow, idWorker));
                             baseWindow.ShowDialog();
+                            MakeWorkBetter();
                         }
                     }
                 }
@@ -147,7 +150,6 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             {
                 MakeSomeHelp.MSG("Необходимо выбрать работника!", MsgBoxImage: MessageBoxImage.Hand);
             }
-            MakeWorkBetter();
         }
 
         private void SelectWorker_Click(object sender, RoutedEventArgs e)

@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="RepairFlatWPF.UserControls.OrderWork.InformationAboutOrder.MakeSmetaForTask"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RepairFlatWPF.UserControls.OrderWork.InformationAboutOrder"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"    
+             MaxHeight="500"
+             Height="auto" Width="auto">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        
+        <Viewbox  Grid.Row="0" Grid.ColumnSpan="2" >
+            <TextBlock Name="NumberOfOrder" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Выберите задания для печати" FontFamily="Times New Roman" FontSize="45 "/>
+        </Viewbox>
+        <CheckBox Unchecked="AllTask_Unchecked" Name="AllTask" Grid.ColumnSpan="2" Grid.Row="1" Content="Все задания" FontSize="26" FontFamily="Times New Roman" Checked="AllTask_Checked" Margin="30 0 0 0" />
+        <Expander Grid.Row="2" Margin="15 0 0 0" FontFamily="Times New Roman" FontSize="20" Header="Выберите задания для печати">
+            <StackPanel  Name="ForCheckBox" Margin="15 0 0 0">
+                
+            </StackPanel>
+        </Expander>
+        <Viewbox Grid.Row="3">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="Return" Click="Return_Click" Grid.Column="0" Grid.Row="5" VerticalAlignment="Bottom" Height="60" Width="305" Margin="15 10 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Возврат" />
+                <Button Name="PrintData" Click="PrintData_Click" Grid.Column="1" Grid.Row="5" VerticalAlignment="Bottom" Height="60" Width="305" Margin="15 10 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Печатать данные"/>
+
+            </Grid>
+        </Viewbox>
+    </Grid>
+</UserControl>

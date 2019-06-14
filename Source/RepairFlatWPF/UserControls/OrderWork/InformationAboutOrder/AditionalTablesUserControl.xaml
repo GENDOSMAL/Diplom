@@ -31,7 +31,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Button Name="MakeSmeta" Click="MakeSmeta_Click" Grid.ColumnSpan="2"   Grid.Row="0"  Height="80" Width="500" Margin="15 5 15 10" FontSize="30" Style="{StaticResource AllButtonAction}" Content="Напечатать смету по заказу" />
-                    <ComboBox Name="WhatPrint" FontFamily="Times New Roman"   FontSize="25" Grid.Column="0" Grid.Row="1" Margin="15,0,20,0" materialDesign:HintAssist.Hint="Способ печати" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center"  />
+                    <ComboBox Name="WhatPrint" FontFamily="Times New Roman" FontSize="22" Grid.Column="0" Grid.Row="1" Margin="20,0,20,0" materialDesign:HintAssist.Hint="Способ печати" Style="{StaticResource MaterialDesignFloatingHintComboBox}" Foreground="Black" VerticalAlignment="Center"  />
   
                 </Grid>
 

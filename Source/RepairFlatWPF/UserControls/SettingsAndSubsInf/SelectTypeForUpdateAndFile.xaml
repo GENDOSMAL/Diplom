@@ -8,9 +8,6 @@
              Height="auto" Width="auto">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/> 
-            <RowDefinition Height="*"/> 
-            <RowDefinition Height="*"/> 
             <RowDefinition Height="*"/> 
             <RowDefinition Height="*"/> 
             <RowDefinition Height="75"/> 

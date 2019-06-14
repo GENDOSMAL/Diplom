@@ -232,7 +232,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
         #endregion
 
         //Добавление работника
-        private void AddBtn_Click(object sender, RoutedEventArgs e)
+        private async void AddBtn_Click(object sender, RoutedEventArgs e)
         {
             if (CheckData())
             {
@@ -264,7 +264,16 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                     newWorker.TypeOfUser = SomeEnums.TypeOfUser.KD.ToString();
                     string Json = JsonConvert.SerializeObject(newWorker);
                     string urlSend = "api/worker/createorupdate/worker";
-                    MakeSomeHelp.UpdloadDataToServer(urlSend, Json);
+                    var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(AddBtn_Click)));
+                    var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+                    if (!deserializedProduct.success)
+                    {
+                        MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MakeSomeHelp.MSG("Операции над данными были произведены!", MsgBoxImage: MessageBoxImage.Information);
+                    }
                     window.Close();
                 }
                 else
@@ -301,7 +310,16 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
                     string Json = JsonConvert.SerializeObject(newWorker);
                     string urlSend = "api/worker/createorupdate/worker";
-                    MakeSomeHelp.UpdloadDataToServer(urlSend, Json);
+                    var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(urlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(AddBtn_Click)));
+                    var deserializedProduct = JsonConvert.DeserializeObject<BaseResult>(task.ToString());
+                    if (!deserializedProduct.success)
+                    {
+                        MakeSomeHelp.MSG($"Произошла ошикбка при работе {deserializedProduct.description}", MsgBoxImage: MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        MakeSomeHelp.MSG("Операции над данными были произведены!", MsgBoxImage: MessageBoxImage.Information);
+                    }
                     window.Close();
                 }
             }
