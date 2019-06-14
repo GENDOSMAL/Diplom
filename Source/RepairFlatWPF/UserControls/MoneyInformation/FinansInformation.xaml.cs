@@ -24,14 +24,12 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
         {
             InitializeComponent();
         }
-        private void ShowStatistik_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void GiveWorkerPayment_Click(object sender, RoutedEventArgs e)
         {
-
+            BaseWindow baseWindow = new BaseWindow("Выдача денег работникам");
+            baseWindow.MakeOpen(new MakePayForWorker(ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void SetDataForPayment_Click(object sender, RoutedEventArgs e)

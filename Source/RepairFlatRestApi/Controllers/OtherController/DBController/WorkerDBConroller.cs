@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Data.Entity;
 using static RepairFlatRestApi.Models.WorkWitthWorker;
 
 namespace RepairFlatRestApi.Controllers.OtherController
@@ -52,6 +53,56 @@ namespace RepairFlatRestApi.Controllers.OtherController
                 else
                 {
                     return new ListOfAllWorkers { success = false };
+                }
+            });
+        }
+
+        internal static object ListOfWorkerNeedPayment()
+        {
+            return Run((db) =>
+            {
+                IEnumerable<User> QueryOfListOfWorkers = default;
+
+                QueryOfListOfWorkers = db.User.Where(ee => ee.TypeOfUser != SomeEnums.TypeOfUser.KD.ToString() && ee.TypeOfUser != SomeEnums.TypeOfUser.Cl.ToString() && ee.TypeOfUser != null).AsEnumerable();
+
+                if (QueryOfListOfWorkers.Any())
+                {
+                    ListOfWorkingWorker ListOfWorkingRab = new ListOfWorkingWorker();
+                    ListOfWorkingRab.Workers = new List<ListOfWorkersThatWork>();
+                    foreach (var workerOfWor in QueryOfListOfWorkers)
+                    {
+
+
+                        string female = "";
+                        if (workerOfWor.Female.HasValue)
+                        {
+                            female = SomeEnums.FemaleType[workerOfWor.Female ?? default];
+                        }
+                        ListOfWorkersThatWork descriptionOfWorker = new ListOfWorkersThatWork();
+                        descriptionOfWorker.DateRozd = workerOfWor.BirstDay.Value.ToString("dd.MM.yyyy HH:mm");
+                        descriptionOfWorker.Female = female;
+                        descriptionOfWorker.idUser = workerOfWor.idUser;
+                        descriptionOfWorker.LastName = workerOfWor.LastName?.Trim();
+                        descriptionOfWorker.Name = workerOfWor.Name?.Trim();
+                        descriptionOfWorker.Patronymic = workerOfWor.Patronymic?.Trim();
+                        descriptionOfWorker.TypeOfUser = workerOfWor.TypeOfUser?.Trim();
+                        if (workerOfWor.WorkerDetails != null)
+                            if (workerOfWor.WorkerDetails.EstabilismentPost.Any())
+                            {
+                                descriptionOfWorker.idPost = workerOfWor.WorkerDetails.EstabilismentPost.FirstOrDefault().idPost;
+                                descriptionOfWorker.DateOfEstanbilesnent = workerOfWor.WorkerDetails.WorkersOperats.FirstOrDefault().DateOfOperate.Value.ToString("dd.MM.yyyy HH:mm");
+                                descriptionOfWorker.NameOfPost = workerOfWor.WorkerDetails.EstabilismentPost.FirstOrDefault().WorkerPosts.NameOfPost?.Trim();
+                                descriptionOfWorker.Salary = workerOfWor.WorkerDetails.EstabilismentPost.FirstOrDefault().Salary;
+                            }
+                        ListOfWorkingRab.Workers.Add(descriptionOfWorker);
+
+                    }
+                    ListOfWorkingRab.success = true;
+                    return ListOfWorkingRab;
+                }
+                else
+                {
+                    return new ListOfWorkingWorker { success = false };
                 }
             });
         }

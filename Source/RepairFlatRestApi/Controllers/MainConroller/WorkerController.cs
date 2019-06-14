@@ -41,6 +41,14 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return OtherController.WorkerDBConroller.CreateListWorkerForMakeNewWorkOrUpdate();
             }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
         }
+        [HttpGet, Route("allworkerforpay")]
+        public HttpResponseMessage DataAboutWorkerPayment()
+        {
+            return CatchError(() =>
+            {
+                return OtherController.WorkerDBConroller.ListOfWorkerNeedPayment();
+            }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        }
         [HttpGet, Route("allworkercanditate")]
         public HttpResponseMessage GetDataAboutWorkerCandidate()
         {
@@ -74,5 +82,14 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return OtherController.WorkerDBConroller.CreateDataAboutPayWages(DataAboutGiveMoney);
             }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
         }
+
+        //[HttpPost, Route("createorupdate/crworkpa")]
+        //public HttpResponseMessage MakeDataAboutSalary(PayWagesM DataAboutGiveMoney)
+        //{
+        //    return CatchError(() =>
+        //    {
+        //        return OtherController.WorkerDBConroller.CreateDataAboutPayWages(DataAboutGiveMoney);
+        //    }, nameof(SubStringController), nameof(GetDataAboutWorkerThatWork));
+        //}
     }
 }

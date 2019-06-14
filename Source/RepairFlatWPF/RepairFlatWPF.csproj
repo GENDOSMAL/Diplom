@@ -186,6 +186,9 @@
     <Compile Include="UserControls\MoneyInformation\MakeDataForPayment.xaml.cs">
       <DependentUpon>MakeDataForPayment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\MoneyInformation\MakePayForWorker.xaml.cs">
+      <DependentUpon>MakePayForWorker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MoneyInformation\ShowDataForPayment.xaml.cs">
       <DependentUpon>ShowDataForPayment.xaml</DependentUpon>
     </Compile>
@@ -320,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\MoneyInformation\MakeDataForPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MoneyInformation\MakePayForWorker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -526,6 +533,7 @@
     <None Include="Resours\Documents\Dogovor.dotx" />
     <None Include="Resours\Documents\MakePerestanovka.dotx" />
     <None Include="Resours\Documents\OplataDoc.dotx" />
+    <None Include="Resours\Documents\PayForWorker.dotx" />
     <None Include="Resours\Documents\Smeta.dotx" />
     <None Include="Resours\Documents\SpavkaAboutOrder.dotx" />
     <None Include="Resours\Documents\WorkerData.dotx" />

@@ -36,6 +36,8 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
                 case TypeOfUserNeed.ForOrder: Route = $"api/worker/allworkerfororder"; break;
                 case TypeOfUserNeed.ForRedact: Route = $"api/worker/allworkerforredact"; break;
                 case TypeOfUserNeed.KD: Route = $"api/worker/allworkercanditate"; break;
+                case TypeOfUserNeed.forpayment: Route = $"api/worker/allworkerforpay"; break;
+
             }
             this.BaseWindow = baseWindow;
             MakeWorkBetter();
@@ -54,7 +56,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
             DataAboutWorker = new DataTable("WorkerInf");
             DataAboutGuid = new List<Tuple<int, Guid>>();
            
-            if (typeOfUserNeed == TypeOfUserNeed.ForRedact || typeOfUserNeed == TypeOfUserNeed.ForOrder)
+            if (typeOfUserNeed == TypeOfUserNeed.ForRedact || typeOfUserNeed == TypeOfUserNeed.ForOrder|| typeOfUserNeed == TypeOfUserNeed.forpayment)
             {
                 foreach (string ColumnName in SomeEnums.WorkerTablesRedact)
                 {

@@ -149,7 +149,8 @@
             KD,
             All,
             ForOrder,
-            ForRedact
+            ForRedact,
+            forpayment
 
         }
         public enum TypeOfOperate

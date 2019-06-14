@@ -127,6 +127,9 @@
   <data name="OplataDoc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resours\documents\oplatadoc.dotx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="PayForWorker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resours\documents\payforworker.dotx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="Smeta" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resours\documents\smeta.dotx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
