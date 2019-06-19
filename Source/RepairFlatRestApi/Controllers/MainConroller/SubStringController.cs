@@ -98,10 +98,6 @@ namespace RepairFlatRestApi.Controllers
         #endregion
 
         #region Обновление данных о типах контакных данных
-        /// <summary>
-        /// Обновление либо добавление данных о контактах
-        /// </summary>
-        /// <returns></returns>
         [HttpPost, Route("contact/update")]
         public HttpResponseMessage UpdateContacts(MakeSubs.MakeUpdOrInsContacts ListOfContacts)
         {
@@ -111,11 +107,6 @@ namespace RepairFlatRestApi.Controllers
             }, nameof(SubStringController), nameof(UpdateContacts));
         }
 
-        /// <summary>
-        /// Отсылание данных о контактах, которые были обновлены после указанной клиентом даты
-        /// </summary>
-        /// <param name="dateofclientlastupdate"></param>
-        ///// <returns></returns>
         [HttpGet, Route("contact/get")]
         public HttpResponseMessage SendAllUpdateContacts([FromUri] string dateofclientlastupdate = null)
         {

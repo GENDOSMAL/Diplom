@@ -192,6 +192,15 @@
     <Compile Include="UserControls\MoneyInformation\ShowDataForPayment.xaml.cs">
       <DependentUpon>ShowDataForPayment.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\MoneyInformation\ShowOtchet\MakeSalaryPayment.xaml.cs">
+      <DependentUpon>MakeSalaryPayment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoneyInformation\ShowOtchet\PaymentInformationAboutOrder.xaml.cs">
+      <DependentUpon>PaymentInformationAboutOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoneyInformation\ShowOtchet\UseMaterialsAndServises.xaml.cs">
+      <DependentUpon>UseMaterialsAndServises.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\OrderWork\AddInfromationUserControl\AddElementOfPremises.xaml.cs">
       <DependentUpon>AddElementOfPremises.xaml</DependentUpon>
     </Compile>
@@ -331,6 +340,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\MoneyInformation\ShowDataForPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MoneyInformation\ShowOtchet\MakeSalaryPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MoneyInformation\ShowOtchet\PaymentInformationAboutOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MoneyInformation\ShowOtchet\UseMaterialsAndServises.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -557,9 +578,7 @@
   <ItemGroup>
     <Resource Include="IoC.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\MoneyInformation\ShowOtchet\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.5.0.0\build\Fody.targets" Condition="Exists('..\packages\Fody.5.0.0\build\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -205,7 +205,7 @@ namespace RepairFlatWPF.UserControls.WorkerInformation.KadrWork
 
                             if (MakeSomeHelp.MSG("Вы дейсвительно хотите напечать информацию о работнике под номером ", MsgBoxImage: MessageBoxImage.Question, MsgBoxButton: MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                             {
-                                var Director = System.IO.Path.Combine(Environment.CurrentDirectory, "Temp");
+                                var Director = System.IO.Path.Combine(Path.GetDirectoryName(Path.GetTempPath()), "Repflat", "Temp");
                                 if (!Directory.Exists(Director))
                                 {
                                     Directory.CreateDirectory(Director);

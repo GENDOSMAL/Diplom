@@ -31,48 +31,45 @@ namespace RepairFlatWPF
         public async void CheckLogin_Click(object sender, RoutedEventArgs e)
         {
 
-            //var task2 = await Task.Run(() => MakeSomeHelp.MakePingToServer(Settings.Default.BaseAdress));
-            //string TextForUser = task2 ? "Связь с сервером установлена..." : "Сервер не доступен!";
-            //Result.Content = TextForUser;
-            //if (!task2) return;
-            //CheckLogin.IsEnabled = false;
-            //CheckLogin.Content = "Ожидание...";
+            var task2 = await Task.Run(() => MakeSomeHelp.MakePingToServer(Settings.Default.BaseAdress));
+            string TextForUser = task2 ? "Связь с сервером установлена..." : "Сервер не доступен!";
+            Result.Content = TextForUser;
+            if (!task2) return;
+            CheckLogin.IsEnabled = false;
+            CheckLogin.Content = "Ожидание...";
 
-            //string base64Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(PasswordText.Password));
-            //string UrlSend = "api/main/auth";
-            //string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login.Text, password = base64Password });
+            string base64Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(PasswordText.Password));
+            string UrlSend = "api/main/auth";
+            string Json = JsonConvert.SerializeObject(new LoginModel.MakeAuth() { login = Login.Text, password = base64Password });
 
-            //var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeAuth)));
-            //if (task != null)
-            //{
-            //    var deserializedProduct = JsonConvert.DeserializeObject<WhatReturn>(task.ToString());
-            //    if (!deserializedProduct.success)
-            //    {
-            //        if (MakeSomeHelp.MSG(deserializedProduct.description, MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
-            //        {
-            //            Result.Content = "";
-            //            CheckLogin.Content = "Авторизация";
-            //            CheckLogin.IsEnabled = true;
-            //        }
-            //    }
-            //    else
-            //    {
-            //        Model.SaveSomeData.IdUser = deserializedProduct.idUser;
-            //        Model.SaveSomeData.TypeOfUser = deserializedProduct.typeofpolz;
-            //        Model.SaveSomeData.LastNameAndIni = deserializedProduct.LastNameAndIni;
-            //        ((MainWindow)Application.Current.MainWindow).Makecheck();
-            //        MakeSomeHelp.MakeLoading();
-            //    }
-            //}
-            //else
-            //{
-            //    Result.Content = "";
-            //    CheckLogin.Content = "Авторизация";
-            //    CheckLogin.IsEnabled = true;
-            //}
-            await Task.Run(() => MakeWorkWirthDataBase.MakeFilePathAndCheck());
-            BaseWindow baseWindow = new BaseWindow("");
-            baseWindow.ShowDialog();
+            var task = await Task.Run(() => BaseWorkWithServer.CatchErrorWithPost(UrlSend, "POST", Json, nameof(BaseWorkWithServer), nameof(MakeAuth)));
+            if (task != null)
+            {
+                var deserializedProduct = JsonConvert.DeserializeObject<WhatReturn>(task.ToString());
+                if (!deserializedProduct.success)
+                {
+                    if (MakeSomeHelp.MSG(deserializedProduct.description, MessageBoxButton.OK, MessageBoxImage.Error) == MessageBoxResult.OK)
+                    {
+                        Result.Content = "";
+                        CheckLogin.Content = "Авторизация";
+                        CheckLogin.IsEnabled = true;
+                    }
+                }
+                else
+                {
+                    Model.SaveSomeData.IdUser = deserializedProduct.idUser;
+                    Model.SaveSomeData.TypeOfUser = deserializedProduct.typeofpolz;
+                    Model.SaveSomeData.LastNameAndIni = deserializedProduct.LastNameAndIni;
+                    ((MainWindow)Application.Current.MainWindow).Makecheck();
+                    MakeSomeHelp.MakeLoading();
+                }
+            }
+            else
+            {
+                Result.Content = "";
+                CheckLogin.Content = "Авторизация";
+                CheckLogin.IsEnabled = true;
+            }
         }
 
         /// <summary>

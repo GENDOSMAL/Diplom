@@ -106,7 +106,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
 
         #region Дополнительные методы
         private bool CheckFields()
-        {//TODO Глобально над этим подумать
+        {
             bool result = true;
             if (!decimal.TryParse(Summa.Text.Trim(), out SummaPay))
             {

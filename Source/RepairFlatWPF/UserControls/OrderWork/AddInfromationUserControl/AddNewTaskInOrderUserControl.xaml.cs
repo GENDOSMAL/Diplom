@@ -620,7 +620,7 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                         ListOfWorkerId.Remove(delete);
                     }
                     else
-                    {//TODO Удаление при редактировании задании
+                    {
                         ListOfDeleteWorker.Add(ListOfWorkerId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item3).First());
                         for (int i = 0; i < TableOfServises.Rows.Count; i++)
                         {

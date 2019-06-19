@@ -38,7 +38,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                     var DataDle = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/Order/doc/smeta1?idOrder={idOrder}"));
                     var InfForSmeta = JsonConvert.DeserializeObject<MakeSmetaAll>(DataDle.ToString());
 
-                    var Director = System.IO.Path.Combine(Environment.CurrentDirectory, "Temp");
+                    var Director = System.IO.Path.Combine(Path.GetDirectoryName(Path.GetTempPath()), "Repflat", "Temp");
                     if (!Directory.Exists(Director))
                     {
                         Directory.CreateDirectory(Director);
@@ -109,7 +109,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 var DataDle = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/Order/doc/dogovor?idOrder={idOrder}"));
                 var InfForDog = JsonConvert.DeserializeObject<MakeDogovor>(DataDle.ToString());
 
-                var Director = System.IO.Path.Combine(Environment.CurrentDirectory, "Temp");
+                var Director = System.IO.Path.Combine(Path.GetDirectoryName(Path.GetTempPath()), "Repflat", "Temp");
                 if (!Directory.Exists(Director))
                 {
                     Directory.CreateDirectory(Director);
@@ -157,7 +157,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 var DataDle = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/Order/doc/sprav?idOrder={idOrder}"));
                 var InfForSpr = JsonConvert.DeserializeObject<MakeDataForSpravka>(DataDle.ToString());
 
-                var Director = System.IO.Path.Combine(Environment.CurrentDirectory, "Temp");
+                var Director = System.IO.Path.Combine(Path.GetDirectoryName(Path.GetTempPath()), "Repflat", "Temp");
                 if (!Directory.Exists(Director))
                 {
                     Directory.CreateDirectory(Director);

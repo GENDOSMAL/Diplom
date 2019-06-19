@@ -103,7 +103,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                             row = DataAboutPayment.Rows[i];
                         }
                     }
-                    var Director = System.IO.Path.Combine(Environment.CurrentDirectory, "Temp");
+                    var Director = System.IO.Path.Combine(Path.GetDirectoryName(Path.GetTempPath()), "Repflat", "Temp");
                     if (!Directory.Exists(Director))
                     {
                         Directory.CreateDirectory(Director);

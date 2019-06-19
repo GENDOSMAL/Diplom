@@ -44,7 +44,8 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
         {
             if (MakeSomeHelp.MSG("Вы дейсвительно хотите создать шаблон квитанции для оплаты ", MsgBoxImage: MessageBoxImage.Question, MsgBoxButton: MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                var Director = System.IO.Path.Combine(Environment.CurrentDirectory, "Temp");
+
+                var Director = System.IO.Path.Combine(Path.GetDirectoryName(Path.GetTempPath()), "Repflat","Temp");
                 if (!Directory.Exists(Director))
                 {
                     Directory.CreateDirectory(Director);

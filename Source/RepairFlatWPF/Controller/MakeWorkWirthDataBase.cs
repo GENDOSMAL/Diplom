@@ -16,7 +16,11 @@ namespace RepairFlatWPF.Controller
         public static string PathToDB = "";
         public static void MakeFilePathAndCheck()
         {
-            string PathToDataBase = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), NameOfSqlFile);
+            string PathToDataBase = Path.Combine(Path.GetDirectoryName(Path.GetTempPath()),"Repflat" ,NameOfSqlFile);
+            if (!Directory.Exists(Path.GetDirectoryName(PathToDataBase)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(PathToDataBase));
+            }
             if (!File.Exists(PathToDataBase))
             {
                 SQLiteConnection.CreateFile(PathToDataBase);

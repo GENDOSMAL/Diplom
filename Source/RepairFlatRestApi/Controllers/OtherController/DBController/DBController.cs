@@ -918,7 +918,8 @@ namespace RepairFlatRestApi.Controllers
                 {
                     Description = e.Description,
                     Value = e.Value,
-                    idContact = e.idContact
+                    idContact = e.idContact,
+                    Regex=e.Regex
                 }).ToList();
 
                 return new MakeSubs.ContactsMake

@@ -88,7 +88,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation
                 {
                     if(MakeSomeHelp.MSG("Данные добавлены. Напечатать информацию?", MsgBoxImage: MessageBoxImage.Question, MsgBoxButton: MessageBoxButton.OKCancel) == MessageBoxResult.OK)
                     {
-                        var Director = System.IO.Path.Combine(Environment.CurrentDirectory, "Temp");
+                        var Director = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.IO.Path.GetTempPath()), "Repflat", "Temp");
                         if (!Directory.Exists(Director))
                         {
                             Directory.CreateDirectory(Director);

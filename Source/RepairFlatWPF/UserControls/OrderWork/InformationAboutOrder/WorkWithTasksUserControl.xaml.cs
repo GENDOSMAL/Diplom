@@ -83,13 +83,13 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
                     Guid idTask = ListOfId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-                    //TODO Удаление заданий
+              
                     var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/order/delete/task?idTask={idTask}&idOrder={idOrder}"));
                     var DataAbout = JsonConvert.DeserializeObject<OrderDesc.SummaOfOrder>(InformFromserver.ToString());
                     MakePreparateDataTable();
                     if (DataAbout.success)
                     {
-                        MakeSomeHelp.MSG($"Данные о из строки <{numberOfRows}> помещении удалены", MessageBoxButton.OK, MessageBoxImage.Question);
+                        MakeSomeHelp.MSG($"Данные о заданиях из строки <{numberOfRows}> были удалены", MessageBoxButton.OK, MessageBoxImage.Question);
                         textBoxSumma.Text = DataAbout.summaOfOrder.ToString();
                         textBoxost.Text = DataAbout.NeedPay.ToString();
                     }
