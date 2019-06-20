@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BaseAdress" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:26566</Value>
+      <Value Profile="(Default)">http://repflat1234.somee.com</Value>
     </Setting>
     <Setting Name="BaseAdressOfFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\My Documents</Value>

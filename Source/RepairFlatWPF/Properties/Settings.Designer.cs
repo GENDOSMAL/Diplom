@@ -25,7 +25,7 @@ namespace RepairFlatWPF.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:26566")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://repflat1234.somee.com")]
         public string BaseAdress {
             get {
                 return ((string)(this["BaseAdress"]));
