@@ -148,7 +148,8 @@ namespace RepairFlatWPF.UserControls
                     Pasport = Pasport.Text.Trim(),
                     Patronymic = Patronymic.Text.Trim(),
                     TypeOfUser = SomeEnums.TypeOfUser.Cl.ToString(),
-                    ListOfContact = ContactInformatio
+                    ListOfContact = ContactInformatio,
+                    
                 };
                 string Json = JsonConvert.SerializeObject(createNewClient);
                 string urlSend = "api/user/create";

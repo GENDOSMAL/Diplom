@@ -17,7 +17,8 @@ namespace RepairFlatWPF.UserControls.OrderWork
             this.idOrder = idOrder;
             FIOClient.Text += FioClient;
             this.Adress.Text += Adress;
-            SummaOfOrder.Text += AllSumma;
+            SummaOfOrder.Text += Convert.ToDecimal(AllSumma);
+
 
             #region Загружаем данные обо всем заказе на соответсвующие элементы управления
             //Данные о помещениях

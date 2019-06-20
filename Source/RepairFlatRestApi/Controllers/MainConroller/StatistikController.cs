@@ -28,5 +28,13 @@ namespace RepairFlatRestApi.Controllers.MainConroller
                 return DBStatistikController.MakeListOfOrderPayment();
             }, nameof(SubStringController), nameof(InformationAboutSalary));
         }
+        [HttpGet, Route("infabsub")]
+        public HttpResponseMessage DataAboutSubStr()
+        {
+            return CatchError(() =>
+            {
+                return DBStatistikController.MakeDataAboutSubStrUsed();
+            }, nameof(SubStringController), nameof(InformationAboutSalary));
+        }
     }
 }

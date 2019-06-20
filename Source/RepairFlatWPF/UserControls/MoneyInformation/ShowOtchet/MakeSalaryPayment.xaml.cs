@@ -71,6 +71,7 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
                 MakeSomeHelp.MSG($"Произошла ошибка <{DataAbSalaryFromServer.description}>",MsgBoxImage:MessageBoxImage.Error);
             }
         }
+
         private async void MakeDataAboutOrderPayment()
         {
             var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/Statistik/payminf"));
@@ -78,12 +79,32 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
 
             if (DataFromServerOrderPayment.success)
             {
-
+                DataTable DataAboutPayment = new DataTable("Payemt");
+                foreach (string NameOfColumn in SomeEnums.InformationAboutOrderPay)
+                {
+                    DataAboutPayment.Columns.Add(NameOfColumn);
+                }
+                DataAboutPayWorker.ItemsSource = DataAboutPayment.DefaultView;
+                int Numb = 1;
+                foreach (var InfAboutOrderPayment in DataFromServerOrderPayment.InformationAboutOrderPay)
+                {
+                    DataRow dataRow = DataAboutPayment.NewRow();
+                    dataRow[0] = Numb;
+                    dataRow[1] = InfAboutOrderPayment.FIOClient;
+                    dataRow[2] = InfAboutOrderPayment.Summa;
+                    dataRow[3] = InfAboutOrderPayment.Desc;
+                    dataRow[4] = InfAboutOrderPayment.DateOfMake.ToString("dd.MM.yyyy");
+                    dataRow[5] = InfAboutOrderPayment.FIOOfWorker;
+                    DataAboutPayment.Rows.Add(dataRow);
+                    Numb++;
+                }
+                DataOfCreate.Content += $" {DateTime.Now.ToString("dd.MM.yyyy")}";
+                Summa.Content += $" {DataFromServerOrderPayment.Summa}";
             }
             else
             {
                 window.Close();
-                MakeSomeHelp.MSG($"Произошла ошибка <{DataAbSalaryFromServer.description}>", MsgBoxImage: MessageBoxImage.Error);
+                MakeSomeHelp.MSG($"Произошла ошибка <{DataFromServerOrderPayment.description}>", MsgBoxImage: MessageBoxImage.Error);
             }
         }
 
@@ -94,7 +115,8 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
                 PrintDialog printDialog = new PrintDialog();
                 if (printDialog.ShowDialog() == true)
                 {
-                    printDialog.PrintVisual(ForPrint, "Информация о выдаче заработной платы");
+                   
+                    printDialog.PrintVisual(ForPrint, "");
                     window.Close();
                 }
             }

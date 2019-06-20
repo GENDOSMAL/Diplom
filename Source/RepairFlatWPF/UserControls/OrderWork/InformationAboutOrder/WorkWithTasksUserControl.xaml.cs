@@ -38,15 +38,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
             BaseWindow redactwindow = new BaseWindow("Создание нового задания");
             redactwindow.MakeOpen(new AddInfromationUserControl.AddNewTaskInOrderUserControl(ref redactwindow, ref textBoxSumma, ref textBoxost, idOrder));
             redactwindow.ShowDialog();
-            if (SaveSomeData.MakeSomeOperation)
-            {
-                SaveSomeData.MakeSomeOperation = false;
-                var dd = SaveSomeData.SomeObject as OrderDesc.SummaOfOrder;
-                SaveSomeData.SomeObject = null;
-                textBoxSumma.Text = dd.summaOfOrder.ToString();
-                textBoxost.Text = dd.NeedPay.ToString();
-                MakePreparateDataTable();
-            }
+            MakePreparateDataTable();
         }
 
         private void EditTask_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -83,7 +75,7 @@ namespace RepairFlatWPF.UserControls.OrderWork
                 if (int.TryParse(indexOfSelectedRows.ToString(), out numberOfRows))
                 {
                     Guid idTask = ListOfId.Where(e2 => e2.Item1 == numberOfRows).Select(e1 => e1.Item2).First();
-              
+
                     var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/order/delete/task?idTask={idTask}&idOrder={idOrder}"));
                     var DataAbout = JsonConvert.DeserializeObject<OrderDesc.SummaOfOrder>(InformFromserver.ToString());
                     MakePreparateDataTable();

@@ -23,7 +23,7 @@ namespace RepairFlatWPF.UserControls
         public SelectOrderToWork()
         {
             InitializeComponent();
-            DownloadDataAboutOrderы();
+            DownloadDataAboutOrder();
             foreach (var type in SomeEnums.RypeOfSearchOrder)
             {
                 SertedType.Items.Add(type);
@@ -38,7 +38,7 @@ namespace RepairFlatWPF.UserControls
 
         }
 
-        async private void DownloadDataAboutOrderы()
+        async private void DownloadDataAboutOrder()
         {
             var InformFromserver = await Task.Run(() => MakeSomeHelp.MakeDownloadByLink($"api/order/allorders"));
             ListofOrders = JsonConvert.DeserializeObject<Model.OrderDesc.AllOrder>(InformFromserver.ToString());
@@ -119,7 +119,7 @@ namespace RepairFlatWPF.UserControls
             BaseWindow baseWindow = new BaseWindow("Cоздание нового заказа");
             baseWindow.MakeOpen(new OrderWork.CreateNewOrder(ref baseWindow));
             baseWindow.ShowDialog();
-            MakeDataTable();
+            DownloadDataAboutOrder();
         }
 
         private void EditOrder_Click(object sender, RoutedEventArgs e)
@@ -135,7 +135,7 @@ namespace RepairFlatWPF.UserControls
                     BaseWindow baseWindow = new BaseWindow($"Редактирование заказа");
                     baseWindow.MakeOpen(new OrderWork.CreateNewOrder(ref baseWindow, false, idSelectOrder ?? default(Guid)));
                     baseWindow.ShowDialog();
-                    MakeDataTable();
+                    DownloadDataAboutOrder();
                 }
             }
             else

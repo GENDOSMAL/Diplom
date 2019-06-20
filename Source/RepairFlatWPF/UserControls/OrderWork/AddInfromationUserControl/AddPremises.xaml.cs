@@ -47,8 +47,6 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
                 this.idPremises = idPremises;
                 MakeDataAboutElement();
                 AddBtn.Content = "Редактировать";
-
-
             }
             else
             {
@@ -99,14 +97,14 @@ namespace RepairFlatWPF.UserControls.OrderWork.AddInfromationUserControl
             if (ListOfElement.success)
             {
                 TypeOfPremises.SelectedIndex = ListOfId.IndexOf(ListOfId.Where(ee => ee == ListOfElement.idPremisesType).First());
-                Description.Text = ListOfElement.Description;
-                Lenght.Text = ListOfElement.Lenght.ToString();
-                Width.Text = ListOfElement.Width.ToString();
-                Height.Text = ListOfElement.Height.ToString();
-                PWalls.Text = ListOfElement.Pwalls.ToString();
-                PCelling.Text = ListOfElement.PCelling.ToString();
-                SWalls.Text = ListOfElement.Swalls.ToString();
-                SFloor.Text = ListOfElement.Sfloor.ToString();
+                Description.Text = ListOfElement.Description.Trim();
+                Lenght.Text = ListOfElement.Lenght.ToString().Trim();
+                Width.Text = ListOfElement.Width.ToString().Trim();
+                Height.Text = ListOfElement.Height.ToString().Trim();
+                PWalls.Text = ListOfElement.Pwalls.ToString().Trim();
+                PCelling.Text = ListOfElement.PCelling.ToString().Trim();
+                SWalls.Text = ListOfElement.Swalls.ToString().Trim();
+                SFloor.Text = ListOfElement.Sfloor.ToString().Trim();
 
                 int number = 1;
                 foreach (var elementInf in ListOfElement.elementOfMeasurments)

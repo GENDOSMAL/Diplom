@@ -25,19 +25,21 @@ namespace RepairFlatWPF.UserControls.MoneyInformation.ShowOtchet
         private void StatistiAboutPaymentWorkerSalary_Click(object sender, RoutedEventArgs e)
         {
             BaseWindow baseWindow = new BaseWindow("Инфомация о выплатах сотрудникам.");
-            baseWindow.MakeOpen(new MakeSalaryPayment(ref baseWindow));
+            baseWindow.MakeOpen(new MakeSalaryPayment(SomeEnums.TypeOfReport.AboutSalary,ref baseWindow));
             baseWindow.ShowDialog();
         }
 
         private void ShowDataAboutPymentOrderInf_Click(object sender, RoutedEventArgs e)
         {
-
+            BaseWindow baseWindow = new BaseWindow("Инфомация о выплатах за заказ.");
+            baseWindow.MakeOpen(new MakeSalaryPayment(SomeEnums.TypeOfReport.AboutOrderPayment, ref baseWindow));
+            baseWindow.ShowDialog();
         }
 
         private void StatistikAboutSubInf_Click(object sender, RoutedEventArgs e)
         {
-            BaseWindow baseWindow = new BaseWindow("Тип данных для отчета.");
-            baseWindow.MakeOpen(new SelectSubDataForOtchet(ref baseWindow));
+            BaseWindow baseWindow = new BaseWindow("Информация о данных по использованию материалалов и услуг");
+            baseWindow.MakeOpen(new UseMaterialsAndServises(ref baseWindow));
             baseWindow.ShowDialog();
         }
 

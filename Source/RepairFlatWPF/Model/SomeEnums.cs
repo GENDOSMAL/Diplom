@@ -60,7 +60,14 @@
 
 
         #region Описание статистики
-        public static string[] InformationAboutSalary = new string[] { "№", "ФИО работника", "Должность", "Размер", "Дата и время" };
+        public static string[] InformationAboutSalary = new string[] { "№", "ФИО работника", "Должность", "Размер", "Дата" };
+
+        public static string[] InformationAboutOrderPay = new string[] { "№", "ФИО клиента", "Сумма", "Описание", "Дата", "ФИО работника" };
+
+        public static string[] InformationAboutServStat = new string[] { "№", "Наименование", "Тип услуги", "Стоимость", "Количество", "Сумма" };
+
+        public static string[] InformationAboutMatStat = new string[] { "№", "Наименование", "Еденицы измерения", "Стоимость", "Количество", "Сумма" };
+
 
         public enum TypeOfReport
         {

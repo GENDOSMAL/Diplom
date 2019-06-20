@@ -31,6 +31,7 @@ namespace RepairFlatRestApi.Controllers.OtherController
                         IdClient = descriptionPerson.idUser,
                         Description = descriptionPerson.Desc,
                     });
+
                     if (descriptionPerson.ListOfContact != null)
                     {
                         if (descriptionPerson.ListOfContact.Any())
