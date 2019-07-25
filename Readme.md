@@ -9,6 +9,5 @@
  2. Rest Api server — будет делать основную работу с базой данных (ASP Net Rest API  web application);
 
  3. Wpf приложение под Windows — необходимо для работы с данными клиентов и фирмы и для составления заказов на ремонт(WPF C# application);
- 4. Приложение под android — необходимо для контроля хода выполнения ремонта для заказчика, а также для общения между работниками фирмы (C# Xamarin).
 
  Более подробное описание будет расположено в [файле](https://github.com/GENDOSMAL/Diplom/blob/master/Documentation/%D0%9E%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%20%D0%BA%D0%BE%D0%BC%D0%BF%D0%BB%D0%B5%D0%BA%D1%81%D0%B0.docx) описания разрабатываемого приложения.
